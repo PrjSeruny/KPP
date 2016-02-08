@@ -1,0 +1,46 @@
+<%@page import=" java.io.*,
+               com.sync.core.utils.Constants,
+               com.sync.master.utils.MasterConstants,
+               com.sync.core.beans.MessageBean,
+               com.sync.core.utils.Utilities,
+               com.sync.master.beans.MasterUserBean"
+%>
+<%
+	MasterUserBean ubn = (MasterUserBean)request.getAttribute(MasterConstants.USER_INFO);
+	MessageBean msg = null;
+System.out.println(ubn);
+	if(null!=ubn && null!=ubn.getMessageBean() && ubn.getMessageBean().anyMessageExist())
+	{
+	  msg = ubn.getMessageBean();
+	}
+
+%>
+<fieldset class="wrapper">
+  <form method="post" action="<%=MasterConstants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>">
+    <input type="hidden" name="<%=MasterConstants.W%>" value="<%=MasterConstants.MASTERUSER%>">
+    <input type="hidden" name="<%=MasterConstants.ACT%>" value="<%=MasterConstants.ACT_UPDATE%>">
+    <div class="form">
+      <h2 class="title">Ubah User</h2>
+      <label class="errormsg"><%=null!=msg?msg.showMessage(MasterConstants.ERRORMSG_PAGE):""%></label>
+      <fieldset>
+        <div>
+          <label>Username</label>
+          <input type="hidden" name="<%=MasterConstants.FORM_MASTERUSER_USERID %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getUser()):""%>">
+          <input type="text" value="<%=null!=ubn?Utilities.showStringValue(ubn.getUser()):""%>" readonly disabled>
+          <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERUSER_USERID):""%></span>
+        </div>
+        <div>
+          <label>Nama Lengkap</label>
+          <input type="text" name="<%=MasterConstants.FORM_MASTERUSER_NAME %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getName()):""%>">
+          <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERUSER_NAME):""%></span>
+        </div>
+      </fieldset>
+      <fieldset>
+        <div>
+          <input type="submit" name="<%=MasterConstants.BTN_SAVE %>" value="Simpan">
+          <input type="submit" name="<%=MasterConstants.BTN_CANCEL %>" value="Batal" class="negate">
+        </div>
+      </fieldset>
+    </div>
+  </form>
+</fieldset>
