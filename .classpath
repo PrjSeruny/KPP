@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="deploy/simorg/WEB-INF/lib/commons-logging-1.2-javadoc.jar"/>
+	<classpathentry kind="lib" path="deploy/simorg/WEB-INF/lib/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="deploy/simorg/WEB-INF/lib/core.jar"/>
+	<classpathentry kind="lib" path="deploy/simorg/WEB-INF/lib/HikariCP.jar"/>
+	<classpathentry kind="lib" path="deploy/simorg/WEB-INF/lib/master.jar"/>
+	<classpathentry kind="lib" path="deploy/simorg/WEB-INF/lib/mysql-connector-java.jar"/>
+	<classpathentry kind="lib" path="deploy/simorg/WEB-INF/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="deploy/simorg/WEB-INF/lib/simorg.jar"/>
+	<classpathentry kind="lib" path="deploy/simorg/WEB-INF/lib/slf4j-api.jar"/>
+	<classpathentry kind="lib" path="deploy/simorg/WEB-INF/lib/slf4j-simple.jar"/>
+	<classpathentry kind="lib" path="lib/commons-logging-1.2-javadoc.jar"/>
+	<classpathentry kind="lib" path="lib/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="lib/core.jar"/>
+	<classpathentry kind="lib" path="lib/HikariCP.jar"/>
+	<classpathentry kind="lib" path="lib/master.jar"/>
+	<classpathentry kind="lib" path="lib/mysql-connector-java.jar"/>
+	<classpathentry kind="lib" path="lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-api.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-simple.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

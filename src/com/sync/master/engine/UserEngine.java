@@ -339,8 +339,13 @@ public class UserEngine extends RootEngine
       String users = "";
       String[] ids = req.getParameterValues(MasterConstants.FORM_MASTERUSER_USERID);
       System.out.println("array : "+ids.length);
-      if(null!=ids && ids.length > 0){
-        users = String.join("','",ids);
+      if(null!=ids && ids.length > 0)
+      {
+        for(int i=0; i<ids.length; i++)
+        {
+          //users = String.join("','",ids[i]);
+        }
+        
         System.out.println("array : "+users);
         
         SQL = "UPDATE "+ MasterTable.TABLE_USERLOGIN + " SET "+
