@@ -19,6 +19,8 @@ public class MasterConstants extends Constants
   
   public static final String MASTERREGION_LIST = "rgionlst";
   public static final String MASTERREGION_INFO = "rgioninfo";
+  public static final String MASTERREGION_KEC_LIST = "keclist";
+  public static final String MASTERREGION_KEL_LIST = "kellist";
   
   public static final String MASTER_USER = PAGES_PATH + "/master_user.jsp";
   public static final String MASTER_USER_LIST = PAGES_PATH + "/master_user_list.jsp";
@@ -29,6 +31,7 @@ public class MasterConstants extends Constants
   public static final String MASTER_REGION_LIST = PAGES_PATH + "/region_list.jsp";
   public static final String MASTER_REGION_EDIT = PAGES_PATH + "/region_edit.jsp";
   public static final String MASTER_REGION_INFO = PAGES_PATH + "/region_info.jsp";
+  public static final String MASTER_REGION_LOOKUP = PAGES_PATH + "/region_lookup.jsp";
   
   public static final String MASTER_RESIDENTS = PAGES_PATH + "/master_resident.jsp";  
   public static final String MASTER_RESIDENT_LIST = PAGES_PATH + "/master_resident_list.jsp";
@@ -65,5 +68,10 @@ public class MasterConstants extends Constants
   public static final String FORM_MASTERRESIDENT_KELURAHAN = "FORM_MASTERRESIDENT_KELURAHAN";
   public static final String FORM_MASTERRESIDENT_KECAMATAN = "FORM_MASTERRESIDENT_KECAMATAN";
   public static final String FORM_MASTERRESIDENT_NOTE = "FORM_MASTERRESIDENT_NOTE";
+  
+  public static final String FORM_MASTERREGION_REGID = "FORM_MASTERREGION_REGID";
+  public static final String FORM_MASTERREGION_KECID = "FORM_MASTERREGION_KECID";
+  public static final String FORM_MASTERREGION_KELID = "FORM_MASTERREGION_KELID";
+  public static final String FORM_MASTERREGION_REGIONONLY = "FORM_MASTERREGION_REGIONONLY";
   
 }

@@ -99,5 +99,8 @@ public class Constants
   public static final String RELIGION_BUDHA = "BUDHA";
   public static final String RELIGION_OTHERS = "OTHERS";
   
+  public static final String FOR = "for";
+  public static final String FOR_KEL = "forkel";
+  public static final String FOR_KEC = "forkec";
   
 }

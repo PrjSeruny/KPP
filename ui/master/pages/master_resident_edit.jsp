@@ -12,6 +12,7 @@
    MessageBean msg = null;
    String type="";
    System.out.println(">>>>>>>>>>>>> JSP ACTION= "+act);
+   
    if(null!=ubn)
    {
      msg = ubn.getBeanMessages();
@@ -54,8 +55,12 @@
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_NAME):""%></span>
         </div>
         <div >
-          <label>Kota Lahir</label>
-          <input type="text" name="<%=MasterConstants.FORM_MASTERRESIDENT_BIRTHCITY %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getCity()):""%>">
+          <label>Kota Lahir</label><a href="javascript:void(0)" 
+          class="lookup"
+          valTarget="#userIDVal;#userNameVal"
+          param="width=450;height=300"
+          url="<%=Constants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>?<%=Constants.W%>=<%=MasterConstants.MASTER_REGION%>&<%=MasterConstants.ACT%>=<%=MasterConstants.ACT_LOOKUP%>&<%=MasterConstants.LOOKUP_SINGLE%>=1&<%=MasterConstants.FORM_MASTERREGION_REGIONONLY%>=true">Cari</a>
+          <input type="text" name="<%=MasterConstants.FORM_MASTERRESIDENT_BIRTHCITY %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getCity()):""%>" readonly="readonly">
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_BIRTHCITY):""%></span>
         </div>
         <div >
@@ -114,13 +119,17 @@
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_ADDRESS):""%></span>
         </div>
         <div >
-          <label>Kota</label>
+          <label>Kota</label><a href="javascript:void(0)" 
+          class="lookup"
+          valTarget="#userIDVal;#userNameVal"
+          param="width=450;height=300"
+          url="<%=Constants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>?<%=Constants.W%>=<%=MasterConstants.MASTER_REGION%>&<%=MasterConstants.ACT%>=<%=MasterConstants.ACT_LOOKUP%>&<%=MasterConstants.LOOKUP_SINGLE%>=1&<%=MasterConstants.FORM_MASTERREGION_REGIONONLY%>=false">Cari</a>
           <input type="text" name="<%=MasterConstants.FORM_MASTERRESIDENT_CITY %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getCity()):""%>">
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_CITY):""%></span>
         </div>
         <div >
           <label>Propinsi</label>
-          <input type="text" name="<%=MasterConstants.FORM_MASTERRESIDENT_REGION %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getRegion()):""%>">
+          <input type="text" name="<%=MasterConstants.FORM_MASTERRESIDENT_REGION %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getRegion()):""%>" readonly="readonly">
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_REGION):""%></span>
         </div>
         <div >
@@ -132,12 +141,12 @@
       <fieldset>
         <div >
           <label>Kecamatan</label>
-          <input type="text" name="<%=MasterConstants.FORM_MASTERRESIDENT_KECAMATAN %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getKecamatan()):""%>">
+          <input type="text" name="<%=MasterConstants.FORM_MASTERRESIDENT_KECAMATAN %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getKecamatan()):""%>" readonly="readonly">
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_KECAMATAN):""%></span>
         </div>
         <div >
           <label>Kelurahan</label>
-          <input type="text" name="<%=MasterConstants.FORM_MASTERRESIDENT_KELURAHAN %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getKelurahan()):""%>">
+          <input type="text" name="<%=MasterConstants.FORM_MASTERRESIDENT_KELURAHAN %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getKelurahan()):""%>" readonly="readonly">
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_KELURAHAN):""%></span>
         </div>
         <div >

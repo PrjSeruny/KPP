@@ -39,7 +39,7 @@ public class ConnectionManager
       Properties prop = new Properties();
       InputStream input = null;
       input = new FileInputStream(
-          "C:/Tech/Apache/Tomcat/webapps/simorg/WEB-INF/initf/db.init");
+          "/Tech/Apache/Tomcat/webapps/simorg/WEB-INF/initf/db.init");
       prop.load(input);
       // get the property value and print it out
       dbDriver = prop.getProperty(Constants.DBDRIVER);

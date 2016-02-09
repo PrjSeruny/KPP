@@ -10,8 +10,12 @@ import com.sync.core.beans.MessageBean;
 import com.sync.core.servlet.CoreServlet;
 import com.sync.core.utils.Constants;
 import com.sync.core.utils.Utilities;
+import com.sync.master.beans.MasterRegionBean;
+import com.sync.master.beans.MasterRegionKecamatanBean;
+import com.sync.master.beans.MasterRegionKelurahanBean;
 import com.sync.master.beans.MasterResidentBean;
 import com.sync.master.beans.MasterUserBean;
+import com.sync.master.engine.MasterRegionEngine;
 import com.sync.master.engine.MasterResidentEngine;
 import com.sync.master.engine.UserEngine;
 import com.sync.master.utils.MasterConstants;
@@ -117,13 +121,13 @@ public class Master extends CoreServlet
     {
       this.doViewMasterRegion(req, res);
     }
-    else if(!Utilities.isEmpy(act) && act.equals(MasterConstants.ACT_LIST))
+    else if(!Utilities.isEmpy(act) && act.equals(MasterConstants.ACT_LOOKUP))
     {
-      this.doListMasterRegions(req, res);
+      this.doLookupMasterRegion(req, res);
     }
     else
     {
-      this.doViewMasterRegion(req, res);
+      this.doMasterRegion(req, res);
     }
   }
   
@@ -148,13 +152,86 @@ public class Master extends CoreServlet
   private void doViewMasterRegion(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
+    System.out.println("VIEWING INFO REGION");
+    String regID = req.getParameter(MasterConstants.FORM_MASTERREGION_REGID);
+    MasterRegionEngine re = new MasterRegionEngine(req, res);
+    MasterRegionBean rebn = null;
     
+    if(null!=req.getParameter(MasterConstants.BTN_DONE))
+    {
+        this.doMasterRegion(req, res);
+        return;
+    }
+    
+    rebn = re.getMasterRegionInfo(regID);
+    System.out.println("DISPLAYING INFO REGION");
+    req.setAttribute(MasterConstants.MASTERREGION_INFO, rebn);
+    
+    if(null!=re)re.closed();
+    super.openContent(MasterConstants.SVT_MASTER_PATH, 
+        MasterConstants.MASTER_REGION, 
+        MasterConstants.MASTER_REGION_INFO, req, res);
+    return;
+  
   }
   
-  private void doListMasterRegions(HttpServletRequest req, HttpServletResponse res)
+  private void doMasterRegion(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
+    String stat = req.getParameter(MasterConstants.DATA_STAT);
+    MasterRegionEngine re = new MasterRegionEngine(req, res);
+    MasterRegionBean[] lists = re.listOfRegion(stat);
     
+    req.setAttribute(MasterConstants.MASTERREGION_LIST, lists);
+    
+    if(null!=re)re.closed();
+    super.openContent(
+        MasterConstants.SVT_MASTER_PATH, 
+        MasterConstants.MASTER_REGION, 
+        MasterConstants.MASTER_REGION_LIST, 
+        req, res);
+    return;
+  
+  }
+  
+  private void doLookupMasterRegion(HttpServletRequest req, HttpServletResponse res)
+  throws ServletException, IOException
+  {
+    String _for = req.getParameter(MasterConstants.FOR);
+    MasterRegionBean[] bn = null;
+    String regID = null;
+    String kecID = null;
+    MasterRegionKecamatanBean[] regKec = null;
+    MasterRegionKelurahanBean[] regKel = null;
+    MasterRegionEngine re = new MasterRegionEngine(req, res);
+    boolean showW = Boolean.parseBoolean(req.getParameter(MasterConstants.FORM_MASTERREGION_REGIONONLY));
+    System.out.println(">>>>>>>>>>>>>>>>>>> SHOW WHAT"+showW);
+    
+    if(!Utilities.isEmpy(_for) && _for.equals(MasterConstants.FOR_KEC))
+    {
+      regID = req.getParameter(MasterConstants.FORM_MASTERREGION_REGID);
+      regKec = re.getKecamatanInfo(regID);
+      req.setAttribute(MasterConstants.MASTERREGION_KEC_LIST, regKec);
+      super.openLookup(MasterConstants.MASTER_REGION_LOOKUP, req, res);
+      return;
+    }
+    else if(!Utilities.isEmpy(_for) && _for.equals(MasterConstants.FOR_KEL))
+    {
+      regID = req.getParameter(MasterConstants.FORM_MASTERREGION_REGID);
+      kecID = req.getParameter(MasterConstants.FORM_MASTERREGION_KECID);
+      regKel = re.getKelurahanInfo(regID, kecID);
+      req.setAttribute(MasterConstants.MASTERREGION_KEL_LIST, regKel);
+      super.openLookup(MasterConstants.MASTER_REGION_LOOKUP, req, res);
+      return;
+    }
+    else
+    {
+      bn = re.listOfRegion(MasterConstants.DATA_CURRENT);
+      req.setAttribute(MasterConstants.FORM_MASTERREGION_REGIONONLY, showW);
+      req.setAttribute(MasterConstants.MASTERREGION_LIST, bn);
+      super.openLookup(MasterConstants.MASTER_REGION_LOOKUP, req, res);
+      return;
+    }
   }
   
   private void MasterResident(HttpServletRequest req, HttpServletResponse res)

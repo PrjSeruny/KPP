@@ -12,6 +12,7 @@ public class MasterRegionKecamatanBean extends DataPreferenceBean
   private String Name = null;
   private String Note = null;
   private MessageBean msg = null;
+  private MasterRegionKelurahanBean[] olds = null;
   
   /** Regular Constructor */
   public MasterRegionKecamatanBean(){}
@@ -30,4 +31,10 @@ public class MasterRegionKecamatanBean extends DataPreferenceBean
   
   public void setNote(String val){ Note = val; }
   public String getNote(){ return Note; }
+  
+  public void setKelurahanInfo(MasterRegionKelurahanBean[] val)
+  { olds = val; }
+  public MasterRegionKelurahanBean[] getKelurahanInfo()
+  { return olds; }
+  
 }

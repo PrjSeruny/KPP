@@ -1,0 +1,9 @@
+user mysql = root, pass= g0gr1b
+
+CREATE USER 'core'@'localhost' IDENTIFIED BY 's3v3nthh34v3n';
+GRANT ALL PRIVILEGES ON * . * TO 'core'@'localhost';
+FLUSH PRIVILEGES;
+
+CREATE USER 'core'@'%' IDENTIFIED BY 's3v3nthh34v3n';
+GRANT ALL PRIVILEGES ON * . * TO 'core'@'%';
+FLUSH PRIVILEGES;

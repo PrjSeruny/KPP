@@ -18,6 +18,7 @@ public class MasterTable
   public static final String TABLE_MASTERREGION = "MasterRegion";
   public static final String COL_MASTERREGION_REGIONID = TABLE_MASTERREGION + ".RegionID";
   public static final String COL_MASTERREGION_NAME = TABLE_MASTERREGION + ".RegionName";
+  public static final String COL_MASTERREGION_STATEPROV = TABLE_MASTERREGION + ".StateProv";
   public static final String COL_MASTERREGION_NOTE = TABLE_MASTERREGION + ".Note";
   public static final String COL_MASTERREGION_CREATEDATE = TABLE_MASTERREGION + ".CreateDate";
   public static final String COL_MASTERREGION_CREATEUSER = TABLE_MASTERREGION + ".CreateUser";
@@ -28,10 +29,10 @@ public class MasterTable
   
   /* Master Region Kecamatan **/
   public static final String TABLE_MASTER_REGION_KEC = "MasterRegionKecamatan";
-  public static final String COl_MASTER_REGION_REGIONID = TABLE_MASTER_REGION_KEC + ".RegionID";
-  public static final String COl_MASTER_REGION_KECAMATANID = TABLE_MASTER_REGION_KEC + ".KecamatanID";
-  public static final String COl_MASTER_REGION_NAME = TABLE_MASTER_REGION_KEC + ".Name";
-  public static final String COl_MASTER_REGION_NOTE = TABLE_MASTER_REGION_KEC + ".Note";
+  public static final String COl_MASTER_REGION_KEC_REGIONID = TABLE_MASTER_REGION_KEC + ".RegionID";
+  public static final String COl_MASTER_REGION_KEC_KECAMATANID = TABLE_MASTER_REGION_KEC + ".KecamatanID";
+  public static final String COl_MASTER_REGION_KEC_NAME = TABLE_MASTER_REGION_KEC + ".Name";
+  public static final String COl_MASTER_REGION_KEC_NOTE = TABLE_MASTER_REGION_KEC + ".Note";
   
   /* Master Region Kelurahan **/
   public static final String TABLE_MASTER_REGION_KEL = "MasterRegionKelurahan";

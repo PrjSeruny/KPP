@@ -238,7 +238,12 @@ public class MasterResidentEngine extends RootEngine
     /* Postal Code **/
     temp = Utilities.trim(req.getParameter(
         MasterConstants.FORM_MASTERRESIDENT_POSTALCODE));
-    if(!Utilities.isEmpy(temp))
+    if(Utilities.isEmpy(temp))
+    {
+      msg.setMessageBean(MasterConstants.FORM_MASTERRESIDENT_POSTALCODE, 
+          "Mohon masukkan no kode pos ");
+    }
+    else
     {
       bn.setPostalCode(temp);
     }

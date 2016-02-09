@@ -8,8 +8,10 @@ public class MasterRegionBean extends DataPreferenceBean
 {
   private String RegionID = null;
   private String RegionName = null;
+  private String StateProv = null;
   private String Note = null;
   private MessageBean msg = null;
+  private MasterRegionKecamatanBean[] olds = null;
   
   /** Regular Constructor */
   public MasterRegionBean(){}
@@ -23,7 +25,15 @@ public class MasterRegionBean extends DataPreferenceBean
   public void setRegionName(String val){ RegionName = val; }
   public String getRegionName(){ return RegionName; }
   
+  public void setStateProv(String val){ StateProv = val; }
+  public String getStateProv(){ return StateProv; }
+  
   public void setNote(String val){ Note = val; }
   public String getNote(){ return Note; }
+  
+  public void setKecamatanInfo(MasterRegionKecamatanBean[] val)
+  { olds = val; }
+  public MasterRegionKecamatanBean[] getKecamatanInfo()
+  { return olds; }
   
 }
