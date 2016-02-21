@@ -10,6 +10,8 @@
 	<property name="core_jar" value="core" />
 	<property name="master" value="com/sync/master/**/*.class"/>
 	<property name="master_jar" value="master"/>
+	<property name="public" value="com/sync/home/**/*.class"/>
+	<property name="public_jar" value="public"/>
 	<!--property name="main-class"  value="com.sync.core.servlet.CoreServlet"/ -->
 	
 	<path id="classpath">
@@ -52,7 +54,15 @@
         </manifest>
         <include name="${build.dir}/*.class"/>
         <include name="${lib.dir}/*.jar"/>
-    </jar>	
+    </jar>
+		<jar destfile="${lib.dir}/${public_jar}.jar" basedir="${build.dir}">
+		         <include name="${public}"/>
+		        <manifest>
+		          <!--attribute name="Main-Class" value="${main-class}"/ -->
+		        </manifest>
+		        <include name="${build.dir}/*.class"/>
+		        <include name="${lib.dir}/*.jar"/>
+		    </jar>
     </target>
 	
 	<target name="main" depends="clean, init, compile, jar" />
