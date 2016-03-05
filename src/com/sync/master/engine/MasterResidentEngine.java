@@ -393,6 +393,9 @@ public class MasterResidentEngine extends RootEngine
       bn.setBirthDate(Utilities.stringToDate(
           rs.getString(MasterTable.COL_MASTER_RESIDENT_BIRTHDATE), 
           MasterConstants.DATE_DB_SHORT_PATTERN));
+      bn.setDeathDate(Utilities.stringToDate(
+          rs.getString(MasterTable.COL_MASTER_RESIDENT_DEATHDATE), 
+          MasterConstants.DATE_DB_SHORT_PATTERN));
       bn.setSex(rs.getInt(MasterTable.COL_MASTER_RESIDENT_SEX));
       bn.setReligion(rs.getString(MasterTable.COL_MASTER_RESIDENT_RELIGION));
       bn.setMaritalStatus(rs.getString(
@@ -418,6 +421,10 @@ public class MasterResidentEngine extends RootEngine
           rs.getString(MasterTable.COL_MASTER_RESIDENT_ENTRYDATE), 
           MasterConstants.DATE_DB_MEDIUM_PATTERN));
       bn.setEntryUser(rs.getString(MasterTable.COL_MASTER_RESIDENT_ENTRYUSER));
+      bn.setVoidDate(Utilities.stringToDate(
+          rs.getString(MasterTable.COL_MASTER_RESIDENT_VOIDDATE), 
+          MasterConstants.DATE_DB_MEDIUM_PATTERN));
+      bn.setVoidUser(rs.getString(MasterTable.COL_MASTER_RESIDENT_VOIDUSER));
     }
     return bn;
   }
@@ -582,6 +589,37 @@ public class MasterResidentEngine extends RootEngine
     }
     return res;
   }
+  
+  public boolean updateDeathDate(MasterResidentBean ubn)
+  {
+    boolean res = false;
+    
+    try
+    {
+      SQL = " UPDATE " + MasterTable.TABLE_MASTER_RESIDENT +
+            " SET " +
+            MasterTable.COL_MASTER_RESIDENT_DEATHDATE + "=? " +
+            " WHERE " +
+            MasterTable.COL_MASTER_RESIDENT_NIK + "=?;";
+      
+      super.getConnection();
+      stat = con.prepareStatement(SQL);
+      stat.setString(1, Utilities.dateToString(ubn.getDeathDate(), 
+          MasterConstants.DATE_DB_MEDIUM_PATTERN));
+      stat.setString(2, ubn.getNIK());
+      
+      if(stat.executeUpdate()>0) return true;
+      else return false;
+    }
+    catch(Exception e)
+    {
+      e.printStackTrace();
+      super.rollback();
+      res = false;
+    }
+    return res;
+  }
+  
   
   public boolean delete(String[] niks)
   {

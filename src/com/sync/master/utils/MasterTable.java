@@ -49,6 +49,7 @@ public class MasterTable
   public static final String COL_MASTER_RESIDENT_NAME = TABLE_MASTER_RESIDENT + ".Name";
   public static final String COL_MASTER_RESIDENT_BIRTHCITY = TABLE_MASTER_RESIDENT + ".BirthCity";
   public static final String COL_MASTER_RESIDENT_BIRTHDATE = TABLE_MASTER_RESIDENT + ".BirthDate";
+  public static final String COL_MASTER_RESIDENT_DEATHDATE = TABLE_MASTER_RESIDENT + ".DeathDate";
   public static final String COL_MASTER_RESIDENT_SEX = TABLE_MASTER_RESIDENT + ".Sex";
   public static final String COL_MASTER_RESIDENT_RELIGION = TABLE_MASTER_RESIDENT + ".Religion";
   public static final String COL_MASTER_RESIDENT_MARITALSTATUS = TABLE_MASTER_RESIDENT + ".MaritalStatus";
@@ -69,6 +70,5 @@ public class MasterTable
   public static final String COL_MASTER_RESIDENT_ENTRYUSER = TABLE_MASTER_RESIDENT + ".EntryUser";
   public static final String COL_MASTER_RESIDENT_VOIDDATE = TABLE_MASTER_RESIDENT + ".VoidDate";
   public static final String COL_MASTER_RESIDENT_VOIDUSER = TABLE_MASTER_RESIDENT + ".VoidUser";
-  
   
 }

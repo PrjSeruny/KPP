@@ -67,6 +67,8 @@ public class Constants
   public static final String BTN_SAVE = "btnsve";
   public static final String BTN_CANCEL = "btncncl";
   public static final String BTN_DONE = "btndone";
+  public static final String BTN_PROC = "btnproc";
+  public static final String BTN_CANCELPROC = "btncnclproc";
   public static final String CHKBOX = "chkbox";
   
   public static final String LOOKUP_SINGLE = "lkpsgl";

@@ -12,6 +12,8 @@
 	<property name="master_jar" value="master"/>
 	<property name="public" value="com/sync/home/**/*.class"/>
 	<property name="public_jar" value="public"/>
+	<property name="trans" value="com/sync/trans/**/*.class"/>
+	<property name="trans_jar" value="trans"/>	    
 	<!--property name="main-class"  value="com.sync.core.servlet.CoreServlet"/ -->
 	
 	<path id="classpath">
@@ -55,14 +57,22 @@
         <include name="${build.dir}/*.class"/>
         <include name="${lib.dir}/*.jar"/>
     </jar>
-		<jar destfile="${lib.dir}/${public_jar}.jar" basedir="${build.dir}">
-		         <include name="${public}"/>
-		        <manifest>
-		          <!--attribute name="Main-Class" value="${main-class}"/ -->
-		        </manifest>
-		        <include name="${build.dir}/*.class"/>
-		        <include name="${lib.dir}/*.jar"/>
-		    </jar>
+	<jar destfile="${lib.dir}/${trans_jar}.jar" basedir="${build.dir}">
+	         <include name="${trans}"/>
+	        <manifest>
+	          <!--attribute name="Main-Class" value="${main-class}"/ -->
+	        </manifest>
+	        <include name="${build.dir}/*.class"/>
+	        <include name="${lib.dir}/*.jar"/>
+	</jar>
+	<jar destfile="${lib.dir}/${public_jar}.jar" basedir="${build.dir}">
+         <include name="${public}"/>
+        <manifest>
+          <!--attribute name="Main-Class" value="${main-class}"/ -->
+        </manifest>
+        <include name="${build.dir}/*.class"/>
+        <include name="${lib.dir}/*.jar"/>
+    </jar>
     </target>
 	
 	<target name="main" depends="clean, init, compile, jar" />

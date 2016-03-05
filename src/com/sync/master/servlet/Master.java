@@ -501,7 +501,6 @@ public class Master extends CoreServlet
   private void doUpdateMasterResident(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
-
     System.out.println("UPDATING MASTER RESIDEN");
     String nik = req.getParameter(MasterConstants.FORM_MASTERRESIDENT_NIK);
     String act = req.getParameter(MasterConstants.ACT);
@@ -615,6 +614,7 @@ public class Master extends CoreServlet
     super.openContent(MasterConstants.SVT_MASTER_PATH, 
         MasterConstants.MASTER_RESIDENT, 
         MasterConstants.MASTER_RESIDENT_INFO, req, res);
+    return;
   }
   
   private void doListMasterResidents(HttpServletRequest req, HttpServletResponse res)

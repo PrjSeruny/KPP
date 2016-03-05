@@ -9,9 +9,9 @@ import java.util.HashMap;
  */
 public class MessageBean
 {
-  public static final int MSG_ERR = -1;
-  public static final int MSG_WARNING = 0;
-  public static final int MSG_INFO = 1;
+  public static final String MSG_ERR = "MSG_ERR";
+  public static final String MSG_WARNING = "MSG_WARNING";
+  public static final String MSG_INFO = "MSG_INFO";
   
   public static final String MSG_ERR_COL = "#FF0000";
   public static final String MSG_ERR_WARNING = "#FFFF01";

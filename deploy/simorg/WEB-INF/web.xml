@@ -35,6 +35,15 @@
   </servlet-mapping>
     
   <servlet>
+    <servlet-name>TransServlet</servlet-name>
+    <servlet-class>com.sync.trans.servlet.Transaction</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TransServlet</servlet-name>
+    <url-pattern>/index/trans</url-pattern>
+  </servlet-mapping>
+    
+  <servlet>
     <servlet-name>PublicServlet</servlet-name>
     <servlet-class>com.sync.home.servlet.Public</servlet-class>
   </servlet>

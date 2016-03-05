@@ -15,6 +15,7 @@ public class MasterResidentBean extends DataPreferenceBean
   private String Name = null;
   private String BirthCity = null;
   private Date BirthDate = null;
+  private Date DeathDate = null;
   private int Sex;
   private String Religion = null;
   private String MaritalStatus = null;
@@ -51,6 +52,9 @@ public class MasterResidentBean extends DataPreferenceBean
   
   public void setBirthDate(Date val){ BirthDate = val; }
   public Date getBirthDate(){ return BirthDate; }
+  
+  public void setDeathDate(Date val){ DeathDate = val; }
+  public Date getDeathDate(){ return DeathDate; }
   
   public void setSex(int val){ Sex = val; }
   public int getSex(){ return Sex; }
