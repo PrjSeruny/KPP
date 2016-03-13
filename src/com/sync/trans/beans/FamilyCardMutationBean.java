@@ -1,4 +1,4 @@
-package com.sync.master.beans;
+package com.sync.trans.beans;
 
 import java.util.Date;
 
@@ -9,19 +9,17 @@ import com.sync.master.utils.MasterConstants;
 
 
 
-public class MasterResidentBean extends DataPreferenceBean
+public class FamilyCardMutationBean extends DataPreferenceBean
 {
   private String NIK = null;
-  private String KKNo = null;
+  private String OldKK = null;
+  private String NewKK = null;
   private String Name = null;
-  private String BirthCity = null;
-  private Date BirthDate = null;
-  private Date DeathDate = null;
+  private Date StartDate = null;
   private int Sex;
   private String Religion = null;
   private String MaritalStatus = null;
   private String FamilyPos = null;
-  private String Work = null;
   private String Nationality = null;
   private String Address = null;
   private String City = null;
@@ -34,29 +32,25 @@ public class MasterResidentBean extends DataPreferenceBean
   private String Note = null;
   private MessageBean msg = null;
   
-  public MasterResidentBean(){}
+  public FamilyCardMutationBean(){}
   
   public void setBeanMessages(MessageBean val){ msg = val; }
   public MessageBean getBeanMessages(){ return msg; }
   
-  
   public void setNIK(String val){ NIK = val; }
   public String getNIK(){ return NIK; }
   
-  public void setKKNo(String val){ KKNo = val; }
-  public String getKKNo(){ return KKNo; }
+  public void setOldKK(String val){ OldKK = val; }
+  public String getOldKK(){ return OldKK; }
+  
+  public void setNewKK(String val){ NewKK = val; }
+  public String getNewKK(){ return NewKK; }
   
   public void setName(String val){ Name = val; }
   public String getName(){ return Name; }
   
-  public void setBirthCity(String val){ BirthCity  = val; }
-  public String getBirthCity(){ return BirthCity; }
-  
-  public void setBirthDate(Date val){ BirthDate = val; }
-  public Date getBirthDate(){ return BirthDate; }
-  
-  public void setDeathDate(Date val){ DeathDate = val; }
-  public Date getDeathDate(){ return DeathDate; }
+  public void setStartDate(Date val){ StartDate = val; }
+  public Date getStartDate(){ return StartDate; }
   
   public void setSex(int val){ Sex = val; }
   public int getSex(){ return Sex; }
@@ -116,9 +110,6 @@ public class MasterResidentBean extends DataPreferenceBean
       return "";
     }
   }
-  
-  public void setWork(String val){ Work = val; }
-  public String getWork(){ return Work; }
   
   public void setNationality(String val){ Nationality = val; }
   public String getNationality(){ return Nationality; }

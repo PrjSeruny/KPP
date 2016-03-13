@@ -205,13 +205,23 @@ public class Master extends CoreServlet
     MasterRegionKelurahanBean[] regKel = null;
     MasterRegionEngine re = new MasterRegionEngine(req, res);
     boolean showW = Boolean.parseBoolean(req.getParameter(MasterConstants.FORM_MASTERREGION_REGIONONLY));
+    String propfield=req.getParameter(MasterConstants.FORM_FIELD1);
+    String cityfield=req.getParameter(MasterConstants.FORM_FIELD2);
+    String kecfield = req.getParameter(MasterConstants.FORM_FIELD3);
+    String kelfield = req.getParameter(MasterConstants.FORM_FIELD4);
+    
     System.out.println(">>>>>>>>>>>>>>>>>>> SHOW WHAT"+showW);
+    System.out.println(">>>>>>>>>>>>>>>>>>> prop="+propfield+" ciry="+cityfield+ " kec="+kecfield+ " kelfield="+kelfield);
     
     if(!Utilities.isEmpy(_for) && _for.equals(MasterConstants.FOR_KEC))
     {
       regID = req.getParameter(MasterConstants.FORM_MASTERREGION_REGID);
       regKec = re.getKecamatanInfo(regID);
       req.setAttribute(MasterConstants.MASTERREGION_KEC_LIST, regKec);
+      req.setAttribute(MasterConstants.FORM_FIELD1, propfield);
+      req.setAttribute(MasterConstants.FORM_FIELD2, cityfield);
+      req.setAttribute(MasterConstants.FORM_FIELD3, kecfield);
+      req.setAttribute(MasterConstants.FORM_FIELD4, kelfield);
       super.openLookup(MasterConstants.MASTER_REGION_LOOKUP, req, res);
       return;
     }
@@ -221,6 +231,10 @@ public class Master extends CoreServlet
       kecID = req.getParameter(MasterConstants.FORM_MASTERREGION_KECID);
       regKel = re.getKelurahanInfo(regID, kecID);
       req.setAttribute(MasterConstants.MASTERREGION_KEL_LIST, regKel);
+      req.setAttribute(MasterConstants.FORM_FIELD1, propfield);
+      req.setAttribute(MasterConstants.FORM_FIELD2, cityfield);
+      req.setAttribute(MasterConstants.FORM_FIELD3, kecfield);
+      req.setAttribute(MasterConstants.FORM_FIELD4, kelfield);
       super.openLookup(MasterConstants.MASTER_REGION_LOOKUP, req, res);
       return;
     }
@@ -229,6 +243,10 @@ public class Master extends CoreServlet
       bn = re.listOfRegion(MasterConstants.DATA_CURRENT);
       req.setAttribute(MasterConstants.FORM_MASTERREGION_REGIONONLY, showW);
       req.setAttribute(MasterConstants.MASTERREGION_LIST, bn);
+      req.setAttribute(MasterConstants.FORM_FIELD1, propfield);
+      req.setAttribute(MasterConstants.FORM_FIELD2, cityfield);
+      req.setAttribute(MasterConstants.FORM_FIELD3, kecfield);
+      req.setAttribute(MasterConstants.FORM_FIELD4, kelfield);
       super.openLookup(MasterConstants.MASTER_REGION_LOOKUP, req, res);
       return;
     }

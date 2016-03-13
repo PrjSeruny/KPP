@@ -67,6 +67,7 @@
             <input type="submit" name="<%=TransConstants.BTN_DONE %>" value="Selesai" class="negate">
             <input type="submit" value="Ubah">
 <%
+    System.out.println("user prosess= "+ubn.getProcessUser() + " user date="+ubn.getProcessDate());
     if(Utilities.isEmpy(ubn.getProcessUser()) && null==ubn.getProcessDate())
     {
 %>            

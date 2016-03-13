@@ -50,6 +50,7 @@ public class Constants
   
   public static final String DATA_STAT = "sts";
   public static final String DATA_ARCHIEVE = "archve";
+  public static final String DATA_RECYCLE = "rcycl";
   public static final String DATA_CURRENT = "curr";
   
   public static final String ACT = "act";
@@ -104,5 +105,20 @@ public class Constants
   public static final String FOR = "for";
   public static final String FOR_KEL = "forkel";
   public static final String FOR_KEC = "forkec";
+  
+  public static final String FAMILY_POS_MOTHER = "Mother";
+  public static final String FAMILY_POS_FATHER = "Father";
+  public static final String FAMILY_POS_CHILD = "Child";
+  
+  public static final String FORM_FIELD1 = "FORM_FIELD1";
+  public static final String FORM_FIELD2 = "FORM_FIELD2";
+  public static final String FORM_FIELD3 = "FORM_FIELD3";
+  public static final String FORM_FIELD4 = "FORM_FIELD4";
+  public static final String FORM_FIELD5 = "FORM_FIELD5";
+  public static final String FORM_FIELD6 = "FORM_FIELD6";
+  public static final String FORM_FIELD7 = "FORM_FIELD7";
+  public static final String FORM_FIELD8 = "FORM_FIELD8";
+  public static final String FORM_FIELD9 = "FORM_FIELD9";
+  public static final String FORM_FIELD10 = "FORM_FIELD10";
   
 }

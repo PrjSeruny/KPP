@@ -32,12 +32,19 @@
       <a href="<%=Constants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>?<%=Constants.W%>=<%=MasterConstants.MASTER_RESIDENT%>&<%=MasterConstants.DATA_STAT%>=<%=MasterConstants.DATA_CURRENT%>" >DATA AKTIF</a>
     <% } %>
         |
-    <% if(stat.equals(MasterConstants.DATA_ARCHIEVE)){out.println("ARSIP");}else{ %> 
-      <a href="<%=Constants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>?<%=Constants.W%>=<%=MasterConstants.MASTER_RESIDENT%>&<%=MasterConstants.DATA_STAT%>=<%=MasterConstants.DATA_ARCHIEVE%>">ARSIP</a>
+    <% if(stat.equals(MasterConstants.DATA_ARCHIEVE)){out.println("RECYCLE");}else{ %> 
+      <a href="<%=Constants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>?<%=Constants.W%>=<%=MasterConstants.MASTER_RESIDENT%>&<%=MasterConstants.DATA_STAT%>=<%=MasterConstants.DATA_RECYCLE%>">RECYCLE</a>
     <% } %>
     </div>
     <a href="javascript:void(0)" class="reload" title="Refresh">Refresh</a>
+<%
+  if(stat.equals(MasterConstants.DATA_CURRENT))
+  {
+%>    
     <a href="javascript:void(0)" class="delete" title="Hapus" style="<%=null!=list && list.length>0?"":"display:none" %>">Hapus</a>
+<%
+  }
+%>    
     <a href="<%=Constants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>?<%=Constants.W%>=<%=MasterConstants.MASTER_RESIDENT%>&<%=MasterConstants.ACT%>=<%=MasterConstants.ACT_CREATE%>" class="add" title="Tambah" >Tambah</a>
 
     <div class="search">

@@ -119,15 +119,24 @@ public class DeathLetterEngine extends RootEngine
     
     if(!Utilities.isEmpy(stat) && stat.equals(MasterConstants.DATA_ARCHIEVE))
     {
-      addSQL += TransTable.COL_DEATHLETTER_VOIDDATE +
-          " IS NOT NULL AND " + TransTable.COL_DEATHLETTER_VOIDUSER +
-          " IS NOT NULL ";
+      addSQL += TransTable.COL_DEATHLETTER_PROCESSDATE + " IS NOT NULL " + 
+             " AND " + TransTable.COL_DEATHLETTER_PROCESSUSER +" IS NOT NULL " +
+             " AND " + TransTable.COL_DEATHLETTER_VOIDDATE + " IS NULL " +
+             " AND " + TransTable.COL_DEATHLETTER_VOIDUSER + " IS NULL ";
+    }
+    else if(!Utilities.isEmpy(stat) && stat.equals(MasterConstants.DATA_RECYCLE))
+    {
+      addSQL += TransTable.COL_DEATHLETTER_VOIDDATE + " IS NOT NULL " +
+          " AND " + TransTable.COL_DEATHLETTER_VOIDUSER + " IS NOT NULL " +
+          " AND " + TransTable.COL_DEATHLETTER_PROCESSDATE + " IS NULL " +
+          " AND " + TransTable.COL_DEATHLETTER_PROCESSUSER + " IS NULL " ;
     }
     else
     {
-      addSQL += TransTable.COL_DEATHLETTER_VOIDDATE +
-          " IS NULL AND " + TransTable.COL_DEATHLETTER_VOIDUSER +
-          " IS NULL ";
+      addSQL += TransTable.COL_DEATHLETTER_VOIDDATE + " IS NULL" +
+          " AND " + TransTable.COL_DEATHLETTER_VOIDUSER + " IS NULL " + 
+          " AND " + TransTable.COL_DEATHLETTER_PROCESSDATE + " IS NULL " +
+          " AND " + TransTable.COL_DEATHLETTER_PROCESSUSER + " IS NULL " ;
     }
     
     if(!Utilities.isEmpy(search)){
@@ -255,7 +264,7 @@ public class DeathLetterEngine extends RootEngine
       stat.setString(3, Utilities.dateToString(bn.getDeathDate(), 
           TransConstants.DATE_DB_SHORT_PATTERN));
       stat.setString(4, Utilities.dateToString(new Date(), 
-          TransConstants.DATE_DB_SHORT_PATTERN));
+          TransConstants.DATE_DB_MEDIUM_PATTERN));
       stat.setString(5, user.getUser());
       stat.setString(6, bn.getNote());
       
@@ -297,7 +306,7 @@ public class DeathLetterEngine extends RootEngine
           TransConstants.DATE_DB_SHORT_PATTERN));
       stat.setString(2, bn.getNote());
       stat.setString(3, Utilities.dateToString(new Date(), 
-          TransConstants.DATE_DB_SHORT_PATTERN));
+          TransConstants.DATE_DB_MEDIUM_PATTERN));
       stat.setString(4, user.getUser());
       stat.setString(5, bn.getNIK());
       
@@ -334,10 +343,10 @@ public class DeathLetterEngine extends RootEngine
       super.getConnection();
       stat = con.prepareStatement(SQL);
       stat.setString(1, Utilities.dateToString(bn.getProcessDate(), 
-          TransConstants.DATE_DB_SHORT_PATTERN));
+          TransConstants.DATE_DB_MEDIUM_PATTERN));
       stat.setString(2, bn.getProcessUser());
       stat.setString(3, Utilities.dateToString(bn.getCancelProcessDate(), 
-          TransConstants.DATE_DB_SHORT_PATTERN));
+          TransConstants.DATE_DB_MEDIUM_PATTERN));
       stat.setString(4, bn.getCancelProcessUser());
       stat.setString(5, bn.getNIK());
       
@@ -421,7 +430,7 @@ public class DeathLetterEngine extends RootEngine
       else
       {
         if(!cancelled)
-        { rebn.setDeathDate(new Date()); }
+        { rebn.setDeathDate(bn.getDeathDate()); }
         else { rebn.setDeathDate(null); }
         
         if(!re.updateDeathDate(rebn))

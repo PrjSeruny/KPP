@@ -295,7 +295,7 @@ create table MasterResident
    Sex            INT,
    Religion       VARCHAR(20) NOT NULL,
    MaritalStatus  VARCHAR(100) NOT NULL,
-   StatusInFamily VARCHAR(10),
+   FamilyPos      VARCHAR(10),
    Work           VARCHAR(100),
    Nationality    VARCHAR(100) NOT NULL,  #Kewarganegaraan
    Address        VARCHAR(100) NOT NULL,
@@ -316,21 +316,18 @@ create table MasterResident
    PRIMARY KEY(NIK)
 )Engine=InnoDB;
 
-
-drop table if exists MasterResidentHistory;
-create table MasterResidentHistory  
+DROP TABLE IF EXISTS MasterResidentHistory;
+CREATE TABLE MasterResidentHistory
 (
    NIK            VARCHAR(100) NOT NULL,
+   StartDate      VARCHAR(50) NOT NULL,
+   EndDate        VARCHAR(50),
    KKNo           VARCHAR(100) NOT NULL,
    Name           VARCHAR(100) NOT NULL,
-   BirthCity      VARCHAR(100) NOT NULL,
-   BirthDate      VARCHAR(20) NOT NULL,
-   DeathDate      VARCHAR(20),
    Sex            INT,
    Religion       VARCHAR(20) NOT NULL,
    MaritalStatus  VARCHAR(100) NOT NULL,
-   StatusInFamily VARCHAR(10),
-   Work           VARCHAR(100),
+   FamilyPos      VARCHAR(10),
    Nationality    VARCHAR(100) NOT NULL,  #Kewarganegaraan
    Address        VARCHAR(100) NOT NULL,
    City           VARCHAR(100) NOT NULL,  #Kota
@@ -340,14 +337,46 @@ create table MasterResidentHistory
    Kecamatan      VARCHAR(75) NOT NULL,
    RT             VARCHAR(20) NOT NULL,
    RW             VARCHAR(20) NOT NULL,
-   Note           TEXT,
-   CreateDate     VARCHAR(20) NOT NULL,
-   CreateUser     VARCHAR(50) NOT NULL,
-   EntryDate      VARCHAR(20),
-   EntryUser      VARCHAR(50),
-   VoidDate       VARCHAR(20),
-   VoidUser       VARCHAR(50),
-   PRIMARY KEY(NIK)
+   EntryDate      VARCHAR(20) NOT NULL,
+   EntryUser      VARCHAR(50) NOT NULL,
+   PRIMARY KEY(NIK, StartDate)
+)Engine=InnoDB;
+
+#Mutasi KK
+DROP TABLE IF EXISTS FamilyCardMutation;
+CREATE TABLE FamilyCardMutation
+(
+   NIK                 VARCHAR(100) NOT NULL,
+   Name                VARCHAR(100) NOT NULL,
+   StartDate           VARCHAR(100) NOT NULL,
+   OldKK               VARCHAR(100) NOT NULL,
+   NewKK               VARCHAR(100) NOT NULL,
+   Sex                 INT,
+   Religion            VARCHAR(20) NOT NULL,
+   MaritalStatus       VARCHAR(100) NOT NULL,
+   FamilyPos           VARCHAR(10),
+   StatusInFamily      VARCHAR(10),
+   Nationality         VARCHAR(100) NOT NULL,  #Kewarganegaraan
+   Address             VARCHAR(100) NOT NULL,
+   City                VARCHAR(100) NOT NULL,  #Kota
+   Region              VARCHAR(100) NOT NULL,  #Propinsi
+   PostalCode          VARCHAR(20) NOT NULL,
+   Kelurahan           VARCHAR(75) NOT NULL,
+   Kecamatan           VARCHAR(75) NOT NULL,
+   RT                  VARCHAR(20) NOT NULL,
+   RW                  VARCHAR(20) NOT NULL,
+   NOTE                TEXT,
+   CreateDate          VARCHAR(20) NOT NULL,
+   CreateUser          VARCHAR(50) NOT NULL,
+   EntryDate           VARCHAR(20),
+   EntryUser           VARCHAR(50),
+   ProcessDate         VARCHAR(20),
+   ProcessUser         VARCHAR(50),
+   CancelProcessDate   VARCHAR(20),
+   CancelProcessUser   VARCHAR(50),
+   VoidDate            VARCHAR(20),
+   VoidUser            VARCHAR(50),
+   PRIMARY KEY(NIK,StartDate)
 )Engine=InnoDB;
 
 #Transaksi Surat Kematian
@@ -376,6 +405,7 @@ drop table if exists BirthLetter;
 create table BirthLetter
 (
   NIK                  VARCHAR(100) NOT NULL,
+  KKNo                 VARCHAR(100) NOT NULL,
   Name                 VARCHAR(100) NOT NULL,
   BirthDate            VARCHAR(20) NOT NULL,
   FatherNIK            VARCHAR(100) NOT NULL,
@@ -391,6 +421,8 @@ create table BirthLetter
   CancelProcessDate    VARCHAR(20),
   CancelProcessUser    VARCHAR(50),
   Note                 TEXT,
+  VoidDate       VARCHAR(20),
+  VoidUser       VARCHAR(50),
   PRIMARY KEY(NIK)
 )Engine=InnoDB;
 

@@ -44,7 +44,17 @@
         </div>
         <div >
           <label>No.KK</label>
-          <input type="text" name="<%=MasterConstants.FORM_MASTERRESIDENT_KK%>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getKKNo()):""%>">
+<%
+   if(!Utilities.isEmpy(act) && act.equals(MasterConstants.ACT_UPDATE_SAVE)) type = "hidden";
+   else type="text";
+%>            
+          <input type="<%=type%>" name="<%=MasterConstants.FORM_MASTERRESIDENT_KK%>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getKKNo()):""%>">
+<%
+   if(!Utilities.isEmpy(act) && act.equals(MasterConstants.ACT_UPDATE_SAVE))
+   {
+     out.println(ubn.getKKNo());
+   }
+%>          
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_KK):""%></span>
         </div>
       </fieldset>
@@ -59,7 +69,7 @@
           class="lookup"
           valTarget="#userIDVal;#userNameVal"
           param="width=450;height=300"
-          url="<%=Constants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>?<%=Constants.W%>=<%=MasterConstants.MASTER_REGION%>&<%=MasterConstants.ACT%>=<%=MasterConstants.ACT_LOOKUP%>&<%=MasterConstants.LOOKUP_SINGLE%>=1&<%=MasterConstants.FORM_MASTERREGION_REGIONONLY%>=true">Cari</a>
+          url="<%=Constants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>?<%=Constants.W%>=<%=MasterConstants.MASTER_REGION%>&<%=MasterConstants.ACT%>=<%=MasterConstants.ACT_LOOKUP%>&<%=MasterConstants.LOOKUP_SINGLE%>=1&<%=MasterConstants.FORM_MASTERREGION_REGIONONLY%>=true&<%=MasterConstants.FORM_FIELD2%>=create.<%=MasterConstants.FORM_MASTERRESIDENT_BIRTHCITY%>">Cari</a>
           <input type="text" name="<%=MasterConstants.FORM_MASTERRESIDENT_BIRTHCITY %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getCity()):""%>" readonly="readonly">
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_BIRTHCITY):""%></span>
         </div>
@@ -90,7 +100,7 @@
           </select>
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_RELIGION):""%></span>
         </div>
-        <div >
+        <div>
           <label>Status Pernikahan</label>
           <select name="<%=MasterConstants.FORM_MASTERRESIDENT_MARITALSTATUS%>">
              <option value="<%=MasterConstants.MARITALSTAT_SINGLE%>"<%=null!=ubn && ubn.getMaritalStatus().equals(MasterConstants.MARITALSTAT_SINGLE)?"selected":""%>>Lajang</option>
@@ -98,6 +108,15 @@
              <option value="<%=MasterConstants.MARITALSTAT_WIDOW%>"<%=null!=ubn && ubn.getMaritalStatus().equals(MasterConstants.MARITALSTAT_WIDOW)?"selected":""%>>Duda/Janda</option>
           </select>
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_MARITALSTATUS):""%></span>
+        </div>
+        <div>
+          <label>Status Hub Dalam Keluarga</label>
+          <select name="<%=MasterConstants.FORM_MASTERRESIDENT_FAMILYPOS%>">
+             <option value="<%=MasterConstants.FAMILY_POS_CHILD%>"<%=null!=ubn && ubn.getFamilyPosVal().equals(MasterConstants.FAMILY_POS_CHILD)?"selected":""%>>Anak</option>
+             <option value="<%=MasterConstants.FAMILY_POS_MOTHER%>"<%=null!=ubn && ubn.getFamilyPosVal().equals(MasterConstants.FAMILY_POS_MOTHER)?"selected":""%>>Istri</option>
+             <option value="<%=MasterConstants.FAMILY_POS_FATHER%>"<%=null!=ubn && ubn.getFamilyPosVal().equals(MasterConstants.FAMILY_POS_FATHER)?"selected":""%>>Kepala Keluarga</option>
+          </select>
+          <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_FAMILYPOS):""%></span>
         </div>
       </fieldset>
       <fieldset>
@@ -123,7 +142,7 @@
           class="lookup"
           valTarget="#userIDVal;#userNameVal"
           param="width=450;height=300"
-          url="<%=Constants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>?<%=Constants.W%>=<%=MasterConstants.MASTER_REGION%>&<%=MasterConstants.ACT%>=<%=MasterConstants.ACT_LOOKUP%>&<%=MasterConstants.LOOKUP_SINGLE%>=1&<%=MasterConstants.FORM_MASTERREGION_REGIONONLY%>=false">Cari</a>
+          url="<%=Constants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>?<%=Constants.W%>=<%=MasterConstants.MASTER_REGION%>&<%=MasterConstants.ACT%>=<%=MasterConstants.ACT_LOOKUP%>&<%=MasterConstants.LOOKUP_SINGLE%>=1&<%=MasterConstants.FORM_MASTERREGION_REGIONONLY%>=false&<%=MasterConstants.FORM_FIELD1%>=create.<%=MasterConstants.FORM_MASTERRESIDENT_REGION%>&<%=MasterConstants.FORM_FIELD2%>=create.<%=MasterConstants.FORM_MASTERRESIDENT_CITY%>&<%=MasterConstants.FORM_FIELD3%>=create.<%=MasterConstants.FORM_MASTERRESIDENT_KECAMATAN%>&<%=MasterConstants.FORM_FIELD4%>=create.<%=MasterConstants.FORM_MASTERRESIDENT_KELURAHAN%>">Cari</a>
           <input type="text" name="<%=MasterConstants.FORM_MASTERRESIDENT_CITY %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getCity()):""%>">
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_CITY):""%></span>
         </div>

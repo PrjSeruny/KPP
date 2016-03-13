@@ -53,6 +53,7 @@ public class MasterTable
   public static final String COL_MASTER_RESIDENT_SEX = TABLE_MASTER_RESIDENT + ".Sex";
   public static final String COL_MASTER_RESIDENT_RELIGION = TABLE_MASTER_RESIDENT + ".Religion";
   public static final String COL_MASTER_RESIDENT_MARITALSTATUS = TABLE_MASTER_RESIDENT + ".MaritalStatus";
+  public static final String COL_MASTER_RESIDENT_FAMILYPOS = TABLE_MASTER_RESIDENT + ".FamilyPos";
   public static final String COL_MASTER_RESIDENT_WORK = TABLE_MASTER_RESIDENT + ".Work";
   public static final String COL_MASTER_RESIDENT_NATIONALITY = TABLE_MASTER_RESIDENT + ".Nationality";
   public static final String COL_MASTER_RESIDENT_ADDRESS = TABLE_MASTER_RESIDENT + ".Address";
@@ -70,5 +71,28 @@ public class MasterTable
   public static final String COL_MASTER_RESIDENT_ENTRYUSER = TABLE_MASTER_RESIDENT + ".EntryUser";
   public static final String COL_MASTER_RESIDENT_VOIDDATE = TABLE_MASTER_RESIDENT + ".VoidDate";
   public static final String COL_MASTER_RESIDENT_VOIDUSER = TABLE_MASTER_RESIDENT + ".VoidUser";
+  
+  /* Master Resident History */
+  public static final String TABLE_MASTER_RESIDENTHISORY = "MasterResidentHistory";
+  public static final String COL_MASTER_RESIDENTHISORY_NIK = TABLE_MASTER_RESIDENTHISORY + ".NIK";
+  public static final String COL_MASTER_RESIDENTHISORY_STARTDATE = TABLE_MASTER_RESIDENTHISORY + ".StartDate";
+  public static final String COL_MASTER_RESIDENTHISORY_ENDDATE = TABLE_MASTER_RESIDENTHISORY + ".EndDate";
+  public static final String COL_MASTER_RESIDENTHISORY_KK = TABLE_MASTER_RESIDENTHISORY + ".KKNo";
+  public static final String COL_MASTER_RESIDENTHISORY_NAME = TABLE_MASTER_RESIDENTHISORY + ".Name";
+  public static final String COL_MASTER_RESIDENTHISORY_SEX = TABLE_MASTER_RESIDENTHISORY + ".Sex";
+  public static final String COL_MASTER_RESIDENTHISORY_RELIGION = TABLE_MASTER_RESIDENTHISORY + ".Religion";
+  public static final String COL_MASTER_RESIDENTHISORY_MARITALSTATUS = TABLE_MASTER_RESIDENTHISORY + ".MaritalStatus";
+  public static final String COL_MASTER_RESIDENTHISORY_FAMILYPOS = TABLE_MASTER_RESIDENTHISORY + ".FamilyPos";
+  public static final String COL_MASTER_RESIDENTHISORY_NATIONALITY = TABLE_MASTER_RESIDENTHISORY + ".Nationality";
+  public static final String COL_MASTER_RESIDENTHISORY_ADDRESS = TABLE_MASTER_RESIDENTHISORY + ".Address";
+  public static final String COL_MASTER_RESIDENTHISORY_CITY = TABLE_MASTER_RESIDENTHISORY + ".City";
+  public static final String COL_MASTER_RESIDENTHISORY_REGION = TABLE_MASTER_RESIDENTHISORY + ".Region";
+  public static final String COL_MASTER_RESIDENTHISORY_POSTALCODE = TABLE_MASTER_RESIDENTHISORY + ".PostalCode";
+  public static final String COL_MASTER_RESIDENTHISORY_RT = TABLE_MASTER_RESIDENTHISORY + ".RT";
+  public static final String COL_MASTER_RESIDENTHISORY_RW = TABLE_MASTER_RESIDENTHISORY + ".RW";
+  public static final String COL_MASTER_RESIDENTHISORY_KELURAHAN = TABLE_MASTER_RESIDENTHISORY + ".Kelurahan";
+  public static final String COL_MASTER_RESIDENTHISORY_KECAMATAN = TABLE_MASTER_RESIDENTHISORY + ".Kecamatan";
+  public static final String COL_MASTER_RESIDENTHISORY_ENTRYDATE = TABLE_MASTER_RESIDENTHISORY + ".EntryDate";
+  public static final String COL_MASTER_RESIDENTHISORY_ENTRYUSER = TABLE_MASTER_RESIDENTHISORY + ".EntryUser";
   
 }

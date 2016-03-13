@@ -10,8 +10,12 @@ import com.sync.core.beans.MessageBean;
 import com.sync.core.servlet.CoreServlet;
 import com.sync.core.utils.Utilities;
 import com.sync.master.utils.MasterConstants;
+import com.sync.trans.beans.BirthLetterBean;
 import com.sync.trans.beans.DeathLetterBean;
+import com.sync.trans.beans.FamilyCardMutationBean;
+import com.sync.trans.engine.BirthLetterEngine;
 import com.sync.trans.engine.DeathLetterEngine;
+import com.sync.trans.engine.FamilyCardMutationEngine;
 import com.sync.trans.utils.TransConstants;
 
 
@@ -42,13 +46,23 @@ public class Transaction extends CoreServlet
     {
       this.TransDeathLetter(req, res);
     }
+    else if(!Utilities.isEmpy(what) && 
+        what.equals(TransConstants.TRANS_BIRTHLETTER))
+    {
+      this.TransBirthLetter(req, res);
+    }
+    else if(!Utilities.isEmpy(what) && 
+        what.equals(TransConstants.TRANS_FAMILYCARDMUT))
+    {
+      this.TransFamilyCardMutation(req, res);
+    }
     else
     {
       super.openURL(MasterConstants.HOME_PAGE, req, res);
     }
   }
   
-  public void TransDeathLetter(HttpServletRequest req, HttpServletResponse res)
+  private void TransDeathLetter(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
     String act = req.getParameter(MasterConstants.ACT);
@@ -84,6 +98,529 @@ public class Transaction extends CoreServlet
       this.doListDeathLetter(req, res);
     }
     return;
+  }
+  
+  private void TransFamilyCardMutation(HttpServletRequest req, HttpServletResponse res)
+  throws ServletException, IOException
+  {
+    String act = req.getParameter(MasterConstants.ACT);
+    if(!Utilities.isEmpy(act) && 
+        (act.equals(MasterConstants.ACT_CREATE)||
+            act.equals(MasterConstants.ACT_CREATE_SAVE))
+      )
+    {
+      this.doCreateFamilyCardMut(req, res);
+    }
+    else 
+      if(!Utilities.isEmpy(act) && 
+        (act.equals(MasterConstants.ACT_UPDATE) || 
+            act.equals(MasterConstants.ACT_UPDATE_SAVE))
+       )
+    {
+      this.doUpdateFamilyCardMut(req, res);
+    }
+    else if(!Utilities.isEmpy(act) && act.equals(MasterConstants.ACT_DELETE))
+    {
+      this.doDeleteFamilyCardMut(req, res);
+    }
+    else if(!Utilities.isEmpy(act) && act.equals(MasterConstants.ACT_LIST))
+    {
+      this.doListFamilyCardMut(req, res);
+    }
+    else if(!Utilities.isEmpy(act) && act.equals(MasterConstants.ACT_INFO))
+    {
+      this.doViewFamilyCardMut(req, res);
+    }
+    else
+    {
+      this.doListFamilyCardMut(req, res);
+    }
+    return;
+  }
+  
+  private void doCreateFamilyCardMut(HttpServletRequest req, HttpServletResponse res)
+  throws ServletException, IOException
+  {
+    System.out.println("CREATE NEW FAMILY CARD MUTATION");
+    String act = req.getParameter(TransConstants.ACT);
+    FamilyCardMutationEngine re = new FamilyCardMutationEngine(req, res);
+    FamilyCardMutationBean rbn = null;
+    System.out.println("ACTION= "+act);
+    
+    if(null!=req.getParameter(TransConstants.BTN_CANCEL))
+    {
+      System.out.println("BTN CANCEL PRESSED>>>>>>>>>>>>>>>>>>>> ");
+      this.doListFamilyCardMut(req, res);
+      return;     
+    }
+    
+    if(!Utilities.isEmpy(act) && act.equals(TransConstants.ACT_CREATE_SAVE))
+    {
+      System.out.println("SAVING AND VALIDATING NEW FAMILY CARD ");
+      rbn = re.validate();
+      req.setAttribute(TransConstants.FAMILYCARDMUT_INFO, rbn);
+      
+      if(null!=rbn && rbn.getBeanMessages().isErrorExist())
+      {
+        System.out.println("SAVING AND VALIDATING NEW FAMILY CARD MUT ERROR EXIST");
+        req.setAttribute(TransConstants.FAMILYCARDMUT_INFO, rbn);
+        req.setAttribute(TransConstants.ACT, MasterConstants.ACT_CREATE_SAVE);
+        super.openContent(TransConstants.SVT_TRANS_PATH, 
+            TransConstants.TRANS_FAMILYCARDMUT, 
+            TransConstants.PAGE_FAMILYCARDMUT_EDIT, req, res);
+        return;      
+      }
+      
+      if(!re.create(rbn))
+      {
+        if(null!=re)re.closed();
+        req.setAttribute(TransConstants.FAMILYCARDMUT_INFO, rbn);
+        super.openContent(TransConstants.SVT_TRANS_PATH, 
+            TransConstants.TRANS_FAMILYCARDMUT, 
+            TransConstants.PAGE_FAMILYCARDMUT_EDIT, req, res);
+        return;
+      }
+      
+      if(null!=re)re.closed();
+      req.setAttribute(TransConstants.FAMILYCARDMUT_INFO, rbn);
+      super.openContent(TransConstants.SVT_TRANS_PATH, 
+          TransConstants.TRANS_FAMILYCARDMUT, 
+          TransConstants.PAGE_FAMILYCARDMUT_INFO, req, res);
+      return;
+    }
+    else
+    {
+      System.out.println("OPEN PAGE CREATE NEW FAMILY CARD");
+      req.setAttribute(TransConstants.ACT, TransConstants.ACT_CREATE_SAVE);
+      super.openContent(TransConstants.SVT_TRANS_PATH, 
+          TransConstants.TRANS_FAMILYCARDMUT, 
+          TransConstants.PAGE_FAMILYCARDMUT_EDIT, req, res);
+      return;      
+    }
+  }
+  
+  private void doUpdateFamilyCardMut(HttpServletRequest req, HttpServletResponse res)
+  throws ServletException, IOException
+  {
+    System.out.println("UPDATING FAMILY CARD MUT");
+    String nik = req.getParameter(TransConstants.FORM_FAMILYCARDMUT_NIK);
+    String sDate = req.getParameter(TransConstants.FORM_FAMILYCARDMUT_STARTDATE);
+    String act = req.getParameter(TransConstants.ACT);
+    FamilyCardMutationEngine re = new FamilyCardMutationEngine(req, res);
+    FamilyCardMutationBean rebn = null;
+    MessageBean msg = null;
+    
+    System.out.println("ACTION= "+act);
+    
+    if(
+        !Utilities.isEmpy(req.getParameter(TransConstants.BTN_DONE)) ||
+        !Utilities.isEmpy(req.getParameter(TransConstants.BTN_CANCEL))
+      )
+    {
+      System.out.println("DONE PRESSED");
+      this.doViewFamilyCardMut(req, res);
+      return;
+    }
+    
+    if(Utilities.isEmpy(nik) || Utilities.isEmpy(sDate))
+    {
+      System.out.println("NO NIK");
+      super.openURL(TransConstants.ERRORMSG_PAGE, req, res);
+      return;
+    }
+    
+    if(!Utilities.isEmpy(act) && act.equals(TransConstants.ACT_UPDATE_SAVE))
+    {
+      System.out.println("ENTER VALIDATE fAMILY CARD");
+      rebn = re.validate();
+      req.setAttribute(TransConstants.ACT, TransConstants.ACT_UPDATE_SAVE);
+      msg = rebn.getBeanMessages();
+      
+      if(null!=msg && msg.isErrorExist())
+      {
+        System.out.println("ERROR VALIDATING UPDATING");
+      }
+      
+      if(!re.update(rebn))
+      {
+        System.out.println("ERROR UPDATING");
+      }
+      
+      if(null!=re) re.closed();
+      this.doViewFamilyCardMut(req, res);
+      return;
+    }
+    else if(null!=req.getParameter(TransConstants.BTN_PROC))
+    {
+      rebn = re.getFamilyCardMutationInfo(req.getParameter(
+          TransConstants.FORM_FAMILYCARDMUT_NIK),
+          req.getParameter(
+              TransConstants.FORM_FAMILYCARDMUT_STARTDATE));
+      
+      if(!re.proceed(rebn, false))
+      {
+        System.out.println("ERROR UPDATING STATUS PROCEED FAMILY CARD");
+      }
+      
+      if(null!=re) re.closed();
+      this.doViewFamilyCardMut(req, res);
+      return;
+    }
+    else if(null!=req.getParameter(TransConstants.BTN_CANCELPROC))
+    {
+      rebn = re.getFamilyCardMutationInfo(req.getParameter(
+          TransConstants.FORM_FAMILYCARDMUT_NIK),
+          req.getParameter(
+              TransConstants.FORM_FAMILYCARDMUT_STARTDATE));
+      
+      if(!re.proceed(rebn, true))
+      {
+        System.out.println("ERROR UPDATING STATUS CANCEL PROCEED FAMILY CARD");
+      }
+      
+      if(null!=re) re.closed();
+      this.doViewFamilyCardMut(req, res);
+      return;
+    }
+    else
+    {
+      System.out.println("ENTER GETTING Family Card");
+      rebn = re.getFamilyCardMutationInfo(nik, sDate);
+      if(null!=rebn)
+      {
+        System.out.println("NIK= "+rebn.getNIK());
+        System.out.println("Nama= "+rebn.getName());
+        req.setAttribute(TransConstants.FAMILYCARDMUT_INFO, rebn);
+        req.setAttribute(TransConstants.ACT, TransConstants.ACT_UPDATE_SAVE);
+      }
+      super.openContent(TransConstants.SVT_TRANS_PATH, 
+                        TransConstants.TRANS_FAMILYCARDMUT, 
+                        TransConstants.PAGE_FAMILYCARDMUT_EDIT, req, res);
+      return;
+    }
+  
+  }
+  
+  private void doDeleteFamilyCardMut(HttpServletRequest req, HttpServletResponse res)
+  throws ServletException, IOException
+  {
+    
+  }
+  
+  private void doListFamilyCardMut(HttpServletRequest req, HttpServletResponse res)
+  throws ServletException, IOException
+  {
+    String stat = req.getParameter(TransConstants.DATA_STAT);
+    FamilyCardMutationEngine re = new FamilyCardMutationEngine(req, res);
+    FamilyCardMutationBean[] lists = re.listOfFamilyCard(stat);
+    
+    req.setAttribute(TransConstants.FAMILYCARDMUT_LIST, lists);
+    
+    if(null!=re)re.closed();
+    super.openContent(
+        TransConstants.SVT_TRANS_PATH, 
+        TransConstants.TRANS_FAMILYCARDMUT, 
+        TransConstants.PAGE_FAMILYCARDMUT_LIST, 
+        req, res);
+    return;
+  
+  }
+  
+  private void doViewFamilyCardMut(HttpServletRequest req, HttpServletResponse res)
+  throws ServletException, IOException
+  {
+    System.out.println("VIEWING INFO FAMILY CARD MUTATION");
+    String nik = req.getParameter(TransConstants.FORM_FAMILYCARDMUT_NIK);
+    String sDate  = req.getParameter(TransConstants.FORM_FAMILYCARDMUT_STARTDATE);
+    FamilyCardMutationEngine re = new FamilyCardMutationEngine(req, res);
+    FamilyCardMutationBean rebn = null;
+    
+    if(null!=req.getParameter(TransConstants.BTN_DONE))
+    {
+        this.doListFamilyCardMut(req, res);
+        return;
+    }
+    
+    rebn = re.getFamilyCardMutationInfo(nik, sDate);
+    System.out.println("DISPLAYING INFO FAMILY CARD MUTATION");
+    req.setAttribute(TransConstants.FAMILYCARDMUT_INFO, rebn);
+    
+    if(null!=re)re.closed();
+    super.openContent(TransConstants.SVT_TRANS_PATH, 
+        TransConstants.TRANS_FAMILYCARDMUT, 
+        TransConstants.PAGE_FAMILYCARDMUT_INFO, req, res);
+    return;
+  
+  
+  }
+  
+  private void TransBirthLetter(HttpServletRequest req, HttpServletResponse res)
+  throws ServletException, IOException
+  {
+    String act = req.getParameter(MasterConstants.ACT);
+    if(!Utilities.isEmpy(act) && 
+        (act.equals(MasterConstants.ACT_CREATE)||
+            act.equals(MasterConstants.ACT_CREATE_SAVE))
+      )
+    {
+      this.doCreateBirthLetter(req, res);
+    }
+    else 
+      if(!Utilities.isEmpy(act) && 
+        (act.equals(MasterConstants.ACT_UPDATE) || 
+            act.equals(MasterConstants.ACT_UPDATE_SAVE))
+       )
+    {
+      this.doUpdateBirthLetter(req, res);
+    }
+    else if(!Utilities.isEmpy(act) && act.equals(MasterConstants.ACT_DELETE))
+    {
+      this.doDeleteBirthLetter(req, res);
+    }
+    else if(!Utilities.isEmpy(act) && act.equals(MasterConstants.ACT_LIST))
+    {
+      this.doListBirthLetter(req, res);
+    }
+    else if(!Utilities.isEmpy(act) && act.equals(MasterConstants.ACT_INFO))
+    {
+      this.doViewBirthLetter(req, res);
+    }
+    else
+    {
+      this.doListBirthLetter(req, res);
+    }
+    return;
+  }
+  
+  
+  
+  private void doCreateBirthLetter(HttpServletRequest req, HttpServletResponse res)
+  throws ServletException, IOException
+  {
+    System.out.println("CREATE NEW BIRTH LETTER");
+    String act = req.getParameter(TransConstants.ACT);
+    BirthLetterEngine re = new BirthLetterEngine(req, res);
+    BirthLetterBean rbn = null;
+    System.out.println("ACTION= "+act);
+    
+    if(null!=req.getParameter(TransConstants.BTN_CANCEL))
+    {
+      System.out.println("BTN CANCEL PRESSED>>>>>>>>>>>>>>>>>>>> ");
+      this.doListBirthLetter(req, res);
+      return;     
+    }
+    
+    if(!Utilities.isEmpy(act) && act.equals(TransConstants.ACT_CREATE_SAVE))
+    {
+      System.out.println("SAVING AND VALIDATING NEW BIRTH LETTER");
+      rbn = re.validate();
+      req.setAttribute(TransConstants.BIRTHLETTER_INFO, rbn);
+      
+      if(null!=rbn && rbn.getBeanMessages().isErrorExist())
+      {
+        System.out.println("SAVING AND VALIDATING NEW BIRTH LETTER ERROR EXIST");
+        req.setAttribute(TransConstants.BIRTHLETTER_INFO, rbn);
+        req.setAttribute(TransConstants.ACT, MasterConstants.ACT_CREATE_SAVE);
+        super.openContent(TransConstants.SVT_TRANS_PATH, 
+            TransConstants.TRANS_BIRTHLETTER, 
+            TransConstants.PAGE_BIRTHLETTER_EDIT, req, res);
+        return;      
+      }
+      
+      if(!re.createBirthLetter(rbn))
+      {
+        if(null!=re)re.closed();
+        req.setAttribute(TransConstants.BIRTHLETTER_INFO, rbn);
+        super.openContent(TransConstants.SVT_TRANS_PATH, 
+            TransConstants.TRANS_BIRTHLETTER, 
+            TransConstants.PAGE_BIRTHLETTER_EDIT, req, res);
+        return;
+      }
+      
+      if(null!=re)re.closed();
+      req.setAttribute(TransConstants.BIRTHLETTER_INFO, rbn);
+      super.openContent(TransConstants.SVT_TRANS_PATH, 
+          TransConstants.TRANS_BIRTHLETTER, 
+          TransConstants.PAGE_BIRTHLETTER_INFO, req, res);
+      return;
+    }
+    else
+    {
+      System.out.println("OPEN PAGE CREATE NEW BIRTH LETTER");
+      req.setAttribute(TransConstants.ACT, TransConstants.ACT_CREATE_SAVE);
+      super.openContent(TransConstants.SVT_TRANS_PATH, 
+          TransConstants.TRANS_BIRTHLETTER, 
+          TransConstants.PAGE_BIRTHLETTER_EDIT, req, res);
+      return;      
+    }
+    
+  }
+  
+  private void doUpdateBirthLetter(HttpServletRequest req, HttpServletResponse res)
+  throws ServletException, IOException
+  {
+    System.out.println("UPDATING BIRTH LETTER");
+    String nik = req.getParameter(TransConstants.FORM_TRANS_BIRTHLETTER_NIK);
+    String act = req.getParameter(TransConstants.ACT);
+    BirthLetterEngine re = new BirthLetterEngine(req, res);
+    BirthLetterBean rebn = null;
+    MessageBean msg = null;
+    
+    System.out.println("ACTION= "+act);
+    
+    if(
+        !Utilities.isEmpy(req.getParameter(TransConstants.BTN_DONE)) ||
+        !Utilities.isEmpy(req.getParameter(TransConstants.BTN_CANCEL))
+      )
+    {
+      System.out.println("DONE PRESSED");
+      this.doViewBirthLetter(req, res);
+      return;
+    }
+    
+    if(Utilities.isEmpy(nik))
+    {
+      System.out.println("NO NIK");
+      super.openURL(TransConstants.ERRORMSG_PAGE, req, res);
+      return;
+    }
+    
+    if(!Utilities.isEmpy(act) && act.equals(TransConstants.ACT_UPDATE_SAVE))
+    {
+      System.out.println("ENTER VALIDATE birth letter");
+      rebn = re.validate();
+      req.setAttribute(TransConstants.ACT, TransConstants.ACT_UPDATE_SAVE);
+      msg = rebn.getBeanMessages();
+      
+      if(null!=msg && msg.isErrorExist())
+      {
+        System.out.println("ERROR VALIDATING UPDATING");
+      }
+      
+      if(!re.updateBirthLetter(rebn))
+      {
+        System.out.println("ERROR UPDATING");
+      }
+      
+      if(null!=re) re.closed();
+      this.doViewBirthLetter(req, res);
+      return;
+    }
+    else if(null!=req.getParameter(TransConstants.BTN_PROC))
+    {
+      rebn = re.getBirthLetterInfo(req.getParameter(
+          TransConstants.FORM_TRANS_BIRTHLETTER_NIK));
+      
+      if(!re.proceedBirthLetter(rebn, false))
+      {
+        System.out.println("ERROR UPDATING STATUS PROCEED KELAHIRAN");
+      }
+      
+      if(null!=re) re.closed();
+      this.doViewBirthLetter(req, res);
+      return;
+    }
+    else if(null!=req.getParameter(TransConstants.BTN_CANCELPROC))
+    {
+      rebn = re.getBirthLetterInfo(req.getParameter(
+          TransConstants.FORM_TRANS_BIRTHLETTER_NIK));
+      
+      if(!re.proceedBirthLetter(rebn, true))
+      {
+        System.out.println("ERROR UPDATING CANCEL PROCEED STATUS KELAHIRAN");
+      }
+      
+      if(null!=re) re.closed();
+      this.doViewBirthLetter(req, res);
+      return;
+    }
+    else
+    {
+      System.out.println("ENTER GETTING Birth Letter");
+      rebn = re.getBirthLetterInfo(nik);
+      if(null!=rebn)
+      {
+        System.out.println("NIK= "+rebn.getNIK());
+        System.out.println("Nama= "+rebn.getName());
+        req.setAttribute(TransConstants.BIRTHLETTER_INFO, rebn);
+        req.setAttribute(TransConstants.ACT, TransConstants.ACT_UPDATE_SAVE);
+      }
+      super.openContent(TransConstants.SVT_TRANS_PATH, 
+                        TransConstants.TRANS_BIRTHLETTER, 
+                        TransConstants.PAGE_BIRTHLETTER_EDIT, req, res);
+      return;
+    }
+  }
+  
+  private void doDeleteBirthLetter(HttpServletRequest req, HttpServletResponse res)
+  throws ServletException, IOException
+  {
+    System.out.println("PREPARING DELETE Birth Letter");
+    String[] niks = req.getParameterValues(MasterConstants.CHKBOX);
+    
+    if(null==niks)
+    {
+      System.out.println("Mohon dicentang data yang ingin dihapus");
+    }
+    else
+    {
+      System.out.println("DATA DEL= "+niks.length);
+    }
+    
+    BirthLetterEngine re = new BirthLetterEngine(req, res);
+    if(!re.delete(niks))
+    {
+      System.out.println("ERROR DELETING DATA");
+    }
+    
+    if(null!=re)re.closed();
+    this.doListBirthLetter(req, res);
+    return;
+  
+  }
+  
+  private void doListBirthLetter(HttpServletRequest req, HttpServletResponse res)
+  throws ServletException, IOException
+  {
+    String stat = req.getParameter(TransConstants.DATA_STAT);
+    BirthLetterEngine re = new BirthLetterEngine(req, res);
+    BirthLetterBean[] lists = re.listOfLetter(stat);
+    
+    req.setAttribute(TransConstants.BIRTHLETTER_LIST, lists);
+    
+    if(null!=re)re.closed();
+    super.openContent(
+        TransConstants.SVT_TRANS_PATH, 
+        TransConstants.TRANS_BIRTHLETTER, 
+        TransConstants.PAGE_BIRTHLETTER_LIST, 
+        req, res);
+    return;
+  }
+  
+  private void doViewBirthLetter(HttpServletRequest req, HttpServletResponse res)
+  throws ServletException, IOException
+  {
+    System.out.println("VIEWING INFO BIRTH LETTER");
+    String nik = req.getParameter(TransConstants.FORM_TRANS_BIRTHLETTER_NIK);
+    BirthLetterEngine re = new BirthLetterEngine(req, res);
+    BirthLetterBean rebn = null;
+    
+    if(null!=req.getParameter(TransConstants.BTN_DONE))
+    {
+        this.doListBirthLetter(req, res);
+        return;
+    }
+    
+    rebn = re.getBirthLetterInfo(nik);
+    System.out.println("DISPLAYING INFO BIRTH LETTER");
+    req.setAttribute(TransConstants.BIRTHLETTER_INFO, rebn);
+    
+    if(null!=re)re.closed();
+    super.openContent(TransConstants.SVT_TRANS_PATH, 
+        TransConstants.TRANS_BIRTHLETTER, 
+        TransConstants.PAGE_BIRTHLETTER_INFO, req, res);
+    return;
+  
   }
   
   private void doCreateDeathLetter(HttpServletRequest req, HttpServletResponse res)

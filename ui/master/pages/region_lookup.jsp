@@ -14,23 +14,28 @@
    MasterRegionBean[] list = (MasterRegionBean[]) request.getAttribute(MasterConstants.MASTERREGION_LIST);
    MasterRegionKecamatanBean[] kec = (MasterRegionKecamatanBean[]) request.getAttribute(MasterConstants.MASTERREGION_KEC_LIST);
    MasterRegionKelurahanBean[] kel = (MasterRegionKelurahanBean[]) request.getAttribute(MasterConstants.MASTERREGION_KEL_LIST);
+   String stateProvfield= (String)request.getAttribute(MasterConstants.FORM_FIELD1);
+   String regionfield = (String)request.getAttribute(MasterConstants.FORM_FIELD2);
+   String kecField = (String)request.getAttribute(MasterConstants.FORM_FIELD3);
+   String kelField = (String)request.getAttribute(MasterConstants.FORM_FIELD4);
+   System.out.println("prop="+stateProvfield+ " region="+regionfield+"kec="+kecField+ " kel="+kelField);
 %>
 <script>
 function putState(stateProv)
 {
-	eval("self.opener.document.create.<%=MasterConstants.FORM_MASTERRESIDENT_REGION%>.value=stateProv");
+	eval("self.opener.document.<%=stateProvfield%>.value=stateProv");
 }
 
 function putCity(region)
 {
-	eval("self.opener.document.create.<%=MasterConstants.FORM_MASTERRESIDENT_BIRTHCITY%>.value=region");
+	eval("self.opener.document.<%=regionfield%>.value=region");
 }
 
 function putAll(region, kec, kel)
 {
-	eval("self.opener.document.create.<%=MasterConstants.FORM_MASTERRESIDENT_CITY%>.value=region");
-	eval("self.opener.document.create.<%=MasterConstants.FORM_MASTERRESIDENT_KECAMATAN%>.value=kec");
-	eval("self.opener.document.create.<%=MasterConstants.FORM_MASTERRESIDENT_KELURAHAN%>.value=kel");
+	eval("self.opener.document.<%=regionfield%>.value=region");
+	eval("self.opener.document.<%=kecField%>.value=kec");
+	eval("self.opener.document.<%=kelField%>.value=kel");
 }
 </script>
 <fieldset>
@@ -61,7 +66,7 @@ function putAll(region, kec, kel)
           else
           {
 %>
-             <a href="javascript:putState('<%=list[i].getStateProv()%>');location.href=('<%=MasterConstants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>?<%=MasterConstants.W%>=<%=MasterConstants.MASTER_REGION%>&<%=MasterConstants.ACT%>=<%=MasterConstants.ACT_LOOKUP%>&<%=MasterConstants.FOR%>=<%=MasterConstants.FOR_KEC%>&<%=MasterConstants.FORM_MASTERREGION_REGID%>=<%=list[i].getRegionID()%>');"><%=list[i].getRegionID()%></a>
+             <a href="javascript:putState('<%=list[i].getStateProv()%>');location.href=('<%=MasterConstants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>?<%=MasterConstants.W%>=<%=MasterConstants.MASTER_REGION%>&<%=MasterConstants.ACT%>=<%=MasterConstants.ACT_LOOKUP%>&<%=MasterConstants.FOR%>=<%=MasterConstants.FOR_KEC%>&<%=MasterConstants.FORM_MASTERREGION_REGID%>=<%=list[i].getRegionID()%>&<%=MasterConstants.FORM_FIELD1%>=<%=stateProvfield%>&<%=MasterConstants.FORM_FIELD2%>=<%=regionfield%>&<%=MasterConstants.FORM_FIELD3%>=<%=kecField%>&<%=MasterConstants.FORM_FIELD4%>=<%=kelField%>');"><%=list[i].getRegionID()%></a>
 <%
           }
 %>          
@@ -84,7 +89,7 @@ function putAll(region, kec, kel)
        {
 %>
           <tr>
-            <td valign="top"><a href="<%=MasterConstants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>?<%=MasterConstants.W%>=<%=MasterConstants.MASTER_REGION%>&<%=MasterConstants.ACT%>=<%=MasterConstants.ACT_LOOKUP%>&<%=MasterConstants.FOR%>=<%=MasterConstants.FOR_KEL%>&<%=MasterConstants.FORM_MASTERREGION_REGID%>=<%=kec[i].getRegionID()%>&<%=MasterConstants.FORM_MASTERREGION_KECID%>=<%=kec[i].getKecamatanID()%>"><%=kec[i].getKecamatanID()%></a></td>
+            <td valign="top"><a href="<%=MasterConstants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>?<%=MasterConstants.W%>=<%=MasterConstants.MASTER_REGION%>&<%=MasterConstants.ACT%>=<%=MasterConstants.ACT_LOOKUP%>&<%=MasterConstants.FOR%>=<%=MasterConstants.FOR_KEL%>&<%=MasterConstants.FORM_MASTERREGION_REGID%>=<%=kec[i].getRegionID()%>&<%=MasterConstants.FORM_MASTERREGION_KECID%>=<%=kec[i].getKecamatanID()%>&<%=MasterConstants.FORM_FIELD1%>=<%=stateProvfield%>&<%=MasterConstants.FORM_FIELD2%>=<%=regionfield%>&<%=MasterConstants.FORM_FIELD3%>=<%=kecField%>&<%=MasterConstants.FORM_FIELD4%>=<%=kelField%>"><%=kec[i].getKecamatanID()%></a></td>
             <td valign="top"><%=kec[i].getName()%></td>
           </tr>
 <%         

@@ -17,8 +17,8 @@
       </li> 
       <li class="facebook"><a href="javascript:void(0)">Transaksi</a>
           <ul>
-          <li><a href="javascript:void(0)">Data KK Baru</a></li>
-          <li><a href="javascript:void(0)">Data Kelahiran</a></li>
+          <li><a href="javascript:void(0)" url="<%=TransConstants.ROOT_PATH%><%=TransConstants.SVT_TRANS_PATH%>?<%=TransConstants.W%>=<%=TransConstants.TRANS_FAMILYCARDMUT%>&<%=TransConstants.DATA_STAT%>=<%=TransConstants.DATA_CURRENT%>">Mutasi KK</a></li>
+          <li><a href="javascript:void(0)" url="<%=TransConstants.ROOT_PATH%><%=TransConstants.SVT_TRANS_PATH%>?<%=TransConstants.W%>=<%=TransConstants.TRANS_BIRTHLETTER%>&<%=TransConstants.DATA_STAT%>=<%=TransConstants.DATA_CURRENT%>">Data Kelahiran</a></li>
           <li><a href="javascript:void(0)" url="<%=TransConstants.ROOT_PATH%><%=TransConstants.SVT_TRANS_PATH%>?<%=TransConstants.W%>=<%=TransConstants.TRANS_DEATHLETTER%>&<%=TransConstants.DATA_STAT%>=<%=TransConstants.DATA_CURRENT%>">Data Kematian</a></li>
           </ul>
       </li>

@@ -165,6 +165,21 @@ public class MasterResidentEngine extends RootEngine
       bn.setMaritalStatus(temp);
     }
     
+    
+    /*Family Position **/
+    temp = Utilities.trim(req.getParameter(
+        MasterConstants.FORM_MASTERRESIDENT_FAMILYPOS));
+    if(Utilities.isEmpy(temp))
+    {
+      System.out.println("EEEEEEEEEEEEEEEEEEEEEEE 9a");
+      msg.setMessageBean(MasterConstants.FORM_MASTERRESIDENT_FAMILYPOS, 
+          "Mohon masukkan Posisi dalam Keluarga");
+    }
+    else
+    {
+      bn.setFamilyPos(temp);
+    }
+    
     /* Work **/
     temp = Utilities.trim(req.getParameter(
         MasterConstants.FORM_MASTERRESIDENT_WORK));
@@ -326,7 +341,7 @@ public class MasterResidentEngine extends RootEngine
 
     addSQL = " WHERE ";
     
-    if(!Utilities.isEmpy(stat) && stat.equals(MasterConstants.DATA_ARCHIEVE))
+    if(!Utilities.isEmpy(stat) && stat.equals(MasterConstants.DATA_RECYCLE))
     {
       addSQL += MasterTable.COL_MASTER_RESIDENT_VOIDDATE +
           " IS NOT NULL AND " + MasterTable.COL_MASTER_RESIDENT_VOIDUSER +
@@ -389,7 +404,6 @@ public class MasterResidentEngine extends RootEngine
       bn.setKKNo(rs.getString(MasterTable.COL_MASTER_RESIDENT_KK));
       bn.setName(rs.getString(MasterTable.COL_MASTER_RESIDENT_NAME));
       bn.setBirthCity(rs.getString(MasterTable.COL_MASTER_RESIDENT_BIRTHCITY));
-      System.out.println("TGL "+rs.getString(MasterTable.COL_MASTER_RESIDENT_BIRTHDATE));
       bn.setBirthDate(Utilities.stringToDate(
           rs.getString(MasterTable.COL_MASTER_RESIDENT_BIRTHDATE), 
           MasterConstants.DATE_DB_SHORT_PATTERN));
@@ -400,6 +414,7 @@ public class MasterResidentEngine extends RootEngine
       bn.setReligion(rs.getString(MasterTable.COL_MASTER_RESIDENT_RELIGION));
       bn.setMaritalStatus(rs.getString(
           MasterTable.COL_MASTER_RESIDENT_MARITALSTATUS));
+      bn.setFamilyPos(rs.getString(MasterTable.COL_MASTER_RESIDENT_FAMILYPOS));
       bn.setWork(rs.getString(MasterTable.COL_MASTER_RESIDENT_WORK));
       bn.setNationality(rs.getString(
           MasterTable.COL_MASTER_RESIDENT_NATIONALITY));
@@ -480,6 +495,7 @@ public class MasterResidentEngine extends RootEngine
                MasterTable.COL_MASTER_RESIDENT_SEX + "," +
                MasterTable.COL_MASTER_RESIDENT_RELIGION + "," +
                MasterTable.COL_MASTER_RESIDENT_MARITALSTATUS + "," +
+               MasterTable.COL_MASTER_RESIDENT_FAMILYPOS + "," +
                MasterTable.COL_MASTER_RESIDENT_WORK + "," +
                MasterTable.COL_MASTER_RESIDENT_NATIONALITY + "," +
                MasterTable.COL_MASTER_RESIDENT_ADDRESS + "," +
@@ -494,7 +510,7 @@ public class MasterResidentEngine extends RootEngine
                MasterTable.COL_MASTER_RESIDENT_CREATEDATE + "," +
                MasterTable.COL_MASTER_RESIDENT_CREATEUSER +
              ")" +
-            " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
       
       super.getConnection();
       stat = con.prepareStatement(SQL);
@@ -508,20 +524,21 @@ public class MasterResidentEngine extends RootEngine
       stat.setInt(6, ubn.getSex());
       stat.setString(7, ubn.getReligion());
       stat.setString(8, ubn.getMaritalStatus());
-      stat.setString(9, ubn.getWork());
-      stat.setString(10, ubn.getNationality());
-      stat.setString(11, ubn.getAddress());
-      stat.setString(12, ubn.getCity());
-      stat.setString(13, ubn.getRegion());
-      stat.setString(14, ubn.getPostalCode());
-      stat.setString(15, ubn.getRT());
-      stat.setString(16, ubn.getRW());
-      stat.setString(17, ubn.getKelurahan());
-      stat.setString(18, ubn.getKecamatan());
-      stat.setString(19, ubn.getNote());
-      stat.setString(20, Utilities.dateToString(new Date(), 
+      stat.setString(9, ubn.getFamilyPos());
+      stat.setString(10, ubn.getWork());
+      stat.setString(11, ubn.getNationality());
+      stat.setString(12, ubn.getAddress());
+      stat.setString(13, ubn.getCity());
+      stat.setString(14, ubn.getRegion());
+      stat.setString(15, ubn.getPostalCode());
+      stat.setString(16, ubn.getRT());
+      stat.setString(17, ubn.getRW());
+      stat.setString(18, ubn.getKelurahan());
+      stat.setString(19, ubn.getKecamatan());
+      stat.setString(20, ubn.getNote());
+      stat.setString(21, Utilities.dateToString(new Date(), 
           MasterConstants.DATE_DB_MEDIUM_PATTERN));
-      stat.setString(21, uses.getUser());
+      stat.setString(22, uses.getUser());
       
       System.out.println("END ENGINE CREATE NEW RESIDENT");
       if(stat.executeUpdate()>0) return true;
@@ -553,7 +570,6 @@ public class MasterResidentEngine extends RootEngine
             MasterTable.COL_MASTER_RESIDENT_BIRTHCITY + "=?, " +
             MasterTable.COL_MASTER_RESIDENT_BIRTHDATE + "=?, " +
             MasterTable.COL_MASTER_RESIDENT_SEX + "=?, " +
-            MasterTable.COL_MASTER_RESIDENT_RELIGION + "=?, " +
             MasterTable.COL_MASTER_RESIDENT_WORK + "=?, " +
             MasterTable.COL_MASTER_RESIDENT_NATIONALITY + "=?, " +
             MasterTable.COL_MASTER_RESIDENT_NOTE + "=?, " +
@@ -569,14 +585,13 @@ public class MasterResidentEngine extends RootEngine
       stat.setString(3, Utilities.dateToString(ubn.getBirthDate(), 
           MasterConstants.DATE_DB_SHORT_PATTERN));
       stat.setInt(4, ubn.getSex());
-      stat.setString(5, ubn.getReligion());
-      stat.setString(6, ubn.getWork());
-      stat.setString(7, ubn.getNationality());
-      stat.setString(8, ubn.getNote());
-      stat.setString(9, Utilities.dateToString(new Date(), 
+      stat.setString(5, ubn.getWork());
+      stat.setString(6, ubn.getNationality());
+      stat.setString(7, ubn.getNote());
+      stat.setString(8, Utilities.dateToString(new Date(), 
           MasterConstants.DATE_DB_MEDIUM_PATTERN));
-      stat.setString(10, uses.getUser());
-      stat.setString(11, ubn.getNIK());
+      stat.setString(9, uses.getUser());
+      stat.setString(10, ubn.getNIK());
       
       if(stat.executeUpdate()>0) return true;
       else return false;
@@ -605,8 +620,59 @@ public class MasterResidentEngine extends RootEngine
       super.getConnection();
       stat = con.prepareStatement(SQL);
       stat.setString(1, Utilities.dateToString(ubn.getDeathDate(), 
-          MasterConstants.DATE_DB_MEDIUM_PATTERN));
+          MasterConstants.DATE_DB_SHORT_PATTERN));
       stat.setString(2, ubn.getNIK());
+      
+      if(stat.executeUpdate()>0) return true;
+      else return false;
+    }
+    catch(Exception e)
+    {
+      e.printStackTrace();
+      super.rollback();
+      res = false;
+    }
+    return res;
+  }
+  
+  public boolean updateKK(MasterResidentBean bn)
+  {
+    boolean res = false;
+    
+    try
+    {
+      SQL = " UPDATE " + MasterTable.TABLE_MASTER_RESIDENT +
+            " SET " +
+            MasterTable.COL_MASTER_RESIDENT_KK + "=?, " +
+            MasterTable.COL_MASTER_RESIDENT_RELIGION + "=?, " +
+            MasterTable.COL_MASTER_RESIDENT_MARITALSTATUS + "=?, " +
+            MasterTable.COL_MASTER_RESIDENT_FAMILYPOS + "=?, " +
+            MasterTable.COL_MASTER_RESIDENT_ADDRESS + "=?, " +
+            MasterTable.COL_MASTER_RESIDENT_CITY + "=?, " +
+            MasterTable.COL_MASTER_RESIDENT_REGION + "=?, " +
+            MasterTable.COL_MASTER_RESIDENT_POSTALCODE + "=?, " +
+            MasterTable.COL_MASTER_RESIDENT_KELURAHAN + "=?, " +
+            MasterTable.COL_MASTER_RESIDENT_KECAMATAN + "=?, " +
+            MasterTable.COL_MASTER_RESIDENT_RT + "=?, " +
+            MasterTable.COL_MASTER_RESIDENT_RW + "=? " +
+            " WHERE " +
+            MasterTable.COL_MASTER_RESIDENT_NIK + "=?;";
+      
+      super.getConnection();
+      stat = con.prepareStatement(SQL);
+      stat.setString(1, bn.getKKNo());
+      stat.setString(2, bn.getReligion());
+      stat.setString(3, bn.getMaritalStatus());
+      stat.setString(4, bn.getFamilyPos());
+      stat.setString(5, bn.getAddress());
+      stat.setString(6, bn.getCity());
+      stat.setString(7, bn.getRegion());
+      stat.setString(8, bn.getPostalCode());
+      stat.setString(9, bn.getKelurahan());
+      stat.setString(10, bn.getKecamatan());
+      stat.setString(11, bn.getRT());
+      stat.setString(12, bn.getRW());
+      stat.setString(13, bn.getNIK());
       
       if(stat.executeUpdate()>0) return true;
       else return false;
@@ -660,7 +726,6 @@ public class MasterResidentEngine extends RootEngine
     
     return res;
   }
-  
   
   public void closed()
   {
