@@ -6,7 +6,6 @@
     $.post( url, form.serialize())
       .done(function(data) {
         $(id).html(data);
-        initFormAjaxHtml();
       })
       .fail(function() {
         alert( "error" );
@@ -22,18 +21,14 @@
     }
   });
   //FUNCTION FOR INITIAL AJAX SUBMIT
-  function initFormAjaxHtml(){
-    $(".ajax-form").unbind("submit");
-    $(".ajax-form").bind("submit", function(event){    
+    $(document).on("submit",".ajax-form", function(event){    
 
-	  $(document).off();
       var frmURL = $(this).attr("action");
       var dst = "#"+$(this).attr("dst");
       postAjaxHtml($(this),frmURL,dst);
       event.preventDefault();
 
     });
-  }
 
   //FUNCTION FOR OPEN POPUP WINDOW
 	function PopupCenter(url, title, prm) {
@@ -77,10 +72,23 @@
 	  	}
 	  	return arrVar;
 	}
+	
+	function openAjaxUrl(target, url){
+    $.post( url)
+    .done(function(data) {
+        $(target).html(data);
+    })
+    .fail(function() {
+        alert( "error" );
+    })
+    .always(function() {
+        parent.cover(false);
+    });
+	}
 
   //TRIGGER ACTIVE WHEN DOM IS LOADED
   $(window).load(function(){
-    initFormAjaxHtml();
+    
   });
 
   	

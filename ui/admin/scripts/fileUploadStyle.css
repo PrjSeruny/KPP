@@ -1,0 +1,77 @@
+form#UploadForm {
+    display: none;
+    background: rgba(0, 0, 0, 0.30);
+    border-radius: 10px;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    left: 0px;
+    top: 0px;
+    text-align: center;
+}
+
+form#UploadForm #message{
+    margin-top: 5px;
+}
+
+#progressbox {
+    position: relative;
+    width: 50%;
+    border: 1px solid #ddd;
+    padding: 1px;
+    border-radius: 3px;
+    background: #ddd;
+    margin: auto;
+    margin-top: 20%;
+}
+
+#progressbar {
+  background-color: lightblue;
+  width: 0%;
+  height: 20px;
+  border-radius: 4px;
+}
+
+#percent {
+  position: absolute;
+  display: inline-block;
+  top: 3px;
+  left: 48%;
+}
+
+#myfile{
+    display:none;
+}
+
+#imagePreview{
+  display: none;
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  overflow: auto;
+  background: rgba(134, 134, 134, 0.33);
+}
+#imagePreview span{
+  margin-top: 80px;
+  display: inline-block;
+  position: relative;
+  margin-bottom: 20px;
+}
+#imagePreview img{
+  max-width: 85%;
+  box-shadow: 3px 3px 10px 0px rgb(158, 157, 157);
+}
+#imagePreview a{
+  position: absolute;
+  font-family: monospace;
+  font-weight: bolder;
+  margin-left: -20px;
+  color: white;
+  text-shadow: 2px 1px 2px #7D7D7D;
+  font-size: 20px;
+}

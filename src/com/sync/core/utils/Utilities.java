@@ -1,5 +1,6 @@
 package com.sync.core.utils;
 
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -96,6 +97,41 @@ public class Utilities
     }
     
     return val;
+  }
+  
+  public static String verifyImage(String path)
+  {
+    String filePath = Constants.DIR_PATH + Constants.ROOT_PATH + path;
+    String result = "."  + Constants.IMAGES_PATH + "/noimage.jpg";
+    
+    File file = new File(filePath);
+    if(file.exists() && file.isFile()){
+      result = "." + path;
+    }
+    
+    return result;
+    
+  }
+
+  public static final String stripNull(String value)
+  {
+    if(null==value) return "";
+
+    return value;
+  }
+  
+  public static final String cleanInput(String original)
+  {
+    if(null==original){return null;}
+    
+    String singleQuote = "`";
+    String doubleQuote = "``";
+    String result = original;
+    result = result.replaceAll("\'", singleQuote);
+    result = result.replaceAll("\"", doubleQuote);
+    result = result.trim();
+    
+    return result;
   }
   
 }

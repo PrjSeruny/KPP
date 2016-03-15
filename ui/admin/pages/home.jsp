@@ -27,14 +27,18 @@
         <input type="text" id="userIDVal">
       </div>
       <div>
-        <label>Input Option</label>
+        <label></label>
         <span id="userNameVal"></span>
       </div>
     </fieldset>
     <fieldset>
       <div>
         <label>Input Text</label>
-        <input type="text">
+        <input type="text" >
+      </div>
+      <div>
+        <label>Input Date</label>
+        <input type="text" class="date">
       </div>
       <div>
         <label>Input Option</label>
@@ -81,19 +85,40 @@
       <div>
         <label>Input Image</label>
         <ul class="upload-img">
-          <li>
-            <a href="javascript:void(0)"></a>
-            <input type="file">
+          <li url="<%=Constants.ROOT_PATH%><%=Constants.SERVLET_PATH %>">
+            <a href="javascript:void(0)" class="new"></a>
+            <form>
+              <input type="hidden" name="<%=Constants.W %>" value="<%=Constants.DELETE_IMAGE_FILE%>">
+              <!-- PARAMETER YANG HARUS ADA DALAM FORM, NAMA DAN CLASS PARAMETER SUDAH PATEN-->
+	            <input type="hidden" class="inputPath" name="image">
+	            <input type="hidden" class="inputPath_thumb" name="image_thumb">
+            </form>
           </li>
-          <li>
-            <a href="javascript:void(0)"></a>
-            <input type="file">
+          <li url="<%=Constants.ROOT_PATH%><%=Constants.SERVLET_PATH %>">
+            <a href="javascript:void(0)" class="new"></a>
+            <form>
+              <input type="hidden" name="<%=Constants.W %>" value="<%=Constants.DELETE_IMAGE_FILE%>">
+              <!-- PARAMETER YANG HARUS ADA DALAM FORM, NAMA DAN CLASS PARAMETER SUDAH PATEN-->
+              <input type="hidden" class="inputPath" name="image">
+              <input type="hidden" class="inputPath_thumb" name="image_thumb">
+            </form>
           </li>
-          <li>
-            <a href="javascript:void(0)"></a>
-            <input type="file">
+          <li url="<%=Constants.ROOT_PATH%><%=Constants.SERVLET_PATH %>">
+            <a href="javascript:void(0)" class="new"></a>
+            <form>
+              <input type="hidden" name="<%=Constants.W %>" value="<%=Constants.DELETE_IMAGE_FILE%>">
+              <!-- PARAMETER YANG HARUS ADA DALAM FORM, NAMA DAN CLASS PARAMETER SUDAH PATEN-->
+              <input type="hidden" class="inputPath" name="image">
+              <input type="hidden" class="inputPath_thumb" name="image_thumb">
+            </form>
           </li>
         </ul>
+      </div>
+    </fieldset>
+    <fieldset>
+      <div>
+        <label>TinyMce Implementation</label>
+        <textarea class="tiny" width="300px"></textarea>
       </div>
     </fieldset>
 

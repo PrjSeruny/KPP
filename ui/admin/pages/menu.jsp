@@ -8,6 +8,12 @@
     <a href="javascript:void(0)"></a>
   </div>
   <ul id="nav">
+      <li class="yahoo"><a href="javascript:void(0)">Public Setting</a>
+          <ul>
+          <li><a href="javascript:void(0)" url="<%=Constants.ROOT_PATH%><%=Constants.SERVLET_PATH%>?<%=Constants.W%>=<%=Constants.SLIDE_SETTING_PRM%>">Gambar Slide</a></li>
+          <li><a href="javascript:void(0)" url="<%=Constants.ROOT_PATH%><%=Constants.SERVLET_PATH%>?<%=Constants.W%>=<%=Constants.GALLERY_SETTING_PRM%>">Gallery Foto</a></li>
+          </ul>
+      </li> 
       <li class="yahoo"><a href="javascript:void(0)">Master</a>
           <ul>
           <li><a href="javascript:void(0)" url="<%=Constants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>?<%=Constants.W%>=<%=MasterConstants.MASTERUSER%>">Master User</a></li>

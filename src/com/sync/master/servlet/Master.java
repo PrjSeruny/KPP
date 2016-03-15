@@ -447,9 +447,7 @@ public class Master extends CoreServlet
       return;
     }
     
-    super.openContent(
-        MasterConstants.SVT_MASTER_PATH, 
-        MasterConstants.MASTERUSER, 
+    super.openURL(
         MasterConstants.MASTER_USER_LIST, 
         req, res);
     return;
@@ -645,9 +643,7 @@ public class Master extends CoreServlet
     req.setAttribute(MasterConstants.MASTERRESIDENT_LIST, lists);
     
     if(null!=re)re.closed();
-    super.openContent(
-        MasterConstants.SVT_MASTER_PATH, 
-        MasterConstants.MASTER_RESIDENT, 
+    super.openURL(
         MasterConstants.MASTER_RESIDENT_LIST, 
         req, res);
     return;
