@@ -21,6 +21,8 @@ public class MasterConstants extends Constants
   public static final String MASTERREGION_INFO = "rgioninfo";
   public static final String MASTERREGION_KEC_LIST = "keclist";
   public static final String MASTERREGION_KEL_LIST = "kellist";
+  public static final String MASTERLEVEL_LIST = "lvllist";
+  public static final String MASTERLEVEL_INFO = "lvlinfo";
   
   public static final String MASTER_USER = PAGES_PATH + "/master_user.jsp";
   public static final String MASTER_USER_LIST = PAGES_PATH + "/master_user_list.jsp";
@@ -47,6 +49,7 @@ public class MasterConstants extends Constants
   public static final String FORM_MASTERUSER_USERID = "FORM_MASTERUSER_USERID";
   public static final String FORM_MASTERUSER_PASSWD = "FORM_MASTERUSER_PASSWD";
   public static final String FORM_MASTERUSER_NAME = "FORM_MASTERUSER_NAME";
+  public static final String FORM_MASTERUSER_LEVEL = "FORM_MASTERUSER_LEVEL";
   
   /* For Form input Master Resident */
   public static final String FORM_MASTERRESIDENT_NIK = "FORM_MASTERRESIDENT_NIK";
