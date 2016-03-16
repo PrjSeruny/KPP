@@ -28,6 +28,7 @@ import java.util.List;
 
 
 
+
 import javax.imageio.ImageIO;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletContext;
@@ -40,6 +41,7 @@ import com.sync.core.beans.GalleryBean;
 import com.sync.core.beans.MessageBean;
 import com.sync.core.beans.SlideBean;
 import com.sync.core.engine.GalleryEngine;
+import com.sync.core.engine.NewsEngine;
 import com.sync.core.engine.RootEngine;
 import com.sync.core.engine.SlideEngine;
 import com.sync.core.utils.Constants;
@@ -88,8 +90,8 @@ public class CoreServlet extends ServletUtilities
         System.out.println("masuk slide setting");
         doCreateSlide(req,res);
       }
-      else if(null!=w && w.equals(Constants.GALLERY_SETTING_PRM)){
-          doUploadGallery(req,res);
+      else if(null!=w && (w.equals(Constants.GALLERY_SETTING_PRM) || w.equals(Constants.NEWS_SETTING_PRM))){
+        doUploadToTemp(req,res);
       }else{
         generalUploadImage(req, res);
       }
@@ -122,7 +124,7 @@ public class CoreServlet extends ServletUtilities
     }
   }
   
-  private void doUploadGallery(HttpServletRequest req, HttpServletResponse res)
+  private void doUploadToTemp(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException 
   {
     res.setContentType("application/json;charset=utf-8");
@@ -243,6 +245,10 @@ public class CoreServlet extends ServletUtilities
     else if(!Utilities.isEmpy(w) && w.equals(Constants.GALLERY_SETTING_PRM))
     {
       this.doGallerySetting(req,res);
+    }   
+    else if(!Utilities.isEmpy(w) && w.equals(Constants.NEWS_SETTING_PRM))
+    {
+      //this.doNewsSetting(req,res);
     }    
     else if(!Utilities.isEmpy(w) && w.equals(Constants.DELETE_IMAGE_FILE))
     {
@@ -260,6 +266,55 @@ public class CoreServlet extends ServletUtilities
     return;
   }
   
+  /*private void doNewsSetting(HttpServletRequest req, HttpServletResponse res)
+  throws ServletException, IOException
+  {
+    String act = req.getParameter(Constants.ACT);
+    System.out.println("action : "+act);
+    if(!Utilities.isEmpy(act) && act.equals(Constants.ACT_INFO)){
+      doNewsInfo(req,res);
+    }
+    else if (!Utilities.isEmpy(act) && (
+        act.equals(Constants.ACT_UPDATE) || 
+        act.equals(Constants.ACT_CREATE) || 
+        act.equals(Constants.ACT_UPDATE_SAVE) || 
+        act.equals(Constants.ACT_CREATE_SAVE)
+        
+    )){
+      doNewsEdit(req,res);
+    }
+    else{
+      doNewsList(req,res);
+    }
+    return;
+  }
+
+  private void doNewsList(HttpServletRequest req, HttpServletResponse res) 
+  throws ServletException, IOException
+  {
+    String act = req.getParameter(Constants.ACT);
+    String id = req.getParameter(Constants.FORM_NEWS_ID);
+    
+    NewsEngine ne = new NewsEngine(req,res);
+    
+    if(!Utilities.isEmpy(act) && act.equals(Constants.ACT_DELETE) && null==id)
+    {
+      doDeleteImage(req, res);
+      return;
+    }
+    
+    if(!Utilities.isEmpy(act) && act.equals(Constants.ACT_DELETE)){
+      ne.deleteNews(id);
+    }
+
+    GalleryBean[] gbn = ge.getGalleryList();
+    req.setAttribute(Constants.GALLERY_SETTING_LIST_BEAN, gbn);
+    
+    ge.closed();
+    super.openURL(Constants.GALLERY_LIST_PG, req, res);
+    return;
+  }*/
+
   private void doGallerySetting(HttpServletRequest req, HttpServletResponse res) 
   throws ServletException, IOException
   {

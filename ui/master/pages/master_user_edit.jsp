@@ -1,3 +1,4 @@
+<%@page import="com.sync.master.beans.MasterLevelAccessBean"%>
 <%@page import=" java.io.*,
                com.sync.core.utils.Constants,
                com.sync.master.utils.MasterConstants,
@@ -7,6 +8,7 @@
 %>
 <%
 	MasterUserBean ubn = (MasterUserBean)request.getAttribute(MasterConstants.USER_INFO);
+	MasterLevelAccessBean[] levelAccess = (MasterLevelAccessBean[])request.getAttribute(MasterConstants.MASTERLEVEL_LIST);
 	MessageBean msg = null;
 System.out.println(ubn);
 	if(null!=ubn && null!=ubn.getMessageBean() && ubn.getMessageBean().anyMessageExist())
@@ -33,6 +35,24 @@ System.out.println(ubn);
           <label>Nama Lengkap</label>
           <input type="text" name="<%=MasterConstants.FORM_MASTERUSER_NAME %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getName()):""%>">
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERUSER_NAME):""%></span>
+        </div>
+        <div>
+          <label>Level ID</label>
+          <select name="<%=MasterConstants.FORM_MASTERUSER_LEVEL%>">
+      			<option value="N/A">Pilih Level</option>
+      			<%
+      			if(null!=levelAccess)
+      			{
+      				for(int j = 0; j < levelAccess.length; j++)
+      				{
+      					%>
+      					<option value="<%=null!=levelAccess[j]?levelAccess[j].getID():""%>"><%=null!=levelAccess[j]?levelAccess[j].getName():"" %></option>
+      					<%
+      				}
+      			}
+      			%>
+      		</select>
+          <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERUSER_LEVEL):""%></span>
         </div>
       </fieldset>
       <fieldset>

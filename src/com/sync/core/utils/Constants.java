@@ -66,6 +66,16 @@ public class Constants
   public static final String FORM_GALLERY_ID = "FORM_GALLERY_ID";
   public static final String FORM_GALLERY_TITLE = "FORM_GALLERY_TITLE";
   public static final String FORM_GALLERY_DESC = "FORM_GALLERY_DESC";
+
+  public static final String NEWS_SETTING_INFO_BEAN = "NEWS_SETTING_INFO_BEAN";
+  public static final String NEWS_SETTING_LIST_BEAN = "NEWS_SETTING_LIST_BEAN";
+  public static final String NEWS_SETTING_PRM = "news";
+  public static final String NEWS_SETTING_PG = PAGES_PATH + "/newsview.jsp";
+  public static final String NEWS_LIST_PG = PAGES_PATH + "/newslist.jsp";
+  public static final String NEWS_EDIT_PG = PAGES_PATH + "/newsedit.jsp";
+  public static final String FORM_NEWS_ID = "FORM_NEWS_ID";
+  public static final String FORM_NEWS_TITLE = "FORM_NEWS_TITLE";
+  public static final String FORM_NEWS_DESC = "FORM_NEWS_DESC";
   
   public static final String DELETE_IMAGE_FILE = "dltimg";
   

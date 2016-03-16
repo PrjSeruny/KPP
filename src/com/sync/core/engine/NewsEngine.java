@@ -2,41 +2,42 @@ package com.sync.core.engine;
 
 import java.io.File;
 import java.sql.Statement;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FilenameUtils;
 
-import com.sync.core.beans.GalleryBean;
+import com.sync.core.beans.NewsBean;
 import com.sync.core.beans.MessageBean;
-import com.sync.core.pool.GalleryPool;
+import com.sync.core.beans.NewsBean;
+import com.sync.core.pool.NewsPool;
 import com.sync.core.utils.Constants;
 import com.sync.core.utils.CoreTable;
 import com.sync.core.utils.Utilities;
 
-public class GalleryEngine extends RootEngine{
-
-  public GalleryEngine(){}
+public class NewsEngine extends RootEngine{
+  public NewsEngine(){}
   
-  public GalleryEngine(HttpServletRequest rq,HttpServletResponse rs){
+  public NewsEngine(HttpServletRequest rq,HttpServletResponse rs){
     req = rq;
     res = rs;
   }
   
-  public GalleryBean validateGallery(){
+  public NewsBean validateNews(){
     System.out.println("BEGINNING VALIDATE");
     MessageBean msg = new MessageBean();
-    GalleryBean gb = new GalleryBean();
+    NewsBean gb = new NewsBean();
     
     String temp;
     
-    temp = Utilities.cleanInput(req.getParameter(Constants.FORM_GALLERY_TITLE));
+    temp = Utilities.cleanInput(req.getParameter(Constants.FORM_NEWS_TITLE));
     if(!Utilities.isEmpy(temp)){
       gb.setTitle(temp);
     }
     
-    temp = Utilities.cleanInput(req.getParameter(Constants.FORM_GALLERY_DESC));
+    temp = Utilities.cleanInput(req.getParameter(Constants.FORM_NEWS_DESC));
     if(!Utilities.isEmpy(temp)){
       gb.setDesc(temp);
     }
@@ -62,15 +63,15 @@ public class GalleryEngine extends RootEngine{
     return gb;
   }
   
-  public GalleryBean getGalleryInfo(String ID)
+  public NewsBean getNewsInfo(String ID)
   {
-    GalleryBean gbn = null;
+    NewsBean nbn = null;
     
     SQL = " SELECT * " +
           " FROM " +
-          CoreTable.TABLE_GALLERY + 
+          CoreTable.TABLE_NEWS + 
           " WHERE " +
-          CoreTable.COL_GALLERY_ID + "=" + ID + ";";
+          CoreTable.COL_NEWS_ID + "=" + ID + ";";
     
     try
     {
@@ -80,42 +81,42 @@ public class GalleryEngine extends RootEngine{
       if(null!=rs)
       {
         rs.next();
-        gbn = new GalleryBean();
-        gbn.setID(rs.getInt(CoreTable.COL_GALLERY_ID));
-        gbn.setTitle(rs.getString(CoreTable.COL_GALLERY_TITLE));
-        gbn.setDesc(rs.getString(CoreTable.COL_GALLERY_DESC));
-        gbn.setPath(rs.getString(CoreTable.COL_GALLERY_PATH));
-        gbn.setPathThumb(rs.getString(CoreTable.COL_GALLERY_PATHTHUMB));
-        gbn.setDateCreate(
-            Utilities.stringToDate(rs.getString(CoreTable.COL_GALLERY_DATECREATE), 
+        nbn = new NewsBean();
+        nbn.setID(rs.getInt(CoreTable.COL_NEWS_ID));
+        nbn.setTitle(rs.getString(CoreTable.COL_NEWS_TITLE));
+        nbn.setDesc(rs.getString(CoreTable.COL_NEWS_DESC));
+        nbn.setPath(rs.getString(CoreTable.COL_NEWS_PATH));
+        nbn.setPathThumb(rs.getString(CoreTable.COL_NEWS_PATHTHUMB));
+        nbn.setEntryDate(
+            Utilities.stringToDate(rs.getString(CoreTable.COL_NEWS_ENTRYDATE), 
                 Constants.DATE_DB_MEDIUM_PATTERN));
       }
     }
     catch(Exception e)
     {
       e.printStackTrace();
-      gbn = null;
+      nbn = null;
     }
     
-    return gbn;
+    return nbn;
   }
   
-  public GalleryBean[] getGalleryList()
+  public NewsBean[] getNewsList()
   {
-    GalleryBean[] lists = null;
+    NewsBean[] lists = null;
     int row = 0;
     String currPage = req.getParameter(Constants.FORM_CURRENT_PAGE);
     String limit = req.getParameter(Constants.FORM_LIMIT_RECORD);
     
-    addSQL = " order by "+CoreTable.COL_GALLERY_DATECREATE+" desc";
+    addSQL = " order by "+CoreTable.COL_NEWS_ENTRYDATE+" desc";
     
-    String pagination = buildPagination(CoreTable.TABLE_GALLERY, 
+    String pagination = buildPagination(CoreTable.TABLE_NEWS, 
                                         (null==currPage?1:Integer.parseInt(currPage)), 
                                         (null==limit?Constants.DEFAULT_LIMIT_RECORD:Integer.parseInt(limit)));
     req.setAttribute(Constants.HTML_PAGINATION, pagination);
     
     SQL = " SELECT * " +
-          " FROM " + CoreTable.TABLE_GALLERY + addSQL + SQLlimit;
+          " FROM " + CoreTable.TABLE_NEWS + addSQL + SQLlimit;
     System.out.println(SQL);
     try
     {
@@ -125,19 +126,19 @@ public class GalleryEngine extends RootEngine{
       
       if(row<=0) return null;
       
-      lists = new GalleryBean[row];
+      lists = new NewsBean[row];
       if(null!=rs)
       {
         for(int i=0; i<row; i++)
         {
           rs.next();
-          lists[i] = new GalleryBean();
-          lists[i].setID(rs.getInt(CoreTable.COL_GALLERY_ID));
-          lists[i].setTitle(rs.getString(CoreTable.COL_GALLERY_TITLE));
-          lists[i].setDesc(rs.getString(CoreTable.COL_GALLERY_DESC));
-          lists[i].setPath(rs.getString(CoreTable.COL_GALLERY_PATH));
-          lists[i].setPathThumb(rs.getString(CoreTable.COL_GALLERY_PATHTHUMB));
-          lists[i].setDateCreate(Utilities.stringToDate(rs.getString(CoreTable.COL_GALLERY_DATECREATE), Constants.DATE_DB_MEDIUM_PATTERN));
+          lists[i] = new NewsBean();
+          lists[i].setID(rs.getInt(CoreTable.COL_NEWS_ID));
+          lists[i].setTitle(rs.getString(CoreTable.COL_NEWS_TITLE));
+          lists[i].setDesc(rs.getString(CoreTable.COL_NEWS_DESC));
+          lists[i].setPath(rs.getString(CoreTable.COL_NEWS_PATH));
+          lists[i].setPathThumb(rs.getString(CoreTable.COL_NEWS_PATHTHUMB));
+          lists[i].setEntryDate(Utilities.stringToDate(rs.getString(CoreTable.COL_NEWS_ENTRYDATE), Constants.DATE_DB_MEDIUM_PATTERN));
         }
       }
     }
@@ -149,10 +150,10 @@ public class GalleryEngine extends RootEngine{
     return lists;
   }
   
-  public GalleryBean[] getAllGallery(){
-    GalleryBean[] lists = null;
+  public NewsBean[] getAllNews(){
+    NewsBean[] lists = null;
     
-    SQL = " SELECT * FROM " + CoreTable.TABLE_GALLERY + " order by "+CoreTable.COL_GALLERY_DATECREATE+" desc";
+    SQL = " SELECT * FROM " + CoreTable.TABLE_NEWS + " order by "+CoreTable.COL_NEWS_ENTRYDATE+" desc";
     System.out.println(SQL);
     try
     {
@@ -162,20 +163,20 @@ public class GalleryEngine extends RootEngine{
       
       if(row<=0) return null;
       
-      lists = new GalleryBean[row];
+      lists = new NewsBean[row];
       if(null!=rs)
       {
         for(int i=0; i<row; i++)
         {
           rs.next();
-          lists[i] = new GalleryBean();
-          lists[i].setID(rs.getInt(CoreTable.COL_GALLERY_ID));
-          lists[i].setTitle(rs.getString(CoreTable.COL_GALLERY_TITLE));
-          lists[i].setDesc(rs.getString(CoreTable.COL_GALLERY_DESC));
-          lists[i].setDateCreate(
-              Utilities.stringToDate(rs.getString(CoreTable.COL_GALLERY_DATECREATE), Constants.DATE_DB_MEDIUM_PATTERN));
-          lists[i].setPath(rs.getString(CoreTable.COL_GALLERY_PATH));
-          lists[i].setPathThumb(rs.getString(CoreTable.COL_GALLERY_PATHTHUMB));
+          lists[i] = new NewsBean();
+          lists[i].setID(rs.getInt(CoreTable.COL_NEWS_ID));
+          lists[i].setTitle(rs.getString(CoreTable.COL_NEWS_TITLE));
+          lists[i].setDesc(rs.getString(CoreTable.COL_NEWS_DESC));
+          lists[i].setEntryDate(
+              Utilities.stringToDate(rs.getString(CoreTable.COL_NEWS_ENTRYDATE), Constants.DATE_DB_MEDIUM_PATTERN));
+          lists[i].setPath(rs.getString(CoreTable.COL_NEWS_PATH));
+          lists[i].setPathThumb(rs.getString(CoreTable.COL_NEWS_PATHTHUMB));
         }
       }
     }
@@ -187,44 +188,44 @@ public class GalleryEngine extends RootEngine{
     return lists;
   }
   
-  public boolean createGallery(GalleryBean gbn)
+  public boolean createGallery(NewsBean nbn)
   {
     boolean res = false;
-    String name = FilenameUtils.getName(gbn.getPath());
-    System.out.println("masuk path : "+gbn.getPath());
+    String name = FilenameUtils.getName(nbn.getPath());
+    System.out.println("masuk path : "+nbn.getPath());
     System.out.println("name image : "+name);
     
     try
     {
-      SQL = " INSERT INTO " + CoreTable.TABLE_GALLERY +
+      SQL = " INSERT INTO " + CoreTable.TABLE_NEWS +
             " VALUES(null,?,?,?,?,?)";
       
-      gbn.setPath(Constants.PICLIB_PATH+"/"+name);
-      gbn.setPathThumb(Constants.PICLIB_THUMB_PATH+"/"+name);
+      nbn.setPath(Constants.PICLIB_PATH+"/"+name);
+      nbn.setPathThumb(Constants.PICLIB_THUMB_PATH+"/"+name);
       
       super.getConnection();
       stat = con.prepareStatement(SQL,Statement.RETURN_GENERATED_KEYS);
-      stat.setString(1, gbn.getTitle());
-      stat.setString(2, gbn.getDesc());
-      stat.setString(4, gbn.getPath());
-      stat.setString(3, gbn.getPathThumb());
+      stat.setString(1, nbn.getTitle());
+      stat.setString(2, nbn.getDesc());
+      stat.setString(4, nbn.getPath());
+      stat.setString(3, nbn.getPathThumb());
       stat.setString(5, 
-          Utilities.dateToString(gbn.getDateCreate(), Constants.DATE_DB_MEDIUM_PATTERN));
+          Utilities.dateToString(nbn.getEntryDate(), Constants.DATE_DB_MEDIUM_PATTERN));
       
       System.out.println("INSERT USER INTO DATABASE "+stat);
       
       if(stat.executeUpdate()>0){
         rs = stat.getGeneratedKeys();
         if (rs.next()) {
-          gbn.setID(rs.getInt(1));
-          System.out.println("id baru "+gbn.getID());
+          nbn.setID(rs.getInt(1));
+          System.out.println("id baru "+nbn.getID());
         }
         
-        GalleryPool gp = GalleryPool.getInstance();
+        NewsPool np = NewsPool.getInstance();
         super.moveFile(Constants.FILE_TEMP_PATH+File.separator+name, Constants.PICLIB_PATH);
         super.moveFile(Constants.FILE_TEMP_THUMB_PATH+File.separator+name, Constants.PICLIB_THUMB_PATH);
         
-        gp.put(gbn.getID(),gbn);
+        np.put(nbn.getID(),nbn);
         
         return true;
       }
@@ -239,39 +240,43 @@ public class GalleryEngine extends RootEngine{
     return res;
   }
   
-  public boolean updateGallery(GalleryBean gbn)
+  public boolean updateNews(NewsBean nbn)
   {
     boolean res = false;
-    String name = FilenameUtils.getName(gbn.getPath());
+    String name = FilenameUtils.getName(nbn.getPath());
     boolean imageIsUpdate = false;
-    GalleryPool gp = GalleryPool.getInstance();
+    NewsPool np = NewsPool.getInstance();
     
-    if(!gp.get(gbn.getID()).getPath().equals(gbn.getPath())){
+    if(!np.get(nbn.getID()).getPath().equals(nbn.getPath())){
       System.out.println("image is updated");
       imageIsUpdate = true;
     }
     
     if(imageIsUpdate){
-      gbn.setPath(Constants.PICLIB_PATH+"/"+name);
-      gbn.setPathThumb(Constants.PICLIB_THUMB_PATH+"/"+name);
+      nbn.setPath(Constants.PICLIB_PATH+"/"+name);
+      nbn.setPathThumb(Constants.PICLIB_THUMB_PATH+"/"+name);
     }
     
     try
     {
-      SQL = "UPDATE " + CoreTable.TABLE_GALLERY +
-            " SET "+CoreTable.COL_GALLERY_TITLE+"=?,"
-            +CoreTable.COL_GALLERY_DESC+"=?,"
-            +CoreTable.COL_GALLERY_PATH+"=?,"
-            +CoreTable.COL_GALLERY_PATHTHUMB+"=?"
-            +" WHERE "+CoreTable.COL_GALLERY_ID+"=?;";
+      SQL = "UPDATE " + CoreTable.TABLE_NEWS +
+            " SET "+CoreTable.COL_NEWS_TITLE+"=?,"
+            +CoreTable.COL_NEWS_DESC+"=?,"
+            +CoreTable.COL_NEWS_ENTRYDATE+"=?,"
+            +CoreTable.COL_NEWS_PATH+"=?,"
+            +CoreTable.COL_NEWS_PATHTHUMB+"=?"
+            +" WHERE "+CoreTable.COL_NEWS_ID+"=?;";
+      
+      nbn.setEntryDate(new Date());
       
       super.getConnection();
       stat = con.prepareStatement(SQL);
-      stat.setString(1, gbn.getTitle());
-      stat.setString(2, gbn.getDesc());
-      stat.setString(3, gbn.getPath());
-      stat.setString(4, gbn.getPathThumb());
-      stat.setInt(5, gbn.getID());
+      stat.setString(1, nbn.getTitle());
+      stat.setString(2, nbn.getDesc());
+      stat.setString(3, Utilities.dateToString(nbn.getEntryDate(), Constants.DATE_DB_MEDIUM_PATTERN));
+      stat.setString(4, nbn.getPath());
+      stat.setString(5, nbn.getPathThumb());
+      stat.setInt(6, nbn.getID());
       
       System.out.println("INSERT USER INTO DATABASE "+stat);
       
@@ -281,7 +286,7 @@ public class GalleryEngine extends RootEngine{
           super.moveFile(Constants.FILE_TEMP_THUMB_PATH+File.separator+name, Constants.PICLIB_THUMB_PATH);
         }
         
-        gp.put(gbn.getID(),gbn);
+        np.put(nbn.getID(),nbn);
         
         return true;
       }
@@ -296,14 +301,14 @@ public class GalleryEngine extends RootEngine{
     return res;
   }
   
-  public boolean deleteGallery(String[] ids)
+  public boolean deleteNews(String[] ids)
   {
     boolean res = false;
     try
     {
-      SQL = " DELETE FROM " + CoreTable.TABLE_GALLERY +
+      SQL = " DELETE FROM " + CoreTable.TABLE_NEWS +
             " WHERE " +
-            CoreTable.COL_GALLERY_ID + " IN ("+String.join(",", ids)+");";
+            CoreTable.COL_NEWS_ID + " IN ("+String.join(",", ids)+");";
       
       super.getConnection();
       stat = con.prepareStatement(SQL);
@@ -312,14 +317,14 @@ public class GalleryEngine extends RootEngine{
       
       if(stat.executeUpdate()>0){
         
-        GalleryPool gp = GalleryPool.getInstance();
-        GalleryBean tmp = null;
+        NewsPool np = NewsPool.getInstance();
+        NewsBean tmp = null;
         
         for(int i=0;i<ids.length;i++){
-          tmp = gp.get(Integer.parseInt(ids[i]));
+          tmp = np.get(Integer.parseInt(ids[i]));
           super.deleteFile(tmp.getPath());
           super.deleteFile(tmp.getPathThumb());
-          gp.remove(Integer.parseInt(ids[i]));
+          np.remove(Integer.parseInt(ids[i]));
         }
         
         return true;
@@ -339,5 +344,4 @@ public class GalleryEngine extends RootEngine{
   {
     super.finalize();
   }
-
 }

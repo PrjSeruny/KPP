@@ -10,11 +10,13 @@ import com.sync.core.beans.MessageBean;
 import com.sync.core.servlet.CoreServlet;
 import com.sync.core.utils.Constants;
 import com.sync.core.utils.Utilities;
+import com.sync.master.beans.MasterLevelAccessBean;
 import com.sync.master.beans.MasterRegionBean;
 import com.sync.master.beans.MasterRegionKecamatanBean;
 import com.sync.master.beans.MasterRegionKelurahanBean;
 import com.sync.master.beans.MasterResidentBean;
 import com.sync.master.beans.MasterUserBean;
+import com.sync.master.engine.MasterLevelEngine;
 import com.sync.master.engine.MasterRegionEngine;
 import com.sync.master.engine.MasterResidentEngine;
 import com.sync.master.engine.UserEngine;
@@ -341,7 +343,9 @@ public class Master extends CoreServlet
     System.out.println("BEGINNING UPDATE USER >>>>>>>>>>>>>>>>>>>>>>>> ");
     String userID = req.getParameter(MasterConstants.FORM_MASTERUSER_USERID);
     UserEngine ue = new UserEngine(req, res);
+    MasterLevelEngine LvlEngine = new MasterLevelEngine(req,res);
     MasterUserBean ubn = null;
+    MasterLevelAccessBean[] AccessBn;
     
     if(
         !Utilities.isEmpy(req.getParameter(MasterConstants.BTN_DONE)) ||
@@ -384,6 +388,8 @@ public class Master extends CoreServlet
     if(null==ubn)
     {
       ubn = ue.getMasterUserInfo(userID);
+      AccessBn = LvlEngine.listOfAccess();
+      req.setAttribute(MasterConstants.MASTERLEVEL_LIST, AccessBn);
       req.setAttribute(MasterConstants.USER_INFO, ubn);
     }
     
@@ -417,11 +423,14 @@ public class Master extends CoreServlet
     
     req.setAttribute(MasterConstants.USER_INFO, ubn);*/
     UserEngine ue = new UserEngine(req, res);
+    MasterLevelEngine LevelEng = new MasterLevelEngine(req, res);
     MasterUserBean[] lists = ue.listOfUsers();
-    
+    MasterLevelAccessBean[] acccessLists = LevelEng.listOfAccess();
+    req.setAttribute(MasterConstants.MASTERLEVEL_LIST, acccessLists);
     req.setAttribute(MasterConstants.USER_LIST, lists);
     
     ue.closed();
+    LevelEng.closed();
     super.openContent(
         MasterConstants.SVT_MASTER_PATH, 
         MasterConstants.MASTERUSER, 

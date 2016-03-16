@@ -15,6 +15,10 @@ public class MasterUserBean
   private String entryUser = null;
   private MessageBean msg = null;
   private String passwd = null;
+  /** levelID variable digunakan untuk hak akses. */
+  private String LevelID = null;
+  public static final String LEVEL_ADMIN = "ADMIN";
+  public static final String LEVEL_USER = "INPUTER";
   
   public MasterUserBean(){}
   
@@ -58,5 +62,10 @@ public class MasterUserBean
   public void setEntryUser(String val){ entryUser = val; }
   /** Gets Entry User */
   public String getEntryUser(){ return entryUser; }
+  
+  /** Set level ID. */
+  public void setLevelID(String val) { LevelID = val; }
+  /** Get Level ID. */
+  public String getLevelID() { return LevelID; }
   
 }

@@ -7,6 +7,7 @@ public class MasterTable
   public static final String COL_USERLOGIN_ID = TABLE_USERLOGIN + ".ID";
   public static final String COL_USERLOGIN_PASSWD = TABLE_USERLOGIN + ".Password";
   public static final String COL_USERLOGIN_NAME = TABLE_USERLOGIN + ".Name";
+  public static final String COL_USERLOGIN_LEVEL = TABLE_USERLOGIN + ".LevelID";
   public static final String COL_USERLOGIN_CREATEDATE = TABLE_USERLOGIN + ".CreateDate";
   public static final String COL_USERLOGIN_CREATEUSER = TABLE_USERLOGIN + ".CreateUser";
   public static final String COL_USERLOGIN_ENTRYDATE = TABLE_USERLOGIN + ".EntryDate";
@@ -94,5 +95,10 @@ public class MasterTable
   public static final String COL_MASTER_RESIDENTHISORY_KECAMATAN = TABLE_MASTER_RESIDENTHISORY + ".Kecamatan";
   public static final String COL_MASTER_RESIDENTHISORY_ENTRYDATE = TABLE_MASTER_RESIDENTHISORY + ".EntryDate";
   public static final String COL_MASTER_RESIDENTHISORY_ENTRYUSER = TABLE_MASTER_RESIDENTHISORY + ".EntryUser";
+  
+  public static final String TABLE_MASTER_LEVEL = "MasterLevel";
+  public static final String COL_MASTER_LEVEL_LEVELID = TABLE_MASTER_LEVEL + ".LevelID";
+  public static final String COL_MASTER_LEVEL_LEVEL_NAME = TABLE_MASTER_LEVEL + ".LevelName";
+  public static final String COL_MASTER_LEVEL_LEVEL_NOTE = TABLE_MASTER_LEVEL + ".LevelNote";
   
 }

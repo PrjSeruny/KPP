@@ -223,7 +223,6 @@ public class UserEngine extends RootEngine
           lists[i] = new MasterUserBean();
           lists[i].setUser(rs.getString(MasterTable.COL_USERLOGIN_ID));
           lists[i].setName(rs.getString(MasterTable.COL_USERLOGIN_NAME));
-          lists[i].setLevelID(rs.getString(MasterTable.COL_USERLOGIN_LEVEL));
           lists[i].setCreateDate(Utilities.stringToDate(rs.getString(MasterTable.COL_USERLOGIN_CREATEDATE), MasterConstants.DATE_DB_MEDIUM_PATTERN));
           lists[i].setCreateUser(rs.getString(MasterTable.COL_USERLOGIN_CREATEUSER));
           lists[i].setEntryDate(Utilities.stringToDate(rs.getString(MasterTable.COL_USERLOGIN_ENTRYDATE), MasterConstants.DATE_DB_MEDIUM_PATTERN));
@@ -283,21 +282,19 @@ public class UserEngine extends RootEngine
                MasterTable.COL_USERLOGIN_ID + "," +
                MasterTable.COL_USERLOGIN_NAME + "," +
                MasterTable.COL_USERLOGIN_PASSWD + "," +
-               MasterTable.COL_USERLOGIN_LEVEL + ", " +
                MasterTable.COL_USERLOGIN_CREATEDATE + "," +
                MasterTable.COL_USERLOGIN_CREATEUSER +
              ")" +
-            " VALUES(?,?,SHA(?),?,?,?)";
+            " VALUES(?,?,SHA(?),?,?)";
       
       super.getConnection();
       stat = con.prepareStatement(SQL);
       stat.setString(1, ubn.getUser());
       stat.setString(2, ubn.getName());
       stat.setString(3, ubn.getPassword());
-      stat.setString(4, ubn.getLevelID());
-      stat.setString(5, Utilities.dateToString(new Date(), 
+      stat.setString(4, Utilities.dateToString(new Date(), 
           MasterConstants.DATE_DB_MEDIUM_PATTERN));
-      stat.setString(6, getUserInSession().getUser());
+      stat.setString(5, getUserInSession().getUser());
       
       System.out.println("INSERT USER INTO DATABASE "+stat);
       
@@ -321,7 +318,6 @@ public class UserEngine extends RootEngine
       SQL = " UPDATE " + MasterTable.TABLE_USERLOGIN +
             " SET " +
             MasterTable.COL_USERLOGIN_NAME + "=?, " +
-            MasterTable.COL_USERLOGIN_LEVEL + "=?, " +
             MasterTable.COL_USERLOGIN_ENTRYDATE + "=?, " +
             MasterTable.COL_USERLOGIN_ENTRYUSER + "=? " +
             " WHERE " +
@@ -330,11 +326,10 @@ public class UserEngine extends RootEngine
       super.getConnection();
       stat = con.prepareStatement(SQL);
       stat.setString(1, ubn.getName());
-      stat.setString(2, ubn.getLevelID());
-      stat.setString(3, Utilities.dateToString(new Date(), 
+      stat.setString(2, Utilities.dateToString(new Date(), 
           MasterConstants.DATE_DB_MEDIUM_PATTERN));
-      stat.setString(4, super.getUserInSession().getUser());
-      stat.setString(5, ubn.getUser());
+      stat.setString(3, super.getUserInSession().getUser());
+      stat.setString(4, ubn.getUser());
       
       if(stat.executeUpdate()>0) return true;
       else return false;
