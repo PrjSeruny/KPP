@@ -56,6 +56,8 @@ public class Master extends CoreServlet
     {
       this.MasterResident(req, res);
     }
+    else if(!Utilities.isEmpy(what) && what.equals(MasterConstants.MASTER_LEVEL_ACCESS))
+    { this.MasterlevelAccess(req, res); }
     else
     {
       super.openURL(MasterConstants.HOME_PAGE, req, res);
@@ -657,5 +659,174 @@ public class Master extends CoreServlet
         req, res);
     return;
   }
-      
+  
+  private void MasterlevelAccess(HttpServletRequest req, HttpServletResponse res)
+  throws ServletException, IOException
+  {
+    String act = req.getParameter(MasterConstants.ACT);
+    
+    if(!Utilities.isEmpy(act) && act.equals(MasterConstants.ACT_CREATE))
+    {
+      this.doCreateMasterLevel(req, res);
+    }
+    else if(!Utilities.isEmpy(act) && act.equals(MasterConstants.ACT_UPDATE))
+    {
+      this.doUpdateMasterLevel(req, res);
+    }
+    else if(!Utilities.isEmpy(act) && act.equals(MasterConstants.ACT_DELETE))
+    {
+      //this.doDeleteMasterUser(req, res);
+    }
+    else if(!Utilities.isEmpy(act) && act.equals(MasterConstants.ACT_INFO))
+    {
+      this.doViewMasterLevelAccess(req, res);
+    }
+    else if
+    (
+        !Utilities.isEmpy(act) && 
+        (act.equals(MasterConstants.ACT_LIST) || act.equals(MasterConstants.ACT_LOOKUP))
+    )
+    {
+      this.doListMasterLevelAccess(req, res);
+    }
+    else
+    {
+      this.doViewMasterLevelAccess(req, res);
+    }
+    return;
+  }
+  
+  private void doViewMasterLevelAccess(HttpServletRequest req, HttpServletResponse res)
+  throws ServletException, IOException
+  {
+    MasterLevelEngine LevelEng = new MasterLevelEngine(req, res);
+    MasterLevelAccessBean[] acccessLists = LevelEng.listOfAccess();
+    req.setAttribute(MasterConstants.MASTERLEVEL_LIST, acccessLists);
+    
+    LevelEng.closed();
+    super.openContent(
+        MasterConstants.SVT_MASTER_PATH, 
+        MasterConstants.MASTER_LEVEL_ACCESS, 
+        MasterConstants.MASTER_LEVELACCESS_PG, 
+        req, res);
+    return;
+  }
+  
+  private void doCreateMasterLevel(HttpServletRequest req, HttpServletResponse res)
+  throws ServletException, IOException
+  {
+  	System.out.println("BEGINNING CREATE ACCESS LEVEL");
+    MasterLevelEngine ml = new MasterLevelEngine(req, res);
+    MasterLevelAccessBean ubn = ml.validate();
+    
+    if(ubn.getMessageBean().anyMessageExist())
+    {
+      System.out.println("THERE IS ERROR ON INPUT MASTER LEVEL");
+      req.setAttribute(MasterConstants.MASTERLEVEL_INFO, ubn);
+    }
+    else
+    {
+      if(!ml.insert(ubn))
+      {
+        System.out.println("THERE IS ERROR ON CREATE MASTER LEVEL");
+        ubn.getMessageBean().setMessageBean(MasterConstants.ERRORMSG_PAGE, 
+            "Error : Gagal menambahkan user!");
+        req.setAttribute(MasterConstants.MASTERLEVEL_INFO, ubn);
+      }
+      System.out.println("FINISH CREATE USER");
+    }
+    
+    ml.closed();
+    this.doViewMasterLevelAccess(req, res);
+    return;
+  }
+  
+  private void doUpdateMasterLevel(HttpServletRequest req, HttpServletResponse res)
+  throws ServletException, IOException
+  {
+  	String LevelID = req.getParameter(MasterConstants.FORM_MASTERUSERLEVELACCESS_LEVELID);
+  	MasterLevelEngine ml = new MasterLevelEngine(req, res);
+  	MasterLevelAccessBean bn = null;
+  	
+  	if(
+        !Utilities.isEmpy(req.getParameter(MasterConstants.BTN_DONE)) ||
+        !Utilities.isEmpy(req.getParameter(MasterConstants.BTN_CANCEL))
+      )
+    {
+      System.out.println("DONE PRESSED");
+      this.doViewMasterLevelAccess(req, res);
+      return;
+    }
+  	
+  	if(Utilities.isEmpy(LevelID))
+    {
+      System.out.println("NO USERID");
+      super.openURL(MasterConstants.ERRORMSG_PAGE, req, res);
+      return;
+    }
+  	
+  	if(!Utilities.isEmpy(req.getParameter(MasterConstants.BTN_SAVE)))
+    {
+      System.out.println("ENTER VALIDATE USER INPUT");
+      bn = ml.validate();
+      if(bn.getMessageBean().anyMessageExist())
+      {
+        req.setAttribute(MasterConstants.MASTERLEVEL_INFO, bn);
+      }
+      else
+      {
+        if(!ml.update(bn))
+        {
+          bn.getMessageBean().setMessageBean(MasterConstants.ERRORMSG_PAGE, 
+              "Error : Gagal merubah user!");
+          req.setAttribute(MasterConstants.MASTERLEVEL_INFO, bn);
+        }
+        else
+        {
+          if(null!=ml) ml.closed();
+          this.doViewMasterLevelAccess(req, res);
+          return;
+        }
+      }
+    }
+  	
+  	if(null==bn)
+    {
+      bn = ml.getAccessInfo(LevelID);
+      req.setAttribute(MasterConstants.MASTERLEVEL_INFO, bn);
+    }
+    
+    if(null!=ml) ml.closed();
+    super.openContent(
+        MasterConstants.SVT_MASTER_PATH, 
+        MasterConstants.MASTER_LEVEL_ACCESS, 
+        MasterConstants.MASTER_LEVELACCESS_EDIT, 
+        req, res);
+    return;
+  }
+  
+  private void doListMasterLevelAccess(HttpServletRequest req, HttpServletResponse res)
+  throws ServletException, IOException
+  {
+    String act = req.getParameter(MasterConstants.ACT);
+    
+    MasterLevelEngine ml = new MasterLevelEngine(req, res);
+    MasterLevelAccessBean[] lists = ml.listOfAccess();
+    
+    req.setAttribute(MasterConstants.MASTERLEVEL_LIST, lists);
+    ml.closed();
+    
+    if(act.equals(MasterConstants.ACT_LOOKUP))
+    {
+      super.openLookup(MasterConstants.MASTER_LEVELACCESS_LOOKUP, req, res);
+      return;
+    }
+    
+    super.openContent(
+        MasterConstants.SVT_MASTER_PATH, 
+        MasterConstants.MASTER_LEVEL_ACCESS, 
+        MasterConstants.MASTER_LEVELACCESS_LIST, 
+        req, res);
+    return;
+  }
 }

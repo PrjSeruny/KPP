@@ -29,6 +29,11 @@ public class MasterConstants extends Constants
   public static final String MASTER_USER_LOOKUP = PAGES_PATH + "/master_user_lookup.jsp";
   public static final String MASTER_USER_EDIT = PAGES_PATH + "/master_user_edit.jsp";
   
+  public static final String MASTER_LEVELACCESS_PG = PAGES_PATH + "/master_levelaccess.jsp";
+  public static final String MASTER_LEVELACCESS_LIST = PAGES_PATH + "/master_levelaccess_list.jsp";
+  public static final String MASTER_LEVELACCESS_LOOKUP = PAGES_PATH + "/master_levelaccess_lookup.jsp";
+  public static final String MASTER_LEVELACCESS_EDIT = PAGES_PATH + "/master_levelaccess_edit.jsp";
+  
   public static final String MASTER_REGIONS = PAGES_PATH + "/region.jsp";
   public static final String MASTER_REGION_LIST = PAGES_PATH + "/region_list.jsp";
   public static final String MASTER_REGION_EDIT = PAGES_PATH + "/region_edit.jsp";
@@ -44,6 +49,7 @@ public class MasterConstants extends Constants
   public static final String MASTERUSER = "musr";
   public static final String MASTER_RESIDENT = "mrsdnt";
   public static final String MASTER_REGION = "mrgion";
+  public static final String MASTER_LEVEL_ACCESS = "mlvlacc";
   
   /* For form input user */
   public static final String FORM_MASTERUSER_USERID = "FORM_MASTERUSER_USERID";
@@ -77,5 +83,9 @@ public class MasterConstants extends Constants
   public static final String FORM_MASTERREGION_KECID = "FORM_MASTERREGION_KECID";
   public static final String FORM_MASTERREGION_KELID = "FORM_MASTERREGION_KELID";
   public static final String FORM_MASTERREGION_REGIONONLY = "FORM_MASTERREGION_REGIONONLY";
+  
+  public static final String FORM_MASTERUSERLEVELACCESS_LEVELID = "FORM_MASTERUSERLEVELACCESS_LEVELID";
+  public static final String FORM_MASTERUSERLEVELACCESS_NAME = "FORM_MASTERUSERLEVELACCESS_NAME";
+  public static final String FORM_MASTERUSERLEVELACCESS_NOTE = "FORM_MASTERUSERLEVELACCESS_NOTE";
   
 }
