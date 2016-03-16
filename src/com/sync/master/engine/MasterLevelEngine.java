@@ -5,7 +5,9 @@ import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sync.core.beans.MessageBean;
 import com.sync.core.engine.RootEngine;
+import com.sync.core.utils.Utilities;
 import com.sync.master.beans.MasterLevelAccessBean;
 import com.sync.master.utils.MasterConstants;
 import com.sync.master.utils.MasterTable;
@@ -99,6 +101,105 @@ public class MasterLevelEngine extends RootEngine
 		}else{System.out.println("RS NEEEEEEEEEEEEEEXT IS NULL");}
 		
 		return bn;
+	}
+	
+	/** validate user input. */
+	public MasterLevelAccessBean validate()
+	{
+		MessageBean msg = new MessageBean();
+		MasterLevelAccessBean bn = new MasterLevelAccessBean();
+		bn.setMessageBean(msg);
+		String tmp = null;
+		
+		//Get Level ID
+		tmp = req.getParameter(MasterConstants.FORM_MASTERUSERLEVELACCESS_LEVELID);
+		if(!Utilities.isEmpy(tmp))
+		{
+			if(tmp.indexOf(" ")>=0)
+			{
+        msg.setMessageBean(MasterConstants.FORM_MASTERUSERLEVELACCESS_LEVELID, 
+        "Tidak boleh memakai spasi");
+      }
+			bn.setID(tmp);
+		}
+		else
+		{
+			msg.setMessageBean(MasterConstants.FORM_MASTERUSERLEVELACCESS_LEVELID, 
+	        "Masukkan Level ID");
+		}
+		
+		//get Name
+		tmp = req.getParameter(MasterConstants.FORM_MASTERUSERLEVELACCESS_NAME);
+		if(!Utilities.isEmpy(tmp))
+		{ bn.setName(tmp); }
+		else
+		{
+			msg.setMessageBean(MasterConstants.FORM_MASTERUSERLEVELACCESS_NAME, 
+	        "Masukkan Level ID");
+		}
+		
+		//get Name
+		tmp = req.getParameter(MasterConstants.FORM_MASTERUSERLEVELACCESS_NOTE);
+		if(!Utilities.isEmpy(tmp))
+		{ bn.setNote(tmp); }
+		
+		return bn;
+	}
+	
+	/** Inserting to DB. */
+	public boolean insert(MasterLevelAccessBean bn)
+	{
+		boolean res = false;
+		try
+		{
+			SQL = "INSERT INTO " + MasterTable.TABLE_MASTER_LEVEL +
+					"(" +
+					MasterTable.COL_MASTER_LEVEL_LEVELID + ", " +
+					MasterTable.COL_MASTER_LEVEL_LEVEL_NAME + ", " +
+					MasterTable.COL_MASTER_LEVEL_LEVEL_NOTE +
+					") VALUES (?,?,?)";
+			
+			super.getConnection();
+			stat = con.prepareStatement(SQL);
+			stat.setString(1, bn.getID());
+			stat.setString(2, bn.getName());
+			stat.setString(3, bn.getNote());
+			System.out.println("QUERY UPDATE MASTER LEVEL: " + stat.toString());
+			if(stat.executeUpdate() > 0) return true;
+			else return false;
+		}
+		catch(Exception e)
+		{e.printStackTrace();super.rollback(); res = false;}
+		
+		return res;
+	}
+	
+	/** Update data in DB. */
+	public boolean update(MasterLevelAccessBean bn)
+	{
+		boolean res = false;
+		try
+		{
+			SQL = "UPDATE " + MasterTable.TABLE_MASTER_LEVEL + 
+					" SET " +
+					MasterTable.COL_MASTER_LEVEL_LEVEL_NAME + "=?, " +
+					MasterTable.COL_MASTER_LEVEL_LEVEL_NOTE + "=? " +
+					" WHERE " +
+					MasterTable.COL_MASTER_LEVEL_LEVELID + "=?;";
+			
+			super.getConnection();
+			stat = con.prepareStatement(SQL);
+			stat.setString(1, bn.getName());
+			stat.setString(2, bn.getNote());
+			stat.setString(3, bn.getID());
+			
+			if(stat.executeUpdate() > 0) return true;
+			else return false;
+		}
+		catch(Exception e)
+		{e.printStackTrace();super.rollback();res=false;}
+		
+		return res;
 	}
 	
   public void closed()
