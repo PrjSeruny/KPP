@@ -308,7 +308,7 @@ public class NewsEngine extends RootEngine{
     {
       SQL = " DELETE FROM " + CoreTable.TABLE_NEWS +
             " WHERE " +
-            CoreTable.COL_NEWS_ID + " IN ("+String.join(",", ids)+");";
+            CoreTable.COL_NEWS_ID + " IN ("+Utilities.joinForSQL(",", ids)+");";
       
       super.getConnection();
       stat = con.prepareStatement(SQL);

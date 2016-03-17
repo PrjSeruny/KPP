@@ -303,7 +303,7 @@ public class GalleryEngine extends RootEngine{
     {
       SQL = " DELETE FROM " + CoreTable.TABLE_GALLERY +
             " WHERE " +
-            CoreTable.COL_GALLERY_ID + " IN ("+String.join(",", ids)+");";
+            CoreTable.COL_GALLERY_ID + " IN ("+Utilities.joinForSQL(",", ids)+");";
       
       super.getConnection();
       stat = con.prepareStatement(SQL);
