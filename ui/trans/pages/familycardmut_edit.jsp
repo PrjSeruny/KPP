@@ -13,14 +13,27 @@
    MessageBean msg = null;
    String type="";
    System.out.println(">>>>>>>>>>>>> JSP ACTION= "+act);
-   
+   String genmsg ="";
    if(null!=ubn)
    {
      msg = ubn.getBeanMessages();
+     if(null!=msg)
+     {
+       genmsg = msg.getMessageBean(MessageBean.MSG_ERR);
+       System.out.println(">>>>>>>>>>>>> genmsg= "+genmsg);
+     }
    }
    
 %>
 <fieldset class="wrapper">
+<%
+   if(!Utilities.isEmpy(genmsg))
+   {
+%>
+      <font color="red"><%=!Utilities.isEmpy(genmsg)?genmsg:""%></font>
+<% 
+   }
+%>
   <form name="create" method="post" action="<%=Constants.ROOT_PATH%><%=TransConstants.SVT_TRANS_PATH%>">
      <input type="hidden" name="<%=TransConstants.W%>" value="<%=TransConstants.TRANS_FAMILYCARDMUT%>">
      <input type="hidden" name="<%=TransConstants.ACT%>" value="<%=act%>">
@@ -45,7 +58,7 @@
         </div>
         <div >
           <label>Tgl Mulai Berlaku KK Baru</label>
-          <input type="<%=type%>" name="<%=TransConstants.FORM_FAMILYCARDMUT_STARTDATE%>" value="<%=null!=ubn?Utilities.showStringValue(Utilities.dateToString(ubn.getStartDate(), MasterConstants.DATE_HTML_SHORT_PATTERN)):""%>">
+          <input type="<%=type%>" class="date" name="<%=TransConstants.FORM_FAMILYCARDMUT_STARTDATE%>" value="<%=null!=ubn?Utilities.showStringValue(Utilities.dateToString(ubn.getStartDate(), MasterConstants.DATE_HTML_SHORT_PATTERN)):""%>">
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(TransConstants.FORM_FAMILYCARDMUT_STARTDATE):""%></span>
         </div>
       </fieldset>

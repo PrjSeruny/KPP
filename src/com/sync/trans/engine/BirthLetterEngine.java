@@ -198,23 +198,20 @@ public class BirthLetterEngine extends RootEngine
       addSQL += TransTable.COL_BIRTHLETTER_PROCESSDATE +
           " IS NOT NULL AND " + TransTable.COL_BIRTHLETTER_PROCESSUSER +
           " IS NOT NULL " +
-          " AND " + TransTable.COL_BIRTHLETTER_VOIDDATE + " IS NULL " +
-          " AND " + TransTable.COL_BIRTHLETTER_VOIDUSER + " IS NULL ";
+          " AND " + TransTable.COL_BIRTHLETTER_CANCELPROCESSDATE + " IS NULL " +
+          " AND " + TransTable.COL_BIRTHLETTER_CANCELPROCESSUSER + " IS NULL ";
     }
-    else if(!Utilities.isEmpy(stat) && stat.equals(MasterConstants.DATA_RECYCLE))
+    /*else if(!Utilities.isEmpy(stat) && stat.equals(MasterConstants.DATA_RECYCLE))
     {
       addSQL += TransTable.COL_BIRTHLETTER_VOIDDATE +
           " IS NOT NULL AND " + TransTable.COL_BIRTHLETTER_VOIDDATE +
           " IS NOT NULL "+
           " AND " + TransTable.COL_BIRTHLETTER_PROCESSDATE + " IS NULL " +
           " AND " + TransTable.COL_BIRTHLETTER_PROCESSUSER + " IS NULL ";
-    }
+    }*/
     else
     {
-      addSQL += TransTable.COL_BIRTHLETTER_VOIDDATE +
-          " IS NULL " + 
-          " AND " + TransTable.COL_BIRTHLETTER_VOIDUSER + " IS NULL " +
-          " AND " + TransTable.COL_BIRTHLETTER_PROCESSDATE + " IS NULL " +
+      addSQL += TransTable.COL_BIRTHLETTER_PROCESSDATE + " IS NULL " +
           " AND " + TransTable.COL_BIRTHLETTER_PROCESSUSER + " IS NULL ";
     }
     
@@ -479,16 +476,10 @@ public class BirthLetterEngine extends RootEngine
   public boolean delete(String[] niks)
   {
     boolean res = false;
-    HttpSession ses = req.getSession(false);
-    MasterUserBean uses = (MasterUserBean)ses.getAttribute(
-        MasterConstants.MASTERUSER);
     
     try
     {
-      SQL = " UPDATE " + TransTable.TABLE_BIRTHLETTER +
-          " SET " +
-          TransTable.COL_BIRTHLETTER_VOIDDATE + "=?, " +
-          TransTable.COL_BIRTHLETTER_VOIDUSER + "=? " +
+      SQL = " DELETE FROM " + TransTable.TABLE_BIRTHLETTER +
           " WHERE " +
           TransTable.COL_BIRTHLETTER_NIK + "=?;";
     
@@ -497,10 +488,7 @@ public class BirthLetterEngine extends RootEngine
     
     for(int i=0; i<niks.length; i++)
     {
-      stat.setString(1, Utilities.dateToString(new Date(), 
-          MasterConstants.DATE_DB_MEDIUM_PATTERN));
-      stat.setString(2, uses.getUser());
-      stat.setString(3, niks[i]);
+      stat.setString(1, niks[i]);
       stat.executeUpdate();
     }
     

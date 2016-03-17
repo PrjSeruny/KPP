@@ -28,7 +28,7 @@
       <label class="errormsg"><%=null!=msg?msg.showMessage(MasterConstants.ERRORMSG_PAGE):""%></label>
       <fieldset>
         <div >
-          <label>NIK</label>
+          <label><font color="red">#</font>NIK</label>
 <%
    if(!Utilities.isEmpy(act) && act.equals(MasterConstants.ACT_UPDATE_SAVE)) type = "hidden";
    else type="text";
@@ -43,7 +43,7 @@
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_NIK):""%></span>
         </div>
         <div >
-          <label>No.KK</label>
+          <label><font color="red">#</font>No.KK</label>
 <%
    if(!Utilities.isEmpy(act) && act.equals(MasterConstants.ACT_UPDATE_SAVE)) type = "hidden";
    else type="text";
@@ -57,15 +57,32 @@
 %>          
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_KK):""%></span>
         </div>
-      </fieldset>
-      <fieldset>
-        <div >
-          <label>Nama</label>
+        <div>
+          <label><font color="red">#</font>Nama</label>
           <input type="text" name="<%=MasterConstants.FORM_MASTERRESIDENT_NAME %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getName()):""%>">
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_NAME):""%></span>
         </div>
-        <div >
-          <label>Kota Lahir</label><a href="javascript:void(0)" 
+        <div>
+          <label><font color="red">#</font>Status Hub Dalam Keluarga</label>
+          <select name="<%=MasterConstants.FORM_MASTERRESIDENT_FAMILYPOS%>">
+             <option value="<%=MasterConstants.FAMILY_POS_CHILD%>"<%=null!=ubn && ubn.getFamilyPosVal().equals(MasterConstants.FAMILY_POS_CHILD)?"selected":""%>>Anak</option>
+             <option value="<%=MasterConstants.FAMILY_POS_MOTHER%>"<%=null!=ubn && ubn.getFamilyPosVal().equals(MasterConstants.FAMILY_POS_MOTHER)?"selected":""%>>Istri</option>
+             <option value="<%=MasterConstants.FAMILY_POS_FATHER%>"<%=null!=ubn && ubn.getFamilyPosVal().equals(MasterConstants.FAMILY_POS_FATHER)?"selected":""%>>Kepala Keluarga</option>
+          </select>
+          <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_FAMILYPOS):""%></span>
+        </div>
+      </fieldset>
+      <fieldset>
+        <div>
+          <label><font color="red">#</font>Jenis Kelamin</label>
+          <select name="<%=MasterConstants.FORM_MASTERRESIDENT_SEX%>">
+             <option value="<%=MasterConstants.SEX_M%>"<%=null!=ubn && ubn.getSex()==MasterConstants.SEX_M?"selected":""%>>Laki-Laki</option>
+             <option value="<%=MasterConstants.SEX_F%>"<%=null!=ubn && ubn.getSex()==MasterConstants.SEX_F?"selected":""%>>Perempuan</option>
+          </select>
+          <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_SEX):""%></span>
+        </div>
+        <div>
+          <label><font color="red">#</font>Kota Lahir</label><a href="javascript:void(0)" 
           class="lookup"
           valTarget="#userIDVal;#userNameVal"
           param="width=450;height=300"
@@ -74,22 +91,14 @@
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_BIRTHCITY):""%></span>
         </div>
         <div >
-          <label>Tanggal Lahir</label>
-          <input type="text" name="<%=MasterConstants.FORM_MASTERRESIDENT_BIRTHDATE %>" value="<%=null!=ubn?Utilities.showStringValue(Utilities.dateToString(ubn.getBirthDate(), MasterConstants.DATE_HTML_SHORT_PATTERN)):""%>">
+          <label><font color="red">#</font>Tanggal Lahir</label>
+          <input class="date" type="text" name="<%=MasterConstants.FORM_MASTERRESIDENT_BIRTHDATE %>" value="<%=null!=ubn?Utilities.showStringValue(Utilities.dateToString(ubn.getBirthDate(), MasterConstants.DATE_HTML_SHORT_PATTERN)):""%>">
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_BIRTHDATE):""%></span>
         </div>
       </fieldset>
       <fieldset>
-        <div >
-          <label>Jenis Kelamin</label>
-          <select name="<%=MasterConstants.FORM_MASTERRESIDENT_SEX%>">
-             <option value="<%=MasterConstants.SEX_M%>"<%=null!=ubn && ubn.getSex()==MasterConstants.SEX_M?"selected":""%>>Laki-Laki</option>
-             <option value="<%=MasterConstants.SEX_F%>"<%=null!=ubn && ubn.getSex()==MasterConstants.SEX_F?"selected":""%>>Perempuan</option>
-          </select>
-          <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_SEX):""%></span>
-        </div>
-        <div >
-          <label>Agama</label>
+        <div>
+          <label><font color="red">#</font>Agama</label>
           <select name="<%=MasterConstants.FORM_MASTERRESIDENT_RELIGION%>">
              <option value="<%=MasterConstants.RELIGION_ISLAM%>" <%=null!=ubn && ubn.getReligion().equals(MasterConstants.RELIGION_ISLAM)?"selected":""%>>Islam</option>
              <option value="<%=MasterConstants.RELIGION_CHRISTIAN%>" <%=null!=ubn && ubn.getReligion().equals(MasterConstants.RELIGION_CHRISTIAN)?"selected":""%>>Kristen</option>
@@ -101,7 +110,7 @@
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_RELIGION):""%></span>
         </div>
         <div>
-          <label>Status Pernikahan</label>
+          <label><font color="red">#</font>Status Pernikahan</label>
           <select name="<%=MasterConstants.FORM_MASTERRESIDENT_MARITALSTATUS%>">
              <option value="<%=MasterConstants.MARITALSTAT_SINGLE%>"<%=null!=ubn && ubn.getMaritalStatus().equals(MasterConstants.MARITALSTAT_SINGLE)?"selected":""%>>Lajang</option>
              <option value="<%=MasterConstants.MARITALSTAT_MARRIED%>"<%=null!=ubn && ubn.getMaritalStatus().equals(MasterConstants.MARITALSTAT_MARRIED)?"selected":""%>>Menikah</option>
@@ -109,36 +118,22 @@
           </select>
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_MARITALSTATUS):""%></span>
         </div>
-        <div>
-          <label>Status Hub Dalam Keluarga</label>
-          <select name="<%=MasterConstants.FORM_MASTERRESIDENT_FAMILYPOS%>">
-             <option value="<%=MasterConstants.FAMILY_POS_CHILD%>"<%=null!=ubn && ubn.getFamilyPosVal().equals(MasterConstants.FAMILY_POS_CHILD)?"selected":""%>>Anak</option>
-             <option value="<%=MasterConstants.FAMILY_POS_MOTHER%>"<%=null!=ubn && ubn.getFamilyPosVal().equals(MasterConstants.FAMILY_POS_MOTHER)?"selected":""%>>Istri</option>
-             <option value="<%=MasterConstants.FAMILY_POS_FATHER%>"<%=null!=ubn && ubn.getFamilyPosVal().equals(MasterConstants.FAMILY_POS_FATHER)?"selected":""%>>Kepala Keluarga</option>
-          </select>
-          <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_FAMILYPOS):""%></span>
-        </div>
       </fieldset>
       <fieldset>
         <div>
-          <label>Pekerjaan</label>
+          <label><font color="red">#</font>Pekerjaan</label>
           <input type="text" name="<%=MasterConstants.FORM_MASTERRESIDENT_WORK %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getWork()):""%>">
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_WORK):""%></span>
         </div>
         <div>
-          <label>Kewarganegaraan</label>
+          <label><font color="red">#</font>Kewarganegaraan</label>
           <input type="text" name="<%=MasterConstants.FORM_MASTERRESIDENT_NATIONALITY %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getNationality()):""%>">
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_NATIONALITY):""%></span>
         </div>
       </fieldset>
       <fieldset>
-        <div >
-          <label>Alamat</label>
-          <input type="text" name="<%=MasterConstants.FORM_MASTERRESIDENT_ADDRESS %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getAddress()):""%>">
-          <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_ADDRESS):""%></span>
-        </div>
-        <div >
-          <label>Kota</label><a href="javascript:void(0)" 
+       <div>
+          <label><font color="red">#</font>Kota</label><a href="javascript:void(0)" 
           class="lookup"
           valTarget="#userIDVal;#userNameVal"
           param="width=450;height=300"
@@ -147,34 +142,39 @@
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_CITY):""%></span>
         </div>
         <div >
-          <label>Propinsi</label>
+          <label><font color="red">#</font>Propinsi</label>
           <input type="text" name="<%=MasterConstants.FORM_MASTERRESIDENT_REGION %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getRegion()):""%>" readonly="readonly">
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_REGION):""%></span>
         </div>
         <div >
-          <label>Kode Pos</label>
+          <label><font color="red">#</font>Alamat</label>
+          <input type="text" name="<%=MasterConstants.FORM_MASTERRESIDENT_ADDRESS %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getAddress()):""%>">
+          <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_ADDRESS):""%></span>
+        </div>
+        <div >
+          <label><font color="red">#</font>Kode Pos</label>
           <input type="text" name="<%=MasterConstants.FORM_MASTERRESIDENT_POSTALCODE %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getPostalCode()):""%>">
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_POSTALCODE):""%></span>
         </div>
       </fieldset>
       <fieldset>
         <div >
-          <label>Kecamatan</label>
+          <label><font color="red">#</font>Kecamatan</label>
           <input type="text" name="<%=MasterConstants.FORM_MASTERRESIDENT_KECAMATAN %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getKecamatan()):""%>" readonly="readonly">
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_KECAMATAN):""%></span>
         </div>
         <div >
-          <label>Kelurahan</label>
+          <label><font color="red">#</font>Kelurahan</label>
           <input type="text" name="<%=MasterConstants.FORM_MASTERRESIDENT_KELURAHAN %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getKelurahan()):""%>" readonly="readonly">
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_KELURAHAN):""%></span>
         </div>
         <div >
-          <label>RT</label>
+          <label><font color="red">#</font>RT</label>
           <input type="text" name="<%=MasterConstants.FORM_MASTERRESIDENT_RT %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getRT()):""%>">
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_RT):""%></span>
         </div>
         <div >
-          <label>RW</label>
+          <label><font color="red">#</font>RW</label>
           <input type="text" name="<%=MasterConstants.FORM_MASTERRESIDENT_RW %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getRW()):""%>">
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_RW):""%></span>
         </div>

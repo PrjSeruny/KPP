@@ -13,14 +13,27 @@
    MessageBean msg = null;
    String type="";
    System.out.println(">>>>>>>>>>>>> JSP ACTION= "+act);
-   
+   String genmsg ="";
    if(null!=ubn)
    {
      msg = ubn.getBeanMessages();
+     if(null!=msg)
+     {
+       genmsg = msg.getMessageBean(MessageBean.MSG_ERR);
+       System.out.println(">>>>>>>>>>>>> genmsg= "+genmsg);
+     }
    }
    
 %>
 <fieldset class="wrapper">
+<%
+   if(!Utilities.isEmpy(genmsg))
+   {
+%>
+      <font color="red"><%=!Utilities.isEmpy(genmsg)?genmsg:""%></font>
+<% 
+   }
+%>
   <form name="create" method="post" action="<%=Constants.ROOT_PATH%><%=TransConstants.SVT_TRANS_PATH%>">
      <input type="hidden" name="<%=TransConstants.W%>" value="<%=TransConstants.TRANS_BIRTHLETTER%>">
      <input type="hidden" name="<%=TransConstants.ACT%>" value="<%=act%>">
@@ -28,8 +41,8 @@
       <h2 class="title">Surat Kelahiran</h2>
       <label class="errormsg"><%=null!=msg?msg.showMessage(TransConstants.ERRORMSG_PAGE):""%></label>
       <fieldset>
-        <div >
-          <label>NIK</label>
+        <div>
+          <label><font color="red">#</font>NIK</label>
 <%
    if(!Utilities.isEmpy(act) && act.equals(TransConstants.ACT_UPDATE_SAVE)) type = "hidden";
    else type="text";
@@ -44,43 +57,43 @@
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(TransConstants.FORM_TRANS_BIRTHLETTER_NIK):""%></span>
         </div>
         <div>
-          <label>No.KK</label>
+          <label><font color="red">#</font>No.KK</label>
           <input type="text" name="<%=TransConstants.FORM_TRANS_BIRTHLETTER_KKNO%>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getKKNo()):""%>">
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(TransConstants.FORM_TRANS_BIRTHLETTER_KKNO):""%></span>
         </div>
       </fieldset>
       <fieldset>
         <div>
-          <label>Nama</label>
+          <label><font color="red">#</font>Nama</label>
           <input type="text" name="<%=TransConstants.FORM_TRANS_BIRTHLETTER_NAME %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getName()):""%>">
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(TransConstants.FORM_TRANS_BIRTHLETTER_NAME):""%></span>
         </div>
         <div >
-          <label>Tanggal Kelahiran</label>
-          <input type="text" name="<%=TransConstants.FORM_TRANS_BIRTHLETTER_BIRTHDATE%>" value="<%=null!=ubn?Utilities.showStringValue(Utilities.dateToString(ubn.getBirthDate(), TransConstants.DATE_HTML_SHORT_PATTERN)):""%>">
+          <label><font color="red">#</font>Tanggal Kelahiran</label>
+          <input type="text" class="date" name="<%=TransConstants.FORM_TRANS_BIRTHLETTER_BIRTHDATE%>" value="<%=null!=ubn?Utilities.showStringValue(Utilities.dateToString(ubn.getBirthDate(), TransConstants.DATE_HTML_SHORT_PATTERN)):""%>">
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(TransConstants.FORM_TRANS_BIRTHLETTER_BIRTHDATE):""%></span>
         </div>
       </fieldset>
       <fieldset>
         <div>
-          <label>NIK Ayah</label>
+          <label><font color="red">#</font>NIK Ayah</label>
           <input type="text" name="<%=TransConstants.FORM_TRANS_BIRTHLETTER_FATHERNIK%>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getFatherNIK()):""%>">
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(TransConstants.FORM_TRANS_BIRTHLETTER_FATHERNIK):""%></span>
         </div>
         <div>
-          <label>Nama Ayah</label>
+          <label><font color="red">#</font>Nama Ayah</label>
           <input type="text" name="<%=TransConstants.FORM_TRANS_BIRTHLETTER_FATHERNAME%>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getFatherName()):""%>">
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(TransConstants.FORM_TRANS_BIRTHLETTER_FATHERNAME):""%></span>
         </div>
        </fieldset>
        <fieldset>
         <div>
-          <label>NIK Ibu</label>
+          <label><font color="red">#</font>NIK Ibu</label>
           <input type="text" name="<%=TransConstants.FORM_TRANS_BIRTHLETTER_MOTHERNIK%>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getMotherNIK()):""%>">
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(TransConstants.FORM_TRANS_BIRTHLETTER_MOTHERNIK):""%></span>
         </div>
         <div>
-          <label>Nama Ibu</label>
+          <label><font color="red">#</font>Nama Ibu</label>
           <input type="text" name="<%=TransConstants.FORM_TRANS_BIRTHLETTER_MOTHERNAME%>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getMotherName()):""%>">
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(TransConstants.FORM_TRANS_BIRTHLETTER_MOTHERNAME):""%></span>
         </div>

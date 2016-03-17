@@ -26,16 +26,19 @@ public class TransConstants extends Constants
   
   /** For setting page */
   /* Family Card Mutation */
+  public static final String PAGE_FAMILYCARDMUT = PAGES_PATH + "/familycardmut.jsp";
   public static final String PAGE_FAMILYCARDMUT_LIST = PAGES_PATH + "/familycardmut_list.jsp";
   public static final String PAGE_FAMILYCARDMUT_INFO = PAGES_PATH + "/familycardmut_info.jsp";
   public static final String PAGE_FAMILYCARDMUT_EDIT = PAGES_PATH + "/familycardmut_edit.jsp";
   
   /* Death Letter */
+  public static final String PAGE_DEATHLETTER = PAGES_PATH + "/deathletter.jsp";
   public static final String PAGE_DEATHLETTER_LIST = PAGES_PATH + "/deathletterlist.jsp";
   public static final String PAGE_DEATHLETTER_INFO = PAGES_PATH + "/deathletterinfo.jsp";
   public static final String PAGE_DEATHLETTER_EDIT = PAGES_PATH + "/deathletteredit.jsp";
   
   /* Birth Letter */
+  public static final String PAGE_BIRTHLETTER = PAGES_PATH + "/birthletter.jsp";
   public static final String PAGE_BIRTHLETTER_LIST = PAGES_PATH + "/birthletterlist.jsp";
   public static final String PAGE_BIRTHLETTER_INFO = PAGES_PATH + "/birthletterinfo.jsp";
   public static final String PAGE_BIRTHLETTER_EDIT = PAGES_PATH + "/birthletteredit.jsp";

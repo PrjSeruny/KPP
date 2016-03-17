@@ -1,3 +1,4 @@
+<%@page import="com.sync.trans.utils.TransConstants"%>
 <%@page import="com.sync.master.beans.MasterResidentBean"%>
 <%@page import=" java.io.*,
                com.sync.core.utils.Constants,
@@ -8,10 +9,10 @@
 %>
 <fieldset class="wrapper">
   <div class="form" style="clear:left">
-    <h2 class="title">Daftar Penduduk</h2>
-    <form method="post"  class="ajax-form" dst="residentlist" id="residentlist" 
-    action="<%=Constants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>?<%=Constants.W%>=<%=MasterConstants.MASTER_RESIDENT%>">
-      <jsp:include page="<%=MasterConstants.MASTER_RESIDENT_LIST%>" flush="true"/>
+    <h2 class="title">Daftar Data Kematian</h2>
+    <form method="post"  class="ajax-form" dst="deathlist" id="deathlist" 
+    action="<%=Constants.ROOT_PATH%><%=TransConstants.SVT_TRANS_PATH%>?<%=TransConstants.W%>=<%=TransConstants.TRANS_DEATHLETTER%>">
+      <jsp:include page="<%=TransConstants.PAGE_DEATHLETTER_LIST%>" flush="true"/>
     </form>
   </div>
 </fieldset>

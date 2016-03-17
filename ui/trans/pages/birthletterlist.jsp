@@ -21,7 +21,6 @@
    String type="";
    System.out.println(">>>>>>>>>>>>> JSP ACTION= "+act);
 %>
-
     
 <input type="hidden" name="<%=TransConstants.ACT%>" value="<%=TransConstants.ACT_LIST%>">
 <input id="stat" type="hidden" name="<%=TransConstants.DATA_STAT%>" value="<%=stat%>">
@@ -35,10 +34,6 @@
     <% if(stat.equals(TransConstants.DATA_ARCHIEVE)){out.println("ARSIP");}else{ %> 
       <a href="<%=Constants.ROOT_PATH%><%=TransConstants.SVT_TRANS_PATH%>?<%=Constants.W%>=<%=TransConstants.TRANS_BIRTHLETTER%>&<%=TransConstants.DATA_STAT%>=<%=TransConstants.DATA_ARCHIEVE%>">ARSIP</a>
     <% } %>
-        |
-    <% if(stat.equals(TransConstants.DATA_RECYCLE)){out.println("RECYCLE");}else{ %> 
-      <a href="<%=Constants.ROOT_PATH%><%=TransConstants.SVT_TRANS_PATH%>?<%=Constants.W%>=<%=TransConstants.TRANS_BIRTHLETTER%>&<%=TransConstants.DATA_STAT%>=<%=TransConstants.DATA_RECYCLE%>">RECYCLE</a>
-    <% } %>    
     </div>
     <a href="javascript:void(0)" class="reload" title="Refresh">Refresh</a>
     <a href="javascript:void(0)" class="delete" title="Hapus" style="<%=null!=list && list.length>0?"":"display:none" %>">Hapus</a>

@@ -374,8 +374,6 @@ CREATE TABLE FamilyCardMutation
    ProcessUser         VARCHAR(50),
    CancelProcessDate   VARCHAR(20),
    CancelProcessUser   VARCHAR(50),
-   VoidDate            VARCHAR(20),
-   VoidUser            VARCHAR(50),
    PRIMARY KEY(NIK,StartDate)
 )Engine=InnoDB;
 
@@ -395,8 +393,6 @@ create table DeathLetter
   CancelProcessDate    VARCHAR(20),
   CancelProcessUser    VARCHAR(50),
   Note                 TEXT,
-  VoidDate       VARCHAR(20),
-  VoidUser       VARCHAR(50),
   PRIMARY KEY(NIK)
 )Engine=InnoDB;
 
@@ -421,8 +417,6 @@ create table BirthLetter
   CancelProcessDate    VARCHAR(20),
   CancelProcessUser    VARCHAR(50),
   Note                 TEXT,
-  VoidDate       VARCHAR(20),
-  VoidUser       VARCHAR(50),
   PRIMARY KEY(NIK)
 )Engine=InnoDB;
 
@@ -450,12 +444,13 @@ CREATE TABLE IF NOT EXISTS Gallery
 DROP TABLE IF EXISTS News;
 CREATE TABLE News
 (
-   ID
-   Title
-   Description
-   EntryDate
-   Path
-   Path_Thumb
+   ID               INT(4) NOT NULL AUTO_INCREMENT,
+   Title            VARCHAR(100) DEFAULT NULL,
+   Description      TEXT NOT NULL,
+   Path             VARCHAR(255) NOT NULL,
+   Path_Thumb       VARCHAR(255) NOT NULL,
+   EntryDate        VARCHAR(50) NOT NULL,
+   PRIMARY KEY (ID)
 )ENGINE=InnoDB;
 
 

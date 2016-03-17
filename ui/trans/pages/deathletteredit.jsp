@@ -12,14 +12,27 @@
    MessageBean msg = null;
    String type="";
    System.out.println(">>>>>>>>>>>>> JSP ACTION= "+act);
-   
+   String genmsg ="";
    if(null!=ubn)
    {
      msg = ubn.getBeanMessage();
+     if(null!=msg)
+     {
+       genmsg = msg.getMessageBean(MessageBean.MSG_ERR);
+       System.out.println(">>>>>>>>>>>>> genmsg= "+genmsg);
+     }
    }
    
 %>
 <fieldset class="wrapper">
+<%
+   if(!Utilities.isEmpy(genmsg))
+   {
+%>
+      <font color="red"><%=!Utilities.isEmpy(genmsg)?genmsg:""%></font>
+<% 
+   }
+%>
   <form name="create" method="post" action="<%=Constants.ROOT_PATH%><%=TransConstants.SVT_TRANS_PATH%>">
      <input type="hidden" name="<%=TransConstants.W%>" value="<%=TransConstants.TRANS_DEATHLETTER%>">
      <input type="hidden" name="<%=TransConstants.ACT%>" value="<%=act%>">
@@ -28,7 +41,7 @@
       <label class="errormsg"><%=null!=msg?msg.showMessage(TransConstants.ERRORMSG_PAGE):""%></label>
       <fieldset>
         <div >
-          <label>NIK</label>
+          <label><font color="red">#</font>NIK</label>
 <%
    if(!Utilities.isEmpy(act) && act.equals(TransConstants.ACT_UPDATE_SAVE)) type = "hidden";
    else type="text";
@@ -45,13 +58,13 @@
       </fieldset>
       <fieldset>
         <div>
-          <label>Nama</label>
+          <label><font color="red">#</font>Nama</label>
           <input type="text" name="<%=TransConstants.FORM_TRANS_DEATHLETTER_NAME %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getName()):""%>">
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(TransConstants.FORM_TRANS_DEATHLETTER_NAME):""%></span>
         </div>
         <div >
-          <label>Tanggal Kematian</label>
-          <input type="text" name="<%=TransConstants.FORM_TRANS_DEATHLETTER_DEATHDATE %>" value="<%=null!=ubn?Utilities.showStringValue(Utilities.dateToString(ubn.getDeathDate(), TransConstants.DATE_HTML_SHORT_PATTERN)):""%>">
+          <label><font color="red">#</font>Tanggal Kematian</label>
+          <input type="text" class="date" name="<%=TransConstants.FORM_TRANS_DEATHLETTER_DEATHDATE %>" value="<%=null!=ubn?Utilities.showStringValue(Utilities.dateToString(ubn.getDeathDate(), TransConstants.DATE_HTML_SHORT_PATTERN)):""%>">
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(TransConstants.FORM_TRANS_DEATHLETTER_DEATHDATE):""%></span>
         </div>
       </fieldset>

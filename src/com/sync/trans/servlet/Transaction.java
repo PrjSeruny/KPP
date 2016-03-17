@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.sync.core.beans.MessageBean;
 import com.sync.core.servlet.CoreServlet;
 import com.sync.core.utils.Utilities;
-import com.sync.master.utils.MasterConstants;
 import com.sync.trans.beans.BirthLetterBean;
 import com.sync.trans.beans.DeathLetterBean;
 import com.sync.trans.beans.FamilyCardMutationBean;
@@ -58,84 +57,122 @@ public class Transaction extends CoreServlet
     }
     else
     {
-      super.openURL(MasterConstants.HOME_PAGE, req, res);
+      super.openURL(TransConstants.HOME_PAGE, req, res);
     }
   }
   
   private void TransDeathLetter(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
-    String act = req.getParameter(MasterConstants.ACT);
+    String act = req.getParameter(TransConstants.ACT);
     if(!Utilities.isEmpy(act) && 
-        (act.equals(MasterConstants.ACT_CREATE)||
-            act.equals(MasterConstants.ACT_CREATE_SAVE))
+        (act.equals(TransConstants.ACT_CREATE)||
+            act.equals(TransConstants.ACT_CREATE_SAVE))
       )
     {
       this.doCreateDeathLetter(req, res);
     }
     else 
       if(!Utilities.isEmpy(act) && 
-        (act.equals(MasterConstants.ACT_UPDATE) || 
-            act.equals(MasterConstants.ACT_UPDATE_SAVE))
+        (act.equals(TransConstants.ACT_UPDATE) || 
+            act.equals(TransConstants.ACT_UPDATE_SAVE))
        )
     {
       this.doUpdateDeathLetter(req, res);
     }
-    else if(!Utilities.isEmpy(act) && act.equals(MasterConstants.ACT_DELETE))
+    else if(!Utilities.isEmpy(act) && act.equals(TransConstants.ACT_DELETE))
     {
       this.doDeleteDeathLetter(req, res);
     }
-    else if(!Utilities.isEmpy(act) && act.equals(MasterConstants.ACT_LIST))
+    else if(!Utilities.isEmpy(act) && act.equals(TransConstants.ACT_LIST))
     {
       this.doListDeathLetter(req, res);
     }
-    else if(!Utilities.isEmpy(act) && act.equals(MasterConstants.ACT_INFO))
+    else if(!Utilities.isEmpy(act) && act.equals(TransConstants.ACT_INFO))
     {
       this.doViewDeathLetter(req, res);
     }
     else
     {
-      this.doListDeathLetter(req, res);
+      this.doDeathLetter(req, res);
     }
     return;
+  }
+  
+  private void doDeathLetter(HttpServletRequest req, HttpServletResponse res)
+  throws ServletException, IOException
+  {
+    String stat = req.getParameter(TransConstants.DATA_STAT);
+    DeathLetterEngine ue = new DeathLetterEngine(req, res);
+    DeathLetterBean[] lists = ue.listOfLetter(stat);
+    
+    req.setAttribute(TransConstants.DEATHLETTER_LIST,lists);
+    
+    if(null!=ue)ue.closed();
+    super.openContent(
+        TransConstants.SVT_TRANS_PATH, 
+        TransConstants.TRANS_DEATHLETTER, 
+        TransConstants.PAGE_DEATHLETTER, 
+        req, res);
+    return;
+  
   }
   
   private void TransFamilyCardMutation(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
-    String act = req.getParameter(MasterConstants.ACT);
+    String act = req.getParameter(TransConstants.ACT);
     if(!Utilities.isEmpy(act) && 
-        (act.equals(MasterConstants.ACT_CREATE)||
-            act.equals(MasterConstants.ACT_CREATE_SAVE))
+        (act.equals(TransConstants.ACT_CREATE)||
+            act.equals(TransConstants.ACT_CREATE_SAVE))
       )
     {
       this.doCreateFamilyCardMut(req, res);
     }
     else 
       if(!Utilities.isEmpy(act) && 
-        (act.equals(MasterConstants.ACT_UPDATE) || 
-            act.equals(MasterConstants.ACT_UPDATE_SAVE))
+        (act.equals(TransConstants.ACT_UPDATE) || 
+            act.equals(TransConstants.ACT_UPDATE_SAVE))
        )
     {
       this.doUpdateFamilyCardMut(req, res);
     }
-    else if(!Utilities.isEmpy(act) && act.equals(MasterConstants.ACT_DELETE))
+    else if(!Utilities.isEmpy(act) && act.equals(TransConstants.ACT_DELETE))
     {
       this.doDeleteFamilyCardMut(req, res);
     }
-    else if(!Utilities.isEmpy(act) && act.equals(MasterConstants.ACT_LIST))
+    else if(!Utilities.isEmpy(act) && act.equals(TransConstants.ACT_LIST))
     {
       this.doListFamilyCardMut(req, res);
     }
-    else if(!Utilities.isEmpy(act) && act.equals(MasterConstants.ACT_INFO))
+    else if(!Utilities.isEmpy(act) && act.equals(TransConstants.ACT_INFO))
     {
       this.doViewFamilyCardMut(req, res);
     }
     else
     {
-      this.doListFamilyCardMut(req, res);
+      this.doFamilyCardMut(req, res);
     }
     return;
+  }
+  
+  private void doFamilyCardMut(HttpServletRequest req, HttpServletResponse res)
+  throws ServletException, IOException
+  {
+    String stat = req.getParameter(TransConstants.DATA_STAT);
+    FamilyCardMutationEngine ue = new FamilyCardMutationEngine(req, res);
+    FamilyCardMutationBean[] lists = ue.listOfFamilyCard(stat);
+    
+    req.setAttribute(TransConstants.FAMILYCARDMUT_LIST, lists);
+    
+    if(null!=ue)ue.closed();
+    super.openContent(
+        TransConstants.SVT_TRANS_PATH, 
+        TransConstants.TRANS_FAMILYCARDMUT, 
+        TransConstants.PAGE_FAMILYCARDMUT, 
+        req, res);
+    return;
+  
   }
   
   private void doCreateFamilyCardMut(HttpServletRequest req, HttpServletResponse res)
@@ -164,7 +201,7 @@ public class Transaction extends CoreServlet
       {
         System.out.println("SAVING AND VALIDATING NEW FAMILY CARD MUT ERROR EXIST");
         req.setAttribute(TransConstants.FAMILYCARDMUT_INFO, rbn);
-        req.setAttribute(TransConstants.ACT, MasterConstants.ACT_CREATE_SAVE);
+        req.setAttribute(TransConstants.ACT, TransConstants.ACT_CREATE_SAVE);
         super.openContent(TransConstants.SVT_TRANS_PATH, 
             TransConstants.TRANS_FAMILYCARDMUT, 
             TransConstants.PAGE_FAMILYCARDMUT_EDIT, req, res);
@@ -337,7 +374,7 @@ public class Transaction extends CoreServlet
     
     if(null!=req.getParameter(TransConstants.BTN_DONE))
     {
-        this.doListFamilyCardMut(req, res);
+        this.doFamilyCardMut(req, res);
         return;
     }
     
@@ -357,38 +394,56 @@ public class Transaction extends CoreServlet
   private void TransBirthLetter(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
-    String act = req.getParameter(MasterConstants.ACT);
+    String act = req.getParameter(TransConstants.ACT);
     if(!Utilities.isEmpy(act) && 
-        (act.equals(MasterConstants.ACT_CREATE)||
-            act.equals(MasterConstants.ACT_CREATE_SAVE))
+        (act.equals(TransConstants.ACT_CREATE)||
+            act.equals(TransConstants.ACT_CREATE_SAVE))
       )
     {
       this.doCreateBirthLetter(req, res);
     }
     else 
       if(!Utilities.isEmpy(act) && 
-        (act.equals(MasterConstants.ACT_UPDATE) || 
-            act.equals(MasterConstants.ACT_UPDATE_SAVE))
+        (act.equals(TransConstants.ACT_UPDATE) || 
+            act.equals(TransConstants.ACT_UPDATE_SAVE))
        )
     {
       this.doUpdateBirthLetter(req, res);
     }
-    else if(!Utilities.isEmpy(act) && act.equals(MasterConstants.ACT_DELETE))
+    else if(!Utilities.isEmpy(act) && act.equals(TransConstants.ACT_DELETE))
     {
       this.doDeleteBirthLetter(req, res);
     }
-    else if(!Utilities.isEmpy(act) && act.equals(MasterConstants.ACT_LIST))
+    else if(!Utilities.isEmpy(act) && act.equals(TransConstants.ACT_LIST))
     {
       this.doListBirthLetter(req, res);
     }
-    else if(!Utilities.isEmpy(act) && act.equals(MasterConstants.ACT_INFO))
+    else if(!Utilities.isEmpy(act) && act.equals(TransConstants.ACT_INFO))
     {
       this.doViewBirthLetter(req, res);
     }
     else
     {
-      this.doListBirthLetter(req, res);
+      this.doBirthLetter(req, res);
     }
+    return;
+  }
+  
+  private void doBirthLetter(HttpServletRequest req, HttpServletResponse res)
+  throws ServletException, IOException
+  {
+    String stat = req.getParameter(TransConstants.DATA_STAT);
+    BirthLetterEngine ue = new BirthLetterEngine(req, res);
+    BirthLetterBean[] lists = ue.listOfLetter(stat);
+    
+    req.setAttribute(TransConstants.BIRTHLETTER_LIST, lists);
+    
+    if(null!=ue)ue.closed();
+    super.openContent(
+        TransConstants.SVT_TRANS_PATH, 
+        TransConstants.TRANS_BIRTHLETTER, 
+        TransConstants.PAGE_BIRTHLETTER, 
+        req, res);
     return;
   }
   
@@ -420,7 +475,7 @@ public class Transaction extends CoreServlet
       {
         System.out.println("SAVING AND VALIDATING NEW BIRTH LETTER ERROR EXIST");
         req.setAttribute(TransConstants.BIRTHLETTER_INFO, rbn);
-        req.setAttribute(TransConstants.ACT, MasterConstants.ACT_CREATE_SAVE);
+        req.setAttribute(TransConstants.ACT, TransConstants.ACT_CREATE_SAVE);
         super.openContent(TransConstants.SVT_TRANS_PATH, 
             TransConstants.TRANS_BIRTHLETTER, 
             TransConstants.PAGE_BIRTHLETTER_EDIT, req, res);
@@ -556,7 +611,7 @@ public class Transaction extends CoreServlet
   throws ServletException, IOException
   {
     System.out.println("PREPARING DELETE Birth Letter");
-    String[] niks = req.getParameterValues(MasterConstants.CHKBOX);
+    String[] niks = req.getParameterValues(TransConstants.CHKBOX);
     
     if(null==niks)
     {
@@ -607,7 +662,7 @@ public class Transaction extends CoreServlet
     
     if(null!=req.getParameter(TransConstants.BTN_DONE))
     {
-        this.doListBirthLetter(req, res);
+        this.doBirthLetter(req, res);
         return;
     }
     
@@ -649,7 +704,7 @@ public class Transaction extends CoreServlet
       {
         System.out.println("SAVING AND VALIDATING NEW DEATH LETTER ERROR EXIST");
         req.setAttribute(TransConstants.DEATHLETTER_INFO, rbn);
-        req.setAttribute(TransConstants.ACT, MasterConstants.ACT_CREATE_SAVE);
+        req.setAttribute(TransConstants.ACT, TransConstants.ACT_CREATE_SAVE);
         super.openContent(TransConstants.SVT_TRANS_PATH, 
             TransConstants.TRANS_DEATHLETTER, 
             TransConstants.PAGE_DEATHLETTER_EDIT, req, res);
@@ -785,7 +840,7 @@ public class Transaction extends CoreServlet
   throws ServletException, IOException
   {
     System.out.println("PREPARING DELETE Death Letter");
-    String[] niks = req.getParameterValues(MasterConstants.CHKBOX);
+    String[] niks = req.getParameterValues(TransConstants.CHKBOX);
     
     if(null==niks)
     {
@@ -836,7 +891,7 @@ public class Transaction extends CoreServlet
     
     if(null!=req.getParameter(TransConstants.BTN_DONE))
     {
-        this.doListDeathLetter(req, res);
+        this.doDeathLetter(req, res);
         return;
     }
     
