@@ -426,20 +426,38 @@ create table BirthLetter
   PRIMARY KEY(NIK)
 )Engine=InnoDB;
 
-CREATE TABLE IF NOT EXISTS SlideSetting (
-  ID int(1) NOT NULL,
-  Path varchar(255) NOT NULL,
-  Path_Thumb varchar(255) NOT NULL,
+DROP TABLE IF EXISTS SlideSetting;
+CREATE TABLE IF NOT EXISTS SlideSetting 
+(
+  ID            INT(1) NOT NULL,
+  Path          VARCHAR(255) NOT NULL,
+  Path_Thumb    VARCHAR(255) NOT NULL,
   PRIMARY KEY (ID)
 ) ENGINE=InnoDB;
 
-CREATE TABLE IF NOT EXISTS Gallery (
-  ID int(4) NOT NULL AUTO_INCREMENT,
-  Title varchar(100) DEFAULT NULL,
-  Description text,
-  Path varchar(255) NOT NULL,
-  Path_thum` varchar(255) NOT NULL,
-  DateCreate varchar(50) NOT NULL,
+DROP TABLE IF EXISTS Gallery;
+CREATE TABLE IF NOT EXISTS Gallery 
+(
+  ID                INT(4) NOT NULL AUTO_INCREMENT,
+  Title             VARCHAR(100) DEFAULT NULL,
+  Description       TEXT,
+  Path              VARCHAR(255) NOT NULL,
+  Path_Thumb        VARCHAR(255) NOT NULL,
+  DateCreate        VARCHAR(50) NOT NULL,
   PRIMARY KEY (ID)
 ) ENGINE=InnoDB;
+
+DROP TABLE IF EXISTS News;
+CREATE TABLE News
+(
+   ID
+   Title
+   Description
+   EntryDate
+   Path
+   Path_Thumb
+)ENGINE=InnoDB;
+
+
+
 
