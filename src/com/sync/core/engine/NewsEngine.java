@@ -35,11 +35,15 @@ public class NewsEngine extends RootEngine{
     temp = Utilities.cleanInput(req.getParameter(Constants.FORM_NEWS_TITLE));
     if(!Utilities.isEmpy(temp)){
       gb.setTitle(temp);
+    }else{
+      msg.setMessageBean(Constants.FORM_NEWS_TITLE, "Silahkan Isi Judul!");
     }
     
     temp = Utilities.cleanInput(req.getParameter(Constants.FORM_NEWS_DESC));
     if(!Utilities.isEmpy(temp)){
       gb.setDesc(temp);
+    }else{
+      msg.setMessageBean(Constants.FORM_NEWS_DESC, "Silahkan Isi Deskripsi!");
     }
     
     temp = Utilities.cleanInput(req.getParameter(Constants.FORM_IMAGE_PATH));
@@ -188,7 +192,7 @@ public class NewsEngine extends RootEngine{
     return lists;
   }
   
-  public boolean createGallery(NewsBean nbn)
+  public boolean createNews(NewsBean nbn)
   {
     boolean res = false;
     String name = FilenameUtils.getName(nbn.getPath());
@@ -207,8 +211,8 @@ public class NewsEngine extends RootEngine{
       stat = con.prepareStatement(SQL,Statement.RETURN_GENERATED_KEYS);
       stat.setString(1, nbn.getTitle());
       stat.setString(2, nbn.getDesc());
-      stat.setString(4, nbn.getPath());
-      stat.setString(3, nbn.getPathThumb());
+      stat.setString(3, nbn.getPath());
+      stat.setString(4, nbn.getPathThumb());
       stat.setString(5, 
           Utilities.dateToString(nbn.getEntryDate(), Constants.DATE_DB_MEDIUM_PATTERN));
       
@@ -301,14 +305,14 @@ public class NewsEngine extends RootEngine{
     return res;
   }
   
-  public boolean deleteNews(String[] ids)
+  public boolean deleteNews(String id)
   {
     boolean res = false;
     try
     {
       SQL = " DELETE FROM " + CoreTable.TABLE_NEWS +
             " WHERE " +
-            CoreTable.COL_NEWS_ID + " IN ("+Utilities.joinForSQL(",", ids)+");";
+            CoreTable.COL_NEWS_ID + "="+id;
       
       super.getConnection();
       stat = con.prepareStatement(SQL);
@@ -318,14 +322,13 @@ public class NewsEngine extends RootEngine{
       if(stat.executeUpdate()>0){
         
         NewsPool np = NewsPool.getInstance();
-        NewsBean tmp = null;
-        
-        for(int i=0;i<ids.length;i++){
-          tmp = np.get(Integer.parseInt(ids[i]));
+        NewsBean tmp = np.get(Integer.parseInt(id));
+        if(null!=tmp){
           super.deleteFile(tmp.getPath());
           super.deleteFile(tmp.getPathThumb());
-          np.remove(Integer.parseInt(ids[i]));
+          np.remove(Integer.parseInt(id)); 
         }
+       
         
         return true;
       }

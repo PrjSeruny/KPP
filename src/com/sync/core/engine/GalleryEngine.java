@@ -206,8 +206,8 @@ public class GalleryEngine extends RootEngine{
       stat = con.prepareStatement(SQL,Statement.RETURN_GENERATED_KEYS);
       stat.setString(1, gbn.getTitle());
       stat.setString(2, gbn.getDesc());
-      stat.setString(4, gbn.getPath());
-      stat.setString(3, gbn.getPathThumb());
+      stat.setString(3, gbn.getPath());
+      stat.setString(4, gbn.getPathThumb());
       stat.setString(5, 
           Utilities.dateToString(gbn.getDateCreate(), Constants.DATE_DB_MEDIUM_PATTERN));
       
@@ -303,7 +303,7 @@ public class GalleryEngine extends RootEngine{
     {
       SQL = " DELETE FROM " + CoreTable.TABLE_GALLERY +
             " WHERE " +
-            CoreTable.COL_GALLERY_ID + " IN ("+Utilities.joinForSQL(",", ids)+");";
+            CoreTable.COL_GALLERY_ID + " IN ("+String.join(",", ids)+");";
       
       super.getConnection();
       stat = con.prepareStatement(SQL);

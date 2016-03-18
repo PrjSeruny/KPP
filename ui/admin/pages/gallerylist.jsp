@@ -48,7 +48,7 @@
 			           <tr>
 			             <td align="center"><input class="selChild userid del" parent="userids" type="checkbox" name="<%=Constants.FORM_GALLERY_ID%>" value="<%=list[i].getID()%>"></td>
 			             <td valign="top">
-		                 <a href="javascript:void(0)" class="img-thumb imgview" imgpath="<%=Utilities.verifyImage(list[i].getPath()) %>" style="background-image: url(<%=Utilities.verifyImage(list[i].getPath()) %>)"></a>
+		                 <a href="javascript:void(0)" class="img-thumb imgview" imgpath="<%=Utilities.verifyImage(list[i].getPath()) %>" style="background-image: url(<%=Utilities.verifyImage(list[i].getPathThumb()) %>)"></a>
 			             </td>
 			             <td valign="top">
                      <a style="display: block;height: 105px;width: 100%;"
@@ -79,4 +79,3 @@
 
     </form>
   </div>
-</fieldset>
