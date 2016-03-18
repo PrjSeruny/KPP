@@ -70,7 +70,7 @@ public class Constants
   public static final String NEWS_SETTING_INFO_BEAN = "NEWS_SETTING_INFO_BEAN";
   public static final String NEWS_SETTING_LIST_BEAN = "NEWS_SETTING_LIST_BEAN";
   public static final String NEWS_SETTING_PRM = "news";
-  public static final String NEWS_SETTING_PG = PAGES_PATH + "/newsview.jsp";
+  public static final String NEWS_INFO_PG = PAGES_PATH + "/newsinfo.jsp";
   public static final String NEWS_LIST_PG = PAGES_PATH + "/newslist.jsp";
   public static final String NEWS_EDIT_PG = PAGES_PATH + "/newsedit.jsp";
   public static final String FORM_NEWS_ID = "FORM_NEWS_ID";

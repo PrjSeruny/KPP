@@ -29,6 +29,7 @@ import java.util.List;
 
 
 
+
 import javax.imageio.ImageIO;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletContext;
@@ -39,6 +40,7 @@ import javax.servlet.http.HttpSession;
 
 import com.sync.core.beans.GalleryBean;
 import com.sync.core.beans.MessageBean;
+import com.sync.core.beans.NewsBean;
 import com.sync.core.beans.SlideBean;
 import com.sync.core.engine.GalleryEngine;
 import com.sync.core.engine.NewsEngine;
@@ -248,7 +250,7 @@ public class CoreServlet extends ServletUtilities
     }   
     else if(!Utilities.isEmpy(w) && w.equals(Constants.NEWS_SETTING_PRM))
     {
-      //this.doNewsSetting(req,res);
+      this.doNewsSetting(req,res);
     }    
     else if(!Utilities.isEmpy(w) && w.equals(Constants.DELETE_IMAGE_FILE))
     {
@@ -266,7 +268,7 @@ public class CoreServlet extends ServletUtilities
     return;
   }
   
-  /*private void doNewsSetting(HttpServletRequest req, HttpServletResponse res)
+  private void doNewsSetting(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
     String act = req.getParameter(Constants.ACT);
@@ -289,6 +291,85 @@ public class CoreServlet extends ServletUtilities
     return;
   }
 
+  private void doNewsInfo(HttpServletRequest req, HttpServletResponse res)
+  throws ServletException, IOException
+  {
+    String id = req.getParameter(Constants.FORM_NEWS_ID);
+    NewsEngine ne = new NewsEngine(req, res);
+
+    NewsBean nbn = ne.getNewsInfo(id);
+    req.setAttribute(Constants.NEWS_SETTING_INFO_BEAN, nbn);
+    
+    ne.closed();
+    
+    super.openContent(
+        Constants.SERVLET_PATH, 
+        Constants.NEWS_SETTING_PRM, 
+        Constants.NEWS_INFO_PG, 
+        req, res);
+    return;
+  }
+
+  private void doNewsEdit(HttpServletRequest req, HttpServletResponse res)
+  throws ServletException, IOException
+  {
+    String act = req.getParameter(Constants.ACT);
+    String id = req.getParameter(Constants.FORM_NEWS_ID);
+    NewsEngine ne = new NewsEngine(req, res);
+    
+    if(!Utilities.isEmpy(act) && act.equals(Constants.ACT_UPDATE)){
+      NewsBean nbn = ne.getNewsInfo(id);
+      req.setAttribute(Constants.NEWS_SETTING_INFO_BEAN, nbn);
+      req.setAttribute(Constants.ACT, Constants.ACT_UPDATE_SAVE);
+    }
+    else if(!Utilities.isEmpy(act) && act.equals(Constants.ACT_CREATE_SAVE)){
+      NewsBean nbn = ne.validateNews();
+      nbn.setEntryDate(new Date());
+      
+      if(nbn.getMessageBean().anyMessageExist()){
+        req.setAttribute(Constants.NEWS_SETTING_INFO_BEAN, nbn);
+      }else{
+        if(ne.createNews(nbn)){
+          ne.closed();
+          doNewsList(req, res);
+          return;
+        }else{
+          req.setAttribute(Constants.NEWS_SETTING_INFO_BEAN, nbn);
+        }        
+      }
+      
+      req.setAttribute(Constants.ACT, Constants.ACT_CREATE_SAVE);
+    }
+    else if(!Utilities.isEmpy(act) && act.equals(Constants.ACT_UPDATE_SAVE)){
+      NewsBean nbn = ne.validateNews();
+      nbn.setID(Integer.parseInt(id));
+      ne.updateNews(nbn);
+      
+      if(nbn.getMessageBean().anyMessageExist()){
+        req.setAttribute(Constants.NEWS_SETTING_INFO_BEAN, nbn);
+        req.setAttribute(Constants.ACT, Constants.ACT_UPDATE_SAVE);
+      }else{
+        ne.closed();
+        doNewsList(req, res);
+        return;
+      }
+      
+    }
+    else{
+      req.setAttribute(Constants.ACT, Constants.ACT_CREATE_SAVE);
+    }
+    
+    ne.closed();
+    
+    super.openContent(
+        Constants.SERVLET_PATH, 
+        Constants.NEWS_SETTING_PRM, 
+        Constants.NEWS_EDIT_PG, 
+        req, res);
+    return;
+    
+  }
+
   private void doNewsList(HttpServletRequest req, HttpServletResponse res) 
   throws ServletException, IOException
   {
@@ -307,13 +388,17 @@ public class CoreServlet extends ServletUtilities
       ne.deleteNews(id);
     }
 
-    GalleryBean[] gbn = ge.getGalleryList();
-    req.setAttribute(Constants.GALLERY_SETTING_LIST_BEAN, gbn);
+    NewsBean[] nbn = ne.getNewsList();
+    req.setAttribute(Constants.NEWS_SETTING_LIST_BEAN, nbn);
     
-    ge.closed();
-    super.openURL(Constants.GALLERY_LIST_PG, req, res);
+    ne.closed();
+    super.openContent(
+        Constants.SERVLET_PATH, 
+        Constants.NEWS_SETTING_PRM, 
+        Constants.NEWS_LIST_PG,
+        req, res);
     return;
-  }*/
+  }
 
   private void doGallerySetting(HttpServletRequest req, HttpServletResponse res) 
   throws ServletException, IOException
