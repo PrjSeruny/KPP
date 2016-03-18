@@ -70,6 +70,7 @@ public class GalleryPool {
         res = false;
       }
       
+      ge.closed();
       return res;
     }
   }

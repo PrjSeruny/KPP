@@ -44,13 +44,71 @@
   </servlet-mapping>
     
   <servlet>
-    <servlet-name>PublicServlet</servlet-name>
+    <servlet-name>Home</servlet-name>
     <servlet-class>com.sync.home.servlet.Public</servlet-class>
+    <init-param>
+      <param-name>w</param-name>
+      <param-value>home</param-value>
+    </init-param>
   </servlet>
   <servlet-mapping>
-    <servlet-name>PublicServlet</servlet-name>
-    <url-pattern>/index/public</url-pattern>
+    <servlet-name>Home</servlet-name>
+    <url-pattern>/home</url-pattern>
   </servlet-mapping>
+    
+  <servlet>
+    <servlet-name>About</servlet-name>
+    <servlet-class>com.sync.home.servlet.Public</servlet-class>
+    <init-param>
+      <param-name>w</param-name>
+      <param-value>about</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>About</servlet-name>
+    <url-pattern>/about</url-pattern>
+  </servlet-mapping>
+    
+  <servlet>
+    <servlet-name>News</servlet-name>
+    <servlet-class>com.sync.home.servlet.Public</servlet-class>
+    <init-param>
+      <param-name>w</param-name>
+      <param-value>news</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>News</servlet-name>
+    <url-pattern>/news</url-pattern>
+  </servlet-mapping>
+    
+  <servlet>
+    <servlet-name>Gallery</servlet-name>
+    <servlet-class>com.sync.home.servlet.Public</servlet-class>
+    <init-param>
+      <param-name>w</param-name>
+      <param-value>gallery</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Gallery</servlet-name>
+    <url-pattern>/gallery</url-pattern>
+  </servlet-mapping>
+    
+  <servlet>
+    <servlet-name>Contact</servlet-name>
+    <servlet-class>com.sync.home.servlet.Public</servlet-class>
+    <init-param>
+      <param-name>w</param-name>
+      <param-value>contact</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Contact</servlet-name>
+    <url-pattern>/contact</url-pattern>
+  </servlet-mapping>
+  
+  
   <!-- ==================== Default Session Configuration ================= -->
   <!-- You can set the default session timeout (in minutes) for all newly   -->
   <!-- created sessions by modifying the value below.                       -->

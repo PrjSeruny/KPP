@@ -122,6 +122,14 @@
     text-shadow: 1px 1px 1px #66696B;
   }
 
+  #nav > li > a{
+    padding: 0px 10px 0px 10px;
+    background: #3AB3A9;
+  }
+  #nav > li > a:hover{
+      background: #3BA39B;
+  }
+
   #nav ul{
     padding: 0px;
     border-bottom: 1px solid #DDDDDD;
@@ -170,6 +178,53 @@
   }
   #nav li.twitter:hover  {
     background: url(../images/twitter.png) no-repeat 9px 12px #3BA39B;
+  }
+  
+  #nav li.master > a:before{
+      font-family: "Glyphicons Reguler";
+      font-size: 15px;
+      content: "\E158";
+      margin-right: 5px;
+      vertical-align: bottom;
+  }
+  
+  #nav li.public > a:before{
+      font-family: "Glyphicons Reguler";
+      font-size: 15px;
+      content: "\E281";
+      margin-right: 5px;
+      vertical-align: bottom;
+  }
+  
+  #nav li.report > a:before{
+      font-family: "Glyphicons Reguler";
+      font-size: 15px;
+      content: "\E450";
+      margin-right: 5px;
+      vertical-align: bottom;
+  }
+  
+  #nav li.logout > a:before{
+      font-family: "Glyphicons Reguler";
+      font-size: 15px;
+      content: "\E389";
+      margin-right: 5px;
+      vertical-align: bottom;
+  }
+  
+  #nav li.home > a:before{
+      font-family: "Glyphicons Reguler";
+      font-size: 15px;
+      content: "\E021";
+      margin-right: 5px;
+      vertical-align: bottom;
+  }
+  #nav li.process > a:before{
+      font-family: "Glyphicons Reguler";
+      font-size: 15px;
+      content: "\E083";
+      margin-right: 5px;
+      vertical-align: bottom;
   }
 
   #nav li:hover{

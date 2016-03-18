@@ -1,53 +1,53 @@
 package com.sync.core.pool;
 
 import java.util.TreeMap;
-import com.sync.core.beans.SlideBean;
-import com.sync.core.engine.SlideEngine;
 
-public class SlidePool {
+import com.sync.core.beans.CompanyBean;
+import com.sync.core.engine.CompanyEngine;
 
-  private static SlidePool p = new SlidePool();
-  private TreeMap<Integer, SlideBean> collections;
+public class CompanyPool {
+  private static CompanyPool p = new CompanyPool();
+  private TreeMap<String, CompanyBean> collections;
   private static final Object lock = new Object();
   
   /**
    * Constructor.
    */
-  private SlidePool()
-  { collections = new TreeMap<Integer, SlideBean>(); }
+  private CompanyPool()
+  { collections = new TreeMap<String, CompanyBean>(); }
 
   /**
    * Get this instance of the modules pool.
    */
-  public static synchronized SlidePool getInstance()
+  public static synchronized CompanyPool getInstance()
   {
     if(null==p)
     {
       synchronized(lock)
-      { if(null==p) p = new SlidePool(); }
+      { if(null==p) p = new CompanyPool(); }
     }
 
     return p;
   }
   
-  public void put(Integer key, SlideBean val)
+  public void put(String key, CompanyBean val)
   { synchronized(lock) { collections.put(key, val); } }
 
-  public SlideBean get(Integer key) { return collections.get(key); }
+  public CompanyBean get(String key) { return collections.get(key); }
 
-  public void remove(Integer key) 
+  public void remove(String key) 
   { synchronized(lock) { collections.remove(key); } }
   
   public boolean reload()
   {
     synchronized(lock)
     {
-      SlideEngine se = new SlideEngine();
+      CompanyEngine ce = new CompanyEngine();
       boolean res = false;
       
       try
       {
-        SlideBean[] list = se.getSlideList();
+        CompanyBean[] list = ce.getAllCompanySetting();
         if(null!=list)
         {
           //Clear the old pool first
@@ -55,23 +55,23 @@ public class SlidePool {
           
           //Relist the result.      
           for(int l=0; l<list.length; l++)
-          { this.put(list[l].getId(), list[l]); }
+          { this.put(list[l].getParam(), list[l]); }
           
           res = true;
 
-          System.out.println("Slide pool berhasil di isi");
+          System.out.println("Company pool berhasil di isi");
         }
       }
       catch (Exception e)
       {
-        System.out.println("Slide pool gagal di isi");
+        System.out.println("Company pool gagal di isi");
         e.printStackTrace();
         res = false;
       }
       
-      se.closed();
+      ce.closed();
+      
       return res;
     }
   }
-  
 }

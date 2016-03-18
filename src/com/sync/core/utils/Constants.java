@@ -76,6 +76,22 @@ public class Constants
   public static final String FORM_NEWS_ID = "FORM_NEWS_ID";
   public static final String FORM_NEWS_TITLE = "FORM_NEWS_TITLE";
   public static final String FORM_NEWS_DESC = "FORM_NEWS_DESC";
+
+  public static final String COMPANY_SETTING_LIST_BEAN = "COMPANY_SETTING_LIST_BEAN";
+  public static final String COMPANY_SETTING_PRM = "cmpst";
+  public static final String COMPANY_SETTING_EDIT_PG = PAGES_PATH + "/companyedit.jsp";
+  
+  public static final String COMPANY_ADDRESS_PARAM = "COMPANY_ADDRESS";
+  public static final String COMPANY_PHONE_PARAM = "COMPANY_PHONE";
+  public static final String COMPANY_FAX_PARAM = "COMPANY_FAX";
+  public static final String COMPANY_EMAIL_PARAM = "COMPANY_EMAIL";
+  public static final String COMPANY_LAT_PARAM = "COMPANY_LAT";
+  public static final String COMPANY_LONG_PARAM = "COMPANY_LONG";
+  
+  
+  public static final String PROFILE_SETTING_PRM = "prfl";
+  public static final String PROFILE_SETTING_EDIT_PG = PAGES_PATH + "/profileedit.jsp";
+  public static final String COMPANY_PROFILE_PARAM = "COMPANY_PROFILE";
   
   public static final String DELETE_IMAGE_FILE = "dltimg";
   

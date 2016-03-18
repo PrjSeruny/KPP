@@ -18,6 +18,7 @@ import org.json.JSONObject;
 
 import com.sync.core.beans.ContentBean;
 import com.sync.core.engine.ConnectionManager;
+import com.sync.core.pool.CompanyPool;
 import com.sync.core.pool.GalleryPool;
 import com.sync.core.pool.NewsPool;
 import com.sync.core.pool.SlidePool;
@@ -53,6 +54,7 @@ public class ServletUtilities extends HttpServlet
     this.loadSlidePool();
     this.loadGalleryPool();
     this.loadNewsPool();
+    this.loadCompanyPool();
     return;
   }
   
@@ -107,6 +109,24 @@ public class ServletUtilities extends HttpServlet
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println("Kesalahan mengisi News Pool untuk pertama kali");
+    }
+    return;
+  }
+
+  private void loadCompanyPool() {
+    
+    try {
+      CompanyPool cp = CompanyPool.getInstance();
+      
+      if(cp.reload()){
+        System.out.println("Company Pool diisi untuk pertama kali");
+      }else{
+        System.out.println("Gagal mengisi Company Pool untuk pertama kali");
+      }
+      
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.out.println("Kesalahan mengisi Company Pool untuk pertama kali");
     }
     return;
   }

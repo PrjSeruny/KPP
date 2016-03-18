@@ -47,7 +47,7 @@ $(document).ready(function(){
     $("#nav").toggle();
   });
   
-  $("#nav ul a").click(function(){
+  $("#nav a").click(function(){
     var url = $(this).attr("url");
     if(url && url!=""){
       $("#content").attr("src",url);

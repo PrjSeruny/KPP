@@ -23,13 +23,13 @@ public class PublicConstants extends Constants
 	
 	
 	/** Feature Public Home. */
-	public static final String PUBLIC_HOME_PRM = "phome";
+	public static final String PUBLIC_HOME_PRM = "home";
 	/** Feature Public About. */
-	public static final String PUBLIC_ABOUT_PRM = "pabout";
+	public static final String PUBLIC_ABOUT_PRM = "about";
 	/** Feature Public News. */
-	public static final String PUBLIC_NEWS_PRM = "pnews";
+	public static final String PUBLIC_NEWS_PRM = "news";
 	/** Feature Public Gallery. */
-	public static final String PUBLIC_GALLERY_PRM = "pgallery";
+	public static final String PUBLIC_GALLERY_PRM = "gallery";
 	/** Feature Public Contact. */
-	public static final String PUBLIC_CONTACT_PRM = "pcontact";
+	public static final String PUBLIC_CONTACT_PRM = "contact";
 }

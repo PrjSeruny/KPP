@@ -458,7 +458,7 @@ CREATE TABLE IF NOT EXISTS News (
 ) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS SlideSetting;
-CREATE TABLE IF NOT EXISTS SlideSetting 
+CREATE TABLE SlideSetting 
 (
   ID            INT(1) NOT NULL,
   Path          VARCHAR(255) NOT NULL,
@@ -467,7 +467,7 @@ CREATE TABLE IF NOT EXISTS SlideSetting
 ) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS Gallery;
-CREATE TABLE IF NOT EXISTS Gallery 
+CREATE TABLE Gallery 
 (
   ID                INT(4) NOT NULL AUTO_INCREMENT,
   Title             VARCHAR(100) DEFAULT NULL,
@@ -481,12 +481,19 @@ CREATE TABLE IF NOT EXISTS Gallery
 DROP TABLE IF EXISTS News;
 CREATE TABLE News
 (
-   ID
-   Title
-   Description
-   EntryDate
-   Path
-   Path_Thumb
+  ID               INT(4) NOT NULL AUTO_INCREMENT,
+  Title            VARCHAR(100) DEFAULT NULL,
+  Description      TEXT,
+  Path             VARCHAR(255) NOT NULL,
+  Path_Thumb       VARCHAR(255) NOT NULL,
+  EntryDate        VARCHAR(50) NOT NULL,
+  PRIMARY KEY (ID)
 )ENGINE=InnoDB;
 
+DROP TABLE IF EXISTS Company;
+CREATE TABLE Company (
+  Param           VARCHAR(100) NOT NULL,
+  Value           TEXT NOT NULL,
+  PRIMARY KEY (Param)
+) ENGINE=InnoDB;
 

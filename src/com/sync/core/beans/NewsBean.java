@@ -8,6 +8,7 @@ public class NewsBean {
   private Date entryDate;
   private MessageBean msg = null;
 
+  public NewsBean(){}
   
   /** Sets MessageBean */
   public void setMessageBean(MessageBean val){ msg = val; }
@@ -27,8 +28,6 @@ public class NewsBean {
   public void setEntryDate(Date val) {
     entryDate = val;
   }
-
-  public NewsBean(){}
 
   /**
    * @return the id

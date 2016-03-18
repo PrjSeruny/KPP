@@ -14,38 +14,51 @@
         <link rel="stylesheet" href="css/ie7.css" type="text/css">
     <![endif]-->
     <script type="text/javascript">
-
-    // By default, data/elements cannot be dropped in other elements. To allow a drop, we must prevent the default handling of the element
-    document.addEventListener("dragover", function(event) {
-        event.preventDefault();
-    });
-    document.addEventListener("drop", function(event) {
-        event.preventDefault();
-        if ( event.target.id == "toTop" ) {
-            var data = event.dataTransfer.getData("Text");
-            //alert(data);
-            if(data=="lp"){
-                //window.location.href="login.html";
-                $("#lgpg").submit();
-            }
-            
-        }
-    });
-    document.addEventListener("dragstart", function(event) {
-        // The dataTransfer.setData() method sets the data type and the value of the dragged data
-        event.dataTransfer.setData("Text", event.target.id);
-    });
-
     $(window).scroll(function() {
         if($(window).scrollTop() > 100){
             $("#toTop").fadeIn("slow");
+            //$("#toTop").css("background-color","none");
         }else{
             $("#toTop").fadeOut("slow");
+            //$("#toTop").css("background-color","none");
         }
     });
     $(function(){
-        $("#toTop").click(function(){
+        /* $("#toTop").click(function(){
             $("html, body").animate({ scrollTop: "0px" });
+        }); */
+        var delay;
+        var stat = false;
+        var count = 1;
+        $("#toTop").bind('mousedown touchstart', function(){
+          var toTop = $(this);
+          stat = true;
+          delay = setInterval(function(){
+            count++;
+            //$("title").text(count);
+            if(count == 3 || count == 4){
+              //$("#toTop").css("background-color","red");
+            }else if(count == 5){
+              //$("#toTop").css("background-color","yellow");
+            }else if(count == 6){
+              $("#toTop").css("background-color","green");
+            }else{
+              //$("#toTop").css("background-color","none");
+            }
+          },1000);
+        });
+        $(document).bind('mouseup touchend', function(){
+          if(count > 5){
+            count = 1;
+            $("#lgpg").submit();
+          }else{
+            count = 1;
+            if(stat){
+              $("html, body").animate({ scrollTop: "0px" });
+            }
+          }
+          clearInterval(delay);
+          stat = false;
         });
     });
     </script>
@@ -59,26 +72,20 @@
         <div>
             <ul>
                 <li class="selected">
-                    <a href="<%=Constants.ROOT_PATH%><%=PublicConstants.SVT_PUBLIC_PATH%>?<%=Constants.W%>=<%=PublicConstants.PUBLIC_HOME_PRM%>">Home</a>
+                    <a href="<%=Constants.ROOT_PATH%>/<%=PublicConstants.PUBLIC_HOME_PRM%>">Home</a>
                 </li>
                 <li>
-                    <a href="<%=Constants.ROOT_PATH%><%=PublicConstants.SVT_PUBLIC_PATH%>?<%=Constants.W%>=<%=PublicConstants.PUBLIC_ABOUT_PRM%>">About</a>
+                    <a href="<%=Constants.ROOT_PATH%>/<%=PublicConstants.PUBLIC_ABOUT_PRM%>">About</a>
                 </li>
                 <li>
-                    <a href="<%=Constants.ROOT_PATH%><%=PublicConstants.SVT_PUBLIC_PATH%>?<%=Constants.W%>=<%=PublicConstants.PUBLIC_NEWS_PRM%>">News</a>
+                    <a href="<%=Constants.ROOT_PATH%>/<%=PublicConstants.PUBLIC_NEWS_PRM%>">News</a>
                 </li>
                 <li>
-                    <a href="<%=Constants.ROOT_PATH%><%=PublicConstants.SVT_PUBLIC_PATH%>?<%=Constants.W%>=<%=PublicConstants.PUBLIC_GALLERY_PRM%>">Gallery</a>
+                    <a href="<%=Constants.ROOT_PATH%>/<%=PublicConstants.PUBLIC_GALLERY_PRM%>">Gallery</a>
                 </li>
                 <li>
-                    <a href="<%=Constants.ROOT_PATH%><%=PublicConstants.SVT_PUBLIC_PATH%>?<%=Constants.W%>=<%=PublicConstants.PUBLIC_CONTACT_PRM%>">Contact</a>
+                    <a href="<%=Constants.ROOT_PATH%>/<%=PublicConstants.PUBLIC_CONTACT_PRM%>">Contact</a>
                 </li>
-                <!-- <li>
-                    <a href="forms.html">forms</a>
-                </li>
-                <li>
-                    <a href="blog.html">blog</a>
-                </li> -->
             </ul>
         </div>
     </div>

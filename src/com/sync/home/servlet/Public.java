@@ -30,9 +30,8 @@ public class Public extends CoreServlet
 	
 	public void doPost(HttpServletRequest req, HttpServletResponse res)
 	throws ServletException, IOException
-	{	
-		
-		String what = req.getParameter(PublicConstants.W);
+	{			
+		String what = getServletConfig().getInitParameter(PublicConstants.W);
 		System.out.println("GET WHAT ???? " + what);
 		if(!Utilities.isEmpy(what) && what.equals(PublicConstants.PUBLIC_HOME_PRM))
 		{this.doPublicHome(req, res);}
@@ -57,11 +56,7 @@ public class Public extends CoreServlet
 	throws ServletException, IOException
 	{
 		System.out.println("_________________ HOME PAGE _________________");
-		super.openContent(
-        PublicConstants.SVT_PUBLIC_PATH, 
-        PublicConstants.PUBLIC_HOME_PRM, 
-        PublicConstants.PUBLIC_HOME_PAGE, 
-        req, res);
+		super.openURL(PublicConstants.PUBLIC_HOME_PAGE, req, res);
     return;
 	}
 	
@@ -69,11 +64,7 @@ public class Public extends CoreServlet
 	throws ServletException, IOException
 	{
 		System.out.println("_________________ ABOUT PAGE _________________");
-		super.openContent(
-        PublicConstants.SVT_PUBLIC_PATH, 
-        PublicConstants.PUBLIC_ABOUT_PRM, 
-        PublicConstants.PUBLIC_ABOUT_PAGE, 
-        req, res);
+		super.openURL(PublicConstants.PUBLIC_ABOUT_PAGE, req, res);
     return;
 	}
 	
@@ -81,11 +72,7 @@ public class Public extends CoreServlet
 	throws ServletException, IOException
 	{
 		System.out.println("_________________ NEWS PAGE _________________");
-		super.openContent(
-        PublicConstants.SVT_PUBLIC_PATH, 
-        PublicConstants.PUBLIC_NEWS_PRM, 
-        PublicConstants.PUBLIC_NEWS_PAGE, 
-        req, res);
+    super.openURL(PublicConstants.PUBLIC_NEWS_PAGE, req, res);
     return;
 	}
 	
@@ -93,11 +80,7 @@ public class Public extends CoreServlet
 	throws ServletException, IOException
 	{
 		System.out.println("_________________ GALLERY PAGE _________________");
-		super.openContent(
-        PublicConstants.SVT_PUBLIC_PATH, 
-        PublicConstants.PUBLIC_GALLERY_PRM, 
-        PublicConstants.PUBLIC_GALLERY_PAGE, 
-        req, res);
+		super.openURL(PublicConstants.PUBLIC_GALLERY_PAGE, req, res);
     return;
 	}
 	
@@ -105,11 +88,7 @@ public class Public extends CoreServlet
 	throws ServletException, IOException
 	{
 		System.out.println("_________________ CONTACT PAGE _________________");
-		super.openContent(
-        PublicConstants.SVT_PUBLIC_PATH, 
-        PublicConstants.PUBLIC_CONTACT_PRM, 
-        PublicConstants.PUBLIC_CONTACT_PAGE, 
-        req, res);
+		super.openURL(PublicConstants.PUBLIC_CONTACT_PAGE, req, res);
     return;
 	}
 }

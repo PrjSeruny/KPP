@@ -70,6 +70,8 @@ public class NewsPool {
         res = false;
       }
       
+      ne.closed();
+      
       return res;
     }
   }

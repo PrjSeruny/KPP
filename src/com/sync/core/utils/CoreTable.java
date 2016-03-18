@@ -24,4 +24,8 @@ public class CoreTable
   public static final String COL_NEWS_ENTRYDATE = TABLE_NEWS + ".EntryDate";
   public static final String COL_NEWS_PATH = TABLE_NEWS + ".Path";
   public static final String COL_NEWS_PATHTHUMB = TABLE_NEWS + ".Path_Thumb";
+
+  public static final String TABLE_COMPANY = "Company";
+  public static final String COL_COMPANY_PARAM = TABLE_COMPANY + ".Param";
+  public static final String COL_COMPANY_VALUE = TABLE_COMPANY + ".Value";
 }

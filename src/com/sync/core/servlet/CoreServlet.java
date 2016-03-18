@@ -30,6 +30,9 @@ import java.util.List;
 
 
 
+
+
+
 import javax.imageio.ImageIO;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletContext;
@@ -38,10 +41,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.sync.core.beans.CompanyBean;
 import com.sync.core.beans.GalleryBean;
 import com.sync.core.beans.MessageBean;
 import com.sync.core.beans.NewsBean;
 import com.sync.core.beans.SlideBean;
+import com.sync.core.engine.CompanyEngine;
 import com.sync.core.engine.GalleryEngine;
 import com.sync.core.engine.NewsEngine;
 import com.sync.core.engine.RootEngine;
@@ -49,6 +54,7 @@ import com.sync.core.engine.SlideEngine;
 import com.sync.core.utils.Constants;
 import com.sync.core.utils.ServletUtilities;
 import com.sync.core.utils.Utilities;
+import com.sync.home.utils.PublicConstants;
 import com.sync.master.beans.MasterUserBean;
 import com.sync.master.engine.UserEngine;
 import com.sync.master.utils.MasterConstants;
@@ -121,9 +127,9 @@ public class CoreServlet extends ServletUtilities
         return;
       }
       
-      super.openURL(Constants.INDEX_PAGE, req, res);
-      return;
+      super.openURL(PublicConstants.PUBLIC_HOME_PAGE, req, res);
     }
+    return;
   }
   
   private void doUploadToTemp(HttpServletRequest req, HttpServletResponse res)
@@ -252,6 +258,14 @@ public class CoreServlet extends ServletUtilities
     {
       this.doNewsSetting(req,res);
     }    
+    else if(!Utilities.isEmpy(w) && w.equals(Constants.COMPANY_SETTING_PRM))
+    {
+      this.doCompanySetting(req,res);
+    }    
+    else if(!Utilities.isEmpy(w) && w.equals(Constants.PROFILE_SETTING_PRM))
+    {
+      this.doProfileSetting(req,res);
+    }    
     else if(!Utilities.isEmpy(w) && w.equals(Constants.DELETE_IMAGE_FILE))
     {
       this.doDeleteImage(req,res);
@@ -268,6 +282,46 @@ public class CoreServlet extends ServletUtilities
     return;
   }
   
+  private void doProfileSetting(HttpServletRequest req, HttpServletResponse res)
+  throws ServletException, IOException
+  {
+    String act = req.getParameter(Constants.ACT);
+    System.out.println("action : "+act);
+    if (!Utilities.isEmpy(act) && act.equals(Constants.ACT_CREATE_SAVE)){
+      CompanyEngine ce = new CompanyEngine(req, res);
+      CompanyBean[] cbs = ce.validateContact();
+      ce.createCompanySetting(cbs);
+      ce.closed();
+    }
+  
+    super.openContent(
+        Constants.SERVLET_PATH, 
+        Constants.PROFILE_SETTING_PRM, 
+        Constants.PROFILE_SETTING_EDIT_PG, 
+        req, res);
+    return;
+  }
+
+  private void doCompanySetting(HttpServletRequest req, HttpServletResponse res)
+  throws ServletException, IOException
+  {
+    String act = req.getParameter(Constants.ACT);
+    System.out.println("action : "+act);
+    if (!Utilities.isEmpy(act) && act.equals(Constants.ACT_CREATE_SAVE)){
+      CompanyEngine ce = new CompanyEngine(req, res);
+      CompanyBean[] cbs = ce.validateContact();
+      ce.createCompanySetting(cbs);
+      ce.closed();
+    }
+
+    super.openContent(
+        Constants.SERVLET_PATH, 
+        Constants.COMPANY_SETTING_PRM, 
+        Constants.COMPANY_SETTING_EDIT_PG, 
+        req, res);
+    return;
+  }
+
   private void doNewsSetting(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
