@@ -506,3 +506,8 @@ CREATE TABLE Company (
   PRIMARY KEY (LevelID,MenuID,Permission )
 ) ENGINE=InnoDB;
 
+INSERT INTO LevelAccess VALUES ('ADMIN','lvlaccess','pI');
+INSERT INTO LevelAccess VALUES ('ADMIN','lvlaccess','pL');
+INSERT INTO LevelAccess VALUES ('ADMIN','lvlaccess','pC');
+INSERT INTO LevelAccess VALUES ('ADMIN','lvlaccess','pU');
+INSERT INTO LevelAccess VALUES ('ADMIN','lvlaccess','pD');

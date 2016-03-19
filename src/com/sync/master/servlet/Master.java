@@ -142,24 +142,58 @@ public class Master extends CoreServlet
   private void doCreateMasterRegion(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
-    
+  	if(!super.validateAcces(
+  			req, 
+  			res, 
+  			MasterConstants.MASTER_REGION, 
+  			LevelAccessBean.PERMIT_CREATE))
+  	{
+  		super.openURL(MasterConstants.ERROR_PAGE, req, res);
+  		return;
+  	}
   }
   
   private void doUpdateMasterRegion(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
-    
+  	if(!super.validateAcces(
+  			req, 
+  			res, 
+  			MasterConstants.MASTER_REGION, 
+  			LevelAccessBean.PERMIT_UPDATE))
+  	{
+  		super.openURL(MasterConstants.ERROR_PAGE, req, res);
+  		return;
+  	}
   }
   
   private void doDeleteMasterRegion(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
-    
+  	if(!super.validateAcces(
+  			req, 
+  			res, 
+  			MasterConstants.MASTER_REGION, 
+  			LevelAccessBean.PERMIT_DELETE))
+  	{
+  		super.openURL(MasterConstants.ERROR_PAGE, req, res);
+  		return;
+  	}
   }
   
   private void doViewMasterRegion(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
+  	if(!super.validateAcces(
+  			req, 
+  			res, 
+  			MasterConstants.MASTER_REGION, 
+  			LevelAccessBean.PERMIT_INFO))
+  	{
+  		super.openURL(MasterConstants.ERROR_PAGE, req, res);
+  		return;
+  	}
+  	
     System.out.println("VIEWING INFO REGION");
     String regID = req.getParameter(MasterConstants.FORM_MASTERREGION_REGID);
     MasterRegionEngine re = new MasterRegionEngine(req, res);
@@ -186,6 +220,16 @@ public class Master extends CoreServlet
   private void doMasterRegion(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
+  	if(!super.validateAcces(
+  			req, 
+  			res, 
+  			MasterConstants.MASTER_REGION, 
+  			LevelAccessBean.PERMIT_LIST))
+  	{
+  		super.openURL(MasterConstants.ERROR_PAGE, req, res);
+  		return;
+  	}
+  	
     String stat = req.getParameter(MasterConstants.DATA_STAT);
     MasterRegionEngine re = new MasterRegionEngine(req, res);
     MasterRegionBean[] lists = re.listOfRegion(stat);
@@ -306,6 +350,15 @@ public class Master extends CoreServlet
   private void doMasterResidents(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
+  	if(!super.validateAcces(
+  			req, 
+  			res, 
+  			MasterConstants.MASTER_RESIDENT, 
+  			LevelAccessBean.PERMIT_LIST))
+  	{
+  		super.openURL(MasterConstants.ERROR_PAGE, req, res);
+  		return;
+  	}
     MasterResidentEngine ue = new MasterResidentEngine(req, res);
     MasterResidentBean[] lists = ue.listOfResidents();
     
@@ -323,6 +376,16 @@ public class Master extends CoreServlet
   private void doCreateMasterUser(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
+  	if(!super.validateAcces(
+  			req, 
+  			res, 
+  			MasterConstants.MASTERUSER, 
+  			LevelAccessBean.PERMIT_CREATE))
+  	{
+  		super.openURL(MasterConstants.ERROR_PAGE, req, res);
+  		return;
+  	}
+  	
     System.out.println("BEGINNING CREATE USER");
     UserEngine ue = new UserEngine(req, res);
     MasterUserBean ubn = ue.validate();
@@ -349,6 +412,16 @@ public class Master extends CoreServlet
   private void doUpdateMasterUser(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
+  	if(!super.validateAcces(
+  			req, 
+  			res, 
+  			MasterConstants.MASTERUSER, 
+  			LevelAccessBean.PERMIT_UPDATE))
+  	{
+  		super.openURL(MasterConstants.ERROR_PAGE, req, res);
+  		return;
+  	}
+  	
     System.out.println("BEGINNING UPDATE USER >>>>>>>>>>>>>>>>>>>>>>>> ");
     String userID = req.getParameter(MasterConstants.FORM_MASTERUSER_USERID);
     UserEngine ue = new UserEngine(req, res);
@@ -415,6 +488,16 @@ public class Master extends CoreServlet
   private void doDeleteMasterUser(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
+  	if(!super.validateAcces(
+  			req, 
+  			res, 
+  			MasterConstants.MASTERUSER, 
+  			LevelAccessBean.PERMIT_DELETE))
+  	{
+  		super.openURL(MasterConstants.ERROR_PAGE, req, res);
+  		return;
+  	}
+  	
     UserEngine ue = new UserEngine(req, res);
     ue.deleteMasterUser();
     ue.closed();
@@ -425,6 +508,16 @@ public class Master extends CoreServlet
   private void doViewMasterUser(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
+  	if(!super.validateAcces(
+  			req, 
+  			res, 
+  			MasterConstants.MASTERUSER, 
+  			LevelAccessBean.PERMIT_INFO))
+  	{
+  		super.openURL(MasterConstants.ERROR_PAGE, req, res);
+  		return;
+  	}
+  	
     /*String userID = req.getParameter(MasterConstants.FORM_MASTERUSER_USERID);
     UserEngine ue = new UserEngine(req, res);
     MasterUserBean ubn = null; 
@@ -451,6 +544,16 @@ public class Master extends CoreServlet
   private void doListMasterUsers(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
+  	if(!super.validateAcces(
+  			req, 
+  			res, 
+  			MasterConstants.MASTERUSER, 
+  			LevelAccessBean.PERMIT_LIST))
+  	{
+  		super.openURL(MasterConstants.ERROR_PAGE, req, res);
+  		return;
+  	}
+  	
     String act = req.getParameter(MasterConstants.ACT);
     
     UserEngine ue = new UserEngine(req, res);
@@ -474,6 +577,16 @@ public class Master extends CoreServlet
   private void doCreateMasterResident(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
+  	if(!super.validateAcces(
+  			req, 
+  			res, 
+  			MasterConstants.MASTER_RESIDENT, 
+  			LevelAccessBean.PERMIT_CREATE))
+  	{
+  		super.openURL(MasterConstants.ERROR_PAGE, req, res);
+  		return;
+  	}
+  	
     System.out.println("CREATE NEW RESIDENT");
     String act = req.getParameter(MasterConstants.ACT);
     MasterResidentEngine re = new MasterResidentEngine(req, res);
@@ -535,6 +648,16 @@ public class Master extends CoreServlet
   private void doUpdateMasterResident(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
+  	if(!super.validateAcces(
+  			req, 
+  			res, 
+  			MasterConstants.MASTER_RESIDENT, 
+  			LevelAccessBean.PERMIT_UPDATE))
+  	{
+  		super.openURL(MasterConstants.ERROR_PAGE, req, res);
+  		return;
+  	}
+  	
     System.out.println("UPDATING MASTER RESIDEN");
     String nik = req.getParameter(MasterConstants.FORM_MASTERRESIDENT_NIK);
     String act = req.getParameter(MasterConstants.ACT);
@@ -603,6 +726,16 @@ public class Master extends CoreServlet
   private void doDeleteMasterResident(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
+  	if(!super.validateAcces(
+  			req, 
+  			res, 
+  			MasterConstants.MASTER_RESIDENT, 
+  			LevelAccessBean.PERMIT_DELETE))
+  	{
+  		super.openURL(MasterConstants.ERROR_PAGE, req, res);
+  		return;
+  	}
+  	
     System.out.println("PREPARING DELETE RESIDENT");
     String[] niks = req.getParameterValues(MasterConstants.CHKBOX);
     
@@ -629,6 +762,16 @@ public class Master extends CoreServlet
   private void doViewMasterResident(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
+  	if(!super.validateAcces(
+  			req, 
+  			res, 
+  			MasterConstants.MASTER_RESIDENT, 
+  			LevelAccessBean.PERMIT_INFO))
+  	{
+  		super.openURL(MasterConstants.ERROR_PAGE, req, res);
+  		return;
+  	}
+  	
     System.out.println("VIEWING INFO RESIDENT");
     String nik = req.getParameter(MasterConstants.FORM_MASTERRESIDENT_NIK);
     MasterResidentEngine re = new MasterResidentEngine(req, res);
@@ -667,6 +810,16 @@ public class Master extends CoreServlet
   private void doListMasterResidents(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
+  	if(!super.validateAcces(
+  			req, 
+  			res, 
+  			MasterConstants.MASTER_RESIDENT, 
+  			LevelAccessBean.PERMIT_LIST))
+  	{
+  		super.openURL(MasterConstants.ERROR_PAGE, req, res);
+  		return;
+  	}
+  	
     MasterResidentEngine re = new MasterResidentEngine(req, res);
     MasterResidentBean[] lists = re.listOfResidents();
     
@@ -718,6 +871,16 @@ public class Master extends CoreServlet
   private void doViewMasterLevelAccess(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
+  	if(!super.validateAcces(
+  			req, 
+  			res, 
+  			MasterConstants.MASTER_LEVEL_ACCESS, 
+  			LevelAccessBean.PERMIT_INFO))
+  	{
+  		super.openURL(MasterConstants.ERROR_PAGE, req, res);
+  		return;
+  	}
+  	
     MasterLevelEngine LevelEng = new MasterLevelEngine(req, res);
     MasterLevelAccessBean[] acccessLists = LevelEng.listOfAccess();
     req.setAttribute(MasterConstants.MASTERLEVEL_LIST, acccessLists);
@@ -734,6 +897,16 @@ public class Master extends CoreServlet
   private void doCreateMasterLevel(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
+  	if(!super.validateAcces(
+  			req, 
+  			res, 
+  			MasterConstants.MASTER_LEVEL_ACCESS, 
+  			LevelAccessBean.PERMIT_CREATE))
+  	{
+  		super.openURL(MasterConstants.ERROR_PAGE, req, res);
+  		return;
+  	}
+  	
   	System.out.println("BEGINNING CREATE ACCESS LEVEL");
     MasterLevelEngine ml = new MasterLevelEngine(req, res);
     MasterLevelAccessBean ubn = ml.validate();
@@ -763,6 +936,16 @@ public class Master extends CoreServlet
   private void doUpdateMasterLevel(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
+  	if(!super.validateAcces(
+  			req, 
+  			res, 
+  			MasterConstants.MASTER_LEVEL_ACCESS, 
+  			LevelAccessBean.PERMIT_UPDATE))
+  	{
+  		super.openURL(MasterConstants.ERROR_PAGE, req, res);
+  		return;
+  	}
+  	
   	String LevelID = req.getParameter(MasterConstants.FORM_MASTERUSERLEVELACCESS_LEVELID);
   	MasterLevelEngine ml = new MasterLevelEngine(req, res);
   	MasterLevelAccessBean bn = null;
@@ -827,6 +1010,16 @@ public class Master extends CoreServlet
   private void doListMasterLevelAccess(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
+  	if(!super.validateAcces(
+  			req, 
+  			res, 
+  			MasterConstants.MASTER_LEVEL_ACCESS, 
+  			LevelAccessBean.PERMIT_LIST))
+  	{
+  		super.openURL(MasterConstants.ERROR_PAGE, req, res);
+  		return;
+  	}
+  	
     String act = req.getParameter(MasterConstants.ACT);
     
     MasterLevelEngine ml = new MasterLevelEngine(req, res);
@@ -871,6 +1064,16 @@ public class Master extends CoreServlet
   private void doCreateAccess(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
+  	if(!super.validateAcces(
+  			req, 
+  			res, 
+  			MasterConstants.LEVELACCESS, 
+  			LevelAccessBean.PERMIT_CREATE))
+  	{
+  		super.openURL(MasterConstants.ERROR_PAGE, req, res);
+  		return;
+  	}
+  	
   	LevelAccessEngine la = null;
   	LevelAccessBean lab = null;
   	//Validate
@@ -889,6 +1092,16 @@ public class Master extends CoreServlet
   private void doLevelAccess(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
+  	if(!super.validateAcces(
+  			req, 
+  			res, 
+  			MasterConstants.LEVELACCESS, 
+  			LevelAccessBean.PERMIT_LIST))
+  	{
+  		super.openURL(MasterConstants.ERROR_PAGE, req, res);
+  		return;
+  	}
+  	
   	String LevelID = req.getParameter(MasterConstants.FORM_MASTERUSER_LEVEL);
   	MasterLevelEngine ml = new MasterLevelEngine(req, res);
   	MasterLevelAccessBean[] list = ml.listOfAccess();
