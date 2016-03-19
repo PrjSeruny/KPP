@@ -10,12 +10,14 @@ import com.sync.core.beans.MessageBean;
 import com.sync.core.servlet.CoreServlet;
 import com.sync.core.utils.Constants;
 import com.sync.core.utils.Utilities;
+import com.sync.master.beans.LevelAccessBean;
 import com.sync.master.beans.MasterLevelAccessBean;
 import com.sync.master.beans.MasterRegionBean;
 import com.sync.master.beans.MasterRegionKecamatanBean;
 import com.sync.master.beans.MasterRegionKelurahanBean;
 import com.sync.master.beans.MasterResidentBean;
 import com.sync.master.beans.MasterUserBean;
+import com.sync.master.engine.LevelAccessEngine;
 import com.sync.master.engine.MasterLevelEngine;
 import com.sync.master.engine.MasterRegionEngine;
 import com.sync.master.engine.MasterResidentEngine;
@@ -58,6 +60,8 @@ public class Master extends CoreServlet
     }
     else if(!Utilities.isEmpy(what) && what.equals(MasterConstants.MASTER_LEVEL_ACCESS))
     { this.MasterlevelAccess(req, res); }
+    else if(!Utilities.isEmpy(what) && what.equals(MasterConstants.LEVELACCESS))
+    { this.LevelAccess(req, res); }
     else
     {
       super.openURL(MasterConstants.HOME_PAGE, req, res);
@@ -826,6 +830,62 @@ public class Master extends CoreServlet
         MasterConstants.SVT_MASTER_PATH, 
         MasterConstants.MASTER_LEVEL_ACCESS, 
         MasterConstants.MASTER_LEVELACCESS_LIST, 
+        req, res);
+    return;
+  }
+  
+  private void LevelAccess(HttpServletRequest req, HttpServletResponse res)
+  throws ServletException, IOException
+  {
+  	String act = req.getParameter(MasterConstants.ACT);
+    
+    if(!Utilities.isEmpy(act) && 
+        (act.equals(MasterConstants.ACT_CREATE)||
+            act.equals(MasterConstants.ACT_CREATE_SAVE))
+      )
+    {
+      this.doCreateAccess(req, res);
+    }
+    else
+    {
+      this.doLevelAccess(req, res);
+    }
+    return;
+  }
+  
+  private void doCreateAccess(HttpServletRequest req, HttpServletResponse res)
+  throws ServletException, IOException
+  {
+  	LevelAccessEngine la = null;
+  	LevelAccessBean lab = null;
+  	//Validate
+  	if(null==la) la = new LevelAccessEngine(req, res);
+  	lab = la.validateEntry();
+  	
+  	if(null!=lab)
+  	{
+  		la.insertLevelAccess(lab);
+  	}
+  	else System.out.println("TEST 1.B: BEAN LEVEL ACCESS IS NULL");
+  	if(null!=la) la.closed();
+  	this.doLevelAccess(req, res);
+  }
+  
+  private void doLevelAccess(HttpServletRequest req, HttpServletResponse res)
+  throws ServletException, IOException
+  {
+  	String LevelID = req.getParameter(MasterConstants.FORM_MASTERUSER_LEVEL);
+  	MasterLevelEngine ml = new MasterLevelEngine(req, res);
+  	MasterLevelAccessBean[] list = ml.listOfAccess();
+  	
+  	
+  	if(null!=list) req.setAttribute(MasterConstants.MASTERLEVEL_LIST, list);
+  	req.setAttribute(MasterConstants.FORM_MASTERUSER_LEVEL, LevelID);
+  	if(null!=ml) ml.closed();
+    super.openContent(
+        MasterConstants.SVT_MASTER_PATH, 
+        MasterConstants.LEVELACCESS, 
+        MasterConstants.LEVEL_ACCESS_EDIT, 
         req, res);
     return;
   }

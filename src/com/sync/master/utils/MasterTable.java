@@ -101,4 +101,9 @@ public class MasterTable
   public static final String COL_MASTER_LEVEL_LEVEL_NAME = TABLE_MASTER_LEVEL + ".LevelName";
   public static final String COL_MASTER_LEVEL_LEVEL_NOTE = TABLE_MASTER_LEVEL + ".LevelNote";
   
+  public static final String TABLE_LEVEL_ACCESS = "LevelAccess";
+  public static final String COL_LEVELACCESS_LEVELID = TABLE_LEVEL_ACCESS + ".LevelID";
+  public static final String COL_LEVELACCESS_MODULID = TABLE_LEVEL_ACCESS + ".ModulID";
+  public static final String COL_LEVELACCESS_MENUID = TABLE_LEVEL_ACCESS + ".MenuID";
+  public static final String COL_LEVELACCESS_PERMISSION = TABLE_LEVEL_ACCESS + ".Permission";
 }

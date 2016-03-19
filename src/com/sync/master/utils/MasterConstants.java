@@ -44,12 +44,15 @@ public class MasterConstants extends Constants
   public static final String MASTER_RESIDENT_LIST = PAGES_PATH + "/master_resident_list.jsp";
   public static final String MASTER_RESIDENT_EDIT = PAGES_PATH + "/master_resident_edit.jsp";
   public static final String MASTER_RESIDENT_INFO = PAGES_PATH + "/master_resident_info.jsp";
+  
+  public static final String LEVEL_ACCESS_EDIT = PAGES_PATH + "/levelaccess.jsp";
 
   /* Value of what feature */
   public static final String MASTERUSER = "musr";
   public static final String MASTER_RESIDENT = "mrsdnt";
   public static final String MASTER_REGION = "mrgion";
   public static final String MASTER_LEVEL_ACCESS = "mlvlacc";
+  public static final String LEVELACCESS = "lvlaccess";
   
   /* For form input user */
   public static final String FORM_MASTERUSER_USERID = "FORM_MASTERUSER_USERID";

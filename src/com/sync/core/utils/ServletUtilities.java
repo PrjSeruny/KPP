@@ -22,6 +22,7 @@ import com.sync.core.pool.CompanyPool;
 import com.sync.core.pool.GalleryPool;
 import com.sync.core.pool.NewsPool;
 import com.sync.core.pool.SlidePool;
+import com.sync.master.pool.LevelAccessPool;
 
 
 
@@ -55,6 +56,7 @@ public class ServletUtilities extends HttpServlet
     this.loadGalleryPool();
     this.loadNewsPool();
     this.loadCompanyPool();
+    this.loadLevelAccessPool();
     return;
   }
   
@@ -131,6 +133,21 @@ public class ServletUtilities extends HttpServlet
     return;
   }
 
+  private void loadLevelAccessPool()
+  {
+  	try
+  	{
+  		LevelAccessPool la = LevelAccessPool.getInstance();
+  		if(la.reload()) { System.out.println("Level Access Pool diisi untuk pertama kali");}
+  		else {System.out.println("Gagal mengisi Level Access Pool untuk pertama kali");}
+  	}
+  	catch(Exception e)
+  	{
+  		e.printStackTrace();
+  		System.out.println("Kesalahan mengisi Level Access Pool untuk pertama kali");
+  	}
+  }
+  
   public void isMultipartForm(HttpServletRequest req)
   throws ServletException, IOException
   {
