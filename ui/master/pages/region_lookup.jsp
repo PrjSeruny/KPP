@@ -18,7 +18,6 @@
    String regionfield = (String)request.getAttribute(MasterConstants.FORM_FIELD2);
    String kecField = (String)request.getAttribute(MasterConstants.FORM_FIELD3);
    String kelField = (String)request.getAttribute(MasterConstants.FORM_FIELD4);
-   System.out.println("prop="+stateProvfield+ " region="+regionfield+"kec="+kecField+ " kel="+kelField);
 %>
 <script>
 function putState(stateProv)

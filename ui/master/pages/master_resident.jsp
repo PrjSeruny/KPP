@@ -12,7 +12,6 @@
     <form method="post"  class="ajax-form" dst="residentlist" id="residentlist" 
     action="<%=Constants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>?<%=Constants.W%>=<%=MasterConstants.MASTER_RESIDENT%>">
       <jsp:include page="<%=MasterConstants.MASTER_RESIDENT_LIST%>" flush="true"/>
-
     </form>
   </div>
 </fieldset>

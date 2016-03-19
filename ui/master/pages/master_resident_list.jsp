@@ -27,15 +27,6 @@
 <fieldset>
 
   <div class="list-con">
-    <div class="data-stat">
-    <% if(stat.equals(MasterConstants.DATA_CURRENT)){out.println("DATA AKTIF");}else{ %>
-      <a href="<%=Constants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>?<%=Constants.W%>=<%=MasterConstants.MASTER_RESIDENT%>&<%=MasterConstants.DATA_STAT%>=<%=MasterConstants.DATA_CURRENT%>" >DATA AKTIF</a>
-    <% } %>
-        |
-    <% if(stat.equals(MasterConstants.DATA_ARCHIEVE)){out.println("RECYCLE");}else{ %> 
-      <a href="<%=Constants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>?<%=Constants.W%>=<%=MasterConstants.MASTER_RESIDENT%>&<%=MasterConstants.DATA_STAT%>=<%=MasterConstants.DATA_RECYCLE%>">RECYCLE</a>
-    <% } %>
-    </div>
     <a href="javascript:void(0)" class="reload" title="Refresh">Refresh</a>
 <%
   if(stat.equals(MasterConstants.DATA_CURRENT))
