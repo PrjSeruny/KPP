@@ -121,54 +121,54 @@ $(document).ready(function(){
 	    </tr>
 	    <tr class="print" bgcolor="#FFCCCC">
 	      <td class="print" valign="top" width="250"><b>Master Level Access</b></td>
-	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=MasterConstants.MASTER_LEVEL_ACCESS %>" value="<%=LevelAccessBean.PERMIT_LIST%>"/></td>
-	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=MasterConstants.MASTER_LEVEL_ACCESS %>" value="<%=LevelAccessBean.PERMIT_INFO%>"/></td>
-	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=MasterConstants.MASTER_LEVEL_ACCESS %>" value="<%=LevelAccessBean.PERMIT_CREATE%>"/></td>
-	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=MasterConstants.MASTER_LEVEL_ACCESS %>" value="<%=LevelAccessBean.PERMIT_UPDATE%>"/></td>
-	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=MasterConstants.MASTER_LEVEL_ACCESS %>" value="<%=LevelAccessBean.PERMIT_DELETE%>"/></td>
+	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=MasterConstants.MASTER_LEVEL_ACCESS %>" value="<%=LevelAccessBean.PERMIT_LIST%>" <%=lp.checkValidate(LevelID, MasterConstants.MASTER_LEVEL_ACCESS, LevelAccessBean.PERMIT_LIST)?"checked":""%>/></td>
+	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=MasterConstants.MASTER_LEVEL_ACCESS %>" value="<%=LevelAccessBean.PERMIT_INFO%>" <%=lp.checkValidate(LevelID, MasterConstants.MASTER_LEVEL_ACCESS, LevelAccessBean.PERMIT_CREATE)?"checked":""%>/></td>
+	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=MasterConstants.MASTER_LEVEL_ACCESS %>" value="<%=LevelAccessBean.PERMIT_CREATE%>" <%=lp.checkValidate(LevelID, MasterConstants.MASTER_LEVEL_ACCESS, LevelAccessBean.PERMIT_DELETE)?"checked":""%>/></td>
+	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=MasterConstants.MASTER_LEVEL_ACCESS %>" value="<%=LevelAccessBean.PERMIT_UPDATE%>" <%=lp.checkValidate(LevelID, MasterConstants.MASTER_LEVEL_ACCESS, LevelAccessBean.PERMIT_UPDATE)?"checked":""%>/></td>
+	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=MasterConstants.MASTER_LEVEL_ACCESS %>" value="<%=LevelAccessBean.PERMIT_DELETE%>" <%=lp.checkValidate(LevelID, MasterConstants.MASTER_LEVEL_ACCESS, LevelAccessBean.PERMIT_DELETE)?"checked":""%>/></td>
 	    </tr>
 	    <tr class="print" bgcolor="#FFCCCC">
 	      <td class="print" valign="top" width="250"><b>Level Access</b></td>
-	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=MasterConstants.LEVELACCESS %>" value="<%=LevelAccessBean.PERMIT_LIST%>"/></td>
-	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=MasterConstants.LEVELACCESS %>" value="<%=LevelAccessBean.PERMIT_INFO%>"/></td>
-	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=MasterConstants.LEVELACCESS %>" value="<%=LevelAccessBean.PERMIT_CREATE%>"/></td>
-	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=MasterConstants.LEVELACCESS %>" value="<%=LevelAccessBean.PERMIT_UPDATE%>"/></td>
-	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=MasterConstants.LEVELACCESS %>" value="<%=LevelAccessBean.PERMIT_DELETE%>"/></td>
+	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=MasterConstants.LEVELACCESS %>" value="<%=LevelAccessBean.PERMIT_LIST%>" <%=lp.checkValidate(LevelID, MasterConstants.LEVELACCESS, LevelAccessBean.PERMIT_LIST)?"checked":""%>/></td>
+	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=MasterConstants.LEVELACCESS %>" value="<%=LevelAccessBean.PERMIT_INFO%>" <%=lp.checkValidate(LevelID, MasterConstants.LEVELACCESS, LevelAccessBean.PERMIT_INFO)?"checked":""%>/></td>
+	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=MasterConstants.LEVELACCESS %>" value="<%=LevelAccessBean.PERMIT_CREATE%>" <%=lp.checkValidate(LevelID, MasterConstants.LEVELACCESS, LevelAccessBean.PERMIT_CREATE)?"checked":""%>/></td>
+	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=MasterConstants.LEVELACCESS %>" value="<%=LevelAccessBean.PERMIT_UPDATE%>" <%=lp.checkValidate(LevelID, MasterConstants.LEVELACCESS, LevelAccessBean.PERMIT_UPDATE)?"checked":""%>/></td>
+	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=MasterConstants.LEVELACCESS %>" value="<%=LevelAccessBean.PERMIT_DELETE%>" <%=lp.checkValidate(LevelID, MasterConstants.LEVELACCESS, LevelAccessBean.PERMIT_DELETE)?"checked":""%>/></td>
 	    </tr>
  	    <tr class="print" bgcolor="#FFFFFF">
      		<td valign="top" height="2" colspan="9">&nbsp;</td>
 	    </tr>
 	    <tr class="print" bgcolor="#FFCCFF">
 	      <td class="print" valign="top" width="250"><b>Transaksi</b></td>
-	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=MasterConstants.LEVELACCESS %>" value="<%=LevelAccessBean.PERMIT_LIST%>"/></td>
-	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=MasterConstants.LEVELACCESS %>" value="<%=LevelAccessBean.PERMIT_INFO%>"/></td>
-	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=MasterConstants.LEVELACCESS %>" value="<%=LevelAccessBean.PERMIT_CREATE%>"/></td>
-	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=MasterConstants.LEVELACCESS %>" value="<%=LevelAccessBean.PERMIT_UPDATE%>"/></td>
-	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=MasterConstants.LEVELACCESS %>" value="<%=LevelAccessBean.PERMIT_DELETE%>"/></td>
+ 	      <td class="print" align="center" valign="top"></td>
+	      <td class="print" align="center" valign="top"></td>
+	      <td class="print" align="center" valign="top">&nbsp;</td>
+	      <td class="print" align="center" valign="top">&nbsp;</td>
+	      <td class="print" align="center" valign="top">&nbsp;</td>
 	    </tr>
 	    <tr class="print" bgcolor="#FFCCCC">
 	      <td class="print" valign="top" width="250"><b>Mutasi KK</b></td>
-	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=TransConstants.TRANS_FAMILYCARDMUT %>" value="<%=LevelAccessBean.PERMIT_LIST%>"/></td>
-	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=TransConstants.TRANS_FAMILYCARDMUT %>" value="<%=LevelAccessBean.PERMIT_INFO%>"/></td>
-	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=TransConstants.TRANS_FAMILYCARDMUT %>" value="<%=LevelAccessBean.PERMIT_CREATE%>"/></td>
-	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=TransConstants.TRANS_FAMILYCARDMUT %>" value="<%=LevelAccessBean.PERMIT_UPDATE%>"/></td>
-	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=TransConstants.TRANS_FAMILYCARDMUT %>" value="<%=LevelAccessBean.PERMIT_DELETE%>"/></td>
+	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=TransConstants.TRANS_FAMILYCARDMUT %>" value="<%=LevelAccessBean.PERMIT_LIST%>" <%=lp.checkValidate(LevelID, TransConstants.TRANS_FAMILYCARDMUT, LevelAccessBean.PERMIT_LIST)?"checked":""%>/></td>
+	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=TransConstants.TRANS_FAMILYCARDMUT %>" value="<%=LevelAccessBean.PERMIT_INFO%>" <%=lp.checkValidate(LevelID, TransConstants.TRANS_FAMILYCARDMUT, LevelAccessBean.PERMIT_INFO)?"checked":""%>/></td>
+	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=TransConstants.TRANS_FAMILYCARDMUT %>" value="<%=LevelAccessBean.PERMIT_CREATE%>" <%=lp.checkValidate(LevelID, TransConstants.TRANS_FAMILYCARDMUT, LevelAccessBean.PERMIT_CREATE)?"checked":""%>/></td>
+	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=TransConstants.TRANS_FAMILYCARDMUT %>" value="<%=LevelAccessBean.PERMIT_UPDATE%>" <%=lp.checkValidate(LevelID, TransConstants.TRANS_FAMILYCARDMUT, LevelAccessBean.PERMIT_UPDATE)?"checked":""%>/></td>
+	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=TransConstants.TRANS_FAMILYCARDMUT %>" value="<%=LevelAccessBean.PERMIT_DELETE%>" <%=lp.checkValidate(LevelID, TransConstants.TRANS_FAMILYCARDMUT, LevelAccessBean.PERMIT_DELETE)?"checked":""%>/></td>
 	    </tr>
 	    <tr class="print" bgcolor="#FFCCCC">
 	      <td class="print" valign="top" width="250"><b>Daftar Kelahiran</b></td>
-	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=TransConstants.TRANS_BIRTHLETTER %>" value="<%=LevelAccessBean.PERMIT_LIST%>"/></td>
-	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=TransConstants.TRANS_BIRTHLETTER %>" value="<%=LevelAccessBean.PERMIT_INFO%>"/></td>
-	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=TransConstants.TRANS_BIRTHLETTER %>" value="<%=LevelAccessBean.PERMIT_CREATE%>"/></td>
-	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=TransConstants.TRANS_BIRTHLETTER %>" value="<%=LevelAccessBean.PERMIT_UPDATE%>"/></td>
-	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=TransConstants.TRANS_BIRTHLETTER %>" value="<%=LevelAccessBean.PERMIT_DELETE%>"/></td>
+	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=TransConstants.TRANS_BIRTHLETTER %>" value="<%=LevelAccessBean.PERMIT_LIST%>" <%=lp.checkValidate(LevelID, TransConstants.TRANS_BIRTHLETTER, LevelAccessBean.PERMIT_LIST)?"checked":""%>/></td>
+	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=TransConstants.TRANS_BIRTHLETTER %>" value="<%=LevelAccessBean.PERMIT_INFO%>" <%=lp.checkValidate(LevelID, TransConstants.TRANS_BIRTHLETTER, LevelAccessBean.PERMIT_INFO)?"checked":""%>/></td>
+	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=TransConstants.TRANS_BIRTHLETTER %>" value="<%=LevelAccessBean.PERMIT_CREATE%>" <%=lp.checkValidate(LevelID, TransConstants.TRANS_BIRTHLETTER, LevelAccessBean.PERMIT_CREATE)?"checked":""%>/></td>
+	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=TransConstants.TRANS_BIRTHLETTER %>" value="<%=LevelAccessBean.PERMIT_UPDATE%>" <%=lp.checkValidate(LevelID, TransConstants.TRANS_BIRTHLETTER, LevelAccessBean.PERMIT_UPDATE)?"checked":""%>/></td>
+	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=TransConstants.TRANS_BIRTHLETTER %>" value="<%=LevelAccessBean.PERMIT_DELETE%>" <%=lp.checkValidate(LevelID, TransConstants.TRANS_BIRTHLETTER, LevelAccessBean.PERMIT_DELETE)?"checked":""%>/></td>
 	    </tr>
 	    <tr class="print" bgcolor="#FFCCCC">
 	      <td class="print" valign="top" width="250"><b>Daftar Kematian</b></td>
-	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=TransConstants.TRANS_DEATHLETTER %>" value="<%=LevelAccessBean.PERMIT_LIST%>"/></td>
-	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=TransConstants.TRANS_DEATHLETTER %>" value="<%=LevelAccessBean.PERMIT_INFO%>"/></td>
-	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=TransConstants.TRANS_DEATHLETTER %>" value="<%=LevelAccessBean.PERMIT_CREATE%>"/></td>
-	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=TransConstants.TRANS_DEATHLETTER %>" value="<%=LevelAccessBean.PERMIT_UPDATE%>"/></td>
-	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=TransConstants.TRANS_DEATHLETTER %>" value="<%=LevelAccessBean.PERMIT_DELETE%>"/></td>
+	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=TransConstants.TRANS_DEATHLETTER %>" value="<%=LevelAccessBean.PERMIT_LIST%>" <%=lp.checkValidate(LevelID, TransConstants.TRANS_DEATHLETTER, LevelAccessBean.PERMIT_LIST)?"checked":""%>/></td>
+	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=TransConstants.TRANS_DEATHLETTER %>" value="<%=LevelAccessBean.PERMIT_INFO%>" <%=lp.checkValidate(LevelID, TransConstants.TRANS_DEATHLETTER, LevelAccessBean.PERMIT_INFO)?"checked":""%>/></td>
+	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=TransConstants.TRANS_DEATHLETTER %>" value="<%=LevelAccessBean.PERMIT_CREATE%>" <%=lp.checkValidate(LevelID, TransConstants.TRANS_DEATHLETTER, LevelAccessBean.PERMIT_CREATE)?"checked":""%>/></td>
+	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=TransConstants.TRANS_DEATHLETTER %>" value="<%=LevelAccessBean.PERMIT_UPDATE%>" <%=lp.checkValidate(LevelID, TransConstants.TRANS_DEATHLETTER, LevelAccessBean.PERMIT_UPDATE)?"checked":""%>/></td>
+	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=TransConstants.TRANS_DEATHLETTER %>" value="<%=LevelAccessBean.PERMIT_DELETE%>" <%=lp.checkValidate(LevelID, TransConstants.TRANS_DEATHLETTER, LevelAccessBean.PERMIT_DELETE)?"checked":""%>/></td>
 	    </tr>
  	    <tr class="print" bgcolor="#FFFFFF">
      		<td valign="top" height="2" colspan="9">&nbsp;</td>

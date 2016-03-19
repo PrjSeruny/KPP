@@ -4,6 +4,7 @@ create table UserLogin
   ID          VARCHAR(50) NOT NULL,
   Password    VARCHAR(50) NOT NULL,
   Name        VARCHAR(50),
+  LevelID     VARCHAR(50) NOT NULL,
   CreateDate  VARCHAR(20) NOT NULL,
   CreateUser  VARCHAR(50) NOT NULL,
   EntryDate   VARCHAR(20),
@@ -495,5 +496,13 @@ CREATE TABLE Company (
   Param           VARCHAR(100) NOT NULL,
   Value           TEXT NOT NULL,
   PRIMARY KEY (Param)
+) ENGINE=InnoDB;
+
+DROP TABLE IF EXISTS LevelAccess;
+CREATE TABLE Company (
+  LevelID         VARCHAR(50) NOT NULL,
+  MenuID          VARCHAR(50) NOT NULL,
+  Permission			VARCHAR(10) NOT NULL,
+  PRIMARY KEY (LevelID,MenuID,Permission )
 ) ENGINE=InnoDB;
 
