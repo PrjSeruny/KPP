@@ -77,8 +77,13 @@ public class Utilities
 
     try
     {
-      sdf = new SimpleDateFormat(pattern);
-      return sdf.format(val);
+      if(null!=val)
+      {
+        sdf = new SimpleDateFormat(pattern);
+        return sdf.format(val);
+      }
+      else return null;
+      
     }
     catch(Exception e)
     {
@@ -134,4 +139,34 @@ public class Utilities
     return result;
   }
   
+  public static final String join(String delim, String[] arr2Combine)
+  {
+    String result = "";
+
+    for(int i=0; i<arr2Combine.length; i++)
+    {
+      result += arr2Combine[i];
+      if(i<arr2Combine.length-1) result += delim;
+    }
+    
+    if(result.trim().length()>0) return result;
+    
+    return null;
+  }
+  
+  public static final String joinForSQL(String delim, String[] arr2Combine)
+  {
+    String result = "";
+
+    for(int i=0; i<arr2Combine.length; i++)
+    {
+      result += "'" + arr2Combine[i] + "'";
+      if(i<arr2Combine.length-1) result += delim;
+    }
+    
+    if(result.trim().length()>0) return result;
+    
+    return null;
+  }
+
 }

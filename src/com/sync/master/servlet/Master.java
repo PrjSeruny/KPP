@@ -652,18 +652,17 @@ public class Master extends CoreServlet
   }
   
   private void doLookupMasterResidents(HttpServletRequest req, HttpServletResponse res)
-      throws ServletException, IOException
-      {
-        String _for = req.getParameter(MasterConstants.FOR);
-        MasterResidentBean[] bn = null;
-        MasterResidentEngine re = new MasterResidentEngine(req, res);
-        
-        bn = re.lookup();
-        req.setAttribute(MasterConstants.MASTERRESIDENT_LIST, bn);
-        super.openLookup(MasterConstants.MASTER_RESIDENT_LOOKUP, req, res);
-        return;
-      
-      }
+  throws ServletException, IOException
+  {
+    MasterResidentBean[] bn = null;
+    MasterResidentEngine re = new MasterResidentEngine(req, res);
+    
+    bn = re.lookup();
+    req.setAttribute(MasterConstants.MASTERRESIDENT_LIST, bn);
+    super.openLookup(MasterConstants.MASTER_RESIDENT_LOOKUP, req, res);
+    return;
+  
+  }
   
   private void doListMasterResidents(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
