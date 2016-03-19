@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.sync.core.beans.MessageBean;
 import com.sync.core.servlet.CoreServlet;
 import com.sync.core.utils.Utilities;
+import com.sync.master.beans.LevelAccessBean;
 import com.sync.trans.beans.BirthLetterBean;
 import com.sync.trans.beans.DeathLetterBean;
 import com.sync.trans.beans.FamilyCardMutationBean;
@@ -159,6 +160,15 @@ public class Transaction extends CoreServlet
   private void doFamilyCardMut(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
+  	if(!super.validateAcces(
+  			req, 
+  			res, 
+  			TransConstants.TRANS_FAMILYCARDMUT, 
+  			LevelAccessBean.PERMIT_LIST))
+  	{
+  		super.openURL(TransConstants.ERROR_PAGE, req, res);
+  		return;
+  	}
     String stat = req.getParameter(TransConstants.DATA_STAT);
     FamilyCardMutationEngine ue = new FamilyCardMutationEngine(req, res);
     FamilyCardMutationBean[] lists = ue.listOfFamilyCard(stat);
@@ -178,6 +188,15 @@ public class Transaction extends CoreServlet
   private void doCreateFamilyCardMut(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
+  	if(!super.validateAcces(
+  			req, 
+  			res, 
+  			TransConstants.TRANS_FAMILYCARDMUT, 
+  			LevelAccessBean.PERMIT_CREATE))
+  	{
+  		super.openURL(TransConstants.ERROR_PAGE, req, res);
+  		return;
+  	}
     System.out.println("CREATE NEW FAMILY CARD MUTATION");
     String act = req.getParameter(TransConstants.ACT);
     FamilyCardMutationEngine re = new FamilyCardMutationEngine(req, res);
@@ -239,6 +258,15 @@ public class Transaction extends CoreServlet
   private void doUpdateFamilyCardMut(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
+  	if(!super.validateAcces(
+  			req, 
+  			res, 
+  			TransConstants.TRANS_FAMILYCARDMUT, 
+  			LevelAccessBean.PERMIT_UPDATE))
+  	{
+  		super.openURL(TransConstants.ERROR_PAGE, req, res);
+  		return;
+  	}
     System.out.println("UPDATING FAMILY CARD MUT");
     String nik = req.getParameter(TransConstants.FORM_FAMILYCARDMUT_NIK);
     String sDate = req.getParameter(TransConstants.FORM_FAMILYCARDMUT_STARTDATE);
@@ -341,12 +369,29 @@ public class Transaction extends CoreServlet
   private void doDeleteFamilyCardMut(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
-    
+  	if(!super.validateAcces(
+  			req, 
+  			res, 
+  			TransConstants.TRANS_FAMILYCARDMUT, 
+  			LevelAccessBean.PERMIT_DELETE))
+  	{
+  		super.openURL(TransConstants.ERROR_PAGE, req, res);
+  		return;
+  	}
   }
   
   private void doListFamilyCardMut(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
+  	if(!super.validateAcces(
+  			req, 
+  			res, 
+  			TransConstants.TRANS_FAMILYCARDMUT, 
+  			LevelAccessBean.PERMIT_LIST))
+  	{
+  		super.openURL(TransConstants.ERROR_PAGE, req, res);
+  		return;
+  	}
     String stat = req.getParameter(TransConstants.DATA_STAT);
     FamilyCardMutationEngine re = new FamilyCardMutationEngine(req, res);
     FamilyCardMutationBean[] lists = re.listOfFamilyCard(stat);
@@ -366,6 +411,15 @@ public class Transaction extends CoreServlet
   private void doViewFamilyCardMut(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
+  	if(!super.validateAcces(
+  			req, 
+  			res, 
+  			TransConstants.TRANS_FAMILYCARDMUT, 
+  			LevelAccessBean.PERMIT_INFO))
+  	{
+  		super.openURL(TransConstants.ERROR_PAGE, req, res);
+  		return;
+  	}
     System.out.println("VIEWING INFO FAMILY CARD MUTATION");
     String nik = req.getParameter(TransConstants.FORM_FAMILYCARDMUT_NIK);
     String sDate  = req.getParameter(TransConstants.FORM_FAMILYCARDMUT_STARTDATE);

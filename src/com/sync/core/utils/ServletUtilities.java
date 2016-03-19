@@ -22,7 +22,9 @@ import com.sync.core.pool.CompanyPool;
 import com.sync.core.pool.GalleryPool;
 import com.sync.core.pool.NewsPool;
 import com.sync.core.pool.SlidePool;
+import com.sync.master.beans.MasterUserBean;
 import com.sync.master.pool.LevelAccessPool;
+import com.sync.master.utils.MasterConstants;
 
 
 
@@ -242,5 +244,27 @@ public class ServletUtilities extends HttpServlet
     
     openURL(Constants.LOOKUP_PAGE, req, res);
     return;
+  }
+  
+  public boolean validateAcces
+  (
+  		HttpServletRequest req,
+  		HttpServletResponse res,
+  		String MenuID,
+  		String Permisson
+  )
+  {
+  	boolean result = false;
+  	LevelAccessPool lp = LevelAccessPool.getInstance();
+  	
+  	//get LevelID by Session
+  	HttpSession ses = req.getSession(false);
+    MasterUserBean uses = (MasterUserBean)ses.getAttribute(
+        MasterConstants.MASTERUSER);
+    
+    //Check Falidate
+    result = lp.checkValidate(uses.getLevelID(), MenuID, Permisson);
+  	System.out.println("RESUUUUUUUUUUUUUUUUUUUUUUUULT: " + result);
+  	return result;
   }
 }
