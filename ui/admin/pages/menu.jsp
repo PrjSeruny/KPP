@@ -20,11 +20,11 @@
       </li> 
       <li class="master"><a href="javascript:void(0)">Master</a>
           <ul>
+          <li><a href="javascript:void(0)" url="<%=Constants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>?<%=Constants.W%>=<%=MasterConstants.MASTER_LEVEL_ACCESS%>">Master Level Access</a></li>
           <li><a href="javascript:void(0)" url="<%=Constants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>?<%=Constants.W%>=<%=MasterConstants.MASTERUSER%>">Master User</a></li>
+          <li><a href="javascript:void(0)" url="<%=Constants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>?<%=Constants.W%>=<%=MasterConstants.LEVELACCESS%>">Level Access</a></li>
           <li><a href="javascript:void(0)" url="<%=Constants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>?<%=Constants.W%>=<%=MasterConstants.MASTER_REGION%>">Master Region</a></li>
           <li><a href="javascript:void(0)" url="<%=Constants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>?<%=Constants.W%>=<%=MasterConstants.MASTER_RESIDENT%>&<%=MasterConstants.DATA_STAT%>=<%=MasterConstants.DATA_CURRENT%>">Master Penduduk</a></li>
-          <li><a href="javascript:void(0)" url="<%=Constants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>?<%=Constants.W%>=<%=MasterConstants.MASTER_LEVEL_ACCESS%>">Master Level Access</a></li>
-		  <li><a href="javascript:void(0)" url="<%=Constants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>?<%=Constants.W%>=<%=MasterConstants.LEVELACCESS%>">Level Access</a></li>
           </ul>
       </li> 
       <li class="process"><a href="javascript:void(0)">Transaksi</a>
