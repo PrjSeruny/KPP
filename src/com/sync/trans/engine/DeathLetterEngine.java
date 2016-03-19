@@ -121,22 +121,22 @@ public class DeathLetterEngine extends RootEngine
     {
       addSQL += TransTable.COL_DEATHLETTER_PROCESSDATE + " IS NOT NULL " + 
              " AND " + TransTable.COL_DEATHLETTER_PROCESSUSER +" IS NOT NULL " +
-             " AND " + TransTable.COL_DEATHLETTER_VOIDDATE + " IS NULL " +
-             " AND " + TransTable.COL_DEATHLETTER_VOIDUSER + " IS NULL ";
+             " AND " + TransTable.COL_DEATHLETTER_CANCELPROCESSDATE +" IS NULL " +
+             " AND " + TransTable.COL_DEATHLETTER_CANCELPROCESSUSER +" IS NULL " ;
     }
-    else if(!Utilities.isEmpy(stat) && stat.equals(MasterConstants.DATA_RECYCLE))
+    /*else if(!Utilities.isEmpy(stat) && stat.equals(MasterConstants.DATA_RECYCLE))
     {
       addSQL += TransTable.COL_DEATHLETTER_VOIDDATE + " IS NOT NULL " +
           " AND " + TransTable.COL_DEATHLETTER_VOIDUSER + " IS NOT NULL " +
+          " AND " + TransTable.COL_DEATHLETTER_CANCELPROCESSDATE +" IS NULL " +
+          " AND " + TransTable.COL_DEATHLETTER_CANCELPROCESSUSER +" IS NULL " +
           " AND " + TransTable.COL_DEATHLETTER_PROCESSDATE + " IS NULL " +
           " AND " + TransTable.COL_DEATHLETTER_PROCESSUSER + " IS NULL " ;
-    }
+    }*/
     else
     {
-      addSQL += TransTable.COL_DEATHLETTER_VOIDDATE + " IS NULL" +
-          " AND " + TransTable.COL_DEATHLETTER_VOIDUSER + " IS NULL " + 
-          " AND " + TransTable.COL_DEATHLETTER_PROCESSDATE + " IS NULL " +
-          " AND " + TransTable.COL_DEATHLETTER_PROCESSUSER + " IS NULL " ;
+      addSQL += TransTable.COL_DEATHLETTER_PROCESSDATE + " IS NULL " +
+                " AND " + TransTable.COL_DEATHLETTER_PROCESSUSER + " IS NULL " ;
     }
     
     if(!Utilities.isEmpy(search)){
@@ -277,10 +277,12 @@ public class DeathLetterEngine extends RootEngine
       super.rollback();
       e.printStackTrace();
       res = false;
+      MessageBean msg = new MessageBean();
+      msg.setMessageBean(MessageBean.MSG_ERR, e.getMessage());
+      bn.setBeanMessage(msg);
     }
     return res;
   }
-  
   
   public boolean updateDeathLetter(DeathLetterBean bn)
   {
@@ -319,6 +321,9 @@ public class DeathLetterEngine extends RootEngine
       e.printStackTrace();
       super.rollback();
       res = false;
+      MessageBean msg = new MessageBean();
+      msg.setMessageBean(MessageBean.MSG_ERR, e.getMessage());
+      bn.setBeanMessage(msg);
     }
     
     return res;
@@ -359,6 +364,9 @@ public class DeathLetterEngine extends RootEngine
       e.printStackTrace();
       super.rollback();
       res = false;
+      MessageBean msg = new MessageBean();
+      msg.setMessageBean(MessageBean.MSG_ERR, e.getMessage());
+      bn.setBeanMessage(msg);
     }
     
     return res;
@@ -367,16 +375,10 @@ public class DeathLetterEngine extends RootEngine
   public boolean delete(String[] niks)
   {
     boolean res = false;
-    HttpSession ses = req.getSession(false);
-    MasterUserBean uses = (MasterUserBean)ses.getAttribute(
-        MasterConstants.MASTERUSER);
     
     try
     {
-      SQL = " UPDATE " + TransTable.TABLE_DEATHLETTER +
-          " SET " +
-          TransTable.COL_DEATHLETTER_VOIDDATE + "=?, " +
-          TransTable.COL_DEATHLETTER_VOIDUSER + "=? " +
+      SQL = " DELETE FROM " + TransTable.TABLE_DEATHLETTER +
           " WHERE " +
           TransTable.COL_DEATHLETTER_NIK + "=?;";
     
@@ -385,10 +387,7 @@ public class DeathLetterEngine extends RootEngine
     
     for(int i=0; i<niks.length; i++)
     {
-      stat.setString(1, Utilities.dateToString(new Date(), 
-          MasterConstants.DATE_DB_MEDIUM_PATTERN));
-      stat.setString(2, uses.getUser());
-      stat.setString(3, niks[i]);
+      stat.setString(1, niks[i]);
       stat.executeUpdate();
     }
     
@@ -403,8 +402,7 @@ public class DeathLetterEngine extends RootEngine
     
     return res;
   }
-  
-  
+
   public boolean proceedDeathLetter(DeathLetterBean bn, boolean cancelled)
   {
     boolean res = false;

@@ -11,8 +11,10 @@ import com.sync.core.beans.MessageBean;
 import com.sync.core.engine.RootEngine;
 import com.sync.core.utils.Utilities;
 import com.sync.master.beans.MasterResidentBean;
+import com.sync.master.beans.MasterResidentHistoryBean;
 import com.sync.master.beans.MasterUserBean;
 import com.sync.master.engine.MasterResidentEngine;
+import com.sync.master.engine.MasterResidentHistoryEngine;
 import com.sync.master.utils.MasterConstants;
 import com.sync.trans.beans.BirthLetterBean;
 import com.sync.trans.utils.TransConstants;
@@ -23,6 +25,7 @@ import com.sync.trans.utils.TransTable;
 public class BirthLetterEngine extends RootEngine
 {
   private MasterResidentEngine re = null;
+  private MasterResidentHistoryEngine rehist = null;
   
   public BirthLetterEngine(HttpServletRequest rq, HttpServletResponse rs)
   {
@@ -198,23 +201,20 @@ public class BirthLetterEngine extends RootEngine
       addSQL += TransTable.COL_BIRTHLETTER_PROCESSDATE +
           " IS NOT NULL AND " + TransTable.COL_BIRTHLETTER_PROCESSUSER +
           " IS NOT NULL " +
-          " AND " + TransTable.COL_BIRTHLETTER_VOIDDATE + " IS NULL " +
-          " AND " + TransTable.COL_BIRTHLETTER_VOIDUSER + " IS NULL ";
+          " AND " + TransTable.COL_BIRTHLETTER_CANCELPROCESSDATE + " IS NULL " +
+          " AND " + TransTable.COL_BIRTHLETTER_CANCELPROCESSUSER + " IS NULL ";
     }
-    else if(!Utilities.isEmpy(stat) && stat.equals(MasterConstants.DATA_RECYCLE))
+    /*else if(!Utilities.isEmpy(stat) && stat.equals(MasterConstants.DATA_RECYCLE))
     {
       addSQL += TransTable.COL_BIRTHLETTER_VOIDDATE +
           " IS NOT NULL AND " + TransTable.COL_BIRTHLETTER_VOIDDATE +
           " IS NOT NULL "+
           " AND " + TransTable.COL_BIRTHLETTER_PROCESSDATE + " IS NULL " +
           " AND " + TransTable.COL_BIRTHLETTER_PROCESSUSER + " IS NULL ";
-    }
+    }*/
     else
     {
-      addSQL += TransTable.COL_BIRTHLETTER_VOIDDATE +
-          " IS NULL " + 
-          " AND " + TransTable.COL_BIRTHLETTER_VOIDUSER + " IS NULL " +
-          " AND " + TransTable.COL_BIRTHLETTER_PROCESSDATE + " IS NULL " +
+      addSQL += TransTable.COL_BIRTHLETTER_PROCESSDATE + " IS NULL " +
           " AND " + TransTable.COL_BIRTHLETTER_PROCESSUSER + " IS NULL ";
     }
     
@@ -377,6 +377,9 @@ public class BirthLetterEngine extends RootEngine
       super.rollback();
       e.printStackTrace();
       res = false;
+      MessageBean msg = new MessageBean();
+      msg.setMessageBean(MessageBean.MSG_ERR, e.getMessage());
+      bn.setBeanMessages(msg);
     }
     return res;
   }
@@ -431,6 +434,9 @@ public class BirthLetterEngine extends RootEngine
       e.printStackTrace();
       super.rollback();
       res = false;
+      MessageBean msg = new MessageBean();
+      msg.setMessageBean(MessageBean.MSG_ERR, e.getMessage());
+      bn.setBeanMessages(msg);
     }
     
     return res;
@@ -471,6 +477,9 @@ public class BirthLetterEngine extends RootEngine
       e.printStackTrace();
       super.rollback();
       res = false;
+      MessageBean msg = new MessageBean();
+      msg.setMessageBean(MessageBean.MSG_ERR, e.getMessage());
+      bn.setBeanMessages(msg);
     }
     
     return res;
@@ -479,16 +488,10 @@ public class BirthLetterEngine extends RootEngine
   public boolean delete(String[] niks)
   {
     boolean res = false;
-    HttpSession ses = req.getSession(false);
-    MasterUserBean uses = (MasterUserBean)ses.getAttribute(
-        MasterConstants.MASTERUSER);
     
     try
     {
-      SQL = " UPDATE " + TransTable.TABLE_BIRTHLETTER +
-          " SET " +
-          TransTable.COL_BIRTHLETTER_VOIDDATE + "=?, " +
-          TransTable.COL_BIRTHLETTER_VOIDUSER + "=? " +
+      SQL = " DELETE FROM " + TransTable.TABLE_BIRTHLETTER +
           " WHERE " +
           TransTable.COL_BIRTHLETTER_NIK + "=?;";
     
@@ -497,10 +500,7 @@ public class BirthLetterEngine extends RootEngine
     
     for(int i=0; i<niks.length; i++)
     {
-      stat.setString(1, Utilities.dateToString(new Date(), 
-          MasterConstants.DATE_DB_MEDIUM_PATTERN));
-      stat.setString(2, uses.getUser());
-      stat.setString(3, niks[i]);
+      stat.setString(1, niks[i]);
       stat.executeUpdate();
     }
     
@@ -521,7 +521,7 @@ public class BirthLetterEngine extends RootEngine
   {
     boolean res = false;
     HttpSession ses = req.getSession(false);
-    
+    String errMsg = null;
     try
     {
       
@@ -530,10 +530,18 @@ public class BirthLetterEngine extends RootEngine
       
       if(!cancelled)
       {
-        bn.setProcessDate(new Date());
-        bn.setProcessUser(user.getUser());
-        bn.setCancelProcessDate(null);
-        bn.setCancelProcessUser(null);
+        errMsg = this.proceedResidentHistory(bn, cancelled);
+        if(!Utilities.isEmpy(errMsg))
+        {
+          throw new Exception(errMsg);
+        }
+        else
+        {
+          bn.setProcessDate(new Date());
+          bn.setProcessUser(user.getUser());
+          bn.setCancelProcessDate(null);
+          bn.setCancelProcessUser(null);
+        }
       }
       else
       {
@@ -543,9 +551,12 @@ public class BirthLetterEngine extends RootEngine
         bn.setCancelProcessUser(user.getUser());
       }
       
-      if(!this.updateStatusProcess(bn))
+      if(Utilities.isEmpy(errMsg))
       {
-        throw new Exception("Gagal Update status process");
+        if(!this.updateStatusProcess(bn))
+        {
+          throw new Exception("Gagal Update status process");
+        }
       }
       
       res = true;
@@ -562,9 +573,113 @@ public class BirthLetterEngine extends RootEngine
     return res;
   }
   
+  private String proceedResidentHistory(BirthLetterBean bn, boolean cancel)
+  {
+    System.out.println("PROCEED RESIDENT HISTORY!!!!!!!");
+    MasterResidentBean rebn = null;
+    String errMsg = null;
+    MasterResidentBean newrebn = null;
+    MasterResidentHistoryBean hisrebn = null;
+    HttpSession ses = req.getSession(false);
+    
+    try
+    {
+      MasterUserBean user = (MasterUserBean)ses.getAttribute(
+          MasterConstants.MASTERUSER);
+      
+      if(!cancel)
+      {
+        /** Mencari detail data berdasarkan NIK ayah */
+        re = new MasterResidentEngine();
+        rebn = re.getMasterResidentInfo(bn.getFatherNIK());
+        
+        if(null==rebn || !rebn.getNIK().equals(bn.getFatherNIK()))
+        { 
+          rebn =  re.getMasterResidentInfo(bn.getFatherNIK());
+        }
+        
+        if(null==rebn)
+        {
+          throw new Exception(
+              "NIK Ayah:"+bn.getNIK()+ " belum terdaftar di Data Penduduk. "
+                  + "Daftarkan terlebih dahulu");
+        }
+        else
+        {
+          /** inserting into master resident **/
+          newrebn = new MasterResidentBean();
+          newrebn.setNIK(bn.getNIK());
+          newrebn.setName(bn.getName());
+          newrebn.setKKNo(bn.getKKNo());
+          newrebn.setBirthDate(bn.getBirthDate());
+          newrebn.setReligion(rebn.getReligion());
+          newrebn.setMaritalStatus(TransConstants.MARITALSTAT_SINGLE);
+          newrebn.setFamilyPos(TransConstants.FAMILY_POS_CHILD);
+          newrebn.setNationality(rebn.getNationality());
+          newrebn.setAddress(rebn.getAddress());
+          newrebn.setCity(rebn.getCity());
+          newrebn.setRegion(rebn.getRegion());
+          newrebn.setPostalCode(rebn.getPostalCode());
+          newrebn.setKelurahan(rebn.getKelurahan());
+          newrebn.setKecamatan(rebn.getKecamatan());
+          newrebn.SetRW(rebn.getRW());
+          newrebn.setRT(rebn.getRT());
+          newrebn.setCreateDate(new Date());
+          newrebn.setCreateUser(user.getUser());
+          re = new MasterResidentEngine();
+          if(!re.createMasterResident(newrebn))
+          {
+            throw new Exception("Error: Gagal membuat data master penduduk");
+          }
+          
+          /** inserting into master resident history */
+          hisrebn = new MasterResidentHistoryBean();
+          hisrebn.setNIK(bn.getNIK());
+          hisrebn.setName(bn.getName());
+          hisrebn.setKKNo(bn.getKKNo());
+          hisrebn.setReligion(rebn.getReligion());
+          hisrebn.setMaritalStatus(TransConstants.MARITALSTAT_SINGLE);
+          hisrebn.setFamilyPos(TransConstants.FAMILY_POS_CHILD);
+          hisrebn.setNationality(rebn.getNationality());
+          hisrebn.setAddress(rebn.getAddress());
+          hisrebn.setCity(rebn.getCity());
+          hisrebn.setRegion(rebn.getRegion());
+          hisrebn.setPostalCode(rebn.getPostalCode());
+          hisrebn.setKelurahan(rebn.getKelurahan());
+          hisrebn.setKecamatan(rebn.getKecamatan());
+          hisrebn.SetRW(rebn.getRW());
+          hisrebn.setRT(rebn.getRT());
+          hisrebn.setEntryDate(new Date());
+          hisrebn.setEntryUser(user.getUser());
+          
+          rehist = new MasterResidentHistoryEngine();
+          if(!rehist.createMasterResidentHistory(hisrebn))
+          {
+            throw new Exception("Error: Gagal membuat history data master penduduk");
+          }
+          
+        }
+      }
+      else
+      {
+        
+      }
+      
+    }
+    catch(Exception e)
+    {
+      super.rollback();
+      errMsg = e.getMessage();
+    }
+    
+    return errMsg;
+  }
+  
   public void closed()
   {
     if(null!=re) re.closed();
+    if(null!=rehist) rehist.closed();
+    
     super.finalize();
   }
 }

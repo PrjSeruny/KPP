@@ -322,24 +322,19 @@ public class FamilyCardMutationEngine extends RootEngine
     {
       addSQL += TransTable.COL_FAMILYCARDMUT_PROCESSDATE +
           " IS NOT NULL AND " + TransTable.COL_FAMILYCARDMUT_PROCESSUSER +
-          " IS NOT NULL " +
-          " AND " + TransTable.COL_FAMILYCARDMUT_VOIDDATE + " IS NULL " +
-          " AND " + TransTable.COL_FAMILYCARDMUT_VOIDUSER + " IS NULL ";
+          " IS NOT NULL " ;
     }
-    else if(!Utilities.isEmpy(stat) && stat.equals(MasterConstants.DATA_RECYCLE))
+    /*else if(!Utilities.isEmpy(stat) && stat.equals(MasterConstants.DATA_RECYCLE))
     {
       addSQL += TransTable.COL_FAMILYCARDMUT_VOIDDATE +
           " IS NOT NULL AND " + TransTable.COL_FAMILYCARDMUT_VOIDDATE +
           " IS NOT NULL "+
           " AND " + TransTable.COL_FAMILYCARDMUT_PROCESSDATE + " IS NULL " +
           " AND " + TransTable.COL_FAMILYCARDMUT_PROCESSUSER + " IS NULL ";
-    }
+    }*/
     else
     {
-      addSQL += TransTable.COL_FAMILYCARDMUT_VOIDDATE +
-          " IS NULL " + 
-          " AND " + TransTable.COL_FAMILYCARDMUT_VOIDUSER + " IS NULL " +
-          " AND " + TransTable.COL_FAMILYCARDMUT_PROCESSDATE + " IS NULL " +
+      addSQL += TransTable.COL_FAMILYCARDMUT_PROCESSDATE + " IS NULL " +
           " AND " + TransTable.COL_FAMILYCARDMUT_PROCESSUSER + " IS NULL ";
     }
     
@@ -539,6 +534,9 @@ public class FamilyCardMutationEngine extends RootEngine
       super.rollback();
       res = false;
       System.out.println("ERR ENGINE CREATE FAMILY CARDT "+e.getMessage());
+      MessageBean msg = new MessageBean();
+      msg.setMessageBean(MessageBean.MSG_ERR, e.getMessage());
+      ubn.setBeanMessages(msg);
     }
     
     return res;
@@ -612,28 +610,20 @@ public class FamilyCardMutationEngine extends RootEngine
       e.printStackTrace();
       super.rollback();
       res = false;
+      MessageBean msg = new MessageBean();
+      msg.setMessageBean(MessageBean.MSG_ERR, e.getMessage());
+      ubn.setBeanMessages(msg);
     }
     return res;
   }
   
-
-  
-
-  
-  
   public boolean delete(String[] niks, String[] tdate)
   {
     boolean res = false;
-    HttpSession ses = req.getSession(false);
-    MasterUserBean uses = (MasterUserBean)ses.getAttribute(
-        MasterConstants.MASTERUSER);
     
     try
     {
-      SQL = " UPDATE " + TransTable.TABLE_FAMILYCARDMUT +
-          " SET " +
-          TransTable.COL_FAMILYCARDMUT_VOIDDATE + "=?, " +
-          TransTable.COL_FAMILYCARDMUT_VOIDUSER + "=? " +
+      SQL = " DELETE FROM " + TransTable.TABLE_FAMILYCARDMUT +
           " WHERE " +
           TransTable.COL_FAMILYCARDMUT_NIK + "=?  AND " +
           TransTable.COL_FAMILYCARDMUT_STARTDATE + "=? ";
@@ -643,11 +633,8 @@ public class FamilyCardMutationEngine extends RootEngine
     
     for(int i=0; i<niks.length; i++)
     {
-      stat.setString(1, Utilities.dateToString(new Date(), 
-          MasterConstants.DATE_DB_MEDIUM_PATTERN));
-      stat.setString(2, uses.getUser());
-      stat.setString(3, niks[i]);
-      stat.setString(4, tdate[i]);
+      stat.setString(1, niks[i]);
+      stat.setString(2, tdate[i]);
       stat.executeUpdate();
     }
     
@@ -745,6 +732,9 @@ public class FamilyCardMutationEngine extends RootEngine
       e.printStackTrace();
       super.rollback();
       res = false;
+      MessageBean msg = new MessageBean();
+      msg.setMessageBean(MessageBean.MSG_ERR, e.getMessage());
+      bn.setBeanMessages(msg);
     }
     
     return res;
