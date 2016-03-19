@@ -20,6 +20,7 @@
      if(null!=msg)
      {
        genmsg = msg.getMessageBean(MessageBean.MSG_ERR);
+       System.out.println(">>>>>>>>>>>>> genmsg= "+genmsg);
      }
    }
    
@@ -29,7 +30,9 @@
 <%
    if(!Utilities.isEmpy(genmsg))
    {
-     out.println(genmsg);
+%>
+      <font color="red"><%=!Utilities.isEmpy(genmsg)?genmsg:""%></font>
+<% 
    }
 %>
  <form name="info" method="post" action="<%=Constants.ROOT_PATH%><%=TransConstants.SVT_TRANS_PATH%>">

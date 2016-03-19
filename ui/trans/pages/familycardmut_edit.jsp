@@ -13,14 +13,27 @@
    MessageBean msg = null;
    String type="";
    System.out.println(">>>>>>>>>>>>> JSP ACTION= "+act);
-   
+   String genmsg ="";
    if(null!=ubn)
    {
      msg = ubn.getBeanMessages();
+     if(null!=msg)
+     {
+       genmsg = msg.getMessageBean(MessageBean.MSG_ERR);
+       System.out.println(">>>>>>>>>>>>> genmsg= "+genmsg);
+     }
    }
    
 %>
 <fieldset class="wrapper">
+<%
+   if(!Utilities.isEmpy(genmsg))
+   {
+%>
+      <font color="red"><%=!Utilities.isEmpy(genmsg)?genmsg:""%></font>
+<% 
+   }
+%>
   <form name="create" method="post" action="<%=Constants.ROOT_PATH%><%=TransConstants.SVT_TRANS_PATH%>">
      <input type="hidden" name="<%=TransConstants.W%>" value="<%=TransConstants.TRANS_FAMILYCARDMUT%>">
      <input type="hidden" name="<%=TransConstants.ACT%>" value="<%=act%>">
@@ -30,11 +43,16 @@
       <fieldset>
         <div >
           <label>NIK</label>
+          <a href="javascript:void(0)" 
+          class="lookup"
+          valTarget="#userIDVal;#userNameVal"
+          param="width=450;height=300"
+          url="<%=Constants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>?<%=Constants.W%>=<%=MasterConstants.MASTER_RESIDENT%>&<%=MasterConstants.ACT%>=<%=MasterConstants.ACT_LOOKUP%>&<%=MasterConstants.LOOKUP_SINGLE%>=1">Cari</a>
 <%
    if(!Utilities.isEmpy(act) && act.equals(TransConstants.ACT_UPDATE_SAVE)) type = "hidden";
    else type="text";
 %>            
-               <input type="<%=type%>" name="<%=TransConstants.FORM_FAMILYCARDMUT_NIK%>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getNIK()):""%>">
+               <input type="<%=type%>" id="userIDVal"  readonly="readonly" name="<%=TransConstants.FORM_FAMILYCARDMUT_NIK%>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getNIK()):""%>">
 <%
    if(!Utilities.isEmpy(act) && act.equals(TransConstants.ACT_UPDATE_SAVE))
    {
@@ -45,14 +63,14 @@
         </div>
         <div >
           <label>Tgl Mulai Berlaku KK Baru</label>
-          <input type="<%=type%>" name="<%=TransConstants.FORM_FAMILYCARDMUT_STARTDATE%>" value="<%=null!=ubn?Utilities.showStringValue(Utilities.dateToString(ubn.getStartDate(), MasterConstants.DATE_HTML_SHORT_PATTERN)):""%>">
+          <input type="<%=type%>" class="date" name="<%=TransConstants.FORM_FAMILYCARDMUT_STARTDATE%>" value="<%=null!=ubn?Utilities.showStringValue(Utilities.dateToString(ubn.getStartDate(), MasterConstants.DATE_HTML_SHORT_PATTERN)):""%>">
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(TransConstants.FORM_FAMILYCARDMUT_STARTDATE):""%></span>
         </div>
       </fieldset>
       <fieldset>
         <div>
           <label>Nama</label>
-          <input type="text" name="<%=TransConstants.FORM_FAMILYCARDMUT_NAME %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getName()):""%>">
+          <input type="text" id="userNameVal" readonly="readonly"  name="<%=TransConstants.FORM_FAMILYCARDMUT_NAME %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getName()):""%>">
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(TransConstants.FORM_FAMILYCARDMUT_NAME):""%></span>
         </div>
         <div>

@@ -13,7 +13,9 @@
 	<property name="public" value="com/sync/home/**/*.class"/>
 	<property name="public_jar" value="public"/>
 	<property name="trans" value="com/sync/trans/**/*.class"/>
-	<property name="trans_jar" value="trans"/>	    
+	<property name="trans_jar" value="trans"/>	   
+	<property name="report" value="com/sync/report/**/*.class"/>
+	<property name="report_jar" value="report"/>
 	<!--property name="main-class"  value="com.sync.core.servlet.CoreServlet"/ -->
 	
 	<path id="classpath">
@@ -44,7 +46,6 @@
     <jar destfile="${lib.dir}/${core_jar}.jar" basedir="${build.dir}">
     	 <include name="${core}"/>
         <manifest>
-          <!--attribute name="Main-Class" value="${main-class}"/ -->
         </manifest>
     	<include name="${build.dir}/*.class"/>
     	<include name="${lib.dir}/*.jar"/>
@@ -52,23 +53,27 @@
 	<jar destfile="${lib.dir}/${master_jar}.jar" basedir="${build.dir}">
          <include name="${master}"/>
         <manifest>
-          <!--attribute name="Main-Class" value="${main-class}"/ -->
         </manifest>
         <include name="${build.dir}/*.class"/>
         <include name="${lib.dir}/*.jar"/>
     </jar>
 	<jar destfile="${lib.dir}/${trans_jar}.jar" basedir="${build.dir}">
-	         <include name="${trans}"/>
-	        <manifest>
-	          <!--attribute name="Main-Class" value="${main-class}"/ -->
-	        </manifest>
-	        <include name="${build.dir}/*.class"/>
-	        <include name="${lib.dir}/*.jar"/>
+         <include name="${trans}"/>
+        <manifest>
+        </manifest>
+        <include name="${build.dir}/*.class"/>
+        <include name="${lib.dir}/*.jar"/>
 	</jar>
+	<jar destfile="${lib.dir}/${report_jar}.jar" basedir="${build.dir}">
+         <include name="${report}"/>
+        <manifest>
+        </manifest>
+        <include name="${build.dir}/*.class"/>
+        <include name="${lib.dir}/*.jar"/>
+    </jar>	
 	<jar destfile="${lib.dir}/${public_jar}.jar" basedir="${build.dir}">
          <include name="${public}"/>
         <manifest>
-          <!--attribute name="Main-Class" value="${main-class}"/ -->
         </manifest>
         <include name="${build.dir}/*.class"/>
         <include name="${lib.dir}/*.jar"/>
