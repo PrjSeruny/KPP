@@ -1,41 +1,9 @@
 package com.sync.core.servlet;
 
-import java.awt.Graphics2D;
-import java.awt.geom.AffineTransform;
-import java.awt.image.BufferedImage;
-import java.io.BufferedInputStream;
 import java.io.IOException;
-import java.io.File;
 import java.io.PrintWriter;
 import java.util.Date;
-import java.util.List;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-import javax.imageio.ImageIO;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -49,22 +17,18 @@ import com.sync.core.beans.SlideBean;
 import com.sync.core.engine.CompanyEngine;
 import com.sync.core.engine.GalleryEngine;
 import com.sync.core.engine.NewsEngine;
-import com.sync.core.engine.RootEngine;
 import com.sync.core.engine.SlideEngine;
 import com.sync.core.utils.Constants;
 import com.sync.core.utils.ServletUtilities;
 import com.sync.core.utils.Utilities;
 import com.sync.home.utils.PublicConstants;
+import com.sync.master.beans.MasterResidentBean;
 import com.sync.master.beans.MasterUserBean;
+import com.sync.master.engine.MasterResidentEngine;
 import com.sync.master.engine.UserEngine;
 import com.sync.master.utils.MasterConstants;
 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileItemFactory;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
 import org.json.JSONObject;
 
 public class CoreServlet extends ServletUtilities
@@ -118,6 +82,10 @@ public class CoreServlet extends ServletUtilities
     else if(!Utilities.isEmpy(_do) && _do.equals(Constants.D_LOGOUT))
     {
       this.doLogout(req, res);
+    }
+    else if(!Utilities.isEmpy(_do) && _do.equals(Constants.D_SEARCH))
+    {
+      this.doViewHome(req, res);;
     }
     else //show website
     {
@@ -272,12 +240,7 @@ public class CoreServlet extends ServletUtilities
     }
     else //show website
     {
-      super.openContent(
-          Constants.SERVLET_PATH, 
-          Constants.HOME_PRM, 
-          Constants.HOME_PAGE, 
-          req, res);
-      return;
+      this.doViewHome(req, res);
     }
     return;
   }
@@ -645,6 +608,33 @@ public class CoreServlet extends ServletUtilities
   private void doViewHome(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
+    String act = req.getParameter(Constants.ACT);
+    
+    if(!Utilities.isEmpy(act) && act.equals(Constants.ACT_LIST)){
+      MasterResidentEngine re = new MasterResidentEngine(req, res);
+      MasterResidentBean[] lists = re.listOfResidents();
+      
+      req.setAttribute(MasterConstants.MASTERRESIDENT_LIST, lists);
+      
+      if(null!=re)re.closed();
+    }else if(!Utilities.isEmpy(act) && act.equals(Constants.ACT_INFO)){
+      String nik = req.getParameter(MasterConstants.FORM_MASTERRESIDENT_NIK);
+      MasterResidentEngine re = new MasterResidentEngine(req, res);
+      MasterResidentBean rebn = null;
+      
+      rebn = re.getMasterResidentInfo(nik);
+      System.out.println("DISPLAYING INFO RESIDENT");
+      req.setAttribute(MasterConstants.MASTERRESIDENT_INFO, rebn);
+      
+      if(null!=re)re.closed();
+      super.openContent(
+          Constants.SERVLET_PATH, 
+          Constants.HOME_PRM, 
+          Constants.HOME_INFO_PAGE, 
+          req, res);
+      return;
+    }
+    
     super.openContent(
         Constants.SERVLET_PATH, 
         Constants.HOME_PRM, 

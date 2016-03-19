@@ -19,6 +19,8 @@ public class Constants
   public static final String D_LOGON = "dlogon";
   /** Constants for logout into database */
   public static final String D_LOGOUT = "dlogout";
+  
+  public static final String D_SEARCH = "dsearch";
 
   public static final String D_VIEW = "vw";
   
@@ -53,6 +55,7 @@ public class Constants
 
   public static final String HOME_PRM = "home";
   public static final String HOME_PAGE = PAGES_PATH + "/home.jsp";
+  public static final String HOME_INFO_PAGE = PAGES_PATH + "/homeinfo.jsp";
   public static final String SLIDE_SETTING_PRM = "sldst";
   public static final String SLIDE_SETTING_PG = PAGES_PATH + "/slide_setting.jsp";
   public static final String FORM_SLIDE_ID = "FORM_SLIDE_ID";
@@ -183,4 +186,5 @@ public class Constants
   
   //Error Access Page
   public static final String ERROR_PAGE = PAGES_PATH + "/Error_Page.jsp";
+  
 }

@@ -24,6 +24,8 @@
                 <input type="text" placeholder="Username" name="<%=Constants.FORM_LOGIN_USERNAME%>">
                 <input type="password" placeholder="Password" name="<%=Constants.FORM_LOGIN_PASSWD%>">
                 <button type="submit" >Login</button><br>
+                <button type="button" style="margin-top: 5px;"
+                onclick="javascript:window.location.href='<%=Constants.ROOT_PATH + Constants.SERVLET_PATH%>?<%=Constants.D%>=<%=Constants.D_SEARCH%>'">Cari Penduduk</button><br>
                 <%=null!=msg && null!=msg.getMessageBean(Constants.FORM_LOGIN_PASSWD)?"<br>"+msg.getMessageBean(Constants.FORM_LOGIN_PASSWD):""%>
             </form>
         </div>
