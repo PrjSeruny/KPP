@@ -126,7 +126,7 @@ public class UserEngine extends RootEngine
     }
     else
     {
-    	msg.setMessageBean(MasterConstants.FORM_MASTERUSER_PASSWD, 
+    	msg.setMessageBean(MasterConstants.FORM_MASTERUSER_LEVEL, 
           "Pilih Level Terlebih dahulu");
     }
     
@@ -146,7 +146,8 @@ public class UserEngine extends RootEngine
     {
       SQL = " SELECT " +
            MasterTable.COL_USERLOGIN_ID + "," +
-           MasterTable.COL_USERLOGIN_NAME +
+           MasterTable.COL_USERLOGIN_NAME + "," +
+           MasterTable.COL_USERLOGIN_LEVEL +
           " FROM " + MasterTable.TABLE_USERLOGIN +
           " WHERE " + MasterTable.COL_USERLOGIN_ID + "='" +
           username + "' AND " + MasterTable.COL_USERLOGIN_PASSWD +
@@ -167,6 +168,7 @@ public class UserEngine extends RootEngine
           rs.next();
           ubn.setUser(rs.getString(MasterTable.COL_USERLOGIN_ID));
           ubn.setName(rs.getString(MasterTable.COL_USERLOGIN_NAME));
+          ubn.setLevelID(rs.getString(MasterTable.COL_USERLOGIN_LEVEL));
         }
       }
       
