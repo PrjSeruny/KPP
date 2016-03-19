@@ -292,6 +292,10 @@ public class Master extends CoreServlet
     {
       this.doViewMasterResident(req, res);
     }
+    else if(!Utilities.isEmpy(act) && act.equals(MasterConstants.ACT_LOOKUP))
+    {
+      this.doLookupMasterResidents(req, res);
+    }
     else
     {
       this.doMasterResidents(req, res);
@@ -302,9 +306,8 @@ public class Master extends CoreServlet
   private void doMasterResidents(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
-    String stat = req.getParameter(MasterConstants.DATA_STAT);
     MasterResidentEngine ue = new MasterResidentEngine(req, res);
-    MasterResidentBean[] lists = ue.listOfResidents(stat);
+    MasterResidentBean[] lists = ue.listOfResidents();
     
     req.setAttribute(MasterConstants.MASTERRESIDENT_LIST, lists);
     
@@ -648,12 +651,25 @@ public class Master extends CoreServlet
     return;
   }
   
+  private void doLookupMasterResidents(HttpServletRequest req, HttpServletResponse res)
+      throws ServletException, IOException
+      {
+        String _for = req.getParameter(MasterConstants.FOR);
+        MasterResidentBean[] bn = null;
+        MasterResidentEngine re = new MasterResidentEngine(req, res);
+        
+        bn = re.lookup();
+        req.setAttribute(MasterConstants.MASTERRESIDENT_LIST, bn);
+        super.openLookup(MasterConstants.MASTER_RESIDENT_LOOKUP, req, res);
+        return;
+      
+      }
+  
   private void doListMasterResidents(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
-    String stat = req.getParameter(MasterConstants.DATA_STAT);
     MasterResidentEngine re = new MasterResidentEngine(req, res);
-    MasterResidentBean[] lists = re.listOfResidents(stat);
+    MasterResidentBean[] lists = re.listOfResidents();
     
     req.setAttribute(MasterConstants.MASTERRESIDENT_LIST, lists);
     

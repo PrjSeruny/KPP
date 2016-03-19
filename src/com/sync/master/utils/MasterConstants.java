@@ -33,6 +33,7 @@ public class MasterConstants extends Constants
   public static final String MASTER_LEVELACCESS_LIST = PAGES_PATH + "/master_levelaccess_list.jsp";
   public static final String MASTER_LEVELACCESS_LOOKUP = PAGES_PATH + "/master_levelaccess_lookup.jsp";
   public static final String MASTER_LEVELACCESS_EDIT = PAGES_PATH + "/master_levelaccess_edit.jsp";
+  public static final String LEVEL_ACCESS_EDIT = PAGES_PATH + "/levelaccess.jsp";
   
   public static final String MASTER_REGIONS = PAGES_PATH + "/region.jsp";
   public static final String MASTER_REGION_LIST = PAGES_PATH + "/region_list.jsp";
@@ -44,8 +45,7 @@ public class MasterConstants extends Constants
   public static final String MASTER_RESIDENT_LIST = PAGES_PATH + "/master_resident_list.jsp";
   public static final String MASTER_RESIDENT_EDIT = PAGES_PATH + "/master_resident_edit.jsp";
   public static final String MASTER_RESIDENT_INFO = PAGES_PATH + "/master_resident_info.jsp";
-  
-  public static final String LEVEL_ACCESS_EDIT = PAGES_PATH + "/levelaccess.jsp";
+  public static final String MASTER_RESIDENT_LOOKUP = PAGES_PATH + "/resident_lookup.jsp";
 
   /* Value of what feature */
   public static final String MASTERUSER = "musr";

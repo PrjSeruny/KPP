@@ -331,7 +331,7 @@ public class MasterResidentEngine extends RootEngine
   }
   
   /** Getting All Master Resident Data */
-  public MasterResidentBean[] listOfResidents(String stat)
+  public MasterResidentBean[] listOfResidents()
   {
     MasterResidentBean[] lists = null;
     int row = 0;
@@ -339,23 +339,10 @@ public class MasterResidentEngine extends RootEngine
     String search = req.getParameter(MasterConstants.FORM_SEARCH_RECORD);
     String limit = req.getParameter(MasterConstants.FORM_LIMIT_RECORD);
 
-    addSQL = " WHERE ";
-    
-    if(!Utilities.isEmpy(stat) && stat.equals(MasterConstants.DATA_RECYCLE))
+    if(!Utilities.isEmpy(search))
     {
-      addSQL += MasterTable.COL_MASTER_RESIDENT_VOIDDATE +
-          " IS NOT NULL AND " + MasterTable.COL_MASTER_RESIDENT_VOIDUSER +
-          " IS NOT NULL ";
-    }
-    else
-    {
-      addSQL += MasterTable.COL_MASTER_RESIDENT_VOIDDATE +
-          " IS NULL AND " + MasterTable.COL_MASTER_RESIDENT_VOIDUSER +
-          " IS NULL ";
-    }
-    
-    if(!Utilities.isEmpy(search)){
-      addSQL += "AND ("+MasterTable.COL_MASTER_RESIDENT_KK+" LIKE '%"+search+"%' OR " +
+      addSQL = " WHERE ";
+      addSQL += " ("+MasterTable.COL_MASTER_RESIDENT_KK+" LIKE '%"+search+"%' OR " +
           MasterTable.COL_MASTER_RESIDENT_NAME+" like '%"+search+"%' OR " +
           MasterTable.COL_MASTER_RESIDENT_NIK+" like '%"+search+"%')";
     }
@@ -436,12 +423,61 @@ public class MasterResidentEngine extends RootEngine
           rs.getString(MasterTable.COL_MASTER_RESIDENT_ENTRYDATE), 
           MasterConstants.DATE_DB_MEDIUM_PATTERN));
       bn.setEntryUser(rs.getString(MasterTable.COL_MASTER_RESIDENT_ENTRYUSER));
-      bn.setVoidDate(Utilities.stringToDate(
-          rs.getString(MasterTable.COL_MASTER_RESIDENT_VOIDDATE), 
-          MasterConstants.DATE_DB_MEDIUM_PATTERN));
-      bn.setVoidUser(rs.getString(MasterTable.COL_MASTER_RESIDENT_VOIDUSER));
     }
     return bn;
+  }
+  
+  public MasterResidentBean[] lookup()
+  {
+    MasterResidentBean[] lists = null;
+    int row = 0;
+    String currPage = req.getParameter(MasterConstants.FORM_CURRENT_PAGE);
+    String search = req.getParameter(MasterConstants.FORM_SEARCH_RECORD);
+    String limit = req.getParameter(MasterConstants.FORM_LIMIT_RECORD);
+    
+    try
+    {
+      if(!Utilities.isEmpy(search))
+      {
+        addSQL += " AND ("+MasterTable.COL_MASTER_RESIDENT_NIK+" LIKE '%"+search+"%' OR " +
+            MasterTable.COL_MASTER_RESIDENT_NAME+" like '%"+search+"%')";
+      }
+      
+      String pagination = buildPagination(MasterTable.TABLE_MASTER_RESIDENT, 
+                          (null==currPage?1:Integer.parseInt(currPage)), 
+                          (null==limit?MasterConstants.DEFAULT_LIMIT_RECORD:Integer.parseInt(limit)));
+                          req.setAttribute(MasterConstants.HTML_PAGINATION, pagination);
+
+      SQL = " SELECT " +
+            MasterTable.TABLE_MASTER_RESIDENT + ".*" +
+            " FROM " +
+            MasterTable.TABLE_MASTER_RESIDENT + 
+            " WHERE " +
+            MasterTable.COL_MASTER_RESIDENT_DEATHDATE + " IS NULL ";
+      
+      SQL += addSQL + SQLlimit;
+      System.out.println("SQL LOOKUP RESIDENT: "+SQL);
+      super.getConnection();
+      rs =  super.executeQuery(SQL);
+      row = super.getTotalRow();
+      
+      if(row<=0) return null;
+      
+      lists = new MasterResidentBean[row];
+      if(null!=rs)
+      {
+        for(int i=0; i<row; i++)
+        {
+          lists[i] = this.next();
+        }
+      }
+    }
+    catch(Exception e)
+    {
+      e.printStackTrace();
+      lists = null;
+    }
+    return lists;
   }
   
   public MasterResidentBean getMasterResidentInfo(String nik)
@@ -497,7 +533,7 @@ public class MasterResidentEngine extends RootEngine
                MasterTable.COL_MASTER_RESIDENT_MARITALSTATUS + "," +
                MasterTable.COL_MASTER_RESIDENT_FAMILYPOS + "," +
                MasterTable.COL_MASTER_RESIDENT_WORK + "," +
-               MasterTable.COL_MASTER_RESIDENT_NATIONALITY + "," +
+               MasterTable.COL_MASTER_RESIDENT_NATIONALITY + "," +  
                MasterTable.COL_MASTER_RESIDENT_ADDRESS + "," +
                MasterTable.COL_MASTER_RESIDENT_CITY + "," +
                MasterTable.COL_MASTER_RESIDENT_REGION + "," +
@@ -511,6 +547,7 @@ public class MasterResidentEngine extends RootEngine
                MasterTable.COL_MASTER_RESIDENT_CREATEUSER +
              ")" +
             " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+      
       
       super.getConnection();
       stat = con.prepareStatement(SQL);
@@ -540,9 +577,16 @@ public class MasterResidentEngine extends RootEngine
           MasterConstants.DATE_DB_MEDIUM_PATTERN));
       stat.setString(22, uses.getUser());
       
-      System.out.println("END ENGINE CREATE NEW RESIDENT");
-      if(stat.executeUpdate()>0) return true;
-      else return false;
+      if(stat.executeUpdate()>0)
+      {
+        System.out.println("SUCCEED CREATED RESIDENT");
+         return true;
+      }
+      else
+      {
+        System.out.println("FALSE RESULT CREATE RESIDENT");
+        return false;
+      }
     }
     catch(Exception e)
     {
@@ -690,16 +734,10 @@ public class MasterResidentEngine extends RootEngine
   public boolean delete(String[] niks)
   {
     boolean res = false;
-    HttpSession ses = req.getSession(false);
-    MasterUserBean uses = (MasterUserBean)ses.getAttribute(
-        MasterConstants.MASTERUSER);
     
     try
     {
-      SQL = " UPDATE " + MasterTable.TABLE_MASTER_RESIDENT +
-          " SET " +
-          MasterTable.COL_MASTER_RESIDENT_VOIDDATE + "=?, " +
-          MasterTable.COL_MASTER_RESIDENT_VOIDUSER + "=? " +
+      SQL = " DELETE FROM " + MasterTable.TABLE_MASTER_RESIDENT +
           " WHERE " +
           MasterTable.COL_MASTER_RESIDENT_NIK + "=?;";
     
@@ -708,10 +746,7 @@ public class MasterResidentEngine extends RootEngine
     
     for(int i=0; i<niks.length; i++)
     {
-      stat.setString(1, Utilities.dateToString(new Date(), 
-          MasterConstants.DATE_DB_MEDIUM_PATTERN));
-      stat.setString(2, uses.getUser());
-      stat.setString(3, niks[i]);
+      stat.setString(1, niks[i]);
       stat.executeUpdate();
     }
     
