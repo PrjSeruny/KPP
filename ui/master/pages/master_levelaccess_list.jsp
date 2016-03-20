@@ -55,6 +55,5 @@ String type="";
   </table>
 </div>
 </fieldset>
-<%=pagination %>
 
 <input type="hidden" name="<%=MasterConstants.ACT%>" value="<%=MasterConstants.ACT_LIST%>">
