@@ -1,3 +1,4 @@
+<%@page import="com.sync.report.beans.ResidentAnalysisDetailsBean"%>
 <%@page import="com.sync.report.utils.ReportConstants"%>
 <%@page import="com.sync.report.beans.ResidentAnalysisBean"%>
 <%@page import="com.sync.master.utils.MasterConstants"%>
@@ -13,17 +14,27 @@
    ResidentAnalysisBean ubn = (ResidentAnalysisBean)request.getAttribute(ReportConstants.RESIDENTANALYSIS_LIST);
    MessageBean msg = null;
    String genmsg ="";
-   
+   if(null!=ubn)
+   {
+     msg = ubn.getBeanMessages();
+     if(null!=msg)
+     {
+       genmsg = msg.getMessageBean(MessageBean.MSG_ERR);
+       System.out.println(">>>>>>>>>>>>> genmsg= "+genmsg);
+     }
+   }
 %>
 <fieldset class="wrapper">
   <form name="search" method="post" action="<%=Constants.ROOT_PATH%><%=ReportConstants.SVT_REPORT_PATH%>">
      <input type="hidden" name="<%=ReportConstants.W%>" value="<%=ReportConstants.REPORT_RESIDENTANALYSIS%>">
-     <input type="hidden" name="<%=ReportConstants.ACT%>" value="<%=act%>">
+     <input type="hidden" name="<%=ReportConstants.ACT%>" value="<%=ReportConstants.ACT_SEARCH_QUERY%>">
     <div class="form">
       <h2 class="title">Analisa Penduduk</h2>
       <fieldset>
+        <div><label>Tipe Pencarian</label></div>
         <div><label class="input"><input type="radio" name="<%=ReportConstants.FORM_RESIDENTANALYSIS_SEARCH%>" value="<%=ReportConstants.FORM_RESIDENTANALYSIS_SEARCH_DETAILS%>">Data Kependudukan</label></div>
         <div><label class="input"><input type="radio" name="<%=ReportConstants.FORM_RESIDENTANALYSIS_SEARCH%>" value="<%=ReportConstants.FORM_RESIDENTANALYSIS_SEARCH_RECAP%>">Rekapitulasi Data</label></div>
+        <br><span class="erroritm"><%=null!=msg?msg.showMessage(ReportConstants.FORM_RESIDENTANALYSIS_SEARCH):""%></span>
       </fieldset>
       <fieldset>
         <div>
@@ -76,4 +87,49 @@
       </fieldset>
     </div>
   </form>
+<%
+    ResidentAnalysisDetailsBean[] list = null;
+   if(null!=ubn)
+   {
+     list = ubn.getDetails();     
+   }
+%>  
+  <table border="0" class="list-tb" style="width: 100%;">
+                    <tr>
+                        <th>NIK</th>
+                        <th>No.KK</th>
+                        <th>Nama</th>
+                        <th>Jenis Kelamin</th>
+                        <th>Tgl Lahir</th>
+                        <th>Alamat</th>
+                        <th>Agama</th>
+                    </tr>
+            <%
+                 if(null!=list && list.length>0)
+                 {
+                   for(int i=0; i<list.length; i++)
+                   {
+             %>
+                      <tr>
+                        <td valign="top"><%=list[i].getNIK()%></a></td>
+                        <td valign="top"><%=list[i].getKKNo()%></td>
+                        <td valign="top" align="left"><%=list[i].getName()%></td>
+                        <td valign="top"><%=list[i].getSexVal()%></td>
+                        <td valign="top"><%=Utilities.dateToString(list[i].getBirthDate(), Constants.DATE_HTML_SHORT_PATTERN)%></td>
+                        <td valign="top" align="left"><%=list[i].getAddress()%></td>
+                        <td valign="top"><%=list[i].getReligion()%></td>
+                      </tr>
+                <%       
+                    }
+                  }
+                  else
+                  {
+              %>
+                     <tr>
+                       <td valign="top" align="center" colspan="8">Data yang dicari tidak ditemukan!</td>
+                     </tr>
+              <%
+                  }
+              %>                    
+              </table>
 </fieldset>

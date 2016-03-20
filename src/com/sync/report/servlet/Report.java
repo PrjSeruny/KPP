@@ -52,13 +52,27 @@ public class Report extends CoreServlet
   throws ServletException, IOException
   {
     String act = req.getParameter(ReportConstants.ACT);
-    ResidentAnalysisEngine rae = new ResidentAnalysisEngine();
-    ResidentAnalysisBean bn = null;
+    ResidentAnalysisEngine rae = new ResidentAnalysisEngine(req, res);
+    ResidentAnalysisBean bn = new ResidentAnalysisBean();
     
     if(!Utilities.isEmpy(act) && act.equals(ReportConstants.ACT_SEARCH_QUERY))
     {
+      System.out.println("OOOOOOOOOOOOOOOOOOOOO searching1");
       bn = rae.validate();
+      req.setAttribute(ReportConstants.RESIDENTANALYSIS_LIST, bn);
+      if(null!=bn.getBeanMessages() && bn.getBeanMessages().isErrorExist())
+      {
+        super.openContent(
+            ReportConstants.SVT_REPORT_PATH, 
+            ReportConstants.REPORT_PATH, 
+            ReportConstants.PAGE_RESIDENTANALYSIS_SEARCH, 
+            req, res);
+        return;
+      }
+      
+      System.out.println("OOOOOOOOOOOOOOOOOOOOO searching2");
       bn = rae.search(bn);
+      System.out.println("OOOOOOOOOOOOOOOOOOOOO searching3");
       req.setAttribute(ReportConstants.RESIDENTANALYSIS_LIST, bn);
       if(null!=rae)rae.closed();
     }

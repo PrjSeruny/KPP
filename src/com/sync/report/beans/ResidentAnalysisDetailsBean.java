@@ -52,6 +52,11 @@ public class ResidentAnalysisDetailsBean
   
   public void setSex(int val){ Sex = val; }
   public int getSex(){ return Sex; }
+  public String getSexVal()
+  {
+    if(Sex==MasterConstants.SEX_F) return "Perempuan";
+    else return "Laki-Laki";
+  }
   
   public void setReligion(String val){ Religion = val; }
   public String getReligion(){ return Religion; }

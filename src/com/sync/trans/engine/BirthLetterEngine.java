@@ -530,18 +530,10 @@ public class BirthLetterEngine extends RootEngine
       
       if(!cancelled)
       {
-        errMsg = this.proceedResidentHistory(bn, cancelled);
-        if(!Utilities.isEmpy(errMsg))
-        {
-          throw new Exception(errMsg);
-        }
-        else
-        {
           bn.setProcessDate(new Date());
           bn.setProcessUser(user.getUser());
           bn.setCancelProcessDate(null);
           bn.setCancelProcessUser(null);
-        }
       }
       else
       {
@@ -674,6 +666,8 @@ public class BirthLetterEngine extends RootEngine
     
     return errMsg;
   }
+  
+
   
   public void closed()
   {
