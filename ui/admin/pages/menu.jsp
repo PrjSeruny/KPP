@@ -35,9 +35,9 @@
           <li><a href="javascript:void(0)" url="<%=TransConstants.ROOT_PATH%><%=TransConstants.SVT_TRANS_PATH%>?<%=TransConstants.W%>=<%=TransConstants.TRANS_DEATHLETTER%>&<%=TransConstants.DATA_STAT%>=<%=TransConstants.DATA_CURRENT%>">Data Kematian</a></li>
           </ul>
       </li>
-      <li class="report"><a href="javascript:void(0)" url="<%=ReportConstants.ROOT_PATH%><%=ReportConstants.SVT_REPORT_PATH%>?<%=ReportConstants.W%>=<%=ReportConstants.REPORT_RESIDENTANALYSIS%>">Laporan</a>
+      <li class="report"><a href="javascript:void(0)">Laporan</a>
           <ul>
-          <li><a href="javascript:void(0)">Laporan Penduduk</a></li>
+          <li><a href="javascript:void(0)" url="<%=ReportConstants.ROOT_PATH%><%=ReportConstants.SVT_REPORT_PATH%>?<%=ReportConstants.W%>=<%=ReportConstants.REPORT_RESIDENTANALYSIS%>">Laporan Penduduk</a></li>
           </ul>
       </li>
       <li class="logout"><a href="<%=Constants.ROOT_PATH%><%=Constants.SERVLET_PATH%>?<%=Constants.D%>=<%=Constants.D_LOGOUT%>">Logout</a></li>
