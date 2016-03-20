@@ -94,6 +94,8 @@ public class LevelAccessEngine extends RootEngine
 		Permission = this.validatePublicSetting(bn, Permission);
 		//Validate Master
 		Permission = this.validateMaster(bn, Permission);
+		//Validate Master
+		Permission = this.validateTransaction(bn, Permission);
 		
 		bn.setDataPermission(Permission);
 		
@@ -124,6 +126,20 @@ public class LevelAccessEngine extends RootEngine
 		if(null!=tmpPermission && tmpPermission.length > 0)
 		{
 			Permission.put(Constants.NEWS_SETTING_PRM, tmpPermission);
+		}
+		
+		//News Setting Permission
+		tmpPermission = req.getParameterValues(Constants.COMPANY_SETTING_PRM);
+		if(null!=tmpPermission && tmpPermission.length > 0)
+		{
+			Permission.put(Constants.COMPANY_SETTING_PRM, tmpPermission);
+		}
+			
+		//News Setting Permission
+		tmpPermission = req.getParameterValues(Constants.PROFILE_SETTING_PRM);
+		if(null!=tmpPermission && tmpPermission.length > 0)
+		{
+			Permission.put(Constants.PROFILE_SETTING_PRM, tmpPermission);
 		}
 		
 		return Permission;

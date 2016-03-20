@@ -84,6 +84,30 @@ $(document).ready(function(){
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=Constants.GALLERY_SETTING_PRM %>" value="<%=LevelAccessBean.PERMIT_UPDATE%>" <%=lp.checkValidate(LevelID, Constants.GALLERY_SETTING_PRM, LevelAccessBean.PERMIT_CREATE)?"checked":""%>/></td>
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=Constants.GALLERY_SETTING_PRM %>" value="<%=LevelAccessBean.PERMIT_DELETE%>" <%=lp.checkValidate(LevelID, Constants.GALLERY_SETTING_PRM, LevelAccessBean.PERMIT_DELETE)?"checked":""%>/></td>
 	    </tr>
+	    <tr class="print" bgcolor="#FFCCCC">
+	      <td class="print" valign="top" width="250"><b>Kontak Setting</b></td>
+	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=Constants.COMPANY_SETTING_PRM %>" value="<%=LevelAccessBean.PERMIT_LIST%>" <%=lp.checkValidate(LevelID, Constants.COMPANY_SETTING_PRM, LevelAccessBean.PERMIT_LIST)?"checked":""%>/></td>
+	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=Constants.COMPANY_SETTING_PRM %>" value="<%=LevelAccessBean.PERMIT_INFO%>" <%=lp.checkValidate(LevelID, Constants.COMPANY_SETTING_PRM, LevelAccessBean.PERMIT_INFO)?"checked":""%>/></td>
+	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=Constants.COMPANY_SETTING_PRM %>" value="<%=LevelAccessBean.PERMIT_CREATE%>" <%=lp.checkValidate(LevelID, Constants.COMPANY_SETTING_PRM, LevelAccessBean.PERMIT_CREATE)?"checked":""%>/></td>
+	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=Constants.COMPANY_SETTING_PRM %>" value="<%=LevelAccessBean.PERMIT_UPDATE%>" <%=lp.checkValidate(LevelID, Constants.COMPANY_SETTING_PRM, LevelAccessBean.PERMIT_CREATE)?"checked":""%>/></td>
+	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=Constants.COMPANY_SETTING_PRM %>" value="<%=LevelAccessBean.PERMIT_DELETE%>" <%=lp.checkValidate(LevelID, Constants.COMPANY_SETTING_PRM, LevelAccessBean.PERMIT_DELETE)?"checked":""%>/></td>
+	    </tr>
+	    <tr class="print" bgcolor="#FFCCCC">
+	      <td class="print" valign="top" width="250"><b>Profile</b></td>
+	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=Constants.PROFILE_SETTING_PRM %>" value="<%=LevelAccessBean.PERMIT_LIST%>" <%=lp.checkValidate(LevelID, Constants.PROFILE_SETTING_PRM, LevelAccessBean.PERMIT_LIST)?"checked":""%>/></td>
+	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=Constants.PROFILE_SETTING_PRM %>" value="<%=LevelAccessBean.PERMIT_INFO%>" <%=lp.checkValidate(LevelID, Constants.PROFILE_SETTING_PRM, LevelAccessBean.PERMIT_INFO)?"checked":""%>/></td>
+	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=Constants.PROFILE_SETTING_PRM %>" value="<%=LevelAccessBean.PERMIT_CREATE%>" <%=lp.checkValidate(LevelID, Constants.PROFILE_SETTING_PRM, LevelAccessBean.PERMIT_CREATE)?"checked":""%>/></td>
+	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=Constants.PROFILE_SETTING_PRM %>" value="<%=LevelAccessBean.PERMIT_UPDATE%>" <%=lp.checkValidate(LevelID, Constants.PROFILE_SETTING_PRM, LevelAccessBean.PERMIT_CREATE)?"checked":""%>/></td>
+	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=Constants.PROFILE_SETTING_PRM %>" value="<%=LevelAccessBean.PERMIT_DELETE%>" <%=lp.checkValidate(LevelID, Constants.PROFILE_SETTING_PRM, LevelAccessBean.PERMIT_DELETE)?"checked":""%>/></td>
+	    </tr>
+	    <tr class="print" bgcolor="#FFCCCC">
+	      <td class="print" valign="top" width="250"><b>Berita</b></td>
+	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=Constants.NEWS_SETTING_PRM %>" value="<%=LevelAccessBean.PERMIT_LIST%>" <%=lp.checkValidate(LevelID, Constants.NEWS_SETTING_PRM, LevelAccessBean.PERMIT_LIST)?"checked":""%>/></td>
+	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=Constants.NEWS_SETTING_PRM %>" value="<%=LevelAccessBean.PERMIT_INFO%>" <%=lp.checkValidate(LevelID, Constants.NEWS_SETTING_PRM, LevelAccessBean.PERMIT_INFO)?"checked":""%>/></td>
+	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=Constants.NEWS_SETTING_PRM %>" value="<%=LevelAccessBean.PERMIT_CREATE%>" <%=lp.checkValidate(LevelID, Constants.NEWS_SETTING_PRM, LevelAccessBean.PERMIT_CREATE)?"checked":""%>/></td>
+	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=Constants.NEWS_SETTING_PRM %>" value="<%=LevelAccessBean.PERMIT_UPDATE%>" <%=lp.checkValidate(LevelID, Constants.NEWS_SETTING_PRM, LevelAccessBean.PERMIT_CREATE)?"checked":""%>/></td>
+	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=Constants.NEWS_SETTING_PRM %>" value="<%=LevelAccessBean.PERMIT_DELETE%>" <%=lp.checkValidate(LevelID, Constants.NEWS_SETTING_PRM, LevelAccessBean.PERMIT_DELETE)?"checked":""%>/></td>
+	    </tr>
 	    <tr class="print" bgcolor="#FFFFFF">
 	      <td valign="top" height="2" colspan="9">&nbsp;</td>
 	    </tr>

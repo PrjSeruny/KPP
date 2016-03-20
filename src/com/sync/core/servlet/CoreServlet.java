@@ -22,6 +22,7 @@ import com.sync.core.utils.Constants;
 import com.sync.core.utils.ServletUtilities;
 import com.sync.core.utils.Utilities;
 import com.sync.home.utils.PublicConstants;
+import com.sync.master.beans.LevelAccessBean;
 import com.sync.master.beans.MasterResidentBean;
 import com.sync.master.beans.MasterUserBean;
 import com.sync.master.engine.MasterResidentEngine;
@@ -248,6 +249,16 @@ public class CoreServlet extends ServletUtilities
   private void doProfileSetting(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
+  	if(!super.validateAcces(
+  			req, 
+  			res, 
+  			Constants.PROFILE_SETTING_PRM, 
+  			LevelAccessBean.PERMIT_INFO))
+  	{
+  		super.openURL(Constants.ERROR_PAGE, req, res);
+  		return;
+  	}
+  	
     String act = req.getParameter(Constants.ACT);
     System.out.println("action : "+act);
     if (!Utilities.isEmpy(act) && act.equals(Constants.ACT_CREATE_SAVE)){
@@ -268,6 +279,16 @@ public class CoreServlet extends ServletUtilities
   private void doCompanySetting(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
+  	if(!super.validateAcces(
+  			req, 
+  			res, 
+  			Constants.COMPANY_SETTING_PRM, 
+  			LevelAccessBean.PERMIT_INFO))
+  	{
+  		super.openURL(Constants.ERROR_PAGE, req, res);
+  		return;
+  	}
+  	
     String act = req.getParameter(Constants.ACT);
     System.out.println("action : "+act);
     if (!Utilities.isEmpy(act) && act.equals(Constants.ACT_CREATE_SAVE)){
