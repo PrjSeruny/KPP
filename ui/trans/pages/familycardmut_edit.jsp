@@ -138,17 +138,23 @@
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(TransConstants.FORM_FAMILYCARDMUT_ADDRESS):""%></span>
         </div>
         <div >
-          <label>Kota</label><a href="javascript:void(0)" 
+          <label>Kota</label>
+          <!-- a href="javascript:void(0)" 
           class="lookup"
           valTarget="#userIDVal;#userNameVal"
           param="width=450;height=300"
-          url="<%=Constants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>?<%=Constants.W%>=<%=MasterConstants.MASTER_REGION%>&<%=MasterConstants.ACT%>=<%=MasterConstants.ACT_LOOKUP%>&<%=MasterConstants.LOOKUP_SINGLE%>=1&<%=MasterConstants.FORM_MASTERREGION_REGIONONLY%>=false&<%=TransConstants.FORM_FIELD1%>=create.<%=TransConstants.FORM_FAMILYCARDMUT_REGION%>&<%=TransConstants.FORM_FIELD2%>=create.<%=TransConstants.FORM_FAMILYCARDMUT_CITY%>&<%=TransConstants.FORM_FIELD3%>=create.<%=TransConstants.FORM_FAMILYCARDMUT_KECAMATAN%>&<%=TransConstants.FORM_FIELD4%>=create.<%=TransConstants.FORM_FAMILYCARDMUT_KELURAHAN%>">Cari</a>
-          <input type="text" name="<%=TransConstants.FORM_FAMILYCARDMUT_CITY %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getCity()):""%>">
+          url="<%=Constants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>?<%=Constants.W%>=<%=MasterConstants.MASTER_REGION%>&<%=MasterConstants.ACT%>=<%=MasterConstants.ACT_LOOKUP%>&<%=MasterConstants.LOOKUP_SINGLE%>=1&<%=MasterConstants.FORM_MASTERREGION_REGIONONLY%>=false&<%=TransConstants.FORM_FIELD1%>=create.<%=TransConstants.FORM_FAMILYCARDMUT_REGION%>&<%=TransConstants.FORM_FIELD2%>=create.<%=TransConstants.FORM_FAMILYCARDMUT_CITY%>&<%=TransConstants.FORM_FIELD3%>=create.<%=TransConstants.FORM_FAMILYCARDMUT_KECAMATAN%>&<%=TransConstants.FORM_FIELD4%>=create.<%=TransConstants.FORM_FAMILYCARDMUT_KELURAHAN%>">Cari</a -->
+          <a href="javascript:void(0)" 
+          class="lookup"
+          valTarget="#userIDVals;#userNameVals"
+          param="width=600;height=300"
+          url="<%=Constants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>?<%=Constants.W%>=<%=MasterConstants.MASTER_REGION_CITY%>&<%=MasterConstants.ACT%>=<%=MasterConstants.ACT_LOOKUP%>&<%=MasterConstants.LOOKUP_SINGLE%>=1">Cari</a>
+          <input type="text" id="userIDVals" name="<%=TransConstants.FORM_FAMILYCARDMUT_CITY %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getCity()):""%>">
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(TransConstants.FORM_FAMILYCARDMUT_CITY):""%></span>
         </div>
         <div >
           <label>Propinsi</label>
-          <input type="text" name="<%=TransConstants.FORM_FAMILYCARDMUT_REGION %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getRegion()):""%>" readonly="readonly">
+          <input type="text" id="userNameVals" name="<%=TransConstants.FORM_FAMILYCARDMUT_REGION %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getRegion()):""%>" readonly="readonly">
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(TransConstants.FORM_FAMILYCARDMUT_REGION):""%></span>
         </div>
         <div >
@@ -160,12 +166,22 @@
       <fieldset>
         <div >
           <label>Kecamatan</label>
-          <input type="text" name="<%=TransConstants.FORM_FAMILYCARDMUT_KECAMATAN %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getKecamatan()):""%>" readonly="readonly">
+          <a href="javascript:void(0)" 
+          class="lookup"
+          valTarget="#userIDVals3"
+          param="width=600;height=300"
+          url="<%=Constants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>?<%=Constants.W%>=<%=MasterConstants.MASTER_REGION_KEC%>&<%=MasterConstants.ACT%>=<%=MasterConstants.ACT_LOOKUP%>&<%=MasterConstants.LOOKUP_SINGLE%>=1">Cari</a>
+          <input type="text" id="userIDVals3" name="<%=TransConstants.FORM_FAMILYCARDMUT_KECAMATAN %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getKecamatan()):""%>" readonly="readonly">
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(TransConstants.FORM_FAMILYCARDMUT_KECAMATAN):""%></span>
         </div>
         <div >
           <label>Kelurahan</label>
-          <input type="text" name="<%=TransConstants.FORM_FAMILYCARDMUT_KELURAHAN %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getKelurahan()):""%>" readonly="readonly">
+          <a href="javascript:void(0)" 
+          class="lookup"
+          valTarget="#userIDVals2"
+          param="width=600;height=300"
+          url="<%=Constants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>?<%=Constants.W%>=<%=MasterConstants.MASTER_REGION_KEL%>&<%=MasterConstants.ACT%>=<%=MasterConstants.ACT_LOOKUP%>&<%=MasterConstants.LOOKUP_SINGLE%>=1">Cari</a>
+          <input type="text" id="userIDVals2" name="<%=TransConstants.FORM_FAMILYCARDMUT_KELURAHAN %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getKelurahan()):""%>" readonly="readonly">
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(TransConstants.FORM_FAMILYCARDMUT_KELURAHAN):""%></span>
         </div>
         <div >
