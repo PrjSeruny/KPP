@@ -1,6 +1,8 @@
 package com.sync.core.pool;
 
+import java.util.ArrayList;
 import java.util.TreeMap;
+
 import com.sync.core.beans.SlideBean;
 import com.sync.core.engine.SlideEngine;
 
@@ -35,6 +37,12 @@ public class SlidePool {
 
   public SlideBean get(Integer key) { return collections.get(key); }
 
+  public ArrayList<SlideBean> getValue()
+  {
+  	ArrayList<SlideBean> value = new ArrayList<SlideBean>(collections.values());
+  	return value;
+  }
+  
   public void remove(Integer key) 
   { synchronized(lock) { collections.remove(key); } }
   

@@ -1,5 +1,6 @@
 package com.sync.core.pool;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.sync.core.beans.NewsBean;
@@ -36,6 +37,12 @@ public class NewsPool {
 
   public NewsBean get(Integer key) { return collections.get(key); }
 
+  public ArrayList<NewsBean> getValue()
+  {
+  	ArrayList<NewsBean> value = new ArrayList<NewsBean>(collections.values());
+  	return value;
+  }
+  
   public void remove(Integer key) 
   { synchronized(lock) { collections.remove(key); } }
   
