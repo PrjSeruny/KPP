@@ -103,6 +103,16 @@ public class Transaction extends CoreServlet
   private void doDeathLetter(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
+  	if(!super.validateAcces(
+  			req, 
+  			res, 
+  			TransConstants.TRANS_DEATHLETTER, 
+  			LevelAccessBean.PERMIT_LIST))
+  	{
+  		super.openURL(TransConstants.ERROR_PAGE, req, res);
+  		return;
+  	}
+  	
     String stat = req.getParameter(TransConstants.DATA_STAT);
     DeathLetterEngine ue = new DeathLetterEngine(req, res);
     DeathLetterBean[] lists = ue.listOfLetter(stat);
@@ -504,6 +514,16 @@ public class Transaction extends CoreServlet
   private void doBirthLetter(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
+  	if(!super.validateAcces(
+  			req, 
+  			res, 
+  			TransConstants.TRANS_BIRTHLETTER, 
+  			LevelAccessBean.PERMIT_LIST))
+  	{
+  		super.openURL(TransConstants.ERROR_PAGE, req, res);
+  		return;
+  	}
+  	
     String stat = req.getParameter(TransConstants.DATA_STAT);
     BirthLetterEngine ue = new BirthLetterEngine(req, res);
     BirthLetterBean[] lists = ue.listOfLetter(stat);
@@ -524,6 +544,16 @@ public class Transaction extends CoreServlet
   private void doCreateBirthLetter(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
+  	if(!super.validateAcces(
+  			req, 
+  			res, 
+  			TransConstants.TRANS_BIRTHLETTER, 
+  			LevelAccessBean.PERMIT_CREATE))
+  	{
+  		super.openURL(TransConstants.ERROR_PAGE, req, res);
+  		return;
+  	}
+  	
     System.out.println("CREATE NEW BIRTH LETTER");
     String act = req.getParameter(TransConstants.ACT);
     BirthLetterEngine re = new BirthLetterEngine(req, res);
@@ -586,6 +616,16 @@ public class Transaction extends CoreServlet
   private void doUpdateBirthLetter(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
+  	if(!super.validateAcces(
+  			req, 
+  			res, 
+  			TransConstants.TRANS_BIRTHLETTER, 
+  			LevelAccessBean.PERMIT_UPDATE))
+  	{
+  		super.openURL(TransConstants.ERROR_PAGE, req, res);
+  		return;
+  	}
+  	
     System.out.println("UPDATING BIRTH LETTER");
     String nik = req.getParameter(TransConstants.FORM_TRANS_BIRTHLETTER_NIK);
     String act = req.getParameter(TransConstants.ACT);
@@ -682,6 +722,16 @@ public class Transaction extends CoreServlet
   private void doDeleteBirthLetter(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
+  	if(!super.validateAcces(
+  			req, 
+  			res, 
+  			TransConstants.TRANS_BIRTHLETTER, 
+  			LevelAccessBean.PERMIT_DELETE))
+  	{
+  		super.openURL(TransConstants.ERROR_PAGE, req, res);
+  		return;
+  	}
+  	
     System.out.println("PREPARING DELETE Birth Letter");
     String[] niks = req.getParameterValues(TransConstants.CHKBOX);
     
@@ -709,6 +759,15 @@ public class Transaction extends CoreServlet
   private void doListBirthLetter(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
+  	if(!super.validateAcces(
+  			req, 
+  			res, 
+  			TransConstants.TRANS_BIRTHLETTER, 
+  			LevelAccessBean.PERMIT_LIST))
+  	{
+  		super.openURL(TransConstants.ERROR_PAGE, req, res);
+  		return;
+  	}
     String stat = req.getParameter(TransConstants.DATA_STAT);
     BirthLetterEngine re = new BirthLetterEngine(req, res);
     BirthLetterBean[] lists = re.listOfLetter(stat);
@@ -727,6 +786,16 @@ public class Transaction extends CoreServlet
   private void doViewBirthLetter(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
+  	if(!super.validateAcces(
+  			req, 
+  			res, 
+  			TransConstants.TRANS_BIRTHLETTER, 
+  			LevelAccessBean.PERMIT_INFO))
+  	{
+  		super.openURL(TransConstants.ERROR_PAGE, req, res);
+  		return;
+  	}
+  	
     System.out.println("VIEWING INFO BIRTH LETTER");
     String nik = req.getParameter(TransConstants.FORM_TRANS_BIRTHLETTER_NIK);
     BirthLetterEngine re = new BirthLetterEngine(req, res);
@@ -753,6 +822,15 @@ public class Transaction extends CoreServlet
   private void doCreateDeathLetter(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
+  	if(!super.validateAcces(
+  			req, 
+  			res, 
+  			TransConstants.TRANS_DEATHLETTER, 
+  			LevelAccessBean.PERMIT_CREATE))
+  	{
+  		super.openURL(TransConstants.ERROR_PAGE, req, res);
+  		return;
+  	}
     System.out.println("CREATE NEW DEATH LETTER");
     String act = req.getParameter(TransConstants.ACT);
     DeathLetterEngine re = new DeathLetterEngine(req, res);
@@ -814,6 +892,15 @@ public class Transaction extends CoreServlet
   private void doUpdateDeathLetter(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
+  	if(!super.validateAcces(
+  			req, 
+  			res, 
+  			TransConstants.TRANS_DEATHLETTER, 
+  			LevelAccessBean.PERMIT_UPDATE))
+  	{
+  		super.openURL(TransConstants.ERROR_PAGE, req, res);
+  		return;
+  	}
     System.out.println("UPDATING DEATH LETTER");
     String nik = req.getParameter(TransConstants.FORM_TRANS_DEATHLETTER_NIK);
     String act = req.getParameter(TransConstants.ACT);
@@ -911,6 +998,16 @@ public class Transaction extends CoreServlet
   private void doDeleteDeathLetter(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
+  	if(!super.validateAcces(
+  			req, 
+  			res, 
+  			TransConstants.TRANS_DEATHLETTER, 
+  			LevelAccessBean.PERMIT_DELETE))
+  	{
+  		super.openURL(TransConstants.ERROR_PAGE, req, res);
+  		return;
+  	}
+  	
     System.out.println("PREPARING DELETE Death Letter");
     String[] niks = req.getParameterValues(TransConstants.CHKBOX);
     
@@ -938,6 +1035,15 @@ public class Transaction extends CoreServlet
   private void doListDeathLetter(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
+  	if(!super.validateAcces(
+  			req, 
+  			res, 
+  			TransConstants.TRANS_DEATHLETTER, 
+  			LevelAccessBean.PERMIT_LIST))
+  	{
+  		super.openURL(TransConstants.ERROR_PAGE, req, res);
+  		return;
+  	}
     String stat = req.getParameter(TransConstants.DATA_STAT);
     DeathLetterEngine re = new DeathLetterEngine(req, res);
     DeathLetterBean[] lists = re.listOfLetter(stat);
@@ -956,6 +1062,16 @@ public class Transaction extends CoreServlet
   private void doViewDeathLetter(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
+  	if(!super.validateAcces(
+  			req, 
+  			res, 
+  			TransConstants.TRANS_DEATHLETTER, 
+  			LevelAccessBean.PERMIT_INFO))
+  	{
+  		super.openURL(TransConstants.ERROR_PAGE, req, res);
+  		return;
+  	}
+  	
     System.out.println("VIEWING INFO DEATH LETTER");
     String nik = req.getParameter(TransConstants.FORM_TRANS_DEATHLETTER_NIK);
     DeathLetterEngine re = new DeathLetterEngine(req, res);
