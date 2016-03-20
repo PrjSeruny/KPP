@@ -107,11 +107,11 @@ public class Utilities
   public static String verifyImage(String path)
   {
     String filePath = Constants.DIR_PATH + Constants.ROOT_PATH + path;
-    String result = "."  + Constants.IMAGES_PATH + "/noimage.jpg";
+    String result = Constants.ROOT_PATH  + Constants.IMAGES_PATH + "/noimage.jpg";
     
     File file = new File(filePath);
     if(file.exists() && file.isFile()){
-      result = "." + path;
+      result = Constants.ROOT_PATH + path;
     }
     
     return result;

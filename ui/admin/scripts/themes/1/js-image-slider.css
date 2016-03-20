@@ -72,7 +72,7 @@
 /* ------ built-in navigation bullets wrapper ------*/
 /* Note: check themes\2\js-image-slider.css to see how to hide nav bullets */
 #slider div.navBulletsWrapper  {
-    top: 300px;
+    top: 360px;
 	text-align: right;
 	background: none;
 	position: relative;

@@ -1,8 +1,22 @@
 <!DOCTYPE HTML>
 <!-- Website Template by freewebsitetemplates.com -->
+<%@page import="com.sync.core.utils.*"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.Collections"%>
+<%@page import="com.sync.core.beans.*"%>
+<%@page import="com.sync.core.pool.*"%>
 <%@page import="com.sync.home.utils.PublicConstants"%>
 <%@page import="com.sync.core.utils.Constants"%>
 <html>
+<%
+SlidePool sp = SlidePool.getInstance();
+ArrayList<SlideBean> sb = sp.getValue();
+Collections.sort(sb, SlideBean.cmpSlide);
+
+NewsPool np = NewsPool.getInstance();
+ArrayList<NewsBean> nb = np.getValue();
+Collections.sort(nb, NewsBean.compNews);
+%>
 <head>
     <meta charset="UTF-8">
     <title>Company Profile</title>
@@ -92,38 +106,27 @@
     <div id="body">
         <div class="header">
             <div class="hcon">
-
             <div id="sliderFrame">
                 <div id="slider">
-                    <img src="<%=Constants.ROOT_PATH%><%=Constants.IMAGES_PATH%>/1.jpg" alt="" />
-                    <img src="<%=Constants.ROOT_PATH%><%=Constants.IMAGES_PATH%>/2.jpg" alt="" />
-                    <img src="<%=Constants.ROOT_PATH%><%=Constants.IMAGES_PATH%>/3.jpg" alt="" />
+                <%
+                for(int i = 0; i<sb.size();i++)
+                {
+                	%>
+                	<img src="<%=Utilities.verifyImage(sb.get(i).getPath()) %>" alt="" />
+                	<%
+                }
+                %>
                 </div>
             </div>
-                <!-- <img src="images/biking.jpg" alt=""> -->
-                <ul>
-                    <li>
-                        <a href="#">LINK 1</a>
-                    </li>
-                    <li>
-                        <a href="#" id="lp">LINK 2</a>
-                    </li>
-                    <li>
-                        <a href="#">LINK 3</a>
-                    </li>
-                    <li>
-                        <a href="#">LINK 4</a>
-                    </li>
-                </ul>
             </div>
         </div>
         <div class="body">
             <div class="section">
                 <div class="article">
-                    <h2>News Information</h2>
-                    <img src="<%=Constants.ROOT_PATH%><%=Constants.IMAGES_PATH%>/piclib/Loyalis.jpg" alt="" width="220">
+                    <h2><%=nb.get(0).getTitle() %></h2>
+                    <img src="<%=Utilities.verifyImage(nb.get(0).getPathThumb())%>" alt="" width="220">
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus in vestibulum mi. Donec felis nunc, placerat quis varius quis, posuere sed velit. In convallis pulvinar rutrum. Suspendisse nec mi lectus, at fermentum felis. Pellentesque ipsum lectus, cursus non pharetra vitae, placerat vitae tellus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+                        <%=nb.get(0).getDesc() %>
                     </p>
                 </div>
                 <div class="aside">

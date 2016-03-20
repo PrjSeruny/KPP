@@ -1,7 +1,14 @@
+<%@page import="com.sync.core.utils.Utilities"%>
+<%@page import="com.sync.core.pool.GalleryPool"%>
+<%@page import="com.sync.core.beans.GalleryBean"%>
 <%@page import="com.sync.home.utils.PublicConstants"%>
 <%@page import="com.sync.core.utils.Constants"%>
 <!DOCTYPE HTML>
 <!-- Website Template by freewebsitetemplates.com -->
+<%
+GalleryPool gp = GalleryPool.getInstance();
+GalleryBean[] lists = gp.getValue();
+%>
 <html>
 <head>
 	<meta charset="UTF-8">
@@ -10,10 +17,26 @@
     <link href="<%=Constants.ROOT_PATH%><%=Constants.SCRIPTS_PATH%>/themes/1/js-image-slider.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="<%=Constants.ROOT_PATH%><%=Constants.SCRIPTS_PATH%>/jquery.min.js"></script>
     <script src="<%=Constants.ROOT_PATH%><%=Constants.SCRIPTS_PATH%>/themes/1/js-image-slider.js" type="text/javascript"></script>
+    <script type="text/javascript" src="<%=Constants.ROOT_PATH%><%=Constants.SCRIPTS_PATH%>/fileUploadScript.js"></script>
+  	<script type="text/javascript" src="<%=Constants.ROOT_PATH%><%=Constants.SCRIPTS_PATH%>/content.js"></script>
+  	<link rel="stylesheet" type="text/css" href="<%=Constants.ROOT_PATH%><%=Constants.SCRIPTS_PATH%>/content.css">
+  	<link rel="stylesheet" type="text/css" href="<%=Constants.ROOT_PATH%><%=Constants.SCRIPTS_PATH%>/fileUploadStyle.css">
 	<!--[if IE 7]>
 		<link rel="stylesheet" href="css/ie7.css" type="text/css">
 	<![endif]-->
+	<style>
+.img-thumb{
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    border: solid 2px #C3C2C2;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+</style>
 </head>
+
 <body>
 	<div id="header">
 		<div>
@@ -41,24 +64,25 @@
 		float: left;
 		margin: 0 7px 21px;
 	}
+	li { display: inline;}
 	</style>
 	<div id="body">
 		<div id="content" style="background:white">
 			<div id="section" style="width:880px">
 				<h2 style="text-align: center;padding-bottom: 0px;">Album Gallery</h2>
-				<div></div>
-				<img src="images/empty-album.png">
-				<img src="images/empty-album.png">
-				<img src="images/empty-album.png">
-				<img src="images/empty-album.png">
-				<img src="images/empty-album.png">
-				<img src="images/empty-album.png">
-				<img src="images/empty-album.png">
-				<img src="images/empty-album.png">
-				<img src="images/empty-album.png">
-				<img src="images/empty-album.png">
-				<img src="images/empty-album.png">
-				<img src="images/empty-album.png">
+				<div>
+				<ul>
+						<%
+						for(int i=0;i<lists.length; i++)
+						{
+							%>
+							<li><a href="javascript:void(0)" class="img-thumb imgview" imgpath="<%=Utilities.verifyImage(lists[i].getPath()) %>" style="background-image: url(<%=Utilities.verifyImage(lists[i].getPathThumb()) %>)"></a></li>
+							<%
+						}
+						%>
+						
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -98,5 +122,8 @@
 			</div>
 		</div>
 	</div>
+  <div id="imagePreview">
+    <span><img alt="" src=""><a href="javascript:void(0)" title="Tutup">x</a></span>
+  </div>
 </body>
-</html>
+</html> 

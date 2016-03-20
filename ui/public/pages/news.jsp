@@ -1,8 +1,18 @@
+<%@page import="com.sync.core.utils.Utilities"%>
+<%@page import="java.util.Collections"%>
+<%@page import="com.sync.core.beans.NewsBean"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.sync.core.pool.NewsPool"%>
 <%@page import="com.sync.home.utils.PublicConstants"%>
 <%@page import="com.sync.core.utils.Constants"%>
 <!DOCTYPE HTML>
 <!-- Website Template by freewebsitetemplates.com -->
 <html>
+<%
+NewsPool sp = NewsPool.getInstance();
+ArrayList<NewsBean> sb = sp.getValue();
+Collections.sort(sb, NewsBean.compNews);
+%>
 <head>
 	<meta charset="UTF-8">
 	<title>Company Profile</title>
@@ -40,42 +50,25 @@
 		<div class="content">
 			<div id="blog">
 				<ul>
-					<li>
-						<div class="article">
-							<h3>news title 1</h3>
-							<p>
-								Sed vehicula dui ac odio dictum a luctus purus aliquam. Suspendisse potenti. Integer feugiat dolor ut odio tincidunt pulvinar. Suspendisse eget mauris sapien, sed convallis purus. Morbi dignissim nunc sed metus faucibus venenatis. Etiam eu purus sit amet velit semper adipiscing non et est. Cras vulputate blandit nulla, ac tristique velit pellentesque et. Sed arcu mi, convallis ultricies volutpat quis, porta eu turpis.
-							</p>
-							<a href="blog-single.html" class="more">readmore</a>
-						</div>
-						<div class="stats">
-							<img src="images/news1.jpg" alt=""> <span>posted: <a href="blog-single.html" >july 17, 2015</a></span> <span>author: <a href="blog-single.html" >admin</a></span> <span>category: <a href="blog-single.html" >Category 1</a></span>
-						</div>
-					</li>
-					<li>
-						<div class="article">
-							<h3>news title 2</h3>
-							<p>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus in vestibulum mi. Donec felis nunc, placerat quis varius quis, posuere sed velit. In convallis pulvinar rutrum. Suspendisse nec mi lectus, at fermentum felis. Pellentesque ipsum lectus, cursus non pharetra vitae, placerat vitae tellus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-							</p>
-							<a href="blog-single.html" class="more">readmore</a>
-						</div>
-						<div class="stats">
-							<img src="images/news2.jpg" alt=""> <span>posted: <a href="blog-single.html" >july 17, 2015</a></span> <span>author: <a href="blog-single.html" >admin</a></span> <span>category: <a href="blog-single.html" >Category 2</a></span>
-						</div>
-					</li>
-					<li>
-						<div class="article">
-							<h3>news title 3</h3>
-							<p>
-								Sed vehicula dui ac odio dictum a luctus purus aliquam. Suspendisse potenti. Integer feugiat dolor ut odio tincidunt pulvinar. Suspendisse eget mauris sapien, sed convallis purus. Morbi dignissim nunc sed metus faucibus venenatis. Etiam eu purus sit amet velit semper adipiscing non et est. Cras vulputate blandit nulla, ac tristique velit pellentesque et. Sed arcu mi, convallis ultricies volutpat quis, porta eu turpis.
-							</p>
-							<a href="blog-single.html" class="more">readmore</a>
-						</div>
-						<div class="stats">
-							<img src="images/news3.jpg" alt=""> <span>posted: <a href="blog-single.html" >july 17, 2015</a></span> <span>author: <a href="blog-single.html" >admin</a></span> <span>category: <a href="blog-single.html" >Category 3</a></span>
-						</div>
-					</li>
+					<%
+					for(int i=0;i<sb.size();i++)
+					{
+						%>
+						<li>
+							<div class="article">
+								<h3><%=sb.get(i).getTitle() %></h3>
+								<p>
+									<%=sb.get(i).getDesc() %>
+								</p>
+								<a href="#" class="more">readmore</a>
+							</div>
+							<div class="stats">
+								<img src="<%=Utilities.verifyImage(sb.get(i).getPathThumb())%>" alt="">
+							</div>
+						</li>
+						<%
+					}
+					%>
 				</ul>
 				<ul class="paging">
 					<li class="first">
