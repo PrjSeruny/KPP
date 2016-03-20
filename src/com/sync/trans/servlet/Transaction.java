@@ -378,6 +378,24 @@ public class Transaction extends CoreServlet
   		super.openURL(TransConstants.ERROR_PAGE, req, res);
   		return;
   	}
+  	
+  	System.out.println("PREPARING DELETE Card Mutation");
+    String[] lists = req.getParameterValues(TransConstants.CHKBOX);
+    
+    if(null==lists)
+    {
+      System.out.println("Mohon dicentang data yang ingin dihapus");
+    }
+    
+    FamilyCardMutationEngine re = new FamilyCardMutationEngine(req, res);
+    if(!re.delete(lists))
+    {
+      System.out.println("ERROR DELETING DATA");
+    }
+    
+    if(null!=re)re.closed();
+    this.doListFamilyCardMut(req, res);
+    return;
   }
   
   private void doListFamilyCardMut(HttpServletRequest req, HttpServletResponse res)

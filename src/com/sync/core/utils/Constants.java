@@ -114,6 +114,8 @@ public class Constants
   public static final String ACT_UPDATE_SAVE = "actupdtsv";
   public static final String ACT_VIEW = "vw";
   public static final String ACT_INFO = "info";
+  public static final String ACT_SEARCH_QUERY = "arschqry";
+  public static final String ACT_SEARCH = "arsch";
   
   public static final String BTN_SAVE = "btnsve";
   public static final String BTN_CANCEL = "btncncl";
@@ -183,6 +185,8 @@ public class Constants
   //CONSTANT INI DIGUNAKAN UNTUK PARAMETER UPLOAD IMAGE, DAN SUDAH PATEN KARENA DIGUNAKAN OLEH JAVASCRIPT (TIDAK BOLEH DIRUBAH)
   public static final String FORM_IMAGE_PATH = "image";
   public static final String FORM_IMAGE_PATHTHUMB = "image_thumb";
+  
+  public static final String DELIMITER_TILDA = "~";
   
   //Error Access Page
   public static final String ERROR_PAGE = PAGES_PATH + "/Error_Page.jsp";

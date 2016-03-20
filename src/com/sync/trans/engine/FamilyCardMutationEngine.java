@@ -617,10 +617,11 @@ public class FamilyCardMutationEngine extends RootEngine
     return res;
   }
   
-  public boolean delete(String[] niks, String[] tdate)
+  public boolean delete(String[] lists)
   {
     boolean res = false;
-    
+    String[] data = new String[2];
+    Date tdate = null;
     try
     {
       SQL = " DELETE FROM " + TransTable.TABLE_FAMILYCARDMUT +
@@ -631,22 +632,29 @@ public class FamilyCardMutationEngine extends RootEngine
     super.getConnection();
     stat = con.prepareStatement(SQL);
     
-    for(int i=0; i<niks.length; i++)
+    if(null!=lists && lists.length>0)
     {
-      stat.setString(1, niks[i]);
-      stat.setString(2, tdate[i]);
-      stat.executeUpdate();
+      for(int i=0; i<lists.length; i++)
+      {
+        data = lists[i].split(TransConstants.DELIMITER_TILDA);
+        tdate = Utilities.stringToDate(data[1], 
+            TransConstants.DATE_HTML_SHORT_PATTERN);
+        
+        stat.setString(1, data[0]);
+        stat.setString(2, Utilities.dateToString(tdate, 
+            TransConstants.DATE_DB_SHORT_PATTERN));
+        stat.executeUpdate();
+      }
     }
     
     res = true;
   }
-    catch(Exception e)
-    {
-      e.printStackTrace();
-      super.rollback();
-      res = false;
-    }
-    
+  catch(Exception e)
+  {
+    e.printStackTrace();
+    super.rollback();
+    res = false;
+  }
     return res;
   }
   
