@@ -7,6 +7,7 @@
                com.sync.master.beans.MasterUserBean"
 %>
 <%
+   String pagination = (String)request.getAttribute(MasterConstants.HTML_PAGINATION);
    String act = (String)request.getAttribute(MasterConstants.ACT);
    String search = (String)request.getParameter(MasterConstants.FORM_SEARCH_RECORD);
    String stat = (String)request.getParameter(MasterConstants.DATA_STAT);
@@ -89,5 +90,7 @@
     </table>
   </div>
 </fieldset>
-        
+ <%=pagination %>
+
+<input type="hidden" name="<%=MasterConstants.ACT%>" value="<%=MasterConstants.ACT_LIST%>"> 
 

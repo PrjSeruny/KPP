@@ -82,12 +82,18 @@
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_SEX):""%></span>
         </div>
         <div>
-          <label><font color="red">#</font>Kota Lahir</label><a href="javascript:void(0)" 
+          <label><font color="red">#</font>Kota Lahir</label>
+          <!-- a href="javascript:void(0)" 
           class="lookup"
           valTarget="#userIDVal;#userNameVal"
           param="width=450;height=300"
-          url="<%=Constants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>?<%=Constants.W%>=<%=MasterConstants.MASTER_REGION%>&<%=MasterConstants.ACT%>=<%=MasterConstants.ACT_LOOKUP%>&<%=MasterConstants.LOOKUP_SINGLE%>=1&<%=MasterConstants.FORM_MASTERREGION_REGIONONLY%>=true&<%=MasterConstants.FORM_FIELD2%>=create.<%=MasterConstants.FORM_MASTERRESIDENT_BIRTHCITY%>">Cari</a>
-          <input type="text" name="<%=MasterConstants.FORM_MASTERRESIDENT_BIRTHCITY %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getCity()):""%>" readonly="readonly">
+          url="<%=Constants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>?<%=Constants.W%>=<%=MasterConstants.MASTER_REGION%>&<%=MasterConstants.ACT%>=<%=MasterConstants.ACT_LOOKUP%>&<%=MasterConstants.LOOKUP_SINGLE%>=1&<%=MasterConstants.FORM_MASTERREGION_REGIONONLY%>=true&<%=MasterConstants.FORM_FIELD2%>=create.<%=MasterConstants.FORM_MASTERRESIDENT_BIRTHCITY%>">Cari</a -->
+          <a href="javascript:void(0)" 
+          class="lookup"
+          valTarget="#userIDVal4;#userNameVal4"
+          param="width=600;height=300"
+          url="<%=Constants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>?<%=Constants.W%>=<%=MasterConstants.MASTER_REGION_CITY%>&<%=MasterConstants.ACT%>=<%=MasterConstants.ACT_LOOKUP%>&<%=MasterConstants.LOOKUP_SINGLE%>=1">Cari</a>
+          <input type="text" id="userIDVal4" name="<%=MasterConstants.FORM_MASTERRESIDENT_BIRTHCITY %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getCity()):""%>" readonly="readonly">
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_BIRTHCITY):""%></span>
         </div>
         <div >
@@ -133,17 +139,23 @@
       </fieldset>
       <fieldset>
        <div>
-          <label><font color="red">#</font>Kota</label><a href="javascript:void(0)" 
+          <label><font color="red">#</font>Kota</label>
+          <!-- a href="javascript:void(0)" 
           class="lookup"
           valTarget="#userIDVal;#userNameVal"
           param="width=450;height=300"
-          url="<%=Constants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>?<%=Constants.W%>=<%=MasterConstants.MASTER_REGION%>&<%=MasterConstants.ACT%>=<%=MasterConstants.ACT_LOOKUP%>&<%=MasterConstants.LOOKUP_SINGLE%>=1&<%=MasterConstants.FORM_MASTERREGION_REGIONONLY%>=false&<%=MasterConstants.FORM_FIELD1%>=create.<%=MasterConstants.FORM_MASTERRESIDENT_REGION%>&<%=MasterConstants.FORM_FIELD2%>=create.<%=MasterConstants.FORM_MASTERRESIDENT_CITY%>&<%=MasterConstants.FORM_FIELD3%>=create.<%=MasterConstants.FORM_MASTERRESIDENT_KECAMATAN%>&<%=MasterConstants.FORM_FIELD4%>=create.<%=MasterConstants.FORM_MASTERRESIDENT_KELURAHAN%>">Cari</a>
-          <input type="text" name="<%=MasterConstants.FORM_MASTERRESIDENT_CITY %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getCity()):""%>">
+          url="<%=Constants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>?<%=Constants.W%>=<%=MasterConstants.MASTER_REGION%>&<%=MasterConstants.ACT%>=<%=MasterConstants.ACT_LOOKUP%>&<%=MasterConstants.LOOKUP_SINGLE%>=1&<%=MasterConstants.FORM_MASTERREGION_REGIONONLY%>=false&<%=MasterConstants.FORM_FIELD1%>=create.<%=MasterConstants.FORM_MASTERRESIDENT_REGION%>&<%=MasterConstants.FORM_FIELD2%>=create.<%=MasterConstants.FORM_MASTERRESIDENT_CITY%>&<%=MasterConstants.FORM_FIELD3%>=create.<%=MasterConstants.FORM_MASTERRESIDENT_KECAMATAN%>&<%=MasterConstants.FORM_FIELD4%>=create.<%=MasterConstants.FORM_MASTERRESIDENT_KELURAHAN%>">Cari</a -->
+          <a href="javascript:void(0)" 
+          class="lookup"
+          valTarget="#userIDVal;#userNameVal"
+          param="width=600;height=300"
+          url="<%=Constants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>?<%=Constants.W%>=<%=MasterConstants.MASTER_REGION_CITY%>&<%=MasterConstants.ACT%>=<%=MasterConstants.ACT_LOOKUP%>&<%=MasterConstants.LOOKUP_SINGLE%>=1">Cari</a>
+          <input type="text" id="userIDVal" name="<%=MasterConstants.FORM_MASTERRESIDENT_CITY %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getCity()):""%>">
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_CITY):""%></span>
         </div>
         <div >
           <label><font color="red">#</font>Propinsi</label>
-          <input type="text" name="<%=MasterConstants.FORM_MASTERRESIDENT_REGION %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getRegion()):""%>" readonly="readonly">
+          <input type="text" id="userNameVal" name="<%=MasterConstants.FORM_MASTERRESIDENT_REGION %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getRegion()):""%>" readonly="readonly">
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_REGION):""%></span>
         </div>
         <div >
@@ -160,12 +172,22 @@
       <fieldset>
         <div >
           <label><font color="red">#</font>Kecamatan</label>
-          <input type="text" name="<%=MasterConstants.FORM_MASTERRESIDENT_KECAMATAN %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getKecamatan()):""%>" readonly="readonly">
+          <a href="javascript:void(0)" 
+          class="lookup"
+          valTarget="#userIDVals3"
+          param="width=600;height=300"
+          url="<%=Constants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>?<%=Constants.W%>=<%=MasterConstants.MASTER_REGION_KEC%>&<%=MasterConstants.ACT%>=<%=MasterConstants.ACT_LOOKUP%>&<%=MasterConstants.LOOKUP_SINGLE%>=1">Cari</a>
+          <input type="text" id="userIDVals3" name="<%=MasterConstants.FORM_MASTERRESIDENT_KECAMATAN %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getKecamatan()):""%>" readonly="readonly">
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_KECAMATAN):""%></span>
         </div>
         <div >
           <label><font color="red">#</font>Kelurahan</label>
-          <input type="text" name="<%=MasterConstants.FORM_MASTERRESIDENT_KELURAHAN %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getKelurahan()):""%>" readonly="readonly">
+          <a href="javascript:void(0)" 
+          class="lookup"
+          valTarget="#userIDVals2"
+          param="width=600;height=300"
+          url="<%=Constants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>?<%=Constants.W%>=<%=MasterConstants.MASTER_REGION_KEL%>&<%=MasterConstants.ACT%>=<%=MasterConstants.ACT_LOOKUP%>&<%=MasterConstants.LOOKUP_SINGLE%>=1">Cari</a>
+          <input id="userIDVals2" type="text" name="<%=MasterConstants.FORM_MASTERRESIDENT_KELURAHAN %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getKelurahan()):""%>" readonly="readonly">
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_KELURAHAN):""%></span>
         </div>
         <div >
