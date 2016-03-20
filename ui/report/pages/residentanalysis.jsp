@@ -23,6 +23,7 @@
        System.out.println(">>>>>>>>>>>>> genmsg= "+genmsg);
      }
    }
+   String city = "", kec="", kel="";
 %>
 <fieldset class="wrapper">
   <form name="search" method="post" action="<%=Constants.ROOT_PATH%><%=ReportConstants.SVT_REPORT_PATH%>">
@@ -47,6 +48,12 @@
          <textarea id="userIDVals" name="<%=ReportConstants.FORM_RESIDENTANALYSIS_NIK%>"></textarea>
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(ReportConstants.FORM_RESIDENTANALYSIS_NIK):""%></span>
         </div>
+<%
+    if(null!=ubn && null!=ubn.getCitys())
+    {
+     city = Utilities.join(ReportConstants.DELIMITER_SEMICOLON, ubn.getCitys());
+    }
+%>        
         <div>
           <label>Kota</label>
           <a href="javascript:void(0)" 
@@ -54,10 +61,17 @@
           valTarget="#userIDVals1"
           param="width=450;height=300"
           url="<%=Constants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>?<%=Constants.W%>=<%=MasterConstants.MASTER_REGION_CITY%>&<%=MasterConstants.ACT%>=<%=MasterConstants.ACT_LOOKUP%>&<%=MasterConstants.LOOKUP_MULTI%>=1">Cari</a>
-         <textarea id="userIDVals1" name="<%=ReportConstants.FORM_RESIDENTANALYSIS_CITY%>"></textarea>
+         <textarea id="userIDVals1" name="<%=ReportConstants.FORM_RESIDENTANALYSIS_CITY%>"><%=!Utilities.isEmpy(city)?city:""%></textarea>
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(ReportConstants.FORM_RESIDENTANALYSIS_CITY):""%></span>
         </div>
       </fieldset>
+<%
+    if(null!=ubn && null!=ubn.getKelVal())
+    {
+     kel = Utilities.join(ReportConstants.DELIMITER_SEMICOLON, ubn.getKelVal());
+    }
+%>        
+        
       <fieldset>
          <div>
           <label>Kelurahan</label>
@@ -66,9 +80,15 @@
           valTarget="#userIDVals2"
           param="width=600;height=300"
           url="<%=Constants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>?<%=Constants.W%>=<%=MasterConstants.MASTER_REGION_KEL%>&<%=MasterConstants.ACT%>=<%=MasterConstants.ACT_LOOKUP%>&<%=MasterConstants.LOOKUP_MULTI%>=1">Cari</a>
-         <textarea id="userIDVals2" name="<%=ReportConstants.FORM_RESIDENTANALYSIS_KEL%>"></textarea>
+         <textarea id="userIDVals2" name="<%=ReportConstants.FORM_RESIDENTANALYSIS_KEL%>"><%=!Utilities.isEmpy(kel)?kel:""%></textarea>
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(ReportConstants.FORM_RESIDENTANALYSIS_KEL):""%></span>
         </div>
+<%
+    if(null!=ubn && null!=ubn.getKecVal())
+    {
+     kec = Utilities.join(ReportConstants.DELIMITER_SEMICOLON, ubn.getKecVal());
+    }
+%>        
         <div>
           <label>Kecamatan</label>
           <a href="javascript:void(0)" 
@@ -76,7 +96,7 @@
           valTarget="#userIDVals3"
           param="width=600;height=300"
           url="<%=Constants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>?<%=Constants.W%>=<%=MasterConstants.MASTER_REGION_KEC%>&<%=MasterConstants.ACT%>=<%=MasterConstants.ACT_LOOKUP%>&<%=MasterConstants.LOOKUP_MULTI%>=1">Cari</a>
-         <textarea id="userIDVals3" name="<%=ReportConstants.FORM_RESIDENTANALYSIS_KEC%>"></textarea>
+         <textarea id="userIDVals3" name="<%=ReportConstants.FORM_RESIDENTANALYSIS_KEC%>"><%=!Utilities.isEmpy(kec)?kec:""%></textarea>
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(ReportConstants.FORM_RESIDENTANALYSIS_KEC):""%></span>
         </div>
       </fieldset>
@@ -87,7 +107,10 @@
       </fieldset>
     </div>
   </form>
-<%
+  <fieldset>
+  <div class="form" style="clear:left;width: 90%;margin: auto;display: -webkit-box;min-height: 500px;"> 
+  <div class="list-con" style="text-align: center;width: 100%;">
+  <%
     ResidentAnalysisDetailsBean[] list = null;
    if(null!=ubn)
    {
@@ -96,6 +119,7 @@
 %>  
   <table border="0" class="list-tb" style="width: 100%;">
                     <tr>
+                        <th>No</th>
                         <th>NIK</th>
                         <th>No.KK</th>
                         <th>Nama</th>
@@ -111,6 +135,7 @@
                    {
              %>
                       <tr>
+                        <td><%=i+1 %></td>
                         <td valign="top"><%=list[i].getNIK()%></a></td>
                         <td valign="top"><%=list[i].getKKNo()%></td>
                         <td valign="top" align="left"><%=list[i].getName()%></td>
@@ -132,4 +157,7 @@
                   }
               %>                    
               </table>
+              </div>
+              </div>
+  </fieldset>
 </fieldset>

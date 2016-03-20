@@ -111,21 +111,21 @@ public class ResidentAnalysisEngine extends RootEngine
       
       if(null !=bn.getCitys() && bn.getCitys().length>0)
       {
-        city = Utilities.joinForSQL("'", bn.getCitys());
+        city = Utilities.joinForSQL(",", bn.getCitys());
         SQL += MasterTable.COL_MASTER_RESIDENT_CITY + " IN(" + city + ")";
       }
       
       if(null!=bn.getNIKs()&&bn.getNIKs().length>0)
       {
         if(!Utilities.isEmpy(city)) SQL += " AND ";
-        nik = Utilities.joinForSQL("'", bn.getNIKs());
+        nik = Utilities.joinForSQL(",", bn.getNIKs());
         SQL += MasterTable.COL_MASTER_RESIDENT_NIK + " IN(" + nik + ")";
       }
       
       if(null!=bn.getKecVal()&&bn.getKecVal().length>0)
       {
         if(!Utilities.isEmpy(city)||!Utilities.isEmpy(nik)) SQL += " AND ";
-        kec = Utilities.joinForSQL("'", bn.getKecVal());
+        kec = Utilities.joinForSQL(",", bn.getKecVal());
         SQL += MasterTable.COL_MASTER_RESIDENT_KECAMATAN + " IN(" + kec + ")";
       }
       
@@ -137,7 +137,7 @@ public class ResidentAnalysisEngine extends RootEngine
           SQL += " AND ";
         }
         
-        kel = Utilities.joinForSQL("'", bn.getKelVal());
+        kel = Utilities.joinForSQL(",", bn.getKelVal());
         SQL += MasterTable.COL_MASTER_RESIDENT_KELURAHAN + " IN(" + kel + ")";
       }
       
