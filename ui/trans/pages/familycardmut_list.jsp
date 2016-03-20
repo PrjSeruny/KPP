@@ -9,6 +9,7 @@
                com.sync.master.beans.MasterUserBean"
 %>
 <%
+   String pagination = (String)request.getAttribute(TransConstants.HTML_PAGINATION);
    String act = (String)request.getAttribute(TransConstants.ACT);
    String search = (String)request.getParameter(TransConstants.FORM_SEARCH_RECORD);
    String stat = (String)request.getParameter(TransConstants.DATA_STAT);
@@ -63,7 +64,7 @@
   %>
           <tr>
             <td align="center">
-              <input type="checkbox" class="selChild birthlettid del" parent="birthlettids" name="<%=TransConstants.CHKBOX%>" value="<%=list[i].getNIK()%>">
+              <input type="checkbox" class="selChild birthlettid del" parent="birthlettids" name="<%=TransConstants.CHKBOX%>" value="<%=list[i].getNIK()%><%=TransConstants.DELIMITER_TILDA%><%=Utilities.dateToString(list[i].getStartDate(), TransConstants.DATE_HTML_SHORT_PATTERN)%>">
             </td>
             <td valign="top"><a href="<%=TransConstants.ROOT_PATH%><%=TransConstants.SVT_TRANS_PATH%>?<%=TransConstants.W%>=<%=TransConstants.TRANS_FAMILYCARDMUT%>&<%=TransConstants.ACT%>=<%=TransConstants.ACT_INFO%>&<%=TransConstants.FORM_FAMILYCARDMUT_NIK%>=<%=list[i].getNIK()%>&<%=TransConstants.FORM_FAMILYCARDMUT_STARTDATE%>=<%=Utilities.dateToString(list[i].getStartDate(), TransConstants.DATE_HTML_SHORT_PATTERN)%>"><%=list[i].getNIK()%></a></td>
             <td valign="top"><%=list[i].getName()%></td>
@@ -87,5 +88,7 @@
     </table>
   </div>
 </fieldset>
-        
+ <%=pagination %>
+
+<input type="hidden" name="<%=TransConstants.ACT%>" value="<%=TransConstants.ACT_LIST%>">    
 

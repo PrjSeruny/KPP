@@ -95,7 +95,7 @@
        <fieldset>
         <div>
           <label><font color="red">#</font>NIK Ibu</label>
-          <input type="text" id="userIDVal2" name="<%=TransConstants.FORM_TRANS_BIRTHLETTER_MOTHERNIK%>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getMotherNIK()):""%>">
+          <input type="text" id="userIDVal2" readonly="readonly" name="<%=TransConstants.FORM_TRANS_BIRTHLETTER_MOTHERNIK%>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getMotherNIK()):""%>">
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(TransConstants.FORM_TRANS_BIRTHLETTER_MOTHERNIK):""%></span>
         </div>
         <div>
@@ -105,7 +105,7 @@
     valTarget="#userIDVal2;#userNameVal2"
     param="width=450;height=300"
     url="<%=Constants.ROOT_PATH%><%=MasterConstants.SVT_MASTER_PATH%>?<%=Constants.W%>=<%=MasterConstants.MASTER_RESIDENT%>&<%=MasterConstants.ACT%>=<%=MasterConstants.ACT_LOOKUP%>&<%=MasterConstants.LOOKUP_SINGLE%>=1">Cari</a>
-          <input type="text" id="userNameVal2" name="<%=TransConstants.FORM_TRANS_BIRTHLETTER_MOTHERNAME%>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getMotherName()):""%>">
+          <input type="text" id="userNameVal2"  readonly="readonly" name="<%=TransConstants.FORM_TRANS_BIRTHLETTER_MOTHERNAME%>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getMotherName()):""%>">
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(TransConstants.FORM_TRANS_BIRTHLETTER_MOTHERNAME):""%></span>
         </div>
        </fieldset>
