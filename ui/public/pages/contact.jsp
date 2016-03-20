@@ -1,11 +1,20 @@
+<%@page import="com.sync.core.beans.CompanyBean"%>
+<%@page import="com.sync.core.pool.CompanyPool"%>
 <%@page import="com.sync.home.utils.PublicConstants"%>
 <%@page import="com.sync.core.utils.Constants"%>
 <!DOCTYPE HTML>
 <!-- Website Template by freewebsitetemplates.com -->
+<%
+CompanyPool cp = CompanyPool.getInstance();
+CompanyBean cb = new CompanyBean();
+String latitude = cp.get(Constants.COMPANY_LAT_PARAM).getValue();
+String longitude = cp.get(Constants.COMPANY_LONG_PARAM).getValue(); 
+%>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<title>Company Profile</title>
+
 	<link rel="stylesheet" href="<%=Constants.ROOT_PATH%><%=Constants.SCRIPTS_PATH%>/style.css" type="text/css">
     <link href="<%=Constants.ROOT_PATH%><%=Constants.SCRIPTS_PATH%>/themes/1/js-image-slider.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="<%=Constants.ROOT_PATH%><%=Constants.SCRIPTS_PATH%>/jquery.min.js"></script>
@@ -13,6 +22,23 @@
 	<!--[if IE 7]>
 		<link rel="stylesheet" href="css/ie7.css" type="text/css">
 	<![endif]-->
+	<style>
+      #map {
+        width: 500px;
+        height: 400px;
+      }
+    </style>
+	<script>
+      function initMap() {
+        var mapDiv = document.getElementById('map');
+        var map = new google.maps.Map(mapDiv, {
+          center: {lat: <%=latitude%>, lng: <%=longitude%>},
+          zoom: 8
+        });
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?callback=initMap"
+    async defer></script>
 </head>
 <body>
 	<div id="header">
@@ -41,7 +67,7 @@
 			<div id="section">
 				<h2>contact</h2>
 				<b><a href="#">visit our office</a></b> 
-				<img src="images/florida.jpg" alt=""> 
+				<div id="map"></div> 
 				<!-- <b><a href="#">visit our vancouver office</a></b> 
 				<img src="images/vancouver.jpg" alt=""> -->
 				<form action="index.html">
@@ -56,48 +82,38 @@
 				</form>
 			</div>
 			<div id="sidebar">
-				<!-- <div class="search">
-					<h3>search</h3>
-					<form action="index.html">
-						<input type="text" name="search" id="search" value="Search here...">
-						<input type="hidden" name="submit" id="submitBtn" value="">
-					</form>
-				</div> -->
 				<div class="contact">
 					<h3>contact information</h3>
 					<ul class="first">
 						<li class="office">
-							<b>our office</b><span>Jl.Patemon 1/4, Surabaya</span>
+							<b>our office</b><span>
+							<%
+							cb = cp.get(Constants.COMPANY_ADDRESS_PARAM);
+							out.println(cb.getValue());
+							%>
+							</span>
 						</li>
 						<li class="telephone">
-							561-574-0800
+							<%
+							cb = cp.get(Constants.COMPANY_PHONE_PARAM);
+							out.println(cb.getValue());
+							%>
 						</li>
 						<li class="fax">
-							561-574-0811
+							<%
+							cb = cp.get(Constants.COMPANY_FAX_PARAM);
+							out.println(cb.getValue());
+							%>
 						</li>
 						<li class="email">
-							<a href="#">info@domain.com</a>
+							<a href="#">
+							<%
+							cb = cp.get(Constants.COMPANY_EMAIL_PARAM);
+							out.println(cb.getValue());
+							%>
+							</a>
 						</li>
 					</ul>
-					<!-- <ul>
-						<li class="office">
-							<b>vancouver office</b><span>471 melody Lane Richmond, VA 23225</span>
-						</li>
-						<li class="telephone">
-							804-417-2482
-						</li>
-						<li class="fax">
-							804-417-2483
-						</li>
-						<li class="email">
-							<a href="http://www.freewebsitetemplates.com/misc/contact">info@fl.cardiocenter.com</a>
-						</li>
-					</ul> -->
-				</div>
-				<!-- <div>
-					<h3>office hours:</h3>
-					<span>Monday - Friday <span>7:00 a.m. - 4:30 p.m.</span></span> <span>Saturdays &amp; Sundays <span>7:00 a.m. - 12:00 p.m.</span></span>
-				</div> -->
 			</div>
 		</div>
 	</div>
