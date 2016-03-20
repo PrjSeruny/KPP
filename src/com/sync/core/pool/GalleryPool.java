@@ -1,5 +1,6 @@
 package com.sync.core.pool;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.sync.core.beans.GalleryBean;
@@ -36,6 +37,13 @@ public class GalleryPool {
 
   public GalleryBean get(Integer key) { return collections.get(key); }
 
+  public GalleryBean[] getValue()
+  {
+  	ArrayList<GalleryBean> value = new ArrayList<GalleryBean>(collections.values());
+  	GalleryBean[] result = value.toArray(new GalleryBean[value.size()]);
+  	return result;
+  }
+  
   public void remove(Integer key) 
   { synchronized(lock) { collections.remove(key); } }
   

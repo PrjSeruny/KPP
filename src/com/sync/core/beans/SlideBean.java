@@ -1,5 +1,7 @@
 package com.sync.core.beans;
 
+import java.util.Comparator;
+
 public class SlideBean {
   int id;
   String Path;
@@ -31,5 +33,14 @@ public class SlideBean {
     Path_Thumb = val;
   }
   
-  
+  public static Comparator<SlideBean> cmpSlide = new Comparator<SlideBean>() {
+
+		public int compare(SlideBean o1, SlideBean o2) {
+			int id_1 = o1.getId();
+			int id_2 = o2.getId();
+			
+			return id_1 - id_2;
+		}
+  	
+	};
 }

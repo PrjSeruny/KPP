@@ -1,5 +1,6 @@
 package com.sync.core.beans;
 
+import java.util.Comparator;
 import java.util.Date;
 
 public class NewsBean {
@@ -98,4 +99,10 @@ public class NewsBean {
   public void setPathThumb(String val) {
     path_thumb = val;
   }
+  
+  public static Comparator<NewsBean> compNews = new Comparator<NewsBean>() {
+		public int compare(NewsBean o1, NewsBean o2) {
+			return o2.getEntryDate().compareTo(o1.getEntryDate());
+		}
+	};
 }
