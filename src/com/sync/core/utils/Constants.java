@@ -187,6 +187,7 @@ public class Constants
   public static final String FORM_IMAGE_PATHTHUMB = "image_thumb";
   
   public static final String DELIMITER_TILDA = "~";
+  public static final String DELIMITER_SEMICOLON = ";";
   
   //Error Access Page
   public static final String ERROR_PAGE = PAGES_PATH + "/Error_Page.jsp";

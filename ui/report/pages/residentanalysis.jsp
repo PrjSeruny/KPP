@@ -22,8 +22,8 @@
     <div class="form">
       <h2 class="title">Analisa Penduduk</h2>
       <fieldset>
-        <div><label class="input"><input type="radio" name="<%=ReportConstants.FORM_RESIDENTANALYSIS_SEARCH_DETAILS%>">Data Kependudukan</label></div>
-        <div><label class="input"><input type="radio" name="<%=ReportConstants.FORM_RESIDENTANALYSIS_SEARCH_RECAP%>">Rekapitulasi Data</label></div>
+        <div><label class="input"><input type="radio" name="<%=ReportConstants.FORM_RESIDENTANALYSIS_SEARCH%>" value="<%=ReportConstants.FORM_RESIDENTANALYSIS_SEARCH_DETAILS%>">Data Kependudukan</label></div>
+        <div><label class="input"><input type="radio" name="<%=ReportConstants.FORM_RESIDENTANALYSIS_SEARCH%>" value="<%=ReportConstants.FORM_RESIDENTANALYSIS_SEARCH_RECAP%>">Rekapitulasi Data</label></div>
       </fieldset>
       <fieldset>
         <div>
