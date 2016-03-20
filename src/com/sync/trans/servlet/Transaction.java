@@ -216,7 +216,7 @@ public class Transaction extends CoreServlet
     if(null!=req.getParameter(TransConstants.BTN_CANCEL))
     {
       System.out.println("BTN CANCEL PRESSED>>>>>>>>>>>>>>>>>>>> ");
-      this.doListFamilyCardMut(req, res);
+      this.doFamilyCardMut(req, res);
       return;     
     }
     
@@ -563,7 +563,7 @@ public class Transaction extends CoreServlet
     if(null!=req.getParameter(TransConstants.BTN_CANCEL))
     {
       System.out.println("BTN CANCEL PRESSED>>>>>>>>>>>>>>>>>>>> ");
-      this.doListBirthLetter(req, res);
+      this.doBirthLetter(req, res);
       return;     
     }
     
@@ -840,7 +840,7 @@ public class Transaction extends CoreServlet
     if(null!=req.getParameter(TransConstants.BTN_CANCEL))
     {
       System.out.println("BTN CANCEL PRESSED>>>>>>>>>>>>>>>>>>>> ");
-      this.doListDeathLetter(req, res);
+      this.doDeathLetter(req, res);
       return;     
     }
     

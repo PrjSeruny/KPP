@@ -33,8 +33,8 @@
       <h2 class="title">Analisa Penduduk</h2>
       <fieldset>
         <div><label>Tipe Pencarian</label></div>
-        <div><label class="input"><input type="radio" name="<%=ReportConstants.FORM_RESIDENTANALYSIS_SEARCH%>" value="<%=ReportConstants.FORM_RESIDENTANALYSIS_SEARCH_DETAILS%>">Data Kependudukan</label></div>
-        <div><label class="input"><input type="radio" name="<%=ReportConstants.FORM_RESIDENTANALYSIS_SEARCH%>" value="<%=ReportConstants.FORM_RESIDENTANALYSIS_SEARCH_RECAP%>">Rekapitulasi Data</label></div>
+        <div><label class="input"><input type="radio" name="<%=ReportConstants.FORM_RESIDENTANALYSIS_SEARCH%>" value="<%=ReportConstants.FORM_RESIDENTANALYSIS_SEARCH_DETAILS%>" <%=(null==ubn) || (null!=ubn && ubn.getWhatToSearch().equals(ReportConstants.FORM_RESIDENTANALYSIS_SEARCH_DETAILS))?"checked":"checked"%> >Data Kependudukan</label></div>
+        <!-- div><label class="input"><input type="radio" name="<%=ReportConstants.FORM_RESIDENTANALYSIS_SEARCH%>" value="<%=ReportConstants.FORM_RESIDENTANALYSIS_SEARCH_RECAP%>">Rekapitulasi Data</label></div -->
         <br><span class="erroritm"><%=null!=msg?msg.showMessage(ReportConstants.FORM_RESIDENTANALYSIS_SEARCH):""%></span>
       </fieldset>
       <fieldset>
