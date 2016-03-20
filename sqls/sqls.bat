@@ -498,6 +498,15 @@ CREATE TABLE Company (
   PRIMARY KEY (Param)
 ) ENGINE=InnoDB;
 
+DROP TABLE IF EXISTS MasterLevel;
+CREATE TABLE Company (
+  LevelID       VARCHAR(100) NOT NULL,
+  LevelName     VARCHAR(100),
+  LevelNote			TEXT,
+  PRIMARY KEY (LevelID)
+) ENGINE=InnoDB;
+
+
 DROP TABLE IF EXISTS LevelAccess;
 CREATE TABLE Company (
   LevelID         VARCHAR(50) NOT NULL,
