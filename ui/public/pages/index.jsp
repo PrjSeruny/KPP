@@ -123,10 +123,10 @@ Collections.sort(nb, NewsBean.compNews);
         <div class="body">
             <div class="section">
                 <div class="article">
-                    <h2><%=nb.get(0).getTitle() %></h2>
-                    <img src="<%=Utilities.verifyImage(nb.get(0).getPathThumb())%>" alt="" width="220">
+                    <h2><%=null!=nb && nb.size() > 0?nb.get(0).getTitle():"" %></h2>
+                    <img src="<%=Utilities.verifyImage(null!=nb && nb.size() > 0?nb.get(0).getPathThumb():"")%>" alt="" width="220">
                     <p>
-                        <%=nb.get(0).getDesc() %>
+                        <%=null!=nb && nb.size() > 0?nb.get(0).getDesc():"" %>
                     </p>
                 </div>
                 <div class="aside">

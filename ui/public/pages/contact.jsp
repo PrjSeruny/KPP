@@ -7,8 +7,15 @@
 <%
 CompanyPool cp = CompanyPool.getInstance();
 CompanyBean cb = new CompanyBean();
-String latitude = cp.get(Constants.COMPANY_LAT_PARAM).getValue();
-String longitude = cp.get(Constants.COMPANY_LONG_PARAM).getValue(); 
+String latitude = null;
+String longitude = null;
+cb = cp.get(Constants.COMPANY_LAT_PARAM);
+if(null!=cb)
+{
+	latitude = cb.getValue();
+	longitude = cb.getValue(); 
+}
+
 %>
 <html>
 <head>
@@ -32,7 +39,7 @@ String longitude = cp.get(Constants.COMPANY_LONG_PARAM).getValue();
       function initMap() {
         var mapDiv = document.getElementById('map');
         var map = new google.maps.Map(mapDiv, {
-          center: {lat: <%=latitude%>, lng: <%=longitude%>},
+          center: {lat: <%=null!=latitude?latitude:0%>, lng: <%=null!=longitude?longitude:0%>},
           zoom: 8
         });
       }
@@ -89,27 +96,27 @@ String longitude = cp.get(Constants.COMPANY_LONG_PARAM).getValue();
 							<b>our office</b><span>
 							<%
 							cb = cp.get(Constants.COMPANY_ADDRESS_PARAM);
-							out.println(cb.getValue());
+							out.println(null!=cb?cb.getValue():"");
 							%>
 							</span>
 						</li>
 						<li class="telephone">
 							<%
 							cb = cp.get(Constants.COMPANY_PHONE_PARAM);
-							out.println(cb.getValue());
+							out.println(null!=cb?cb.getValue():"");
 							%>
 						</li>
 						<li class="fax">
 							<%
 							cb = cp.get(Constants.COMPANY_FAX_PARAM);
-							out.println(cb.getValue());
+							out.println(null!=cb?cb.getValue():"");
 							%>
 						</li>
 						<li class="email">
 							<a href="#">
 							<%
 							cb = cp.get(Constants.COMPANY_EMAIL_PARAM);
-							out.println(cb.getValue());
+							out.println(null!=cb?cb.getValue():"");
 							%>
 							</a>
 						</li>
