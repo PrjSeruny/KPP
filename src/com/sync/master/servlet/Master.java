@@ -54,6 +54,18 @@ public class Master extends CoreServlet
     {
       this.MasterRegion(req, res);
     }
+    else if(!Utilities.isEmpy(what) && what.equals(MasterConstants.MASTER_REGION_CITY))
+    {
+      this.MasterRegionCity(req, res);
+    }
+    else if(!Utilities.isEmpy(what) && what.equals(MasterConstants.MASTER_REGION_KEL))
+    {
+      this.MasterRegionKel(req, res);
+    }
+    else if(!Utilities.isEmpy(what) && what.equals(MasterConstants.MASTER_REGION_KEC))
+    {
+      this.MasterRegionKec(req, res);
+    }
     else if(!Utilities.isEmpy(what) && what.equals(MasterConstants.MASTER_RESIDENT))
     {
       this.MasterResident(req, res);
@@ -133,10 +145,96 @@ public class Master extends CoreServlet
     {
       this.doLookupMasterRegion(req, res);
     }
+    else if(!Utilities.isEmpy(act) && act.equals(MasterConstants.ACT_LIST))
+    {
+      this.doListMasterRegion(req,res);
+    }
     else
     {
       this.doMasterRegion(req, res);
     }
+  }
+  
+  private void doListMasterRegion(HttpServletRequest req, HttpServletResponse res)
+  throws ServletException, IOException
+  {
+      MasterRegionEngine re = new MasterRegionEngine(req, res);
+      MasterRegionBean[] lists = re.listOfRegion();
+      
+      req.setAttribute(MasterConstants.MASTERREGION_LIST, lists);
+      
+      if(null!=re)re.closed();
+      super.openURL(
+          MasterConstants.MASTER_REGION_LIST, 
+          req, res);
+      return;
+   }
+  
+  private void MasterRegionCity(HttpServletRequest req, HttpServletResponse res)
+      throws ServletException, IOException
+      {
+        String act = req.getParameter(MasterConstants.ACT);
+        
+        if(!Utilities.isEmpy(act) && act.equals(MasterConstants.ACT_LOOKUP))
+        {
+          this.doLookupMasterRegionCity(req, res);
+        }
+      }
+      
+      private void MasterRegionKel(HttpServletRequest req, HttpServletResponse res)
+      throws ServletException, IOException
+      {
+        String act = req.getParameter(MasterConstants.ACT);
+        if(!Utilities.isEmpy(act) && act.equals(MasterConstants.ACT_LOOKUP))
+        {
+          this.doLookupMasterRegionKel(req, res);
+        }
+      }
+      
+      private void MasterRegionKec(HttpServletRequest req, HttpServletResponse res)
+          throws ServletException, IOException
+      {
+        String act = req.getParameter(MasterConstants.ACT);
+        if(!Utilities.isEmpy(act) && act.equals(MasterConstants.ACT_LOOKUP))
+        {
+          this.doLookupMasterRegionKec(req, res);
+        }
+      }
+      
+      private void doLookupMasterRegionCity(HttpServletRequest req, HttpServletResponse res)
+      throws ServletException, IOException
+      {
+        MasterRegionBean[] bn = null;
+        MasterRegionEngine re = new MasterRegionEngine(req, res);
+        
+        bn = re.listOfRegion();
+        req.setAttribute(MasterConstants.MASTERREGION_LIST, bn);
+        super.openLookup(MasterConstants.CITY_LOOKUP, req, res);
+        return;
+      }
+      
+      private void doLookupMasterRegionKel(HttpServletRequest req, HttpServletResponse res)
+      throws ServletException, IOException
+      {
+        MasterRegionKelurahanBean[] bn = null;
+        MasterRegionEngine re = new MasterRegionEngine(req, res);
+        
+        bn = re.listOfKel();
+        req.setAttribute(MasterConstants.MASTERREGION_LIST, bn);
+        super.openLookup(MasterConstants.KEL_LOOKUP, req, res);
+        return;
+      }
+      
+      private void doLookupMasterRegionKec(HttpServletRequest req, HttpServletResponse res)
+      throws ServletException, IOException
+      {
+        MasterRegionKecamatanBean[] bn = null;
+        MasterRegionEngine re = new MasterRegionEngine(req, res);
+        
+        bn = re.listOfKec();
+        req.setAttribute(MasterConstants.MASTERREGION_LIST, bn);
+        super.openLookup(MasterConstants.KEC_LOOKUP, req, res);
+        return;
   }
   
   private void doCreateMasterRegion(HttpServletRequest req, HttpServletResponse res)
@@ -230,9 +328,8 @@ public class Master extends CoreServlet
   		return;
   	}
   	
-    String stat = req.getParameter(MasterConstants.DATA_STAT);
     MasterRegionEngine re = new MasterRegionEngine(req, res);
-    MasterRegionBean[] lists = re.listOfRegion(stat);
+    MasterRegionBean[] lists = re.listOfRegion();
     
     req.setAttribute(MasterConstants.MASTERREGION_LIST, lists);
     
@@ -240,7 +337,7 @@ public class Master extends CoreServlet
     super.openContent(
         MasterConstants.SVT_MASTER_PATH, 
         MasterConstants.MASTER_REGION, 
-        MasterConstants.MASTER_REGION_LIST, 
+        MasterConstants.MASTER_REGIONS, 
         req, res);
     return;
   
@@ -292,7 +389,7 @@ public class Master extends CoreServlet
     }
     else
     {
-      bn = re.listOfRegion(MasterConstants.DATA_CURRENT);
+      bn = re.listOfRegion();
       req.setAttribute(MasterConstants.FORM_MASTERREGION_REGIONONLY, showW);
       req.setAttribute(MasterConstants.MASTERREGION_LIST, bn);
       req.setAttribute(MasterConstants.FORM_FIELD1, propfield);

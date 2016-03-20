@@ -40,6 +40,9 @@ public class MasterConstants extends Constants
   public static final String MASTER_REGION_EDIT = PAGES_PATH + "/region_edit.jsp";
   public static final String MASTER_REGION_INFO = PAGES_PATH + "/region_info.jsp";
   public static final String MASTER_REGION_LOOKUP = PAGES_PATH + "/region_lookup.jsp";
+  public static final String CITY_LOOKUP = PAGES_PATH + "/city_lookup.jsp";
+  public static final String KEL_LOOKUP = PAGES_PATH + "/kel_lookup.jsp";
+  public static final String KEC_LOOKUP = PAGES_PATH + "/kec_lookup.jsp";
   
   public static final String MASTER_RESIDENTS = PAGES_PATH + "/master_resident.jsp";  
   public static final String MASTER_RESIDENT_LIST = PAGES_PATH + "/master_resident_list.jsp";
@@ -51,6 +54,9 @@ public class MasterConstants extends Constants
   public static final String MASTERUSER = "musr";
   public static final String MASTER_RESIDENT = "mrsdnt";
   public static final String MASTER_REGION = "mrgion";
+  public static final String MASTER_REGION_CITY = "mrgioncty";
+  public static final String MASTER_REGION_KEL = "mrgionkel";
+  public static final String MASTER_REGION_KEC = "mrgionkec";
   public static final String MASTER_LEVEL_ACCESS = "mlvlacc";
   public static final String LEVELACCESS = "lvlaccess";
   

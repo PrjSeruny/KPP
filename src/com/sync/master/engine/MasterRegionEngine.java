@@ -25,44 +25,96 @@ public class MasterRegionEngine extends RootEngine
   }
   
   /** Getting All Master Region Data */
-  public MasterRegionBean[] listOfRegion(String stat)
+  public MasterRegionBean[] listOfRegion()
+  {MasterRegionBean[] lists = null;
+  int row = 0;
+  String currPage = req.getParameter(MasterConstants.FORM_CURRENT_PAGE);
+  String search = req.getParameter(MasterConstants.FORM_SEARCH_RECORD);
+  String limit = req.getParameter(MasterConstants.FORM_LIMIT_RECORD);
+
+  /*if(!Utilities.isEmpy(stat) && stat.equals(MasterConstants.DATA_ARCHIEVE))
   {
-    MasterRegionBean[] lists = null;
+    addSQL += MasterTable.COL_MASTERREGION_VOIDDATE +
+        " IS NOT NULL AND " + MasterTable.COL_MASTERREGION_VOIDUSER +
+        " IS NOT NULL ";
+  }
+  else
+  {
+    addSQL += MasterTable.COL_MASTERREGION_VOIDDATE +
+        " IS NULL AND " + MasterTable.COL_MASTERREGION_VOIDUSER +
+        " IS NULL ";
+  }*/
+  
+  if(!Utilities.isEmpy(search))
+  {
+    addSQL = " WHERE ";
+    addSQL += " ("+MasterTable.COL_MASTERREGION_REGIONID+" LIKE '%"+search+"%' OR " +
+        MasterTable.COL_MASTERREGION_NAME+" like '%"+search+"%')";
+  }
+  
+  String pagination = buildPagination(MasterTable.TABLE_MASTERREGION, 
+                                      (null==currPage?1:Integer.parseInt(currPage)), 
+                                      (null==limit?MasterConstants.DEFAULT_LIMIT_RECORD:Integer.parseInt(limit)));
+  req.setAttribute(MasterConstants.HTML_PAGINATION, pagination);
+  
+  SQL = " SELECT " +
+        MasterTable.TABLE_MASTERREGION + ".* " +
+        " FROM " + MasterTable.TABLE_MASTERREGION ;
+  SQL += addSQL ;
+  SQL += " ORDER BY " + MasterTable.COL_MASTERREGION_REGIONID + SQLlimit;
+      
+  System.out.println(">>>>>> SQL"+SQL);
+  try
+  {
+    super.getConnection();
+    rs =  super.executeQuery(SQL);
+    row = super.getTotalRow();
+    
+    if(row<=0) return null;
+    
+    lists = new MasterRegionBean[row];
+    if(null!=rs)
+    {
+      for(int i=0; i<row; i++)
+      {
+        lists[i] = this.nextRegion();
+      }
+    }
+  }
+  catch(Exception e)
+  {
+    e.printStackTrace();
+  }
+  
+  return lists;
+  }
+  
+  /** Getting All Master Region Data */
+  public MasterRegionKecamatanBean[] listOfKec()
+  {
+    MasterRegionKecamatanBean[] lists = null;
     int row = 0;
     String currPage = req.getParameter(MasterConstants.FORM_CURRENT_PAGE);
     String search = req.getParameter(MasterConstants.FORM_SEARCH_RECORD);
     String limit = req.getParameter(MasterConstants.FORM_LIMIT_RECORD);
 
-    addSQL = " WHERE ";
-    
-    if(!Utilities.isEmpy(stat) && stat.equals(MasterConstants.DATA_ARCHIEVE))
+    if(!Utilities.isEmpy(search))
     {
-      addSQL += MasterTable.COL_MASTERREGION_VOIDDATE +
-          " IS NOT NULL AND " + MasterTable.COL_MASTERREGION_VOIDUSER +
-          " IS NOT NULL ";
-    }
-    else
-    {
-      addSQL += MasterTable.COL_MASTERREGION_VOIDDATE +
-          " IS NULL AND " + MasterTable.COL_MASTERREGION_VOIDUSER +
-          " IS NULL ";
+      addSQL = " WHERE ";
+      addSQL += " ("+MasterTable.COl_MASTER_REGION_KEC_KECAMATANID +" LIKE '%"+search+"%' OR " +
+          MasterTable.COl_MASTER_REGION_KEC_NAME+" like '%"+search+"%')";
     }
     
-    if(!Utilities.isEmpy(search)){
-      addSQL += "AND ("+MasterTable.COL_MASTER_RESIDENT_KK+" LIKE '%"+search+"%' OR " +
-          MasterTable.COL_MASTER_RESIDENT_NAME+" like '%"+search+"%' OR " +
-          MasterTable.COL_MASTER_RESIDENT_NIK+" like '%"+search+"%')";
-    }
-    
-    String pagination = buildPagination(MasterTable.TABLE_MASTERREGION, 
+    String pagination = buildPagination(MasterTable.TABLE_MASTER_REGION_KEC, 
                                         (null==currPage?1:Integer.parseInt(currPage)), 
                                         (null==limit?MasterConstants.DEFAULT_LIMIT_RECORD:Integer.parseInt(limit)));
     req.setAttribute(MasterConstants.HTML_PAGINATION, pagination);
     
     SQL = " SELECT " +
-          MasterTable.TABLE_MASTERREGION + ".* " +
-          " FROM " + MasterTable.TABLE_MASTERREGION  +
-          " ORDER BY " + MasterTable.COL_MASTERREGION_REGIONID;
+          MasterTable.TABLE_MASTER_REGION_KEC + ".* " +
+          " FROM " + MasterTable.TABLE_MASTER_REGION_KEC ;
+    SQL += addSQL;
+    SQL += " ORDER BY " + MasterTable.COl_MASTER_REGION_KEC_KECAMATANID + SQLlimit;
         
     try
     {
@@ -72,12 +124,64 @@ public class MasterRegionEngine extends RootEngine
       
       if(row<=0) return null;
       
-      lists = new MasterRegionBean[row];
+      lists = new MasterRegionKecamatanBean[row];
       if(null!=rs)
       {
         for(int i=0; i<row; i++)
         {
-          lists[i] = this.nextRegion();
+          lists[i] = this.nextKecamatan();
+        }
+      }
+    }
+    catch(Exception e)
+    {
+      e.printStackTrace();
+    }
+    
+    return lists;
+  }
+  
+  /** Getting All Master Region Data */
+  public MasterRegionKelurahanBean[] listOfKel()
+  {
+    MasterRegionKelurahanBean[] lists = null;
+    int row = 0;
+    String currPage = req.getParameter(MasterConstants.FORM_CURRENT_PAGE);
+    String search = req.getParameter(MasterConstants.FORM_SEARCH_RECORD);
+    String limit = req.getParameter(MasterConstants.FORM_LIMIT_RECORD);
+
+    if(!Utilities.isEmpy(search))
+    {
+      addSQL = " WHERE ";
+      addSQL += " ("+MasterTable.COL_MASTER_REGION_KEL_KELURAHANID +" LIKE '%"+search+"%' OR " +
+          MasterTable.COL_MASTER_REGION_KEL_NAME+" like '%"+search+"%')";
+    }
+    
+    String pagination = buildPagination(MasterTable.TABLE_MASTER_REGION_KEL, 
+                                        (null==currPage?1:Integer.parseInt(currPage)), 
+                                        (null==limit?MasterConstants.DEFAULT_LIMIT_RECORD:Integer.parseInt(limit)));
+    req.setAttribute(MasterConstants.HTML_PAGINATION, pagination);
+    
+    SQL = " SELECT " +
+          MasterTable.TABLE_MASTER_REGION_KEL + ".* " +
+          " FROM " + MasterTable.TABLE_MASTER_REGION_KEL ;
+    SQL += addSQL;
+    SQL += " ORDER BY " + MasterTable.COL_MASTER_REGION_KEL_KELURAHANID + SQLlimit;
+        
+    try
+    {
+      super.getConnection();
+      rs =  super.executeQuery(SQL);
+      row = super.getTotalRow();
+      
+      if(row<=0) return null;
+      
+      lists = new MasterRegionKelurahanBean[row];
+      if(null!=rs)
+      {
+        for(int i=0; i<row; i++)
+        {
+          lists[i] = this.nextKelurahan();
         }
       }
     }
