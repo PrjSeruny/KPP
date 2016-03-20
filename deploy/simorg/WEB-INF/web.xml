@@ -42,6 +42,15 @@
     <servlet-name>TransServlet</servlet-name>
     <url-pattern>/index/trans</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>ReportServlet</servlet-name>
+    <servlet-class>com.sync.report.servlet.Report</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReportServlet</servlet-name>
+    <url-pattern>/index/report</url-pattern>
+  </servlet-mapping>
     
   <servlet>
     <servlet-name>Home</servlet-name>

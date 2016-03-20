@@ -22,6 +22,9 @@ public class ReportConstants extends Constants
   public static final String PAGE_RESIDENTANALYSIS_PRINT = PAGES_PATH + "/residentanalysis_print.jsp";
   
   /** Value of Object in HTML Pages */
+  public static final String FORM_RESIDENTANALYSIS_SEARCH = "FORM_RESIDENTANALYSIS_SEARCH";
+  public static final String FORM_RESIDENTANALYSIS_SEARCH_RECAP = "FORM_RESIDENTANALYSIS_SEARCH_RECAP";
+  public static final String FORM_RESIDENTANALYSIS_SEARCH_DETAILS = "FORM_RESIDENTANALYSIS_SEARCH_DETAILS";
   public static final String FORM_RESIDENTANALYSIS_NIK = "FORM_RESIDENTANALYSIS_NIK";
   public static final String FORM_RESIDENTANALYSIS_CITY = "FORM_RESIDENTANALYSIS_CITY";
   public static final String FORM_RESIDENTANALYSIS_KEL = "FORM_RESIDENTANALYSIS_KEL";
