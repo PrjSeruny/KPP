@@ -2,7 +2,7 @@ package com.sync.core.utils;
 
 
 /**
- * Constants value 
+ * Constants value
  *
  */
 public class Constants
@@ -11,29 +11,29 @@ public class Constants
   public static final String D="d";
   /** Contants for what to process in servlet */
   public static final String W="w";
-  
+
   public static final String DBPATH = "DBPATH";
   public static final String DBDRIVER = "DBDRIVER";
-  
+
   /** Constants for login into database */
   public static final String D_LOGON = "dlogon";
   /** Constants for logout into database */
   public static final String D_LOGOUT = "dlogout";
-  
+
   public static final String D_SEARCH = "dsearch";
 
   public static final String D_VIEW = "vw";
-  
+
   public static final String DATE_HTML_MEDIUM_PATTERN = "dd-MM-yyyy hh:mm:ss";
   public static final String DATE_DB_MEDIUM_PATTERN = "yyyy-MM-dd HH:mm:ss";
   public static final String DATE_HTML_SHORT_PATTERN = "dd-MM-yyyy";
   public static final String DATE_DB_SHORT_PATTERN = "yyyy-MM-dd";
-  
+
   public static final String ROOT_PATH = "/simorg";
-  public static final String DIR_PATH = System.getProperty("user.dir")+"/webapps";
+  public static final String DIR_PATH = "/Tech/Apache/Tomcat/webapps";
   public static final String SERVLET_PATH = "/index";
   public static final String UI_PATH = "/ui";
-  
+
   public static final String ADMIN_PATH = UI_PATH + "/admin";
   public static final String PAGES_PATH = ADMIN_PATH + "/pages";
   public static final String IMAGES_PATH = ADMIN_PATH + "/images";
@@ -43,7 +43,7 @@ public class Constants
   public static final String FILE_TEMP_PATH = FILE_PATH + "/temp";
   public static final String FILE_TEMP_THUMB_PATH = FILE_TEMP_PATH + "/thumb";
   public static final String SCRIPTS_PATH = ADMIN_PATH + "/scripts";
-  
+
   public static final String INDEX_PAGE = PAGES_PATH + "/index.jsp";
   public static final String LOGIN_PAGE = PAGES_PATH + "/login.jsp";
   public static final String LOGOUT_PAGE = PAGES_PATH + "/logout.jsp";
@@ -83,26 +83,26 @@ public class Constants
   public static final String COMPANY_SETTING_LIST_BEAN = "COMPANY_SETTING_LIST_BEAN";
   public static final String COMPANY_SETTING_PRM = "cmpst";
   public static final String COMPANY_SETTING_EDIT_PG = PAGES_PATH + "/companyedit.jsp";
-  
+
   public static final String COMPANY_ADDRESS_PARAM = "COMPANY_ADDRESS";
   public static final String COMPANY_PHONE_PARAM = "COMPANY_PHONE";
   public static final String COMPANY_FAX_PARAM = "COMPANY_FAX";
   public static final String COMPANY_EMAIL_PARAM = "COMPANY_EMAIL";
   public static final String COMPANY_LAT_PARAM = "COMPANY_LAT";
   public static final String COMPANY_LONG_PARAM = "COMPANY_LONG";
-  
-  
+
+
   public static final String PROFILE_SETTING_PRM = "prfl";
   public static final String PROFILE_SETTING_EDIT_PG = PAGES_PATH + "/profileedit.jsp";
   public static final String COMPANY_PROFILE_PARAM = "COMPANY_PROFILE";
-  
+
   public static final String DELETE_IMAGE_FILE = "dltimg";
-  
+
   public static final String DATA_STAT = "sts";
   public static final String DATA_ARCHIEVE = "archve";
   public static final String DATA_RECYCLE = "rcycl";
   public static final String DATA_CURRENT = "curr";
-  
+
   public static final String ACT = "act";
   public static final String ACT_LOGIN = "actlgn";
   public static final String ACT_LIST = "actlst";
@@ -116,17 +116,17 @@ public class Constants
   public static final String ACT_INFO = "info";
   public static final String ACT_SEARCH_QUERY = "arschqry";
   public static final String ACT_SEARCH = "arsch";
-  
+
   public static final String BTN_SAVE = "btnsve";
   public static final String BTN_CANCEL = "btncncl";
   public static final String BTN_DONE = "btndone";
   public static final String BTN_PROC = "btnproc";
   public static final String BTN_CANCELPROC = "btncnclproc";
   public static final String CHKBOX = "chkbox";
-  
+
   public static final String LOOKUP_SINGLE = "lkpsgl";
   public static final String LOOKUP_MULTI = "lkpmlt";
-  
+
   public static final String CONTENT_INFO = "CONTENT_INFO";
 
   public static final String HTML_PAGINATION = "HTML_PAGINATION";
@@ -135,33 +135,33 @@ public class Constants
   public static final String FORM_LIMIT_RECORD = "FORM_LIMIT_RECORD";
   public static final int DEFAULT_LIMIT_RECORD = 10;
   public static final int[] LIMIT_RECORD = {10,50,100};
-  
+
   /* Form Login **/
   public static final String FORM_LOGIN_USERNAME = "usrnm";
   public static final String FORM_LOGIN_PASSWD = "psswd";
-  
+
   public static final int SEX_F = 1;
   public static final int SEX_M = 2;
-  
+
   public static final String MARITALSTAT_SINGLE = "SINGLE";
   public static final String MARITALSTAT_MARRIED = "MARRIED";
   public static final String MARITALSTAT_WIDOW = "WIDOW";
-  
+
   public static final String RELIGION_ISLAM = "ISLAM";
   public static final String RELIGION_CHRISTIAN = "CHRISTIAN";
   public static final String RELIGION_KATOLIK = "KATOLIK";
   public static final String RELIGION_HINDU = "HINDU";
   public static final String RELIGION_BUDHA = "BUDHA";
   public static final String RELIGION_OTHERS = "OTHERS";
-  
+
   public static final String FOR = "for";
   public static final String FOR_KEL = "forkel";
   public static final String FOR_KEC = "forkec";
-  
+
   public static final String FAMILY_POS_MOTHER = "Mother";
   public static final String FAMILY_POS_FATHER = "Father";
   public static final String FAMILY_POS_CHILD = "Child";
-  
+
   public static final String FORM_FIELD1 = "FORM_FIELD1";
   public static final String FORM_FIELD2 = "FORM_FIELD2";
   public static final String FORM_FIELD3 = "FORM_FIELD3";
@@ -172,12 +172,12 @@ public class Constants
   public static final String FORM_FIELD8 = "FORM_FIELD8";
   public static final String FORM_FIELD9 = "FORM_FIELD9";
   public static final String FORM_FIELD10 = "FORM_FIELD10";
-  
+
   public static final String AJAX_STATUS = "ajax_status";
   public static final String AJAX_ERROR = "error";
   public static final String AJAX_SUCCESS = "success";
   public static final String AJAX_MESSAGE = "msg";
-  
+
   //CONSTANT INI DIGUNAKAN UNTUK PARAMETER JSON (AJAX RESPON)
   public static final String FORM_FILE_PATH = "path";
   public static final String FORM_FILE_PATHTHUMB = "path_thumb";
@@ -185,11 +185,11 @@ public class Constants
   //CONSTANT INI DIGUNAKAN UNTUK PARAMETER UPLOAD IMAGE, DAN SUDAH PATEN KARENA DIGUNAKAN OLEH JAVASCRIPT (TIDAK BOLEH DIRUBAH)
   public static final String FORM_IMAGE_PATH = "image";
   public static final String FORM_IMAGE_PATHTHUMB = "image_thumb";
-  
+
   public static final String DELIMITER_TILDA = "~";
   public static final String DELIMITER_SEMICOLON = ";";
-  
+
   //Error Access Page
   public static final String ERROR_PAGE = PAGES_PATH + "/Error_Page.jsp";
-  
+
 }
