@@ -65,6 +65,9 @@ public class MasterTable
   public static final String COL_MASTER_RESIDENT_RW = TABLE_MASTER_RESIDENT + ".RW";
   public static final String COL_MASTER_RESIDENT_KELURAHAN = TABLE_MASTER_RESIDENT + ".Kelurahan";
   public static final String COL_MASTER_RESIDENT_KECAMATAN = TABLE_MASTER_RESIDENT + ".Kecamatan";
+  public static final String COL_MASTER_RESIDENT_EMAIL = TABLE_MASTER_RESIDENT + ".Email";
+  public static final String COL_MASTER_RESIDENT_MOBILENO = TABLE_MASTER_RESIDENT + ".MobileNo";
+  public static final String COL_MASTER_RESIDENT_PHONENO = TABLE_MASTER_RESIDENT + ".PhoneNo";
   public static final String COL_MASTER_RESIDENT_NOTE = TABLE_MASTER_RESIDENT + ".Note";
   public static final String COL_MASTER_RESIDENT_CREATEDATE = TABLE_MASTER_RESIDENT + ".CreateDate";
   public static final String COL_MASTER_RESIDENT_CREATEUSER = TABLE_MASTER_RESIDENT + ".CreateUser";

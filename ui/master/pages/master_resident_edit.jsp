@@ -124,6 +124,11 @@
           </select>
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_MARITALSTATUS):""%></span>
         </div>
+        <div>
+          <label>Email</label>
+          <input type="text" name="<%=MasterConstants.FORM_MASTERRESIDENT_EMAIL%>" value="<%=null!=ubn && !Utilities.isEmpy(ubn.getEmail())?ubn.getEmail():""%>">
+          <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_EMAIL):""%></span>
+        </div>
       </fieldset>
       <fieldset>
         <div>
@@ -135,6 +140,16 @@
           <label><font color="red">#</font>Kewarganegaraan</label>
           <input type="text" name="<%=MasterConstants.FORM_MASTERRESIDENT_NATIONALITY %>" value="<%=null!=ubn?Utilities.showStringValue(ubn.getNationality()):""%>">
           <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_NATIONALITY):""%></span>
+        </div>
+        <div>
+          <label>No.Tlp</label>
+          <input type="text" name="<%=MasterConstants.FORM_MASTERRESIDENT_PHONENO%>" value="<%=null!=ubn && !Utilities.isEmpy(ubn.getPhone())?ubn.getPhone():""%>">
+          <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_PHONENO):""%></span>
+        </div>
+        <div>
+          <label>No.HP</label>
+          <input type="text" name="<%=MasterConstants.FORM_MASTERRESIDENT_MOBILENO%>" value="<%=null!=ubn && !Utilities.isEmpy(ubn.getMobileNo())?ubn.getMobileNo():""%>">
+          <br><span class="erroritm"><%=null!=msg?msg.showMessage(MasterConstants.FORM_MASTERRESIDENT_MOBILENO):""%></span>
         </div>
       </fieldset>
       <fieldset>

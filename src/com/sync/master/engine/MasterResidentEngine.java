@@ -326,6 +326,31 @@ public class MasterResidentEngine extends RootEngine
     {
       bn.setNote(temp);
     }
+    
+    /* Email **/
+    temp = Utilities.trim(req.getParameter(
+        MasterConstants.FORM_MASTERRESIDENT_EMAIL));
+    if(!Utilities.isEmpy(temp))
+    {
+      bn.setEmail(temp);
+    }
+    
+    /* Mobile No **/
+    temp = Utilities.trim(req.getParameter(
+        MasterConstants.FORM_MASTERRESIDENT_MOBILENO));
+    if(!Utilities.isEmpy(temp))
+    {
+      bn.setMobileNo(temp);
+    }
+    
+    /* Phone No **/
+    temp = Utilities.trim(req.getParameter(
+        MasterConstants.FORM_MASTERRESIDENT_PHONENO));
+    if(!Utilities.isEmpy(temp))
+    {
+      bn.setPhoneNo(temp);
+    }
+    
     System.out.println("END VALIDATING RESIDENT");
     return bn;
   }
@@ -415,6 +440,9 @@ public class MasterResidentEngine extends RootEngine
       bn.setKelurahan(rs.getString(MasterTable.COL_MASTER_RESIDENT_KELURAHAN));
       bn.setKecamatan(rs.getString(MasterTable.COL_MASTER_RESIDENT_KECAMATAN));
       bn.setNote(rs.getString(MasterTable.COL_MASTER_RESIDENT_NOTE));
+      bn.setEmail(rs.getString(MasterTable.COL_MASTER_RESIDENT_EMAIL));
+      bn.setMobileNo(rs.getString(MasterTable.COL_MASTER_RESIDENT_MOBILENO));
+      bn.setPhoneNo(rs.getString(MasterTable.COL_MASTER_RESIDENT_PHONENO));
       bn.setCreateDate(Utilities.stringToDate(
           rs.getString(MasterTable.COL_MASTER_RESIDENT_CREATEDATE), 
           MasterConstants.DATE_DB_MEDIUM_PATTERN));
@@ -543,10 +571,13 @@ public class MasterResidentEngine extends RootEngine
                MasterTable.COL_MASTER_RESIDENT_KELURAHAN + "," +
                MasterTable.COL_MASTER_RESIDENT_KECAMATAN + "," +
                MasterTable.COL_MASTER_RESIDENT_NOTE + "," +
+               MasterTable.COL_MASTER_RESIDENT_EMAIL + "," +
+               MasterTable.COL_MASTER_RESIDENT_MOBILENO + "," +
+               MasterTable.COL_MASTER_RESIDENT_PHONENO + "," +
                MasterTable.COL_MASTER_RESIDENT_CREATEDATE + "," +
                MasterTable.COL_MASTER_RESIDENT_CREATEUSER +
              ")" +
-            " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
       
       
       super.getConnection();
@@ -573,9 +604,12 @@ public class MasterResidentEngine extends RootEngine
       stat.setString(18, ubn.getKelurahan());
       stat.setString(19, ubn.getKecamatan());
       stat.setString(20, ubn.getNote());
-      stat.setString(21, Utilities.dateToString(new Date(), 
+      stat.setString(21, ubn.getEmail());
+      stat.setString(22, ubn.getMobileNo());
+      stat.setString(23, ubn.getPhone());
+      stat.setString(24, Utilities.dateToString(new Date(), 
           MasterConstants.DATE_DB_MEDIUM_PATTERN));
-      stat.setString(22, uses.getUser());
+      stat.setString(25, uses.getUser());
       
       if(stat.executeUpdate()>0)
       {
@@ -617,6 +651,9 @@ public class MasterResidentEngine extends RootEngine
             MasterTable.COL_MASTER_RESIDENT_WORK + "=?, " +
             MasterTable.COL_MASTER_RESIDENT_NATIONALITY + "=?, " +
             MasterTable.COL_MASTER_RESIDENT_NOTE + "=?, " +
+            MasterTable.COL_MASTER_RESIDENT_EMAIL + "=?, " +
+            MasterTable.COL_MASTER_RESIDENT_MOBILENO + "=?, " +
+            MasterTable.COL_MASTER_RESIDENT_PHONENO + "=?, " +
             MasterTable.COL_MASTER_RESIDENT_ENTRYDATE + "=?, " +
             MasterTable.COL_MASTER_RESIDENT_ENTRYUSER + "=? " +
             " WHERE " +
@@ -632,10 +669,13 @@ public class MasterResidentEngine extends RootEngine
       stat.setString(5, ubn.getWork());
       stat.setString(6, ubn.getNationality());
       stat.setString(7, ubn.getNote());
-      stat.setString(8, Utilities.dateToString(new Date(), 
+      stat.setString(8, ubn.getEmail());
+      stat.setString(9, ubn.getMobileNo());
+      stat.setString(10, ubn.getPhone());
+      stat.setString(11, Utilities.dateToString(new Date(), 
           MasterConstants.DATE_DB_MEDIUM_PATTERN));
-      stat.setString(9, uses.getUser());
-      stat.setString(10, ubn.getNIK());
+      stat.setString(12, uses.getUser());
+      stat.setString(13, ubn.getNIK());
       
       if(stat.executeUpdate()>0) return true;
       else return false;

@@ -8,13 +8,11 @@ import javax.servlet.http.HttpServletResponse;
 import com.sync.core.beans.MessageBean;
 import com.sync.core.engine.RootEngine;
 import com.sync.core.utils.Utilities;
-import com.sync.master.beans.MasterResidentBean;
 import com.sync.master.utils.MasterConstants;
 import com.sync.master.utils.MasterTable;
 import com.sync.report.beans.ResidentAnalysisBean;
 import com.sync.report.beans.ResidentAnalysisDetailsBean;
 import com.sync.report.utils.ReportConstants;
-import com.sync.trans.utils.TransConstants;
 
 
 public class ResidentAnalysisEngine extends RootEngine
@@ -66,6 +64,12 @@ public class ResidentAnalysisEngine extends RootEngine
     if(!Utilities.isEmpy(temp))
     {
       bn.setKelVal(temp.split(ReportConstants.DELIMITER_SEMICOLON));
+    }
+    
+    temp = req.getParameter(ReportConstants.FORM_RESIDENTANALYSIS_GROUPBY);
+    if(!Utilities.isEmpy(temp))
+    {
+      bn.setGroupBy(temp);
     }
     
     return bn;
@@ -141,6 +145,23 @@ public class ResidentAnalysisEngine extends RootEngine
         SQL += MasterTable.COL_MASTER_RESIDENT_KELURAHAN + " IN(" + kel + ")";
       }
       
+      if(!Utilities.isEmpy(bn.getGroupBy()))
+      {
+        SQL += " ORDER BY ";
+        
+        if(bn.getGroupBy().equals(ReportConstants.FORM_RESIDENTANALYSIS_GROUPBY_CITY))
+        {
+          SQL += MasterTable.COL_MASTER_RESIDENT_CITY;
+        }
+        else if(bn.getGroupBy().equals(ReportConstants.FORM_RESIDENTANALYSIS_GROUPBY_KEC))
+        {
+          SQL += MasterTable.COL_MASTER_RESIDENT_KECAMATAN;
+        }
+        else
+        {
+          SQL += MasterTable.COL_MASTER_RESIDENT_KELURAHAN;
+        }
+      }
       System.out.println(">>>>>>>>>>>>>> SQL="+SQL);
       
       super.getConnection();
@@ -207,6 +228,9 @@ public class ResidentAnalysisEngine extends RootEngine
       bn.SetRW(rs.getString(MasterTable.COL_MASTER_RESIDENT_RW));
       bn.setKelurahan(rs.getString(MasterTable.COL_MASTER_RESIDENT_KELURAHAN));
       bn.setKecamatan(rs.getString(MasterTable.COL_MASTER_RESIDENT_KECAMATAN));
+      bn.setEmail(rs.getString(MasterTable.COL_MASTER_RESIDENT_EMAIL));
+      bn.setPhoneNo(rs.getString(MasterTable.COL_MASTER_RESIDENT_PHONENO));
+      bn.setMobileNo(rs.getString(MasterTable.COL_MASTER_RESIDENT_MOBILENO));
     }
     return bn;
   }

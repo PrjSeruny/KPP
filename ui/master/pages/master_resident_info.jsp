@@ -72,7 +72,10 @@
                     <td class="bold">Kewarganegaraan</td>
                     <td>: <%=null!=ubn?ubn.getNationality():""%></td>
                  </tr>
-                 
+                 <tr>
+                    <td class="bold">Email</td>
+                    <td>: <%=null!=ubn && !Utilities.isEmpy(ubn.getEmail())?ubn.getEmail():""%></td>
+                 </tr>
                  </table>
 
                  <table style="float:left">
@@ -107,6 +110,14 @@
                  <tr>
                     <td class="bold">RW</td>
                     <td>: <%=null!=ubn?ubn.getRW():""%></td>
+                 </tr>
+                 <tr>
+                    <td class="bold">Tlp</td>
+                    <td>: <%=null!=ubn && !Utilities.isEmpy(ubn.getPhone())?ubn.getPhone():""%></td>
+                 </tr>
+                 <tr>
+                    <td class="bold">No.HP</td>
+                    <td>: <%=null!=ubn && !Utilities.isEmpy(ubn.getMobileNo())?ubn.getMobileNo():""%></td>
                  </tr>
                  <tr>
                     <td class="bold">Catatan</td>

@@ -102,13 +102,23 @@
       </fieldset>
       <fieldset>
         <div>
+             <label>Group Berdasarkan:</label>
+            <select name="<%=ReportConstants.FORM_RESIDENTANALYSIS_GROUPBY%>">
+            <option value="<%=ReportConstants.FORM_RESIDENTANALYSIS_GROUPBY_CITY%>"<%=null!=ubn && ubn.getGroupBy().equals(ReportConstants.FORM_RESIDENTANALYSIS_GROUPBY_CITY)?"selected":""%>>Kota</option>
+            <option value="<%=ReportConstants.FORM_RESIDENTANALYSIS_GROUPBY_KEC%>"<%=null!=ubn && ubn.getGroupBy().equals(ReportConstants.FORM_RESIDENTANALYSIS_GROUPBY_KEC)?"selected":""%>>Kecamatan</option>
+            <option value="<%=ReportConstants.FORM_RESIDENTANALYSIS_GROUPBY_KEL%>"<%=null!=ubn && ubn.getGroupBy().equals(ReportConstants.FORM_RESIDENTANALYSIS_GROUPBY_KEL)?"selected":""%>>Kelurahan</option>
+            </select>
+        </div>
+      </fieldset>
+      <fieldset>
+        <div> 
           <input type="submit" value="Cari">
         </div>
       </fieldset>
     </div>
   </form>
   <fieldset>
-  <div class="form" style="clear:left;width: 90%;margin: auto;display: -webkit-box;min-height: 500px;"> 
+  <div class="form" style="clear:left;width: 100%;margin: auto;display: -webkit-box;min-height: 500px;"> 
   <div class="list-con" style="text-align: center;width: 100%;">
   <%
     ResidentAnalysisDetailsBean[] list = null;
@@ -119,43 +129,136 @@
 %>  
   <table border="0" class="list-tb" style="width: 100%;">
                     <tr>
-                        <th>No</th>
                         <th>NIK</th>
                         <th>No.KK</th>
                         <th>Nama</th>
                         <th>Jenis Kelamin</th>
                         <th>Tgl Lahir</th>
                         <th>Alamat</th>
+                        <th>Kelurahan</th>
+                        <th>Kecamatan</th>
+                        <th>Kota</th>
                         <th>Agama</th>
+                        <th>Email</th>
+                        <th>Tlp</th>
+                        <th>No.HP</th>
                     </tr>
-            <%
-                 if(null!=list && list.length>0)
-                 {
-                   for(int i=0; i<list.length; i++)
-                   {
-             %>
-                      <tr>
-                        <td><%=i+1 %></td>
+<%
+   String id = "";
+   boolean groupBy = false, showCount=false;;
+   int count=0;
+   String signCol="";
+   if(null!=list && list.length>0)
+   {
+     for(int i=0; i<list.length; i++)
+     {
+       if(i%2==0) signCol="white";
+       else signCol="#e0fad2";
+       
+       if(ubn.getGroupBy().equals(ReportConstants.FORM_RESIDENTANALYSIS_GROUPBY_CITY))
+       {
+         if(!id.equals(list[i].getCity()) && null!=list[i])
+         {
+           id = list[i].getCity();
+           groupBy = true;
+         }
+       }
+       else if(ubn.getGroupBy().equals(ReportConstants.FORM_RESIDENTANALYSIS_GROUPBY_KEC))
+       {
+         if(!id.equals(list[i].getKecamatan()) && null!=list[i])
+         {
+           id = list[i].getKecamatan();
+           groupBy = true;
+         }
+       }
+       else if(ubn.getGroupBy().equals(ReportConstants.FORM_RESIDENTANALYSIS_GROUPBY_KEL))
+       {
+         if(!id.equals(list[i].getKelurahan()) && null!=list[i])
+         {
+           id = list[i].getKelurahan();
+           groupBy = true;
+         }
+       }
+       
+       if(groupBy)
+       {
+%>
+                     <tr>
+                        <td colspan="13" align="left"><font color="blue"><b><%=id%></b></font></td>
+                     </tr>
+<%         
+       }
+%>
+                      <tr bgcolor="<%=signCol%>">
                         <td valign="top"><%=list[i].getNIK()%></a></td>
                         <td valign="top"><%=list[i].getKKNo()%></td>
                         <td valign="top" align="left"><%=list[i].getName()%></td>
                         <td valign="top"><%=list[i].getSexVal()%></td>
                         <td valign="top"><%=Utilities.dateToString(list[i].getBirthDate(), Constants.DATE_HTML_SHORT_PATTERN)%></td>
                         <td valign="top" align="left"><%=list[i].getAddress()%></td>
+                        <td valign="top" align="left"><%=list[i].getKelurahan()%></td>
+                        <td valign="top" align="left"><%=list[i].getKecamatan()%></td>
+                        <td valign="top" align="left"><%=list[i].getCity()%></td>
                         <td valign="top"><%=list[i].getReligion()%></td>
+                        <td valign="top"><%=!Utilities.isEmpy(list[i].getEmail())?list[i].getEmail():""%></td>
+                        <td valign="top"><%=!Utilities.isEmpy(list[i].getPhone())?list[i].getPhone():""%></td>
+                        <td valign="top"><%=!Utilities.isEmpy(list[i].getMobileNo())?list[i].getMobileNo():""%></td>
                       </tr>
-                <%       
-                    }
-                  }
-                  else
-                  {
-              %>
+<%       
+          groupBy = false;
+          showCount = false;
+          count++;
+          if(ubn.getGroupBy().equals(ReportConstants.FORM_RESIDENTANALYSIS_GROUPBY_CITY))
+          {
+            if(
+                (i<list.length-1 && !id.equals(list[i+1].getCity())) ||
+                (i==list.length-1)
+              )
+            { 
+              showCount = true;
+            }
+          }
+          else if(ubn.getGroupBy().equals(ReportConstants.FORM_RESIDENTANALYSIS_GROUPBY_KEC))
+          {
+            if(
+                (i<list.length-1 && !id.equals(list[i+1].getKecamatan())) ||
+                (i==list.length-1)
+              )
+            { 
+              showCount = true;
+            }
+          }
+          else if(ubn.getGroupBy().equals(ReportConstants.FORM_RESIDENTANALYSIS_GROUPBY_KEL))
+          {
+            if(
+                (i<list.length-1 && !id.equals(list[i+1].getKelurahan())) ||
+                (i==list.length-1)
+              )
+            { 
+              showCount = true;
+            }
+          }
+          
+          if(showCount)
+          {
+%>
+            <tr bgcolor="#def2f4">
+              <td colspan="13" align="left"><font color="black"><b>Total Penduduk <%=id%>: <%=count%></b></font></td>
+            </tr>
+<%            
+             count = 0;
+          }
+	   }
+	 }
+	 else
+	 {
+%>
                      <tr>
-                       <td valign="top" align="center" colspan="8">Data yang dicari tidak ditemukan!</td>
+                       <td valign="top" align="center" colspan="13">Data yang dicari tidak ditemukan!</td>
                      </tr>
-              <%
-                  }
-              %>                    
+<%
+     }
+%>                     
               </table>
               </div>
               </div>

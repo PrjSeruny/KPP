@@ -29,6 +29,9 @@ public class ResidentAnalysisDetailsBean
   private String RW = null;
   private String Kelurahan = null;
   private String Kecamatan = null;
+  private String Email =  null;
+  private String PhoneNo = null;
+  private String MobileNo = null;
   
   public ResidentAnalysisDetailsBean(){}
   
@@ -143,4 +146,14 @@ public class ResidentAnalysisDetailsBean
   
   public void setKecamatan(String val){ Kecamatan = val; }
   public String getKecamatan(){ return Kecamatan; }
+  
+  public void setEmail(String val){ Email = val; }
+  public String getEmail(){ return Email; }
+  
+  public void setPhoneNo(String val){ PhoneNo = val; }
+  public String getPhone(){ return PhoneNo; }
+  
+  public void setMobileNo(String val){ MobileNo = val; }
+  public String getMobileNo(){ return MobileNo; }
+  
 }

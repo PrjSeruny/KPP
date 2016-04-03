@@ -534,6 +534,7 @@ public class BirthLetterEngine extends RootEngine
           bn.setProcessUser(user.getUser());
           bn.setCancelProcessDate(null);
           bn.setCancelProcessUser(null);
+          //this.proceedResidentHistory(bn, false);
       }
       else
       {
@@ -618,6 +619,7 @@ public class BirthLetterEngine extends RootEngine
           newrebn.setRT(rebn.getRT());
           newrebn.setCreateDate(new Date());
           newrebn.setCreateUser(user.getUser());
+          super.getConnection();
           re = new MasterResidentEngine();
           if(!re.createMasterResident(newrebn))
           {
@@ -643,7 +645,7 @@ public class BirthLetterEngine extends RootEngine
           hisrebn.setRT(rebn.getRT());
           hisrebn.setEntryDate(new Date());
           hisrebn.setEntryUser(user.getUser());
-          
+          super.getConnection();
           rehist = new MasterResidentHistoryEngine();
           if(!rehist.createMasterResidentHistory(hisrebn))
           {

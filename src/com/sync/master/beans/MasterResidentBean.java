@@ -29,6 +29,9 @@ public class MasterResidentBean extends DataPreferenceBean
   private String PostalCode = null;
   private String RT = null;
   private String RW = null;
+  private String Email = null;
+  private String MobileNo = null;
+  private String PhoneNo = null;
   private String Kelurahan = null;
   private String Kecamatan = null;
   private String Note = null;
@@ -140,6 +143,15 @@ public class MasterResidentBean extends DataPreferenceBean
   
   public void SetRW(String val){ RW = val; }
   public String getRW(){ return RW; }
+  
+  public void setEmail(String val){ Email = val; }
+  public String getEmail(){ return Email; }
+  
+  public void setMobileNo(String val){ MobileNo = val; }
+  public String getMobileNo(){ return MobileNo; }
+  
+  public void setPhoneNo(String val){ PhoneNo = val; }
+  public String getPhone(){ return PhoneNo; }
   
   public void setKelurahan(String val){ Kelurahan = val; }
   public String getKelurahan(){ return Kelurahan; }

@@ -15,6 +15,7 @@ import com.sync.master.beans.LevelAccessBean;
 import com.sync.master.pool.LevelAccessPool;
 import com.sync.master.utils.MasterConstants;
 import com.sync.master.utils.MasterTable;
+import com.sync.report.utils.ReportConstants;
 import com.sync.trans.utils.TransConstants;
 
 public class LevelAccessEngine extends RootEngine 
@@ -96,6 +97,8 @@ public class LevelAccessEngine extends RootEngine
 		Permission = this.validateMaster(bn, Permission);
 		//Validate Master
 		Permission = this.validateTransaction(bn, Permission);
+	  //Validate Report
+		Permission = this.validateReport(bn, Permission);
 		
 		bn.setDataPermission(Permission);
 		
@@ -217,10 +220,17 @@ public class LevelAccessEngine extends RootEngine
 		return Permission;
 	}
 	
-	public LevelAccessBean validateReport(LevelAccessBean bn)
+	public HashMap<String, String[]> validateReport(LevelAccessBean bn, HashMap<String, String[]> Permission)
 	{
-		
-		return bn;
+	  String[] tmpPermission = null;
+
+    tmpPermission = req.getParameterValues(ReportConstants.REPORT_RESIDENTANALYSIS);
+    if(null!=tmpPermission && tmpPermission.length > 0)
+    {
+      Permission.put(ReportConstants.REPORT_RESIDENTANALYSIS, tmpPermission);
+    }
+    
+		return Permission;
 	}
 	
 	

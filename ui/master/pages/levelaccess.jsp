@@ -1,3 +1,4 @@
+<%@page import="com.sync.report.utils.ReportConstants"%>
 <%@page import="com.sync.master.utils.MasterTable"%>
 <%@page import="com.sync.master.pool.LevelAccessPool"%>
 <%@page import="com.sync.trans.utils.TransConstants"%>
@@ -31,7 +32,7 @@ $(document).ready(function(){
 <input type="hidden" name="<%=MasterConstants.ACT%>" value="<%=MasterConstants.ACT_CREATE%>">
 <table border="0">
 <tr>
-	<td>
+	<td colspan="1">
 		<label>Level ID</label>
 		<select name="<%=MasterConstants.FORM_MASTERUSER_LEVEL%>" class="levelID">
 			<%
@@ -46,13 +47,13 @@ $(document).ready(function(){
 			}
 			%>
 		</select>
+		&nbsp;<input type="submit" value="Save">
 	</td>
-	<td><input type="submit" value="Save"></td>
 </tr>
 <tr>
 	<td colspan="2">
 		<table border="0">
-			<tr class="print" bgcolor="#FFCC99">
+			<tr class="print" bgcolor="#d8fac8">
 	      <td class="print" align="center" valign="top">&nbsp;</td>
 	      <td class="print" align="center" valign="top" width="30"><b>L</b></td>
 	      <td class="print" align="center" valign="top" width="30"><b>I</b></td>
@@ -60,7 +61,7 @@ $(document).ready(function(){
 	      <td class="print" align="center" valign="top" width="30"><b>U</b></td>
 	      <td class="print" align="center" valign="top" width="30"><b>D</b></td>
 	    </tr>
-	    <tr class="print" bgcolor="#FFCCFF">
+	    <tr class="print" bgcolor="#dff0f1">
 	      <td class="print" valign="top" width="250"><b>Public Settings</b></td>
 	      <td class="print" align="center" valign="top"></td>
 	      <td class="print" align="center" valign="top"></td>
@@ -68,7 +69,7 @@ $(document).ready(function(){
 	      <td class="print" align="center" valign="top">&nbsp;</td>
 	      <td class="print" align="center" valign="top">&nbsp;</td>
 	    </tr>
-	    <tr class="print" bgcolor="#FFCCCC">
+	    <tr class="print" bgcolor="#fff2c8">
 	      <td class="print" valign="top" width="250"><b>Gambar Slide</b></td>
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=Constants.SLIDE_SETTING_PRM %>" value="<%=LevelAccessBean.PERMIT_LIST%>" <%=lp.checkValidate(LevelID, Constants.SLIDE_SETTING_PRM, LevelAccessBean.PERMIT_LIST)?"checked":""%>/></td>
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=Constants.SLIDE_SETTING_PRM %>" value="<%=LevelAccessBean.PERMIT_INFO%>" <%=lp.checkValidate(LevelID, Constants.SLIDE_SETTING_PRM, LevelAccessBean.PERMIT_INFO)?"checked":""%>/></td>
@@ -76,7 +77,7 @@ $(document).ready(function(){
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=Constants.SLIDE_SETTING_PRM %>" value="<%=LevelAccessBean.PERMIT_UPDATE%>" <%=lp.checkValidate(LevelID, Constants.SLIDE_SETTING_PRM, LevelAccessBean.PERMIT_UPDATE)?"checked":""%>/></td>
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=Constants.SLIDE_SETTING_PRM %>" value="<%=LevelAccessBean.PERMIT_DELETE%>" <%=lp.checkValidate(LevelID, Constants.SLIDE_SETTING_PRM, LevelAccessBean.PERMIT_DELETE)?"checked":""%>/></td>
 	    </tr>
-	    <tr class="print" bgcolor="#FFCCCC">
+	    <tr class="print" bgcolor="#fff2c8">
 	      <td class="print" valign="top" width="250"><b>Gallery Foto</b></td>
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=Constants.GALLERY_SETTING_PRM %>" value="<%=LevelAccessBean.PERMIT_LIST%>" <%=lp.checkValidate(LevelID, Constants.GALLERY_SETTING_PRM, LevelAccessBean.PERMIT_LIST)?"checked":""%>/></td>
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=Constants.GALLERY_SETTING_PRM %>" value="<%=LevelAccessBean.PERMIT_INFO%>" <%=lp.checkValidate(LevelID, Constants.GALLERY_SETTING_PRM, LevelAccessBean.PERMIT_INFO)?"checked":""%>/></td>
@@ -84,7 +85,7 @@ $(document).ready(function(){
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=Constants.GALLERY_SETTING_PRM %>" value="<%=LevelAccessBean.PERMIT_UPDATE%>" <%=lp.checkValidate(LevelID, Constants.GALLERY_SETTING_PRM, LevelAccessBean.PERMIT_CREATE)?"checked":""%>/></td>
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=Constants.GALLERY_SETTING_PRM %>" value="<%=LevelAccessBean.PERMIT_DELETE%>" <%=lp.checkValidate(LevelID, Constants.GALLERY_SETTING_PRM, LevelAccessBean.PERMIT_DELETE)?"checked":""%>/></td>
 	    </tr>
-	    <tr class="print" bgcolor="#FFCCCC">
+	    <tr class="print" bgcolor="#fff2c8">
 	      <td class="print" valign="top" width="250"><b>Kontak Setting</b></td>
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=Constants.COMPANY_SETTING_PRM %>" value="<%=LevelAccessBean.PERMIT_LIST%>" <%=lp.checkValidate(LevelID, Constants.COMPANY_SETTING_PRM, LevelAccessBean.PERMIT_LIST)?"checked":""%>/></td>
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=Constants.COMPANY_SETTING_PRM %>" value="<%=LevelAccessBean.PERMIT_INFO%>" <%=lp.checkValidate(LevelID, Constants.COMPANY_SETTING_PRM, LevelAccessBean.PERMIT_INFO)?"checked":""%>/></td>
@@ -92,7 +93,7 @@ $(document).ready(function(){
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=Constants.COMPANY_SETTING_PRM %>" value="<%=LevelAccessBean.PERMIT_UPDATE%>" <%=lp.checkValidate(LevelID, Constants.COMPANY_SETTING_PRM, LevelAccessBean.PERMIT_CREATE)?"checked":""%>/></td>
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=Constants.COMPANY_SETTING_PRM %>" value="<%=LevelAccessBean.PERMIT_DELETE%>" <%=lp.checkValidate(LevelID, Constants.COMPANY_SETTING_PRM, LevelAccessBean.PERMIT_DELETE)?"checked":""%>/></td>
 	    </tr>
-	    <tr class="print" bgcolor="#FFCCCC">
+	    <tr class="print" bgcolor="#fff2c8">
 	      <td class="print" valign="top" width="250"><b>Profile</b></td>
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=Constants.PROFILE_SETTING_PRM %>" value="<%=LevelAccessBean.PERMIT_LIST%>" <%=lp.checkValidate(LevelID, Constants.PROFILE_SETTING_PRM, LevelAccessBean.PERMIT_LIST)?"checked":""%>/></td>
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=Constants.PROFILE_SETTING_PRM %>" value="<%=LevelAccessBean.PERMIT_INFO%>" <%=lp.checkValidate(LevelID, Constants.PROFILE_SETTING_PRM, LevelAccessBean.PERMIT_INFO)?"checked":""%>/></td>
@@ -100,7 +101,7 @@ $(document).ready(function(){
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=Constants.PROFILE_SETTING_PRM %>" value="<%=LevelAccessBean.PERMIT_UPDATE%>" <%=lp.checkValidate(LevelID, Constants.PROFILE_SETTING_PRM, LevelAccessBean.PERMIT_CREATE)?"checked":""%>/></td>
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=Constants.PROFILE_SETTING_PRM %>" value="<%=LevelAccessBean.PERMIT_DELETE%>" <%=lp.checkValidate(LevelID, Constants.PROFILE_SETTING_PRM, LevelAccessBean.PERMIT_DELETE)?"checked":""%>/></td>
 	    </tr>
-	    <tr class="print" bgcolor="#FFCCCC">
+	    <tr class="print" bgcolor="#fff2c8">
 	      <td class="print" valign="top" width="250"><b>Berita</b></td>
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=Constants.NEWS_SETTING_PRM %>" value="<%=LevelAccessBean.PERMIT_LIST%>" <%=lp.checkValidate(LevelID, Constants.NEWS_SETTING_PRM, LevelAccessBean.PERMIT_LIST)?"checked":""%>/></td>
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=Constants.NEWS_SETTING_PRM %>" value="<%=LevelAccessBean.PERMIT_INFO%>" <%=lp.checkValidate(LevelID, Constants.NEWS_SETTING_PRM, LevelAccessBean.PERMIT_INFO)?"checked":""%>/></td>
@@ -111,7 +112,7 @@ $(document).ready(function(){
 	    <tr class="print" bgcolor="#FFFFFF">
 	      <td valign="top" height="2" colspan="9">&nbsp;</td>
 	    </tr>
-	    <tr class="print" bgcolor="#FFCCFF">
+	    <tr class="print" bgcolor="#dff0f1">
 	      <td class="print" valign="top" width="250"><b>Master</b></td>
 	      <td class="print" align="center" valign="top"></td>
 	      <td class="print" align="center" valign="top"></td>
@@ -119,7 +120,7 @@ $(document).ready(function(){
 	      <td class="print" align="center" valign="top">&nbsp;</td>
 	      <td class="print" align="center" valign="top">&nbsp;</td>
 	    </tr>
-	    <tr class="print" bgcolor="#FFCCCC">
+	    <tr class="print" bgcolor="#fff2c8">
 	      <td class="print" valign="top" width="250"><b>Master User</b></td>
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=MasterConstants.MASTERUSER %>" value="<%=LevelAccessBean.PERMIT_LIST%>" <%=lp.checkValidate(LevelID, MasterConstants.MASTERUSER, LevelAccessBean.PERMIT_LIST)?"checked":""%>/></td>
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=MasterConstants.MASTERUSER %>" value="<%=LevelAccessBean.PERMIT_INFO%>" <%=lp.checkValidate(LevelID, MasterConstants.MASTERUSER, LevelAccessBean.PERMIT_INFO)?"checked":""%>/></td>
@@ -127,7 +128,7 @@ $(document).ready(function(){
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=MasterConstants.MASTERUSER %>" value="<%=LevelAccessBean.PERMIT_UPDATE%>" <%=lp.checkValidate(LevelID, MasterConstants.MASTERUSER, LevelAccessBean.PERMIT_UPDATE)?"checked":""%>/></td>
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=MasterConstants.MASTERUSER %>" value="<%=LevelAccessBean.PERMIT_DELETE%>" <%=lp.checkValidate(LevelID, MasterConstants.MASTERUSER, LevelAccessBean.PERMIT_DELETE)?"checked":""%>/></td>
 	    </tr>
-	    <tr class="print" bgcolor="#FFCCCC">
+	    <tr class="print" bgcolor="#fff2c8">
 	      <td class="print" valign="top" width="250"><b>Master Region</b></td>
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=MasterConstants.MASTER_REGION %>" value="<%=LevelAccessBean.PERMIT_LIST%>" <%=lp.checkValidate(LevelID, MasterConstants.MASTER_REGION, LevelAccessBean.PERMIT_LIST)?"checked":""%>/></td>
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=MasterConstants.MASTER_REGION %>" value="<%=LevelAccessBean.PERMIT_INFO%>" <%=lp.checkValidate(LevelID, MasterConstants.MASTER_REGION, LevelAccessBean.PERMIT_INFO)?"checked":""%>/></td>
@@ -135,7 +136,7 @@ $(document).ready(function(){
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=MasterConstants.MASTER_REGION %>" value="<%=LevelAccessBean.PERMIT_UPDATE%>" <%=lp.checkValidate(LevelID, MasterConstants.MASTER_REGION, LevelAccessBean.PERMIT_UPDATE)?"checked":""%>/></td>
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=MasterConstants.MASTER_REGION %>" value="<%=LevelAccessBean.PERMIT_DELETE%>" <%=lp.checkValidate(LevelID, MasterConstants.MASTER_REGION, LevelAccessBean.PERMIT_DELETE)?"checked":""%>/></td>
 	    </tr>
-	    <tr class="print" bgcolor="#FFCCCC">
+	    <tr class="print" bgcolor="#fff2c8">
 	      <td class="print" valign="top" width="250"><b>Master Penduduk</b></td>
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=MasterConstants.MASTER_RESIDENT %>" value="<%=LevelAccessBean.PERMIT_LIST%>" <%=lp.checkValidate(LevelID, MasterConstants.MASTER_RESIDENT, LevelAccessBean.PERMIT_LIST)?"checked":""%>/></td>
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=MasterConstants.MASTER_RESIDENT %>" value="<%=LevelAccessBean.PERMIT_INFO%>" <%=lp.checkValidate(LevelID, MasterConstants.MASTER_RESIDENT, LevelAccessBean.PERMIT_INFO)?"checked":""%>/></td>
@@ -143,7 +144,7 @@ $(document).ready(function(){
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=MasterConstants.MASTER_RESIDENT %>" value="<%=LevelAccessBean.PERMIT_UPDATE%>" <%=lp.checkValidate(LevelID, MasterConstants.MASTER_RESIDENT, LevelAccessBean.PERMIT_UPDATE)?"checked":""%>/></td>
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=MasterConstants.MASTER_RESIDENT %>" value="<%=LevelAccessBean.PERMIT_DELETE%>" <%=lp.checkValidate(LevelID, MasterConstants.MASTER_RESIDENT, LevelAccessBean.PERMIT_DELETE)?"checked":""%>/></td>
 	    </tr>
-	    <tr class="print" bgcolor="#FFCCCC">
+	    <tr class="print" bgcolor="#fff2c8">
 	      <td class="print" valign="top" width="250"><b>Master Level Access</b></td>
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=MasterConstants.MASTER_LEVEL_ACCESS %>" value="<%=LevelAccessBean.PERMIT_LIST%>" <%=lp.checkValidate(LevelID, MasterConstants.MASTER_LEVEL_ACCESS, LevelAccessBean.PERMIT_LIST)?"checked":""%>/></td>
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=MasterConstants.MASTER_LEVEL_ACCESS %>" value="<%=LevelAccessBean.PERMIT_INFO%>" <%=lp.checkValidate(LevelID, MasterConstants.MASTER_LEVEL_ACCESS, LevelAccessBean.PERMIT_CREATE)?"checked":""%>/></td>
@@ -151,7 +152,7 @@ $(document).ready(function(){
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=MasterConstants.MASTER_LEVEL_ACCESS %>" value="<%=LevelAccessBean.PERMIT_UPDATE%>" <%=lp.checkValidate(LevelID, MasterConstants.MASTER_LEVEL_ACCESS, LevelAccessBean.PERMIT_UPDATE)?"checked":""%>/></td>
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=MasterConstants.MASTER_LEVEL_ACCESS %>" value="<%=LevelAccessBean.PERMIT_DELETE%>" <%=lp.checkValidate(LevelID, MasterConstants.MASTER_LEVEL_ACCESS, LevelAccessBean.PERMIT_DELETE)?"checked":""%>/></td>
 	    </tr>
-	    <tr class="print" bgcolor="#FFCCCC">
+	    <tr class="print" bgcolor="#fff2c8">
 	      <td class="print" valign="top" width="250"><b>Level Access</b></td>
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=MasterConstants.LEVELACCESS %>" value="<%=LevelAccessBean.PERMIT_LIST%>" <%=lp.checkValidate(LevelID, MasterConstants.LEVELACCESS, LevelAccessBean.PERMIT_LIST)?"checked":""%>/></td>
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=MasterConstants.LEVELACCESS %>" value="<%=LevelAccessBean.PERMIT_INFO%>" <%=lp.checkValidate(LevelID, MasterConstants.LEVELACCESS, LevelAccessBean.PERMIT_INFO)?"checked":""%>/></td>
@@ -162,7 +163,7 @@ $(document).ready(function(){
  	    <tr class="print" bgcolor="#FFFFFF">
      		<td valign="top" height="2" colspan="9">&nbsp;</td>
 	    </tr>
-	    <tr class="print" bgcolor="#FFCCFF">
+	    <tr class="print" bgcolor="#dff0f1">
 	      <td class="print" valign="top" width="250"><b>Transaksi</b></td>
  	      <td class="print" align="center" valign="top"></td>
 	      <td class="print" align="center" valign="top"></td>
@@ -170,7 +171,7 @@ $(document).ready(function(){
 	      <td class="print" align="center" valign="top">&nbsp;</td>
 	      <td class="print" align="center" valign="top">&nbsp;</td>
 	    </tr>
-	    <tr class="print" bgcolor="#FFCCCC">
+	    <tr class="print" bgcolor="#fff2c8">
 	      <td class="print" valign="top" width="250"><b>Mutasi KK</b></td>
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=TransConstants.TRANS_FAMILYCARDMUT %>" value="<%=LevelAccessBean.PERMIT_LIST%>" <%=lp.checkValidate(LevelID, TransConstants.TRANS_FAMILYCARDMUT, LevelAccessBean.PERMIT_LIST)?"checked":""%>/></td>
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=TransConstants.TRANS_FAMILYCARDMUT %>" value="<%=LevelAccessBean.PERMIT_INFO%>" <%=lp.checkValidate(LevelID, TransConstants.TRANS_FAMILYCARDMUT, LevelAccessBean.PERMIT_INFO)?"checked":""%>/></td>
@@ -178,7 +179,7 @@ $(document).ready(function(){
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=TransConstants.TRANS_FAMILYCARDMUT %>" value="<%=LevelAccessBean.PERMIT_UPDATE%>" <%=lp.checkValidate(LevelID, TransConstants.TRANS_FAMILYCARDMUT, LevelAccessBean.PERMIT_UPDATE)?"checked":""%>/></td>
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=TransConstants.TRANS_FAMILYCARDMUT %>" value="<%=LevelAccessBean.PERMIT_DELETE%>" <%=lp.checkValidate(LevelID, TransConstants.TRANS_FAMILYCARDMUT, LevelAccessBean.PERMIT_DELETE)?"checked":""%>/></td>
 	    </tr>
-	    <tr class="print" bgcolor="#FFCCCC">
+	    <tr class="print" bgcolor="#fff2c8">
 	      <td class="print" valign="top" width="250"><b>Daftar Kelahiran</b></td>
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=TransConstants.TRANS_BIRTHLETTER %>" value="<%=LevelAccessBean.PERMIT_LIST%>" <%=lp.checkValidate(LevelID, TransConstants.TRANS_BIRTHLETTER, LevelAccessBean.PERMIT_LIST)?"checked":""%>/></td>
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=TransConstants.TRANS_BIRTHLETTER %>" value="<%=LevelAccessBean.PERMIT_INFO%>" <%=lp.checkValidate(LevelID, TransConstants.TRANS_BIRTHLETTER, LevelAccessBean.PERMIT_INFO)?"checked":""%>/></td>
@@ -186,7 +187,7 @@ $(document).ready(function(){
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=TransConstants.TRANS_BIRTHLETTER %>" value="<%=LevelAccessBean.PERMIT_UPDATE%>" <%=lp.checkValidate(LevelID, TransConstants.TRANS_BIRTHLETTER, LevelAccessBean.PERMIT_UPDATE)?"checked":""%>/></td>
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=TransConstants.TRANS_BIRTHLETTER %>" value="<%=LevelAccessBean.PERMIT_DELETE%>" <%=lp.checkValidate(LevelID, TransConstants.TRANS_BIRTHLETTER, LevelAccessBean.PERMIT_DELETE)?"checked":""%>/></td>
 	    </tr>
-	    <tr class="print" bgcolor="#FFCCCC">
+	    <tr class="print" bgcolor="#fff2c8">
 	      <td class="print" valign="top" width="250"><b>Daftar Kematian</b></td>
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=TransConstants.TRANS_DEATHLETTER %>" value="<%=LevelAccessBean.PERMIT_LIST%>" <%=lp.checkValidate(LevelID, TransConstants.TRANS_DEATHLETTER, LevelAccessBean.PERMIT_LIST)?"checked":""%>/></td>
 	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=TransConstants.TRANS_DEATHLETTER %>" value="<%=LevelAccessBean.PERMIT_INFO%>" <%=lp.checkValidate(LevelID, TransConstants.TRANS_DEATHLETTER, LevelAccessBean.PERMIT_INFO)?"checked":""%>/></td>
@@ -197,18 +198,18 @@ $(document).ready(function(){
  	    <tr class="print" bgcolor="#FFFFFF">
      		<td valign="top" height="2" colspan="9">&nbsp;</td>
 	    </tr>
-	    <tr class="print" bgcolor="#FFCCFF">
-	      <td class="print" valign="top" width="250"><b>Lapora</b></td>
+	    <tr class="print" bgcolor="#dff0f1">
+	      <td class="print" valign="top" width="250"><b>Laporan</b></td>
 	      <td class="print" align="center" valign="top"></td>
 	      <td class="print" align="center" valign="top"></td>
 	      <td class="print" align="center" valign="top">&nbsp;</td>
 	      <td class="print" align="center" valign="top">&nbsp;</td>
 	      <td class="print" align="center" valign="top">&nbsp;</td>
 	    </tr>
-	    <tr class="print" bgcolor="#FFCCCC">
+	    <tr class="print" bgcolor="#fff2c8">
 	      <td class="print" valign="top" width="250"><b>Laporan Kependudukan</b></td>
-	      <td class="print" align="center" valign="top"></td>
-	      <td class="print" align="center" valign="top"></td>
+	      <td class="print" align="center" valign="top">&nbsp;</td>
+	      <td class="print" align="center" valign="top"><input type="checkbox" name="<%=ReportConstants.REPORT_RESIDENTANALYSIS %>" value="<%=LevelAccessBean.PERMIT_INFO%>" <%=lp.checkValidate(LevelID, ReportConstants.REPORT_RESIDENTANALYSIS, LevelAccessBean.PERMIT_INFO)?"checked":""%>/></td>
 	      <td class="print" align="center" valign="top">&nbsp;</td>
 	      <td class="print" align="center" valign="top">&nbsp;</td>
 	      <td class="print" align="center" valign="top">&nbsp;</td>

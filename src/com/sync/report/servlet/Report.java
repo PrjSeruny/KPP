@@ -8,10 +8,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.sync.core.servlet.CoreServlet;
 import com.sync.core.utils.Utilities;
+import com.sync.master.beans.LevelAccessBean;
 import com.sync.report.beans.ResidentAnalysisBean;
 import com.sync.report.engine.ResidentAnalysisEngine;
 import com.sync.report.utils.ReportConstants;
-import com.sync.trans.utils.TransConstants;
 
 
 
@@ -35,7 +35,7 @@ public class Report extends CoreServlet
   public void doPost(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
-    String what = req.getParameter(TransConstants.W);
+    String what = req.getParameter(ReportConstants.W);
     if(!Utilities.isEmpy(what) 
         && what.equals(ReportConstants.REPORT_RESIDENTANALYSIS))
     {
@@ -43,7 +43,7 @@ public class Report extends CoreServlet
     }
     else
     {
-      super.openURL(TransConstants.HOME_PAGE, req, res);
+      super.openURL(ReportConstants.HOME_PAGE, req, res);
       return;
     }
   }
@@ -51,6 +51,16 @@ public class Report extends CoreServlet
   private void doSearchResidentAnalysis(HttpServletRequest req, HttpServletResponse res)
   throws ServletException, IOException
   {
+    if(!super.validateAcces(
+        req, 
+        res, 
+        ReportConstants.REPORT_RESIDENTANALYSIS, 
+        LevelAccessBean.PERMIT_INFO))
+    {
+      super.openURL(ReportConstants.ERROR_PAGE, req, res);
+      return;
+    }
+    
     String act = req.getParameter(ReportConstants.ACT);
     ResidentAnalysisEngine rae = new ResidentAnalysisEngine(req, res);
     ResidentAnalysisBean bn = new ResidentAnalysisBean();

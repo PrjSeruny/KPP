@@ -10,6 +10,7 @@ public class ReportBean
   private String[] Region = null;
   private String[] KelVal = null;
   private String[] KecVal = null;
+  private String GroupBy = null;
   
   public ReportBean(){}
   
@@ -30,5 +31,8 @@ public class ReportBean
   
   public void setKecVal(String[] val){ KecVal = val; }
   public String[] getKecVal(){ return KecVal; }
+  
+  public void setGroupBy(String val){ GroupBy = val; }
+  public String getGroupBy(){ return GroupBy; }
   
 }

@@ -7,3 +7,7 @@ FLUSH PRIVILEGES;
 CREATE USER 'core'@'%' IDENTIFIED BY 's3v3nthh34v3n';
 GRANT ALL PRIVILEGES ON * . * TO 'core'@'%';
 FLUSH PRIVILEGES;
+
+alter table MasterResident add column Email VARCHAR(100) after RW;
+alter table MasterResident add column MobileNo VARCHAR(100) after Email;
+alter table MasterResident add column PhoneNo VARCHAR(100) after MobileNo;
